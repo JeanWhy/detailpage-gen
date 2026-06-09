@@ -1,0 +1,202 @@
+{
+  "meta": {
+    "slug": "i-beaute",
+    "lang": "en",
+    "title": "Sofwave™ Skin Tightening · i-Beaute Skin + Body, Chatswood",
+    "description": "Non-invasive ultrasound lifting that visibly tightens skin in a single session — with zero downtime. Sofwave™ at i-Beaute Skin + Body, Chatswood."
+  },
+  "theme": {
+    "colors": {
+      "sage": "#7C9885", "deep_sage": "#5C7567", "pale_sage": "#C9D6CC",
+      "mist": "#EAF0EB", "gold": "#B08D57", "gold_soft": "#C7A878",
+      "charcoal": "#2B2B2B", "ink": "#3A3A36", "cream": "#FBFAF7", "sand": "#F3EEE4"
+    },
+    "fonts": {
+      "serif": "'Cormorant Garamond', Georgia, serif",
+      "sans": "'Jost', system-ui, -apple-system, sans-serif",
+      "google": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap"
+    }
+  },
+  "brand": { "logo_text": "i&#8209;Beaute", "booking_url": "https://www.fresha.com/book-now/i-beaute-skin-body-kx5nin73/all-offer?pId=22008" },
+  "sticky_cta": { "title": "Sofwave™ Lift", "sub": "Free consult", "button": "Book" },
+  "nav_cta": "Book a Consultation",
+
+  "hero": {
+    "photo": "01_hero",
+    "badge": "Sofwave™ · Now at Chatswood",
+    "headline_html": "Lift. <em>Without</em><br>the surgery.",
+    "sub": "Non-invasive ultrasound that visibly tightens the jawline, brows and neck — in a single session, with zero downtime.",
+    "cta_primary": { "label": "Book Your Lift", "href": "#book" },
+    "cta_secondary": { "label": "See How It Works", "href": "#how" },
+    "stats": [
+      { "n": "1", "l": "Session" },
+      { "n": "0", "l": "Downtime" },
+      { "n": "~30<span style=\"font-size:16px\">min</span>", "l": "In &amp; out" },
+      { "n": "FDA", "l": "Cleared tech" }
+    ]
+  },
+
+  "pain": {
+    "eyebrow": "Sound familiar?",
+    "title_html": "The mirror started changing<br>before you were ready.",
+    "cards": [
+      { "icon": "face", "title": "A softening jaw", "body": "The clean line you took for granted is blurring. Makeup sits differently. Photos catch it from the side." },
+      { "icon": "bottle", "title": "Creams stopped working", "body": "A drawer full of serums that plump and brighten — but can't touch laxity once the deeper structure starts to give." },
+      { "icon": "sun", "title": "But surgery feels too far", "body": "You're not ready for a scalpel, anaesthetic, or two weeks hidden away healing. You just want to look like you — rested." }
+    ]
+  },
+
+  "problem": {
+    "eyebrow": "It isn't your skincare routine",
+    "title_html": "By 35, collagen quietly leaves —<br>and <em>topicals can't follow it down.</em>",
+    "lede": "Firmness lives in the deep dermis and the foundation layer beneath it. That's far below where any cream can reach — which is exactly why the right results need to start there.",
+    "points": [
+      { "n": "01", "title": "Collagen falls ~1% a year", "body": "From your mid-twenties, the scaffold that holds skin taut thins a little every year — and the slide accelerates around menopause." },
+      { "n": "02", "title": "The slack is structural", "body": "Laxity isn't a surface problem. It sits in the dermis and SMAS layer — the same tissue a surgeon lifts." },
+      { "n": "03", "title": "So the fix must go deep", "body": "To firm skin you have to remodel it at the source: precise energy that triggers your own collagen to rebuild." }
+    ]
+  },
+
+  "story": {
+    "photo": "04_story",
+    "reverse": false,
+    "eyebrow": "What the next 12 weeks look like",
+    "title_html": "A lift that arrives<br>the way your skin does —<br>gradually, then obviously.",
+    "timeline": [
+      { "when": "Day 0 · Treatment", "title": "One ~30-minute session", "body": "You relax through a single visit. Walk out, drive home, back to your day. No bandages, no marks to hide." },
+      { "when": "Weeks 1–4", "title": "The first firmness", "body": "Skin starts to feel tauter and look smoother as the deep repair response switches on." },
+      { "when": "Weeks 6–12", "title": "The real result", "body": "Fresh collagen matures. The jawline reads cleaner, the brow sits a touch higher — natural, never \"done.\"" }
+    ]
+  },
+
+  "solution": {
+    "eyebrow": "The treatment",
+    "mark_html": "<b>Sofwave™</b> uses ultrasound to rebuild collagen exactly where firmness is lost — so your skin lifts itself.",
+    "tag": "Non-invasive · No downtime · One session"
+  },
+
+  "how": {
+    "eyebrow": "How it works",
+    "title_html": "Surgical-layer results,<br>over a lunch break.",
+    "lede": "Sofwave delivers precisely controlled ultrasound energy to the mid-dermis, gently heating the exact depth where collagen is built — while a cooling system keeps the surface comfortable and unmarked.",
+    "steps": [
+      { "title": "Consult & map", "body": "We assess your skin and map the zones — jaw, brow, neck, submental — where a lift will read most naturally." },
+      { "title": "The ultrasound pass", "body": "The Sofwave handpiece glides across each zone, sending energy to the precise depth that triggers new collagen." },
+      { "title": "Walk out & rebuild", "body": "That's it. Over the following weeks your own body remodels the tissue — and keeps improving for ~3 months." }
+    ],
+    "chips": ["FDA-cleared technology", "Integrated surface cooling", "All skin tones, all year", "No needles, no surgery"]
+  },
+
+  "proof": {
+    "eyebrow": "Rated 4.9 ★ · 193 reviews on Fresha",
+    "title_html": "The clinic Chatswood<br>keeps coming back to.",
+    "sample_note": "Verified client reviews across i-Beaute's treatments (Fresha & Bookwell). Individual results vary; Sofwave suitability is assessed at your consultation.",
+    "quotes": [
+      { "quote": "Feel so pampered after the treatment. Portia and her staff are very professional and friendly.", "name": "Maria W.", "meta": "Verified · Fresha" },
+      { "quote": "My skin was blocked, clogged and breaking out. The team analysed my needs…", "name": "Kelly B.", "meta": "Verified · Fresha" },
+      { "quote": "Extremely friendly staff. Highly recommend — will be going back. Amazing!", "name": "Ayva", "meta": "Verified review" }
+    ]
+  },
+
+  "authority": {
+    "photo": "08_clinic",
+    "reverse": true,
+    "eyebrow": "Why i-Beaute",
+    "title_html": "A skin &amp; body clinic,<br>not a quick-fix counter.",
+    "body": "At i&#8209;Beaute Skin&nbsp;+&nbsp;Body in Chatswood, advanced treatments are delivered by trained skin therapists who treat your face as a whole — never a single sale. Every Sofwave plan starts with a proper consultation and an honest answer about whether it's right for you.",
+    "creds": [
+      "Trained, certified Sofwave practitioners",
+      "Personalised assessment before any treatment",
+      "The Gallery, Suite 16 · 445 Victoria Ave, Chatswood"
+    ]
+  },
+
+  "benefits": {
+    "eyebrow": "What's included",
+    "title": "One session. Everything considered.",
+    "items": [
+      { "title": "Full skin consultation", "body": "A proper assessment of your skin, your goals and whether Sofwave is the right call." },
+      { "title": "Targeted Sofwave treatment", "body": "Jawline, brow, neck or submental — mapped to where a lift reads most naturally on you." },
+      { "title": "Comfort-first protocol", "body": "Integrated cooling and an experienced therapist keep the session calm and comfortable." },
+      { "title": "Aftercare & review", "body": "Simple guidance and a check-in as your collagen rebuilds over the following weeks." }
+    ],
+    "offer": {
+      "eyebrow": "Start here",
+      "title": "Sofwave™ Consultation",
+      "was": "",
+      "price": "Complimentary",
+      "price_small": "skin consultation",
+      "bullets": ["Personalised skin & suitability assessment", "A clear, honest plan and price for your areas", "Single non-invasive session, zero downtime", "Results build over ~3 months"],
+      "button_label": "Book on Fresha",
+      "fine": "Treatment pricing is tailored to the areas you're treating and confirmed at your consultation."
+    }
+  },
+
+  "comparison": {
+    "eyebrow": "Where it sits",
+    "title_html": "The lift between a cream<br>and a scalpel.",
+    "columns": ["Creams & facials", "Sofwave™", "Surgical facelift"],
+    "own_index": 1,
+    "rows": [
+      { "feat": "Reaches deep laxity", "cells": [{ "t": "Surface only", "k": "no" }, { "t": "Yes — mid-dermis", "k": "yes" }, { "t": "Yes", "k": "yes" }] },
+      { "feat": "Downtime", "cells": [{ "t": "None", "k": "yes" }, { "t": "None", "k": "yes" }, { "t": "1–2 weeks", "k": "no" }] },
+      { "feat": "Surgery / anaesthetic", "cells": [{ "t": "No", "k": "yes" }, { "t": "No", "k": "yes" }, { "t": "Yes", "k": "no" }] },
+      { "feat": "Natural, gradual result", "cells": [{ "t": "Minimal lift", "k": "no" }, { "t": "Yes", "k": "yes" }, { "t": "Dramatic, all at once", "k": "no" }] },
+      { "feat": "Time commitment", "cells": [{ "t": "Ongoing", "k": "yes" }, { "t": "~30 minutes", "k": "yes" }, { "t": "Hours + recovery", "k": "no" }] }
+    ]
+  },
+
+  "target": {
+    "eyebrow": "Is it for you?",
+    "title": "Honest about who it suits.",
+    "yes": {
+      "title": "Sofwave is for you if…",
+      "items": [
+        "You're noticing early to moderate laxity on the jaw, brow or neck",
+        "You want a natural lift, not a dramatic change",
+        "You can't fit surgical downtime around work and family",
+        "You'd rather invest once than chase results with creams"
+      ]
+    },
+    "no": {
+      "title": "Maybe not, if…",
+      "items": [
+        "You have significant, advanced sagging better suited to surgery",
+        "You expect an instant, overnight transformation",
+        "You're pregnant or have certain medical conditions — we'll advise honestly at consult"
+      ]
+    }
+  },
+
+  "faq": {
+    "eyebrow": "No surprises",
+    "title": "The questions everyone asks.",
+    "items": [
+      { "q": "Does it hurt?", "a": "Most clients describe a warming sensation with brief moments of heat as the energy is delivered. Sofwave's integrated cooling keeps the skin surface comfortable, and your therapist adjusts to you throughout." },
+      { "q": "Is there really no downtime?", "a": "Correct. You may have mild redness or slight puffiness for a short time, but there are no marks to hide. Most people return to work or their day immediately." },
+      { "q": "When will I see results?", "a": "Some firmness appears in the first weeks, but the real result builds as new collagen matures — typically over about three months after a single session." },
+      { "q": "How long does it last?", "a": "Results from new collagen are long-lasting, though your skin keeps ageing naturally. Many clients choose a maintenance session down the track. We'll give you an honest, personalised view at your consult." },
+      { "q": "Is it safe for my skin tone?", "a": "Yes. Sofwave's ultrasound energy works independently of melanin, so it's suitable for all skin tones, and can be done year-round." },
+      { "q": "How do I start?", "a": "With a complimentary consultation. We assess your skin, answer everything, and only recommend Sofwave if it's genuinely right for you. Book in seconds on Fresha." }
+    ]
+  },
+
+  "final": {
+    "photo": "13_cta",
+    "eyebrow": "Chatswood · Sofwave™",
+    "title_html": "Meet the <em>rested</em><br>version of you.",
+    "body": "One session. Zero downtime. A lift that looks like nothing but good sleep and good genes. Start with a complimentary consultation.",
+    "button_label": "Book Your Sofwave Lift",
+    "info": [
+      { "t": "Find us", "body_html": "The Gallery, Suite 16<br>445 Victoria Ave, Chatswood NSW" },
+      { "t": "Book online", "body_html": "Instant booking on Fresha<br>Complimentary consultation" },
+      { "t": "The treatment", "body_html": "Sofwave™ ultrasound lifting<br>Non-invasive · No downtime" }
+    ]
+  },
+
+  "footer": {
+    "line": "Skin + Body · The Gallery, Suite 16, 445 Victoria Ave, Chatswood NSW 2067",
+    "link_label": "Book on Fresha",
+    "disclaimer": "Client reviews are genuine, sourced from i-Beaute's public Fresha and Bookwell profiles (4.9★ from 193 reviews at time of writing) and reflect the clinic's treatments overall. Treatment pricing is tailored to the areas treated and confirmed at consultation. Sofwave™ is a trademark of its respective owner. Individual results vary; treatment suitability is determined at consultation."
+  }
+}

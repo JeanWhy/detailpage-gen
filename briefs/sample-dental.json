@@ -1,0 +1,203 @@
+{
+  "meta": {
+    "slug": "aria-implants",
+    "lang": "en",
+    "title": "Full-Arch Dental Implants · Aria Implant Studio",
+    "description": "A fixed full set of teeth in as little as one day — no more loose dentures. All-on-4 dental implants at Aria Implant Studio."
+  },
+  "theme": {
+    "colors": {
+      "sage": "#2E5A6E", "deep_sage": "#14323F", "pale_sage": "#A9C4CF",
+      "mist": "#E7EFF2", "gold": "#B5793A", "gold_soft": "#D2A878",
+      "charcoal": "#15252C", "ink": "#27373D", "cream": "#FBFAF8", "sand": "#F1ECE3"
+    },
+    "gradients": { "grad1": "#3a6275", "grad2": "#13303d", "overlay_rgb": "16,34,42" },
+    "fonts": {
+      "serif": "'Fraunces', Georgia, serif",
+      "sans": "'Inter', system-ui, -apple-system, sans-serif",
+      "google": "https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@300;400;500;600&display=swap"
+    }
+  },
+  "brand": { "logo_text": "Aria", "booking_url": "#book" },
+  "sticky_cta": { "title": "Free Implant Consult", "sub": "3D scan included", "button": "Book" },
+  "nav_cta": "Book a Consultation",
+
+  "hero": {
+    "photo": "01_hero",
+    "badge": "All-on-4® · Fixed Full-Arch Implants",
+    "headline_html": "Teeth you can <em>trust</em><br>again.",
+    "sub": "A fixed, natural-looking full set of teeth in as little as one day — secured by implants, so they never slip, click or come out.",
+    "cta_primary": { "label": "Book Free Consult", "href": "#book" },
+    "cta_secondary": { "label": "See How It Works", "href": "#how" },
+    "stats": [
+      { "n": "1", "l": "Day to new teeth" },
+      { "n": "4", "l": "Implants per arch" },
+      { "n": "98%", "l": "Long-term success*" },
+      { "n": "0", "l": "Adhesives ever" }
+    ]
+  },
+
+  "pain": {
+    "eyebrow": "If this is your day",
+    "title_html": "Living around your teeth,<br>instead of with them.",
+    "cards": [
+      { "icon": "face", "title": "Choosing soft foods", "body": "Steak, crusty bread, fresh apples — quietly off the menu. You order around what your teeth can manage, not what you want." },
+      { "icon": "bottle", "title": "Dentures that betray you", "body": "Adhesive in your bag, the fear of a slip mid-sentence, the click no one else hears but you can't stop noticing." },
+      { "icon": "heart", "title": "Smiling with your hand up", "body": "Hiding your mouth in photos, laughing carefully. A smile should be the easiest thing you do — not the most self-conscious." }
+    ]
+  },
+
+  "problem": {
+    "eyebrow": "It isn't willpower or hygiene",
+    "title_html": "When teeth are lost,<br>the <em>jawbone melts away with them.</em>",
+    "lede": "Every tooth root stimulates the bone that holds it. Lose the tooth and the bone beneath starts to shrink — which is why dentures fit worse every year and the lower face begins to collapse inward.",
+    "points": [
+      { "n": "01", "title": "Bone resorbs without roots", "body": "Within a year of losing a tooth, up to 25% of the surrounding bone can disappear — and it keeps going." },
+      { "n": "02", "title": "Dentures sit on shrinking ground", "body": "They rest on the gum, not in it, so as bone recedes the fit loosens, sore spots appear, and adhesive stops helping." },
+      { "n": "03", "title": "Implants replace the root", "body": "Titanium posts fuse with the bone and stimulate it like real roots — stopping the slide and anchoring teeth for good." }
+    ]
+  },
+
+  "story": {
+    "photo": "04_story",
+    "reverse": false,
+    "eyebrow": "From consult to new smile",
+    "title_html": "Most of the journey<br>happens in a single,<br>well-planned day.",
+    "timeline": [
+      { "when": "Step 1 · Plan", "title": "3D scan & full plan", "body": "A CBCT scan maps your bone in 3D. We plan every implant digitally before you're ever in the chair — no guesswork." },
+      { "when": "Step 2 · Treatment day", "title": "Implants & fixed teeth", "body": "Gently sedated, you receive your implants and a fixed temporary bridge the same day. You leave with teeth." },
+      { "when": "Step 3 · Heal & finalise", "title": "Your permanent set", "body": "As the implants fuse over a few months, we craft and fit your final, custom full-arch — built to last decades." }
+    ]
+  },
+
+  "solution": {
+    "eyebrow": "The treatment",
+    "mark_html": "<b>All-on-4</b> anchors a full arch of fixed teeth onto just four implants — so you walk out with a smile that stays put.",
+    "tag": "Fixed · Same-day teeth · No adhesives"
+  },
+
+  "how": {
+    "eyebrow": "How it works",
+    "title_html": "Four implants. One arch.<br>A lifetime of confidence.",
+    "lede": "Instead of one implant per tooth, the All-on-4 technique angles four implants to harness your strongest available bone — giving an entire arch of fixed teeth immediate, stable support, often without bone grafting.",
+    "steps": [
+      { "title": "Digital 3D planning", "body": "We scan and plan implant placement in software first, for precision and a predictable result before any surgery." },
+      { "title": "Guided placement", "body": "Four implants are placed and angled to maximise contact with healthy bone — fixed teeth attach the same day." },
+      { "title": "Fuse & finalise", "body": "Over a few months the implants integrate with bone, then your permanent, custom arch is fitted for good." }
+    ],
+    "chips": ["Often no bone graft needed", "IV sedation available", "Fixed — never removed at night", "Care plans & financing"]
+  },
+
+  "proof": {
+    "eyebrow": "In their words",
+    "title_html": "The first bite into an apple<br>in years.",
+    "sample_note": "Sample testimonials for layout — replace with verified, consented patient reviews and required disclaimers before publishing.",
+    "quotes": [
+      { "quote": "I cried in the car. I bit into an apple for the first time in six years. No glue, no clicking — they just feel like my own teeth.", "name": "Margaret T.", "meta": "Patient, age 61" },
+      { "quote": "I'd hidden my smile for a decade. The whole thing was done under sedation and I felt nothing. I can't stop grinning now.", "name": "David R.", "meta": "Patient, age 57" },
+      { "quote": "From the 3D scan they showed me exactly what would happen. No surprises. Best decision I've made for myself in years.", "name": "Susan K.", "meta": "Patient, age 64" }
+    ]
+  },
+
+  "authority": {
+    "photo": "08_clinic",
+    "reverse": true,
+    "eyebrow": "Why Aria",
+    "title_html": "Implant-focused. Surgeon-led.<br>Built around one day.",
+    "body": "Aria Implant Studio does one thing and does it completely — full-arch implant dentistry, planned digitally and placed by an experienced implant surgeon. On-site 3D imaging and our own lab mean your case is controlled end to end, with honest advice about whether All-on-4 is right for you.",
+    "creds": [
+      "Surgeon-led, implant-focused practice",
+      "On-site CBCT 3D imaging & guided surgery",
+      "In-house lab for precise, lasting prosthetics"
+    ]
+  },
+
+  "benefits": {
+    "eyebrow": "What's included",
+    "title": "One plan. Everything mapped out.",
+    "items": [
+      { "title": "Free implant consultation", "body": "A no-pressure assessment of your suitability, your goals, and a clear, itemised plan with no hidden costs." },
+      { "title": "3D CBCT scan & digital plan", "body": "A full 3D view of your bone so every implant is planned with precision before treatment day." },
+      { "title": "Sedation & same-day teeth", "body": "Comfortable IV sedation options, and you leave treatment day with a fixed set of teeth — not a gap." },
+      { "title": "Aftercare & reviews", "body": "Guided healing, scheduled reviews, and your custom permanent arch crafted in our own lab." }
+    ],
+    "offer": {
+      "eyebrow": "New patients",
+      "title": "Full-Arch Assessment",
+      "was": "Consult normally $250",
+      "price": "Free",
+      "price_small": "consult + 3D scan",
+      "bullets": ["Implant suitability assessment", "3D CBCT scan included", "Itemised plan & financing options", "No obligation to proceed"],
+      "button_label": "Book My Free Consult",
+      "fine": "Sample offer for demo. Confirm pricing, scan inclusions and any conditions before publishing."
+    }
+  },
+
+  "comparison": {
+    "eyebrow": "Where it sits",
+    "title_html": "Why patients move on<br>from dentures.",
+    "columns": ["Traditional dentures", "All-on-4 implants", "Implant per tooth"],
+    "own_index": 1,
+    "rows": [
+      { "feat": "Stays fixed in place", "cells": [{ "t": "No — removable", "k": "no" }, { "t": "Yes — fixed", "k": "yes" }, { "t": "Yes", "k": "yes" }] },
+      { "feat": "Preserves jawbone", "cells": [{ "t": "No", "k": "no" }, { "t": "Yes", "k": "yes" }, { "t": "Yes", "k": "yes" }] },
+      { "feat": "Teeth on treatment day", "cells": [{ "t": "Varies", "k": "no" }, { "t": "Yes — same day", "k": "yes" }, { "t": "Usually no", "k": "no" }] },
+      { "feat": "Implants needed (per arch)", "cells": [{ "t": "None", "k": "yes" }, { "t": "Just 4", "k": "yes" }, { "t": "6–8+", "k": "no" }] },
+      { "feat": "Often avoids bone graft", "cells": [{ "t": "N/A", "k": "no" }, { "t": "Yes", "k": "yes" }, { "t": "Often not", "k": "no" }] }
+    ]
+  },
+
+  "target": {
+    "eyebrow": "Is it for you?",
+    "title": "Honest about who it suits.",
+    "yes": {
+      "title": "All-on-4 may suit you if…",
+      "items": [
+        "You're missing most or all teeth in an arch, or facing it soon",
+        "Your dentures are loose, painful or undermining your confidence",
+        "You want fixed teeth, not something you remove at night",
+        "You'd rather solve it properly once than keep relining dentures"
+      ]
+    },
+    "no": {
+      "title": "We'll talk it through if…",
+      "items": [
+        "You have only one or two teeth missing — a single implant may be better",
+        "You have uncontrolled health conditions affecting healing — we'll advise honestly",
+        "You're looking for the cheapest short-term patch rather than a lasting solution"
+      ]
+    }
+  },
+
+  "faq": {
+    "eyebrow": "No surprises",
+    "title": "The questions patients ask.",
+    "items": [
+      { "q": "Does it hurt?", "a": "Treatment is done under local anaesthetic with IV sedation options, so most patients feel nothing during the procedure. Post-treatment discomfort is usually well managed with simple pain relief and settles within days." },
+      { "q": "Do I really get teeth the same day?", "a": "In most cases, yes — you leave treatment day with a fixed temporary bridge. Your permanent, custom arch is fitted once the implants have fused with the bone over the following months." },
+      { "q": "Will they look natural?", "a": "Yes. Your final arch is custom-designed in our lab for your face, shade and bite — built to look and function like healthy natural teeth." },
+      { "q": "How long do implants last?", "a": "With good care and regular reviews, dental implants can last decades — many a lifetime. The fixed teeth on top may be refreshed over the years like any restoration." },
+      { "q": "What does it cost?", "a": "Every case differs, so we provide a clear, itemised plan at your consultation along with financing and payment-plan options. No hidden fees." },
+      { "q": "How do I start?", "a": "With a free consultation and 3D scan. We assess your suitability, answer everything, and only recommend treatment that's genuinely right for you." }
+    ]
+  },
+
+  "final": {
+    "photo": "13_cta",
+    "eyebrow": "Aria Implant Studio",
+    "title_html": "Bite, laugh and live<br>like they're <em>yours.</em>",
+    "body": "Because soon, they will be. Start with a free consultation and 3D scan — and a clear, honest plan with no obligation.",
+    "button_label": "Book My Free Consultation",
+    "info": [
+      { "t": "First step", "body_html": "Free consult + 3D scan<br>No obligation to proceed" },
+      { "t": "Treatment", "body_html": "All-on-4® full-arch implants<br>Same-day fixed teeth" },
+      { "t": "Peace of mind", "body_html": "Surgeon-led & digitally planned<br>Financing options available" }
+    ]
+  },
+
+  "footer": {
+    "line": "Aria Implant Studio · Full-arch dental implants · Surgeon-led, digitally planned",
+    "link_label": "Book a free consultation",
+    "disclaimer": "Demo landing page concept for a fictional clinic (\"Aria Implant Studio\"). Statistics, pricing, offers and testimonials are illustrative placeholders and must be replaced with verified, compliant information before publishing. All-on-4® is a registered trademark of Nobel Biocare. Dental implant treatment carries risks; suitability and outcomes are determined by a qualified clinician at consultation. *Success rates vary by case and source."
+  }
+}

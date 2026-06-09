@@ -1,0 +1,561 @@
+"""
+상세페이지 제너레이터 (HTML).
+
+브리프 JSON 하나를 받아 고전환 13섹션 랜딩페이지를 렌더링합니다.
+디자인 시스템(CSS)은 고정이고, 브랜드별로 바뀌는 것은
+:root 변수(컬러/폰트)와 13개 섹션의 '콘텐츠'뿐입니다.
+
+사용법:
+    python3 scripts/build_page.py briefs/i-beaute.json
+    python3 scripts/build_page.py briefs/i-beaute.json output/i-beaute
+
+결과: <output>/index.html  (+ assets/ 폴더 생성)
+이미지 슬롯(hero/story/clinic/cta의 "photo")은 assets/<photo>.jpg 가 있으면
+사용하고, 없으면 세이지 그라데이션으로 우아하게 폴백합니다.
+"""
+
+import json
+import sys
+import html
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).parent.parent
+
+
+# ---------------------------------------------------------------- helpers
+def esc(s):
+    """플레인 텍스트 → HTML 안전. (& < > 만 변환, 따옴표는 유지)"""
+    return html.escape(str(s), quote=False)
+
+
+def raw(brief_field, default=""):
+    return brief_field if brief_field is not None else default
+
+
+ICONS = {
+    "check": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>',
+    "check_bold": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>',
+    "x": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>',
+    "face": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M9 15c.8-1 2-1.5 3-1.5s2.2.5 3 1.5"/><path d="M9 9h.01M15 9h.01"/></svg>',
+    "bottle": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 7h16M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12"/><path d="M10 11v6M14 11v6"/></svg>',
+    "sun": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3v3M12 18v3M5 12H2M22 12h-3M5.6 5.6l2 2M16.4 16.4l2 2M18.4 5.6l-2 2M7.6 16.4l-2 2"/><circle cx="12" cy="12" r="3.2"/></svg>',
+    "spark": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>',
+    "clock": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
+    "heart": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20s-7-4.5-9.2-8.6C1.2 8.3 2.9 5 6 5c2 0 3.2 1.2 4 2.4C10.8 6.2 12 5 14 5c3.1 0 4.8 3.3 3.2 6.4C19 15.5 12 20 12 20z"/></svg>',
+}
+
+
+def icon(name):
+    return ICONS.get(name, ICONS["spark"])
+
+
+# ---------------------------------------------------------------- CSS
+def root_css(theme):
+    c = theme.get("colors", {})
+    f = theme.get("fonts", {})
+    g = theme.get("gradients", {})
+    return f""":root{{
+    --sage:{c.get('sage','#7C9885')}; --deep-sage:{c.get('deep_sage','#5C7567')}; --pale-sage:{c.get('pale_sage','#C9D6CC')};
+    --mist:{c.get('mist','#EAF0EB')}; --gold:{c.get('gold','#B08D57')}; --gold-soft:{c.get('gold_soft','#C7A878')};
+    --charcoal:{c.get('charcoal','#2B2B2B')}; --ink:{c.get('ink','#3A3A36')}; --cream:{c.get('cream','#FBFAF7')}; --sand:{c.get('sand','#F3EEE4')};
+    --line:rgba(43,43,43,.12);
+    --grad1:{g.get('grad1','#6f8a7c')}; --grad2:{g.get('grad2','#3f514a')}; --overlay:{g.get('overlay_rgb','40,46,42')};
+    --serif:{f.get('serif', "'Cormorant Garamond',Georgia,serif")};
+    --sans:{f.get('sans', "'Jost',system-ui,-apple-system,sans-serif")};
+    --maxw:1180px;
+  }}"""
+
+
+STATIC_CSS = r"""
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.12;color:var(--charcoal);letter-spacing:.005em}
+  p{max-width:62ch}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  section{position:relative}
+  .pad{padding:120px 0}
+  .pad-sm{padding:88px 0}
+  .center{text-align:center}
+  .lede{font-size:21px;color:var(--ink);font-weight:300}
+  .muted{color:#7C7B73}
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:18px 38px;border-radius:2px;cursor:pointer;transition:.35s ease;border:1px solid transparent;white-space:nowrap}
+  .btn-primary{background:var(--charcoal);color:var(--cream)}
+  .btn-primary:hover{background:var(--deep-sage)}
+  .btn-gold{background:var(--gold);color:#fff}
+  .btn-gold:hover{background:#9c7a47}
+  .btn-ghost{border-color:rgba(255,255,255,.55);color:#fff}
+  .btn-ghost:hover{background:#fff;color:var(--charcoal);border-color:#fff}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:.4s ease}
+  header.scrolled{background:rgba(251,250,247,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:14px 40px;box-shadow:0 1px 0 var(--line)}
+  .logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#fff;transition:.4s}
+  .logo span{color:var(--gold-soft)}
+  header.scrolled .logo{color:var(--charcoal)}
+  .nav-cta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);padding:11px 22px;border-radius:2px;transition:.35s}
+  .nav-cta:hover{background:#fff;color:var(--charcoal)}
+  header.scrolled .nav-cta{color:var(--charcoal);border-color:var(--charcoal)}
+  header.scrolled .nav-cta:hover{background:var(--charcoal);color:#fff}
+  .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.30) 40%,rgba(var(--overlay),.62) 100%),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%);background-size:cover;background-position:center 30%}
+  .hero[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.30) 40%,rgba(var(--overlay),.62) 100%),var(--img),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%)}
+  .hero .wrap{padding-top:120px;padding-bottom:60px}
+  .hero-badge{display:inline-flex;align-items:center;gap:.6em;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.5);padding:9px 18px;border-radius:999px;margin-bottom:30px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .hero-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
+  .hero h1{font-size:clamp(44px,6.4vw,86px);color:#fff;font-weight:500;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--pale-sage)}
+  .hero .sub{font-size:clamp(18px,2vw,22px);max-width:46ch;margin:28px 0 40px;color:rgba(255,255,255,.9);font-weight:300}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-meta{display:flex;gap:34px;margin-top:54px;flex-wrap:wrap}
+  .hero-meta div{border-left:1px solid rgba(255,255,255,.35);padding-left:16px}
+  .hero-meta .n{font-family:var(--serif);font-size:30px;color:#fff;line-height:1}
+  .hero-meta .l{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:6px}
+  .head{max-width:none;margin-bottom:56px}
+  .head h2{font-size:clamp(32px,4vw,52px)}
+  .head .eyebrow{margin-bottom:18px}
+  .head p{margin-top:20px}
+  .pain{background:var(--sand)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
+  .pain-card{background:var(--cream);padding:42px 34px;border-radius:3px;border:1px solid var(--line)}
+  .pain-card .ic{width:40px;height:40px;color:var(--sage);margin-bottom:22px}
+  .pain-card h3{font-size:24px;margin-bottom:12px}
+  .pain-card p{font-size:16px;color:#6f6e67}
+  .problem{background:var(--deep-sage);color:#fff;text-align:center}
+  .problem h2{color:#fff;font-size:clamp(30px,4vw,50px);max-width:18ch;margin:0 auto}
+  .problem h2 em{font-style:italic;color:var(--gold-soft)}
+  .problem p{color:rgba(255,255,255,.82);margin:26px auto 0;font-size:19px}
+  .problem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px;text-align:left}
+  .problem-row .n{font-family:var(--serif);font-size:40px;color:var(--gold-soft);line-height:1}
+  .problem-row h4{color:#fff;font-size:21px;margin:14px 0 8px}
+  .problem-row p{color:rgba(255,255,255,.72);font-size:15px;margin:0}
+  .split{display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch;gap:0}
+  .split .media{min-height:560px;background:linear-gradient(135deg,var(--pale-sage),var(--sage));background-size:cover;background-position:center}
+  .split .media[data-img]{background-image:var(--img)}
+  .split .body{padding:96px 72px;display:flex;flex-direction:column;justify-content:center}
+  .split.reverse .media{order:2}
+  .timeline{margin-top:34px;border-left:1px solid var(--line);padding-left:0}
+  .tl{position:relative;padding:0 0 30px 30px}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{content:"";position:absolute;left:-5px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+  .tl .w{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .tl h4{font-size:21px;margin:6px 0 4px}
+  .tl p{font-size:15px;color:#6f6e67;margin:0}
+  .solution{background:var(--mist);text-align:center}
+  .solution .mark{font-family:var(--serif);font-size:clamp(34px,4.6vw,58px);font-style:italic;color:var(--charcoal);max-width:20ch;margin:0 auto}
+  .solution .mark b{font-style:normal;font-weight:600;color:var(--deep-sage)}
+  .solution .tag{margin-top:22px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:8px}
+  .step .n{font-family:var(--serif);font-size:18px;color:var(--gold);border:1px solid var(--gold);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .step h3{font-size:25px;margin-bottom:10px}
+  .step p{font-size:16px;color:#6f6e67}
+  .science{display:flex;gap:18px;flex-wrap:wrap;margin-top:64px;padding-top:48px;border-top:1px solid var(--line)}
+  .chip{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.04em;color:var(--ink);background:var(--mist);padding:12px 20px;border-radius:999px}
+  .chip svg{width:18px;height:18px;color:var(--sage)}
+  .proof{background:var(--sand)}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
+  .quote{background:var(--cream);padding:40px 34px;border-radius:3px;border:1px solid var(--line);display:flex;flex-direction:column}
+  .stars{color:var(--gold);letter-spacing:3px;font-size:15px;margin-bottom:18px}
+  .quote p{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--charcoal);line-height:1.45;margin-bottom:auto}
+  .who{display:flex;align-items:center;gap:14px;margin-top:28px}
+  .who .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--pale-sage),var(--sage));flex:none}
+  .who .nm{font-size:15px;font-weight:500;color:var(--charcoal)}
+  .who .mt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9a988f}
+  .sample-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#b3b0a5;text-align:center;margin-top:34px}
+  .authority{background:var(--deep-sage);color:#fff}
+  .authority .split .body{padding:96px 72px}
+  .authority h2{color:#fff}
+  .authority p{color:rgba(255,255,255,.84)}
+  .creds{list-style:none;margin-top:30px;display:grid;gap:14px}
+  .creds li{display:flex;gap:14px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.9)}
+  .creds svg{width:20px;height:20px;color:var(--gold-soft);flex:none;margin-top:3px}
+  .benefits-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;margin-top:8px}
+  .incl{list-style:none;display:grid;gap:2px}
+  .incl li{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line)}
+  .incl li:first-child{padding-top:0}
+  .incl svg{width:22px;height:22px;color:var(--sage);flex:none;margin-top:3px}
+  .incl h4{font-size:20px;margin-bottom:4px}
+  .incl p{font-size:15px;color:#6f6e67;margin:0}
+  .offer-card{background:var(--charcoal);color:#fff;border-radius:4px;padding:44px 38px;align-self:start;position:sticky;top:100px}
+  .offer-card .eyebrow{color:var(--gold-soft)}
+  .offer-card h3{color:#fff;font-size:28px;margin:14px 0 6px}
+  .offer-card .price{font-family:var(--serif);font-size:46px;color:#fff;margin:18px 0 4px}
+  .offer-card .price small{font-size:16px;color:rgba(255,255,255,.6)}
+  .offer-card .was{color:rgba(255,255,255,.55);text-decoration:line-through;font-size:17px}
+  .offer-card ul{list-style:none;margin:24px 0;display:grid;gap:12px}
+  .offer-card li{font-size:15px;color:rgba(255,255,255,.85);display:flex;gap:10px}
+  .offer-card li::before{content:"\2713";color:var(--gold-soft)}
+  .offer-card .btn{width:100%;justify-content:center;margin-top:6px}
+  .offer-card .fine{font-size:12px;color:rgba(255,255,255,.5);margin-top:16px;text-align:center}
+  .compare{background:var(--mist)}
+  .ctable{margin-top:8px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--cream)}
+  .ctable .row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr}
+  .ctable .row > div{padding:22px 24px;border-bottom:1px solid var(--line);font-size:15px}
+  .ctable .row:last-child > div{border-bottom:none}
+  .ctable .h{background:var(--charcoal);color:#fff}
+  .ctable .h > div{font-family:var(--serif);font-size:19px;color:#fff;border-color:rgba(255,255,255,.12)}
+  .ctable .h .feat-col{color:rgba(255,255,255,.6);font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .ctable .own{background:var(--mist)}
+  .ctable .h .own{background:transparent;color:var(--gold-soft)}
+  .ctable .feat{font-weight:500;color:var(--charcoal)}
+  .yes{color:var(--sage);font-weight:500}
+  .no{color:#bdbbb1}
+  .ctable .own .yes{color:var(--deep-sage)}
+  .target-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}
+  .tcol{padding:46px 40px;border-radius:4px}
+  .tcol.yes-col{background:var(--mist);border:1px solid var(--pale-sage)}
+  .tcol.no-col{background:var(--sand);border:1px solid var(--line)}
+  .tcol h3{font-size:24px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+  .tcol ul{list-style:none;display:grid;gap:16px}
+  .tcol li{display:flex;gap:14px;font-size:16px;color:var(--ink)}
+  .tcol li svg{width:20px;height:20px;flex:none;margin-top:3px}
+  .yes-col li svg{color:var(--sage)}
+  .no-col li svg{color:#bdbbb1}
+  .faq{max-width:820px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--line);padding:6px 0}
+  .faq summary{list-style:none;cursor:pointer;padding:26px 0;font-family:var(--serif);font-size:23px;color:var(--charcoal);display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--sans);font-weight:300;font-size:28px;color:var(--gold);transition:.3s;line-height:1}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{padding:0 0 28px;color:#6f6e67;font-size:16px;max-width:none}
+  .final{color:#fff;text-align:center;background:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.88)),linear-gradient(120deg,var(--grad1),var(--grad2));background-size:cover;background-position:center}
+  .final[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.88)),var(--img)}
+  .final h2{color:#fff;font-size:clamp(36px,5vw,68px);max-width:16ch;margin:0 auto}
+  .final h2 em{font-style:italic;color:var(--pale-sage)}
+  .final p{color:rgba(255,255,255,.85);margin:24px auto 40px;font-size:19px}
+  .final .btn{font-size:15px;padding:20px 46px}
+  .final-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:54px;padding-top:40px;border-top:1px solid rgba(255,255,255,.18)}
+  .final-info div{font-size:14px;color:rgba(255,255,255,.8);letter-spacing:.02em}
+  .final-info .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:8px}
+  footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:60px 0;text-align:center;font-size:13px;letter-spacing:.04em}
+  footer .logo{color:#fff;font-size:26px;display:inline-block;margin-bottom:18px}
+  footer a{color:var(--gold-soft)}
+  .disclaimer{max-width:680px;margin:24px auto 0;font-size:11px;color:rgba(255,255,255,.32);line-height:1.6}
+  .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:60;display:none;background:rgba(251,250,247,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
+  .sticky-cta .p{font-family:var(--serif);font-size:18px;color:var(--charcoal)}
+  .sticky-cta .p small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .sticky-cta .btn{padding:14px 26px;flex:none}
+  .reveal{transition:opacity .9s ease,transform .9s ease}
+  .js .reveal{opacity:0;transform:translateY(28px)}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:900px){
+    .pad{padding:84px 0}.pad-sm{padding:64px 0}
+    .pain-grid,.steps,.quotes,.problem-row{grid-template-columns:1fr;gap:20px}
+    .split{grid-template-columns:1fr}
+    .split .media{min-height:340px;order:-1!important}
+    .split .body,.authority .split .body{padding:60px 32px}
+    .benefits-grid,.target-cols{grid-template-columns:1fr;gap:24px}
+    .offer-card{position:static}
+    .ctable{overflow-x:auto}.ctable .row{min-width:620px}
+    .hero-meta{gap:22px}
+    header{padding:16px 22px}.nav-cta{display:none}
+    .sticky-cta{display:flex}
+    body{padding-bottom:72px}
+    .final-info{gap:26px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 22px}
+    .pain-card,.quote{padding:32px 26px}
+  }
+"""
+
+JS = r"""
+  document.documentElement.classList.add('js');
+  const bar=document.getElementById('topbar');
+  const onScroll=()=>bar.classList.toggle('scrolled',window.scrollY>60);
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-photo]').forEach(el=>{
+    const name=el.getAttribute('data-photo');const img=new Image();const src='assets/'+name+'.jpg';
+    img.onload=()=>{el.style.setProperty('--img',`url('${src}')`);el.setAttribute('data-img','');};img.src=src;
+  });
+  document.querySelectorAll('a[data-book]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('book').scrollIntoView({behavior:'smooth'})});});
+"""
+
+
+# ---------------------------------------------------------------- sections
+def render_hero(h, book_url):
+    stats = "".join(
+        f'<div><div class="n">{raw(s.get("n"))}</div><div class="l">{raw(s.get("l"))}</div></div>'
+        for s in h.get("stats", [])
+    )
+    photo = f' data-photo="{esc(h["photo"])}"' if h.get("photo") else ""
+    cta2 = h.get("cta_secondary")
+    cta2_html = (
+        f'<a class="btn btn-ghost" href="{esc(cta2["href"])}">{esc(cta2["label"])}</a>'
+        if cta2 else ""
+    )
+    return f"""<section class="hero" id="top"{photo}>
+  <div class="wrap">
+    <span class="hero-badge reveal">{raw(h.get('badge',''))}</span>
+    <h1 class="reveal">{raw(h.get('headline_html',''))}</h1>
+    <p class="sub reveal">{esc(h.get('sub',''))}</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-gold" href="{esc(h.get('cta_primary',{}).get('href','#book'))}" data-book>{esc(h.get('cta_primary',{}).get('label','Book'))}</a>
+      {cta2_html}
+    </div>
+    <div class="hero-meta reveal">{stats}</div>
+  </div>
+</section>"""
+
+
+def render_pain(p):
+    cards = "".join(
+        f"""<div class="pain-card reveal">{icon(c.get('icon','spark'))}
+        <h3>{esc(c.get('title',''))}</h3><p>{esc(c.get('body',''))}</p></div>"""
+        for c in p.get("cards", [])
+    )
+    return f"""<section class="pain pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">{esc(p.get('eyebrow',''))}</span>
+    <h2>{raw(p.get('title_html',''))}</h2></div>
+    <div class="pain-grid">{cards}</div></div></section>"""
+
+
+def render_problem(p):
+    rows = "".join(
+        f'<div class="reveal"><div class="n">{esc(pt.get("n",""))}</div>'
+        f'<h4>{esc(pt.get("title",""))}</h4><p>{esc(pt.get("body",""))}</p></div>'
+        for pt in p.get("points", [])
+    )
+    return f"""<section class="problem pad"><div class="wrap">
+    <div class="reveal center"><span class="eyebrow">{esc(p.get('eyebrow',''))}</span>
+    <h2>{raw(p.get('title_html',''))}</h2><p>{esc(p.get('lede',''))}</p></div>
+    <div class="problem-row">{rows}</div></div></section>"""
+
+
+def render_story(s):
+    tl = "".join(
+        f'<div class="tl reveal"><div class="w">{esc(t.get("when",""))}</div>'
+        f'<h4>{esc(t.get("title",""))}</h4><p>{esc(t.get("body",""))}</p></div>'
+        for t in s.get("timeline", [])
+    )
+    photo = f' data-photo="{esc(s["photo"])}"' if s.get("photo") else ""
+    rev = " reverse" if s.get("reverse") else ""
+    return f"""<section class="story"><div class="split{rev}">
+    <div class="media reveal"{photo}></div>
+    <div class="body"><span class="eyebrow reveal">{esc(s.get('eyebrow',''))}</span>
+    <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">{raw(s.get('title_html',''))}</h2>
+    <div class="timeline">{tl}</div></div></div></section>"""
+
+
+def render_solution(s):
+    return f"""<section class="solution pad-sm"><div class="wrap reveal">
+    <span class="eyebrow">{esc(s.get('eyebrow',''))}</span>
+    <p class="mark" style="margin-top:18px">{raw(s.get('mark_html',''))}</p>
+    <div class="tag">{esc(s.get('tag',''))}</div></div></section>"""
+
+
+def render_how(h):
+    steps = "".join(
+        f'<div class="step reveal"><div class="n">{i}</div>'
+        f'<h3>{esc(st.get("title",""))}</h3><p>{esc(st.get("body",""))}</p></div>'
+        for i, st in enumerate(h.get("steps", []), 1)
+    )
+    chips = "".join(
+        f'<span class="chip">{ICONS["check"]}{esc(c)}</span>' for c in h.get("chips", [])
+    )
+    science = f'<div class="science reveal">{chips}</div>' if chips else ""
+    lede = f'<p class="lede">{esc(h.get("lede",""))}</p>' if h.get("lede") else ""
+    return f"""<section class="pad" id="how"><div class="wrap">
+    <div class="head reveal"><span class="eyebrow">{esc(h.get('eyebrow',''))}</span>
+    <h2>{raw(h.get('title_html',''))}</h2>{lede}</div>
+    <div class="steps">{steps}</div>{science}</div></section>"""
+
+
+def render_proof(p):
+    quotes = "".join(
+        f"""<div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"{esc(q.get('quote',''))}"</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">{esc(q.get('name',''))}</div><div class="mt">{esc(q.get('meta',''))}</div></div></div></div>"""
+        for q in p.get("quotes", [])
+    )
+    note = f'<p class="sample-tag">{esc(p["sample_note"])}</p>' if p.get("sample_note") else ""
+    return f"""<section class="proof pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">{esc(p.get('eyebrow',''))}</span>
+    <h2>{raw(p.get('title_html',''))}</h2></div>
+    <div class="quotes">{quotes}</div>{note}</div></section>"""
+
+
+def render_authority(a):
+    creds = "".join(
+        f'<li class="reveal">{ICONS["check"]}{esc(c)}</li>' for c in a.get("creds", [])
+    )
+    photo = f' data-photo="{esc(a["photo"])}"' if a.get("photo") else ""
+    rev = " reverse" if a.get("reverse", True) else ""
+    return f"""<section class="authority"><div class="split{rev}">
+    <div class="media reveal"{photo}></div>
+    <div class="body"><span class="eyebrow reveal">{esc(a.get('eyebrow',''))}</span>
+    <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">{raw(a.get('title_html',''))}</h2>
+    <p class="reveal" style="margin-top:22px">{raw(a.get('body',''))}</p>
+    <ul class="creds">{creds}</ul></div></div></section>"""
+
+
+def render_benefits(b, book_url):
+    items = "".join(
+        f'<li class="reveal">{ICONS["check"]}<div><h4>{esc(it.get("title",""))}</h4>'
+        f'<p>{esc(it.get("body",""))}</p></div></li>'
+        for it in b.get("items", [])
+    )
+    o = b.get("offer", {})
+    bullets = "".join(f"<li>{esc(x)}</li>" for x in o.get("bullets", []))
+    return f"""<section class="pad" id="book"><div class="wrap">
+    <div class="head reveal"><span class="eyebrow">{esc(b.get('eyebrow',''))}</span>
+    <h2>{esc(b.get('title',''))}</h2></div>
+    <div class="benefits-grid"><ul class="incl">{items}</ul>
+    <div class="offer-card reveal"><span class="eyebrow">{esc(o.get('eyebrow',''))}</span>
+    <h3>{esc(o.get('title',''))}</h3>
+    <div class="was">{esc(o.get('was',''))}</div>
+    <div class="price">{esc(o.get('price',''))}<small> {esc(o.get('price_small',''))}</small></div>
+    <ul>{bullets}</ul>
+    <a class="btn btn-gold" href="{esc(book_url)}" target="_blank" rel="noopener">{esc(o.get('button_label','Book'))}</a>
+    <div class="fine">{esc(o.get('fine',''))}</div></div></div></div></section>"""
+
+
+def render_comparison(c):
+    own = c.get("own_index", 1)
+    head_cols = "".join(
+        f'<div class="own">{esc(col)}</div>' if i == own else f"<div>{esc(col)}</div>"
+        for i, col in enumerate(c.get("columns", []))
+    )
+    rows = ""
+    for r in c.get("rows", []):
+        cells = ""
+        for i, cell in enumerate(r.get("cells", [])):
+            kind = cell.get("k", "yes")
+            inner = f'<span class="{kind}">{esc(cell.get("t",""))}</span>'
+            wrap_cls = ' class="own"' if i == own else ""
+            cells += f"<div{wrap_cls}>{inner}</div>"
+        rows += f'<div class="row"><div class="feat">{esc(r.get("feat",""))}</div>{cells}</div>'
+    return f"""<section class="compare pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">{esc(c.get('eyebrow',''))}</span>
+    <h2>{raw(c.get('title_html',''))}</h2></div>
+    <div class="ctable reveal"><div class="row h"><div class="feat-col">&nbsp;</div>{head_cols}</div>
+    {rows}</div></div></section>"""
+
+
+def render_target(t):
+    yes = t.get("yes", {})
+    no = t.get("no", {})
+    yes_items = "".join(f"<li>{ICONS['check_bold']}{esc(x)}</li>" for x in yes.get("items", []))
+    no_items = "".join(f"<li>{ICONS['x']}{esc(x)}</li>" for x in no.get("items", []))
+    return f"""<section class="pad-sm"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">{esc(t.get('eyebrow',''))}</span>
+    <h2>{esc(t.get('title',''))}</h2></div>
+    <div class="target-cols">
+    <div class="tcol yes-col reveal"><h3>{ICONS['check_bold']}{esc(yes.get('title',''))}</h3><ul>{yes_items}</ul></div>
+    <div class="tcol no-col reveal"><h3>{ICONS['x']}{esc(no.get('title',''))}</h3><ul>{no_items}</ul></div>
+    </div></div></section>"""
+
+
+def render_faq(f):
+    items = "".join(
+        f'<details class="reveal"><summary>{esc(it.get("q",""))}</summary>'
+        f'<p>{esc(it.get("a",""))}</p></details>'
+        for it in f.get("items", [])
+    )
+    return f"""<section class="pad" style="background:var(--sand)"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">{esc(f.get('eyebrow',''))}</span>
+    <h2>{esc(f.get('title',''))}</h2></div>
+    <div class="faq">{items}</div></div></section>"""
+
+
+def render_final(fi, book_url):
+    info = "".join(
+        f'<div><div class="t">{esc(x.get("t",""))}</div>{raw(x.get("body_html",""))}</div>'
+        for x in fi.get("info", [])
+    )
+    photo = f' data-photo="{esc(fi["photo"])}"' if fi.get("photo") else ""
+    return f"""<section class="final pad"{photo}><div class="wrap reveal">
+    <span class="eyebrow">{esc(fi.get('eyebrow',''))}</span>
+    <h2>{raw(fi.get('title_html',''))}</h2>
+    <p>{esc(fi.get('body',''))}</p>
+    <a class="btn btn-gold" href="{esc(book_url)}" target="_blank" rel="noopener">{esc(fi.get('button_label','Book'))}</a>
+    <div class="final-info">{info}</div></div></section>"""
+
+
+# ---------------------------------------------------------------- assemble
+def build(brief):
+    theme = brief.get("theme", {})
+    meta = brief.get("meta", {})
+    brand = brief.get("brand", {})
+    book_url = brand.get("booking_url", "#book")
+    logo = raw(brand.get("logo_text", "Brand"))
+    sc = brief.get("sticky_cta", {})
+    font_link = theme.get("fonts", {}).get("google", "")
+
+    body = "\n".join([
+        render_hero(brief.get("hero", {}), book_url),
+        render_pain(brief.get("pain", {})),
+        render_problem(brief.get("problem", {})),
+        render_story(brief.get("story", {})),
+        render_solution(brief.get("solution", {})),
+        render_how(brief.get("how", {})),
+        render_proof(brief.get("proof", {})),
+        render_authority(brief.get("authority", {})),
+        render_benefits(brief.get("benefits", {}), book_url),
+        render_comparison(brief.get("comparison", {})),
+        render_target(brief.get("target", {})),
+        render_faq(brief.get("faq", {})),
+        render_final(brief.get("final", {}), book_url),
+    ])
+
+    ft = brief.get("footer", {})
+    footer = f"""<footer><div class="wrap">
+    <div class="logo">{logo}<span style="color:var(--gold-soft)">.</span></div>
+    <div>{esc(ft.get('line',''))}</div>
+    <div style="margin-top:8px"><a href="{esc(book_url)}" target="_blank" rel="noopener">{esc(ft.get('link_label','Book'))}</a></div>
+    <p class="disclaimer">{esc(ft.get('disclaimer',''))}</p></div></footer>"""
+
+    sticky = f"""<div class="sticky-cta">
+    <div class="p">{raw(sc.get('title',''))}<small>{esc(sc.get('sub',''))}</small></div>
+    <a class="btn btn-gold" href="{esc(book_url)}" target="_blank" rel="noopener">{esc(sc.get('button','Book'))}</a></div>"""
+
+    return f"""<!DOCTYPE html>
+<html lang="{esc(meta.get('lang','en'))}">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{esc(meta.get('title',''))}</title>
+<meta name="description" content="{esc(meta.get('description',''))}" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="{esc(font_link)}" rel="stylesheet" />
+<style>
+{root_css(theme)}
+{STATIC_CSS}
+</style>
+</head>
+<body>
+<header id="topbar">
+  <div class="logo">{logo}<span>.</span></div>
+  <a class="nav-cta" href="#book" data-book>{esc(brief.get('nav_cta','Book'))}</a>
+</header>
+{body}
+{footer}
+{sticky}
+<script>{JS}</script>
+</body>
+</html>
+"""
+
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python3 scripts/build_page.py <brief.json> [output_dir]")
+        sys.exit(1)
+    brief_path = Path(sys.argv[1])
+    brief = json.loads(brief_path.read_text(encoding="utf-8"))
+    slug = brief.get("meta", {}).get("slug", brief_path.stem)
+    out_dir = Path(sys.argv[2]) if len(sys.argv) > 2 else PROJECT_ROOT / "output" / slug
+    out_dir.mkdir(parents=True, exist_ok=True)
+    (out_dir / "assets").mkdir(exist_ok=True)
+    html_out = build(brief)
+    (out_dir / "index.html").write_text(html_out, encoding="utf-8")
+    print(f"Built: {out_dir / 'index.html'}  ({len(html_out):,} bytes)")
+    print(f"Preview: node scripts/preview_server.js {out_dir} 4599")
+
+
+if __name__ == "__main__":
+    main()
