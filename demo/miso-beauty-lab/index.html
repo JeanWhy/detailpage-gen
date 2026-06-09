@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Miso Beauty Lab · Korean Head Spa &amp; Skin, Eastwood Sydney</title>
+<meta name="description" content="Authentic Korean head spa and K-beauty facials in Eastwood — personalised, relaxing, and rated 4.5★ on Google. Miso Beauty Lab, Shop 19, 10 Ethel Street." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+:root{
+    --rose:#C9976A; --deep:#3C2F22; --blush:#F1E1C8;
+    --mist:#F6EEE1; --gold:#B0863F; --gold-soft:#D8B981;
+    --charcoal:#2C2419; --ink:#4A4031; --cream:#FCF9F3; --sand:#F2E8D7;
+    --line:rgba(60,47,34,.12);
+    --grad1:#C9976A; --grad2:#3C2F22; --overlay:44,36,25;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Jost', system-ui, -apple-system, sans-serif;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.12;color:var(--charcoal);letter-spacing:.005em}
+  p{max-width:62ch}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  section{position:relative}
+  .pad{padding:120px 0}
+  .pad-sm{padding:88px 0}
+  .center{text-align:center}
+  .lede{font-size:21px;color:var(--ink);font-weight:300}
+  .muted{color:#8a7d68}
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:18px 38px;border-radius:2px;cursor:pointer;transition:.35s ease;border:1px solid transparent;white-space:nowrap}
+  .btn-primary{background:var(--charcoal);color:var(--cream)}
+  .btn-primary:hover{background:var(--deep)}
+  .btn-gold{background:var(--gold);color:#fff}
+  .btn-gold:hover{background:#956f33}
+  .btn-ghost{border-color:rgba(255,255,255,.55);color:#fff}
+  .btn-ghost:hover{background:#fff;color:var(--charcoal);border-color:#fff}
+  .demo-ribbon{background:var(--deep);color:var(--blush);font-family:var(--sans);font-size:12px;letter-spacing:.06em;text-align:center;padding:9px 16px;line-height:1.5}
+  .demo-ribbon b{color:#fff;font-weight:500}
+  header{position:absolute;top:38px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:.4s ease}
+  header.fixed{position:fixed;top:0}
+  header.scrolled{background:rgba(252,249,243,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:14px 40px;box-shadow:0 1px 0 var(--line)}
+  .logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#fff;transition:.4s}
+  .logo span{color:var(--gold-soft)}
+  header.scrolled .logo{color:var(--charcoal)}
+  .nav-cta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);padding:11px 22px;border-radius:2px;transition:.35s}
+  .nav-cta:hover{background:#fff;color:var(--charcoal)}
+  header.scrolled .nav-cta{color:var(--charcoal);border-color:var(--charcoal)}
+  header.scrolled .nav-cta:hover{background:var(--charcoal);color:#fff}
+  .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.28) 40%,rgba(var(--overlay),.62) 100%),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%);background-size:cover;background-position:center 30%}
+  .hero[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.28) 40%,rgba(var(--overlay),.62) 100%),var(--img),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%)}
+  .hero .wrap{padding-top:120px;padding-bottom:60px}
+  .hero-badge{display:inline-flex;align-items:center;gap:.6em;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.5);padding:9px 18px;border-radius:999px;margin-bottom:30px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .hero-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
+  .hero h1{font-size:clamp(44px,6.4vw,86px);color:#fff;font-weight:500;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--blush)}
+  .hero .sub{font-size:clamp(18px,2vw,22px);max-width:48ch;margin:28px 0 40px;color:rgba(255,255,255,.9);font-weight:300}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-meta{display:flex;gap:34px;margin-top:54px;flex-wrap:wrap}
+  .hero-meta div{border-left:1px solid rgba(255,255,255,.35);padding-left:16px}
+  .hero-meta .n{font-family:var(--serif);font-size:30px;color:#fff;line-height:1}
+  .hero-meta .l{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:6px}
+  .head{max-width:none;margin-bottom:56px}
+  .head h2{font-size:clamp(32px,4vw,52px)}
+  .head .eyebrow{margin-bottom:18px}
+  .head p{margin-top:20px}
+  .pain{background:var(--sand)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
+  .pain-card{background:var(--cream);padding:42px 34px;border-radius:3px;border:1px solid var(--line)}
+  .pain-card .ic{width:40px;height:40px;color:var(--rose);margin-bottom:22px}
+  .pain-card h3{font-size:24px;margin-bottom:12px}
+  .pain-card p{font-size:16px;color:#74684f}
+  .problem{background:var(--deep);color:#fff;text-align:center}
+  .problem h2{color:#fff;font-size:clamp(30px,4vw,50px);max-width:18ch;margin:0 auto}
+  .problem h2 em{font-style:italic;color:var(--gold-soft)}
+  .problem p{color:rgba(255,255,255,.82);margin:26px auto 0;font-size:19px}
+  .problem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px;text-align:left}
+  .problem-row .n{font-family:var(--serif);font-size:40px;color:var(--gold-soft);line-height:1}
+  .problem-row h4{color:#fff;font-size:21px;margin:14px 0 8px}
+  .problem-row p{color:rgba(255,255,255,.72);font-size:15px;margin:0}
+  .split{display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch;gap:0}
+  .split .media{min-height:560px;background:linear-gradient(135deg,var(--blush),var(--rose));background-size:cover;background-position:center}
+  .split .media[data-img]{background-image:var(--img)}
+  .split .body{padding:96px 72px;display:flex;flex-direction:column;justify-content:center}
+  .split.reverse .media{order:2}
+  .timeline{margin-top:34px;border-left:1px solid var(--line);padding-left:0}
+  .tl{position:relative;padding:0 0 30px 30px}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{content:"";position:absolute;left:-5px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+  .tl .w{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .tl h4{font-size:21px;margin:6px 0 4px}
+  .tl p{font-size:15px;color:#74684f;margin:0}
+  .solution{background:var(--mist);text-align:center}
+  .solution .mark{font-family:var(--serif);font-size:clamp(34px,4.6vw,58px);font-style:italic;color:var(--charcoal);max-width:20ch;margin:0 auto}
+  .solution .mark b{font-style:normal;font-weight:600;color:var(--deep)}
+  .solution .tag{margin-top:22px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:8px}
+  .step .n{font-family:var(--serif);font-size:18px;color:var(--gold);border:1px solid var(--gold);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .step h3{font-size:25px;margin-bottom:10px}
+  .step p{font-size:16px;color:#74684f}
+  .science{display:flex;gap:18px;flex-wrap:wrap;margin-top:64px;padding-top:48px;border-top:1px solid var(--line)}
+  .chip{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.04em;color:var(--ink);background:var(--mist);padding:12px 20px;border-radius:999px}
+  .chip svg{width:18px;height:18px;color:var(--rose)}
+  .treat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
+  .treat{background:var(--cream);border:1px solid var(--line);border-radius:4px;padding:34px 30px;transition:.3s}
+  .treat:hover{box-shadow:0 14px 40px rgba(60,47,34,.08);transform:translateY(-3px)}
+  .treat .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .treat h3{font-size:23px;margin:10px 0 8px}
+  .treat p{font-size:15px;color:#74684f;margin:0}
+  .proof{background:var(--sand)}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
+  .quote{background:var(--cream);padding:40px 34px;border-radius:3px;border:1px solid var(--line);display:flex;flex-direction:column}
+  .stars{color:var(--gold);letter-spacing:3px;font-size:15px;margin-bottom:18px}
+  .quote p{font-family:var(--serif);font-size:20px;font-style:italic;color:var(--charcoal);line-height:1.45;margin-bottom:auto}
+  .who{display:flex;align-items:center;gap:14px;margin-top:28px}
+  .who .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--blush),var(--rose));flex:none}
+  .who .nm{font-size:15px;font-weight:500;color:var(--charcoal)}
+  .who .mt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#a89a82}
+  .sample-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#b3a68d;text-align:center;margin-top:34px}
+  .authority{background:var(--deep);color:#fff}
+  .authority .split .body{padding:96px 72px}
+  .authority h2{color:#fff}
+  .authority p{color:rgba(255,255,255,.84)}
+  .creds{list-style:none;margin-top:30px;display:grid;gap:14px}
+  .creds li{display:flex;gap:14px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.9)}
+  .creds svg{width:20px;height:20px;color:var(--gold-soft);flex:none;margin-top:3px}
+  .ph-inline{color:var(--gold-soft);font-style:italic}
+  .benefits-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;margin-top:8px}
+  .incl{list-style:none;display:grid;gap:2px}
+  .incl li{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line)}
+  .incl li:first-child{padding-top:0}
+  .incl svg{width:22px;height:22px;color:var(--rose);flex:none;margin-top:3px}
+  .incl h4{font-size:20px;margin-bottom:4px}
+  .incl p{font-size:15px;color:#74684f;margin:0}
+  .offer-card{background:var(--charcoal);color:#fff;border-radius:4px;padding:44px 38px;align-self:start;position:sticky;top:100px}
+  .offer-card .eyebrow{color:var(--gold-soft)}
+  .offer-card h3{color:#fff;font-size:28px;margin:14px 0 6px}
+  .offer-card .price{font-family:var(--serif);font-size:38px;color:#fff;margin:18px 0 4px;line-height:1.1}
+  .offer-card .price small{font-size:16px;color:rgba(255,255,255,.6)}
+  .offer-card ul{list-style:none;margin:24px 0;display:grid;gap:12px}
+  .offer-card li{font-size:15px;color:rgba(255,255,255,.85);display:flex;gap:10px}
+  .offer-card li::before{content:"\2713";color:var(--gold-soft)}
+  .offer-card .btn{width:100%;justify-content:center;margin-top:6px}
+  .offer-card .btn+.btn{margin-top:10px}
+  .offer-card .btn-line{background:transparent;border-color:rgba(255,255,255,.4);color:#fff}
+  .offer-card .btn-line:hover{background:rgba(255,255,255,.1)}
+  .offer-card .fine{font-size:12px;color:rgba(255,255,255,.5);margin-top:16px;text-align:center}
+  .compare{background:var(--mist)}
+  .ctable{margin-top:8px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--cream)}
+  .ctable .row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr}
+  .ctable .row > div{padding:22px 24px;border-bottom:1px solid var(--line);font-size:15px}
+  .ctable .row:last-child > div{border-bottom:none}
+  .ctable .h{background:var(--charcoal);color:#fff}
+  .ctable .h > div{font-family:var(--serif);font-size:19px;color:#fff;border-color:rgba(255,255,255,.12)}
+  .ctable .h .feat-col{color:rgba(255,255,255,.6);font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .ctable .own{background:var(--mist)}
+  .ctable .h .own{background:transparent;color:var(--gold-soft)}
+  .ctable .feat{font-weight:500;color:var(--charcoal)}
+  .yes{color:var(--rose);font-weight:500}
+  .no{color:#c3b095}
+  .ctable .own .yes{color:var(--deep)}
+  .target-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}
+  .tcol{padding:46px 40px;border-radius:4px}
+  .tcol.yes-col{background:var(--mist);border:1px solid var(--blush)}
+  .tcol.no-col{background:var(--sand);border:1px solid var(--line)}
+  .tcol h3{font-size:24px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+  .tcol ul{list-style:none;display:grid;gap:16px}
+  .tcol li{display:flex;gap:14px;font-size:16px;color:var(--ink)}
+  .tcol li svg{width:20px;height:20px;flex:none;margin-top:3px}
+  .yes-col li svg{color:var(--rose)}
+  .no-col li svg{color:#c3b095}
+  .faq{max-width:820px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--line);padding:6px 0}
+  .faq summary{list-style:none;cursor:pointer;padding:26px 0;font-family:var(--serif);font-size:23px;color:var(--charcoal);display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--sans);font-weight:300;font-size:28px;color:var(--gold);transition:.3s;line-height:1}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{padding:0 0 28px;color:#74684f;font-size:16px;max-width:none}
+  .final{color:#fff;text-align:center;background:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.9)),linear-gradient(120deg,var(--grad1),var(--grad2));background-size:cover;background-position:center}
+  .final[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.9)),var(--img)}
+  .final h2{color:#fff;font-size:clamp(36px,5vw,68px);max-width:16ch;margin:0 auto}
+  .final h2 em{font-style:italic;color:var(--blush)}
+  .final p{color:rgba(255,255,255,.85);margin:24px auto 40px;font-size:19px}
+  .final .btn{font-size:15px;padding:20px 46px}
+  .final-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:54px;padding-top:40px;border-top:1px solid rgba(255,255,255,.18)}
+  .final-info div{font-size:14px;color:rgba(255,255,255,.8);letter-spacing:.02em}
+  .final-info .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:8px}
+  footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:60px 0;text-align:center;font-size:13px;letter-spacing:.04em}
+  footer .logo{color:#fff;font-size:26px;display:inline-block;margin-bottom:18px}
+  footer a{color:var(--gold-soft)}
+  .disclaimer{max-width:720px;margin:24px auto 0;font-size:11px;color:rgba(255,255,255,.34);line-height:1.6}
+  .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:60;display:none;background:rgba(252,249,243,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
+  .sticky-cta .p{font-family:var(--serif);font-size:18px;color:var(--charcoal)}
+  .sticky-cta .p small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .sticky-cta .btn{padding:14px 26px;flex:none}
+  .reveal{transition:opacity .9s ease,transform .9s ease}
+  .js .reveal{opacity:0;transform:translateY(28px)}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:900px){
+    .pad{padding:84px 0}.pad-sm{padding:64px 0}
+    .pain-grid,.steps,.quotes,.problem-row,.treat-grid{grid-template-columns:1fr;gap:20px}
+    .split{grid-template-columns:1fr}
+    .split .media{min-height:340px;order:-1!important}
+    .split .body,.authority .split .body{padding:60px 32px}
+    .benefits-grid,.target-cols{grid-template-columns:1fr;gap:24px}
+    .offer-card{position:static}
+    .ctable{overflow-x:auto}.ctable .row{min-width:620px}
+    .hero-meta{gap:22px}
+    header{padding:16px 22px}.nav-cta{display:none}
+    .sticky-cta{display:flex}
+    body{padding-bottom:72px}
+    .final-info{gap:26px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .pain-card,.quote,.treat{padding:32px 26px}
+    h1,h2,h3,h4,.solution .mark,.hero .sub,p{overflow-wrap:break-word}
+    .btn{white-space:normal;text-align:center;padding:16px 24px;letter-spacing:.1em;line-height:1.3}
+    .hero-actions{flex-direction:column;align-items:stretch;gap:12px}
+    .hero-actions .btn{width:100%;justify-content:center}
+    .hero-badge{white-space:normal;line-height:1.5;text-align:center}
+    .hero-meta{gap:16px 18px}
+    .eyebrow{letter-spacing:.2em}
+    .offer-card .price{font-size:30px;word-break:break-word}
+    .final-info{gap:22px}
+  }
+</style>
+</head>
+<body>
+<div class="demo-ribbon">Sample landing-page concept prepared for <b>Miso Beauty Lab</b> &nbsp;·&nbsp; by <b>&lang;Your Studio&rang;</b> &nbsp;·&nbsp; items marked &lang;&nbsp;&rang; are placeholders for the clinic to confirm</div>
+<header id="topbar">
+  <div class="logo">Miso Beauty Lab<span>.</span></div>
+  <a class="nav-cta" href="#book" data-book>Book a Visit</a>
+</header>
+<section class="hero" id="top" data-photo="01_hero">
+  <div class="wrap">
+    <span class="hero-badge reveal">Eastwood · Korean Head Spa &amp; Skin · 4.5&#9733; on Google</span>
+    <h1 class="reveal">Real Korean glow,<br><em>minutes from home.</em></h1>
+    <p class="sub reveal">Authentic Korean head spa and K-beauty facials in Eastwood — personalised, never pushy, and loved by locals. Walk in tired; walk out rejuvenated, in a spotless room with real Korean products and technique.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-gold" href="#book" data-book>Book your visit</a>
+      <a class="btn btn-ghost" href="#treatments">See treatments</a>
+    </div>
+    <div class="hero-meta reveal"><div><div class="n">4.5<span style="font-size:16px">&#9733;</span></div><div class="l">~53 Google reviews</div></div><div><div class="n">2,400<span style="font-size:16px">+</span></div><div class="l">On Instagram</div></div><div><div class="n">한국식</div><div class="l">Korean head spa &amp; skin</div></div><div><div class="n">Eastwood</div><div class="l">10 Ethel Street</div></div></div>
+  </div>
+</section>
+<section class="pain pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Sound familiar?</span>
+    <h2>You're tired — and<br>so is your skin.</h2></div>
+    <div class="pain-grid"><div class="pain-card reveal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
+        <h3>The good clinics feel a city away</h3><p>Authentic Korean head spa and skin care usually means a trip into the city, a premium price, and a day you don't have.</p></div><div class="pain-card reveal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M9 15c.8-1 2-1.5 3-1.5s2.2.5 3 1.5"/><path d="M9 9h.01M15 9h.01"/></svg>
+        <h3>Generic facials, gentle upsell</h3><p>A nice enough hour, but nothing personal — and a recommendation to buy more before anyone really looked at your skin or scalp.</p></div><div class="pain-card reveal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z"/></svg>
+        <h3>You want it done the Korean way</h3><p>Real technique, real Korean products, a spotless room — somewhere you can relax and actually trust the hands you're in.</p></div></div></div></section>
+<section class="problem pad"><div class="wrap">
+    <div class="reveal center"><span class="eyebrow">The Miso difference</span>
+    <h2>Relaxation that actually<br><em>changes</em> your skin.</h2><p>A scalp and a face aren't a one-size treatment. Read first with a scalp camera, then treated with Korean technique and the right products — that's the difference between a nice hour and a real result.</p></div>
+    <div class="problem-row"><div class="reveal"><div class="n">01</div><h4>Personal, not a package</h4><p>Your treatment is chosen for your skin and scalp on the day — guests say it's "so personal," never pushed off a menu.</p></div><div class="reveal"><div class="n">02</div><h4>Korean technique &amp; products</h4><p>Real K-beauty method and top-quality Korean products — the authentic care Eastwood would otherwise travel into the city for.</p></div><div class="reveal"><div class="n">03</div><h4>Tech that shows you</h4><p>A scalp camera reads your follicle health live, so the head spa is matched to what your scalp actually needs — not guessed.</p></div></div></div></section>
+<section class="story"><div class="split">
+    <div class="media reveal" data-photo="04_story"></div>
+    <div class="body"><span class="eyebrow reveal">What a visit looks like</span>
+    <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">Walk in tired.<br><em>Walk out new.</em></h2>
+    <div class="timeline"><div class="tl reveal"><div class="w">First</div><h4>We read your scalp &amp; skin</h4><p>A quick consultation and a scalp-camera look, so your treatment is matched to your skin and scalp — not a fixed routine.</p></div><div class="tl reveal"><div class="w">Then</div><h4>Your head spa &amp; facial</h4><p>The signature scalp treatment and a personalised K-beauty facial, with Korean products and technique, in a spotless, calming room.</p></div><div class="tl reveal"><div class="w">After</div><h4>Lighter, glowing, relaxed</h4><p>Guests describe walking out "feeling pampered and amazing," scalp and skin "so much lighter" — and booking the next visit.</p></div></div></div></div></section>
+<section class="solution pad-sm"><div class="wrap reveal">
+    <span class="eyebrow">In one line</span>
+    <p class="mark" style="margin-top:18px"><b>Miso Beauty Lab</b> is authentic Korean head spa and skincare — personalised, relaxing, and right here in Eastwood, no city trip required.</p>
+    <div class="tag">Head spa · K-beauty facials · Eastwood</div></div></section>
+<section class="pad" id="how"><div class="wrap">
+    <div class="head reveal"><span class="eyebrow">How it works</span>
+    <h2>Three steps to your<br>best skin day.</h2><p class="lede">Nothing is rushed and nothing is pushed. We look first, treat the way your skin and scalp actually need, and send you out glowing.</p></div>
+    <div class="steps"><div class="step reveal"><div class="n">1</div><h3>Scalp &amp; skin reading</h3><p>A short consultation and scalp-camera analysis so your treatment is genuinely matched to you.</p></div><div class="step reveal"><div class="n">2</div><h3>Your tailored treatment</h3><p>Head spa, facial or the signature combo — Korean technique and products, in a calm, spotless room.</p></div><div class="step reveal"><div class="n">3</div><h3>Relax &amp; rejuvenate</h3><p>You leave lighter and glowing. We suggest a simple rhythm to keep your scalp and skin happy — only if you want it.</p></div></div><div class="science reveal"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Authentic Korean technique</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Top-quality Korean products</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Scalp-camera analysis</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Personalised, never pushy</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Spotless &amp; calming</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Korean &amp; English</span></div></div></section>
+<section class="proof pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Rated 4.5 &#9733; · ~53 reviews on Google</span>
+    <h2>Eastwood already<br>loves it here.</h2></div>
+    <div class="quotes"><div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"I've been a few times now for the scalp treatment and facial and have always walked out feeling pampered and amazing. My scalp and skin feel so much better."</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">Mel Y.</div><div class="mt">Verified · Google</div></div></div></div><div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"The scalp massage was absolutely amazing — so relaxing and rejuvenating. The facials are on another level!"</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">Ana Maria P.</div><div class="mt">Verified · Google</div></div></div></div><div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"Sarah and her team are really good — really professional, and they use top-quality Korean products. This is my second time back."</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">Taiba A.</div><div class="mt">Verified · Google</div></div></div></div></div><p class="sample-tag">Genuine reviews from Miso Beauty Lab's public Google profile (4.5★ from ~53 reviews at time of writing), reflecting the overall salon experience — facials, scalp spa and care. Not specific to any regulated medical treatment.</p></div></section>
+<section class="authority"><div class="split reverse">
+    <div class="media reveal" data-photo="08_clinic"></div>
+    <div class="body"><span class="eyebrow reveal">Why Miso Beauty Lab</span>
+    <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">Sarah &amp; her team —<br><em>the Korean ladies</em> Eastwood trusts.</h2>
+    <p class="reveal" style="margin-top:22px">Miso Beauty Lab brings genuine Korean head spa and skincare to Eastwood — friendly, expert hands, real Korean products, and a spotless, calming space. Guests come back again and again because the care is personal: read your skin first, then treat it.</p>
+    <ul class="creds"><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Authentic Korean technique &amp; top-quality Korean products</li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Friendly, personalised care — rated 4.5★ across ~53 Google reviews</li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Led by Sarah — <span class="ph-inline">&lang;experience &amp; credentials to confirm&rang;</span></li></ul></div></div></section>
+<section class="pad" id="treatments" style="background:var(--cream)"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">The menu</span>
+    <h2>What you can book.</h2><p class="lede" style="margin:20px auto 0">Chosen for you at your visit. <span class="muted">Pricing confirmed in-salon — &lang;add your menu prices&rang;.</span></p></div>
+    <div class="treat-grid">
+      <div class="treat reveal" style="border-color:var(--gold)"><div class="k">Signature</div><h3>Head Spa + Facial Combo</h3><p>The most-loved visit: a deep Korean scalp treatment paired with a personalised facial. Walk out lighter and glowing.</p></div>
+      <div class="treat reveal"><div class="k">Scalp</div><h3>Korean Head Spa</h3><p>Scalp-camera reading, deep cleanse and massage that leaves the scalp refreshed and the mind relaxed.</p></div>
+      <div class="treat reveal"><div class="k">Skin</div><h3>K-Beauty Facial</h3><p>Personalised facial with Korean products and machine care — tailored to your skin on the day.</p></div>
+      <div class="treat reveal"><div class="k">Brows &amp; eyes</div><h3>Semi-Permanent Makeup</h3><p>Natural eyebrow and eyeliner tattooing, plus eyelash extensions, for an effortless everyday look.</p></div>
+      <div class="treat reveal"><div class="k">Smooth</div><h3>Laser Hair Removal &amp; Waxing</h3><p>Comfortable hair-removal options to keep skin smooth, by friendly, careful hands.</p></div>
+      <div class="treat reveal"><div class="k">Lifting</div><h3>HIFU <span style="font-size:12px;color:var(--gold)">&lang;if offered&rang;</span></h3><p>Non-surgical skin-tightening for those who want a firmer look. <span class="muted">Confirm availability &amp; details.</span></p></div>
+      <div class="treat reveal"><div class="k">Hands &amp; feet</div><h3>Nail &amp; Foot Care</h3><p>Manicure, pedicure and a relaxing foot massage to finish the visit head to toe.</p></div>
+      <div class="treat reveal" style="background:var(--mist);border-style:dashed"><div class="k">More</div><h3>&amp; your full menu</h3><p>Any other treatments and packages sit here — <span class="ph-inline">&lang;to confirm&rang;</span>.</p></div>
+    </div></div></section>
+<section class="pad" id="book" style="background:var(--sand)"><div class="wrap">
+    <div class="head reveal"><span class="eyebrow">Book a visit</span>
+    <h2>Come in for your<br>best skin day.</h2></div>
+    <div class="benefits-grid"><ul class="incl"><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Personalised, never pushy</h4><p>Read first, treated to suit you — guests say it's "so personal," with no pressure to buy more.</p></div></li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Authentic Korean care</h4><p>Real K-beauty technique and top-quality Korean products — without the trip into the city.</p></div></li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Spotless &amp; relaxing</h4><p>A clean, calming room and friendly hands — the part of your week you'll look forward to.</p></div></li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Loved by locals</h4><p>4.5★ across ~53 Google reviews — and a lot of guests on their second, third and fourth visit.</p></div></li></ul>
+    <div class="offer-card reveal"><span class="eyebrow">Easy to book</span>
+    <h3>Head Spa &amp; Skin, your way</h3>
+    <div class="price">Call or message<small><br>to book your visit</small></div>
+    <ul><li>Scalp &amp; skin reading on arrival</li><li>Your treatment matched to you</li><li>Korean products &amp; technique</li><li>Honest advice, no pressure</li></ul>
+    <a class="btn btn-gold" href="tel:+61414264600">Call 0414 264 600</a>
+    <a class="btn btn-line" href="https://www.instagram.com/misobeauty_lab/" target="_blank" rel="noopener">Message on Instagram</a>
+    <div class="fine">Shop 19, 10 Ethel Street, Eastwood NSW 2122. <span class="ph-inline">&lang;Add online booking &amp; hours&rang;</span></div></div></div></div></section>
+<section class="compare pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Where it sits</span>
+    <h2>Why locals stay<br>in Eastwood for it.</h2></div>
+    <div class="ctable reveal"><div class="row h"><div class="feat-col">&nbsp;</div><div>Generic salon</div><div class="own">Miso Beauty Lab</div><div>City clinic</div></div>
+    <div class="row"><div class="feat">Authentic Korean technique</div><div><span class="no">Varies</span></div><div class="own"><span class="yes">Yes — and products</span></div><div><span class="yes">Often</span></div></div><div class="row"><div class="feat">Scalp-camera head spa</div><div><span class="no">Rarely</span></div><div class="own"><span class="yes">Yes</span></div><div><span class="no">Sometimes</span></div></div><div class="row"><div class="feat">Personalised, no upsell</div><div><span class="no">Often pushy</span></div><div class="own"><span class="yes">"So personal"</span></div><div><span class="no">Premium pressure</span></div></div><div class="row"><div class="feat">Close to home</div><div><span class="yes">Maybe</span></div><div class="own"><span class="yes">Eastwood</span></div><div><span class="no">A city trip</span></div></div><div class="row"><div class="feat">Value for money</div><div><span class="no">Hit &amp; miss</span></div><div class="own"><span class="yes">"Value for money"</span></div><div><span class="no">City prices</span></div></div></div></div></section>
+<section class="pad-sm"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Is it for you?</span>
+    <h2>Who loves Miso.</h2></div>
+    <div class="target-cols">
+    <div class="tcol yes-col reveal"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>Come in if…</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You want authentic Korean head spa or skin care near home</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You'd love a treatment that's relaxing and actually personalised</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You care about a clean room, friendly hands and real Korean products</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You're tired of generic facials and gentle upsells</li></ul></div>
+    <div class="tcol no-col reveal"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>Maybe not, if…</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>You're after a 10-minute express service with no consultation</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>You want a medical/surgical procedure rather than skin &amp; scalp care</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>You'd rather not be asked about your skin or scalp at all</li></ul></div>
+    </div></div></section>
+<section class="pad" style="background:var(--sand)"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Before you come in</span>
+    <h2>The questions we're asked most.</h2></div>
+    <div class="faq"><details class="reveal"><summary>What's the signature treatment?</summary><p>The head spa and facial combo — a deep Korean scalp treatment with scalp-camera reading, paired with a personalised K-beauty facial. It's the most-loved visit by far.</p></details><details class="reveal"><summary>What is a Korean head spa?</summary><p>A deep-cleansing, deeply relaxing scalp treatment that cleanses, massages and refreshes the scalp using Korean technique and products — many guests say their scalp and hair feel "so much lighter" after.</p></details><details class="reveal"><summary>Do you speak Korean?</summary><p>Yes — care is offered in Korean and English, so you're comfortable whichever you prefer.</p></details><details class="reveal"><summary>How do I book?</summary><p>Call or text us on 0414 264 600, or message us on Instagram @misobeauty_lab. <span class="ph-inline">&lang;Add online booking if you'd like one&rang;</span></p></details><details class="reveal"><summary>Where are you, and is there parking?</summary><p>Shop 19, 10 Ethel Street, Eastwood NSW 2122, in the heart of Eastwood. <span class="ph-inline">&lang;Add parking / transport note&rang;</span></p></details><details class="reveal"><summary>How much does it cost?</summary><p>It depends on the treatment and whether you choose a combo. We'll give you clear pricing when you book. <span class="ph-inline">&lang;Add a from-price or menu&rang;</span></p></details></div></div></section>
+<section class="final pad" data-photo="13_cta"><div class="wrap reveal">
+    <span class="eyebrow">Eastwood · Korean Head Spa &amp; Skin</span>
+    <h2>Your scalp and skin<br>will <em>thank you.</em></h2>
+    <p>Authentic Korean head spa and K-beauty facials, personalised and relaxing — right here in Eastwood. Book your visit and walk out glowing.</p>
+    <a class="btn btn-gold" href="tel:+61414264600">Call 0414 264 600 to book</a>
+    <div class="final-info"><div><div class="t">Where</div>Shop 19, 10 Ethel Street<br>Eastwood NSW 2122</div><div><div class="t">Hours</div>Closed Sundays<br><span class="ph-inline">&lang;confirm opening hours&rang;</span></div><div><div class="t">Book</div>0414 264 600<br>@misobeauty_lab</div></div></div></section>
+<footer><div class="wrap">
+    <div class="logo">Miso Beauty Lab<span style="color:var(--gold-soft)">.</span></div>
+    <div>Miso Beauty Lab (K Beauty) · Korean Head Spa &amp; Skin · Shop 19, 10 Ethel Street, Eastwood NSW 2122</div>
+    <div style="margin-top:8px"><a href="tel:+61414264600">0414 264 600</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/misobeauty_lab/" target="_blank" rel="noopener">@misobeauty_lab</a></div>
+    <p class="disclaimer">This is a sample landing-page concept prepared for Miso Beauty Lab — not a live website. Client reviews are genuine, sourced from Miso Beauty Lab's public Google profile (4.5★ from ~53 reviews at time of writing) and reflect the overall salon experience, not any specific regulated treatment. Items marked &lang;&nbsp;&rang; (opening hours, founder details, pricing, online booking, and real photos) are to be confirmed by the clinic before going live. Individual results vary.</p></div></footer>
+<div class="sticky-cta">
+    <div class="p">Book a visit<small>Call or message</small></div>
+    <a class="btn btn-gold" href="tel:+61414264600">Call</a></div>
+<script>
+  document.documentElement.classList.add('js');
+  const bar=document.getElementById('topbar');
+  const ribbon=document.querySelector('.demo-ribbon');
+  const rh=ribbon?ribbon.offsetHeight:0;
+  const onScroll=()=>{const y=window.scrollY;bar.classList.toggle('fixed',y>rh);bar.classList.toggle('scrolled',y>rh+60);};
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-photo]').forEach(el=>{
+    const name=el.getAttribute('data-photo');const img=new Image();const src='assets/'+name+'.jpg';
+    img.onload=()=>{el.style.setProperty('--img',`url('${src}')`);el.setAttribute('data-img','');};img.src=src;
+  });
+  document.querySelectorAll('a[data-book]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('book').scrollIntoView({behavior:'smooth'})});});
+</script>
+</body>
+</html>

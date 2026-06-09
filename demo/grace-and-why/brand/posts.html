@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grace &amp; Why — Starter Posts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  :root{--ink:#1C1A17;--paper:#FBF9F5;--gold:#A8803C;--gold-soft:#C9A567;--soft:#F1EBE0;--sand:#EFE7D8;--muted:#857B6B;
+    --serif:'Cormorant Garamond',serif;--sans:'Jost',sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#3a352e;font-family:var(--sans);display:flex;flex-direction:column;align-items:center;gap:40px;padding:40px 0}
+  .post{width:1080px;height:1350px;position:relative;overflow:hidden;flex:none}
+  .post .num{position:absolute;top:30px;left:40px;font-size:18px;letter-spacing:.2em;text-transform:uppercase;z-index:5;opacity:.5}
+  .lg{position:absolute;bottom:54px;left:64px;font-family:var(--serif);font-size:38px;font-weight:600;z-index:5}
+  .lg i{font-style:italic}
+  .pad{padding:96px 76px;height:100%;display:flex;flex-direction:column}
+  .eyebrow{font-size:24px;font-weight:500;letter-spacing:.28em;text-transform:uppercase}
+  h2{font-family:var(--serif);font-weight:500;line-height:1.08}
+  .big{font-size:104px}
+  .mid{font-size:78px}
+  .lede{font-size:38px;font-weight:300;line-height:1.5}
+
+  /* P1 dark intro */
+  .p1{background:radial-gradient(circle at 50% 35%,#26231E,#1C1A17 72%);color:#fff}
+  .p1 .num,.p1 .lg{color:#fff}
+  .p1 .pad{align-items:center;text-align:center;justify-content:center}
+  .p1 .mk{font-family:var(--serif);font-size:128px;font-weight:500;line-height:1.02}
+  .p1 .mk i{font-style:italic}.p1 .mk .amp{color:var(--gold-soft);font-style:italic}
+  .p1 .tag{font-size:42px;font-style:italic;font-family:var(--serif);color:rgba(255,255,255,.9);margin-top:40px}
+  .p1 .sub{font-size:30px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-soft);margin-top:56px}
+
+  /* P2 google-closed hook */
+  .p2{background:var(--ink);color:#fff}.p2 .num,.p2 .lg{color:#fff}
+  .p2 .eyebrow{color:var(--gold-soft)}
+  .p2 h2{color:#fff;margin-top:28px}
+  .p2 .chip{margin-top:48px;display:inline-flex;align-items:center;gap:18px;background:#2a2620;border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:26px 34px;align-self:flex-start}
+  .p2 .dot{width:18px;height:18px;border-radius:50%;background:#c0392b;flex:none}
+  .p2 .chip .t{font-size:30px}.p2 .chip .t b{color:#e06; color:#ff6b6b;font-weight:500}
+  .p2 .foot{margin-top:auto;font-size:34px;color:rgba(255,255,255,.82);font-weight:300;line-height:1.5}
+  .p2 .foot b{color:var(--gold-soft);font-weight:500}
+
+  /* P3 pretty != booked (light) */
+  .p3{background:var(--paper);color:var(--ink)}.p3 .num,.p3 .lg{color:var(--ink)}
+  .p3 .pad{justify-content:center}
+  .p3 .eyebrow{color:var(--gold)}
+  .p3 h2{margin:30px 0}
+  .p3 .equ{font-family:var(--serif);font-size:150px;color:var(--gold);line-height:1;margin:10px 0}
+  .p3 .lede{color:var(--muted);max-width:80%}
+
+  /* P4 sample (anonymized) */
+  .p4{background:linear-gradient(150deg,#2C2419,#1C1A17);color:#fff}.p4 .num,.p4 .lg{color:#fff}
+  .p4 .eyebrow{color:var(--gold-soft)}
+  .p4 h2{color:#fff;margin-top:26px}
+  .p4 .frame{margin-top:auto;margin-bottom:20px;background:#fff;border-radius:18px;height:560px;overflow:hidden;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.45)}
+  .p4 .frame .topbar{height:54px;background:#f3ede3;display:flex;align-items:center;gap:10px;padding:0 22px}
+  .p4 .frame .topbar i{width:14px;height:14px;border-radius:50%;background:#d9cdb8;display:inline-block}
+  .p4 .mock{padding:46px 50px;background:linear-gradient(160deg,#C9976A,#3C2F22);height:calc(100% - 54px);color:#fff;display:flex;flex-direction:column;justify-content:center}
+  .p4 .mock .e{font-size:20px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.85)}
+  .p4 .mock h3{font-family:var(--serif);font-size:72px;font-weight:500;margin:14px 0;line-height:1.05}
+  .p4 .mock h3 em{font-style:italic;color:#F1E1C8}
+  .p4 .mock .pill{margin-top:18px;align-self:flex-start;background:#fff;color:#3C2F22;font-size:22px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;padding:16px 30px;border-radius:4px}
+
+  /* P5 trust checklist */
+  .p5{background:var(--soft);color:var(--ink)}.p5 .num,.p5 .lg{color:var(--ink)}
+  .p5 .eyebrow{color:var(--gold)}
+  .p5 h2{margin:26px 0 50px}
+  .p5 ul{list-style:none;display:grid;gap:34px}
+  .p5 li{display:flex;gap:28px;align-items:flex-start;font-size:42px;font-weight:300}
+  .p5 li svg{width:48px;height:48px;color:var(--gold);flex:none;margin-top:6px}
+  .p5 li b{font-weight:500}
+  .p5 .kr{margin-top:auto;font-size:34px;font-style:italic;font-family:var(--serif);color:var(--muted)}
+</style>
+</head>
+<body>
+
+  <!-- POST 1 — brand intro -->
+  <div class="post p1"><div class="num">01</div>
+    <div class="pad">
+      <div class="mk"><i>Grace</i> <span class="amp">&amp;</span> Why</div>
+      <div class="tag">Beautiful pages, built to book.</div>
+      <div class="sub">Clinic websites · Sydney</div>
+    </div>
+  </div>
+
+  <!-- POST 2 — google closed hook -->
+  <div class="post p2"><div class="num">02</div>
+    <div class="pad">
+      <span class="eyebrow">A quick question</span>
+      <h2 class="mid" style="margin-top:28px">Have you Googled<br>your own clinic<br>lately?</h2>
+      <div class="chip"><span class="dot"></span><span class="t"><b>Permanently closed</b></span></div>
+      <div class="foot">Plenty of great clinics show up as closed, wrong, or invisible — while customers quietly book <b>elsewhere.</b><br><br>DM us "GOOGLE" — we'll check yours, free.</div>
+    </div>
+    <div class="lg"><i>Grace</i> &amp; Why</div>
+  </div>
+
+  <!-- POST 3 — pretty != booked -->
+  <div class="post p3"><div class="num">03</div>
+    <div class="pad">
+      <span class="eyebrow">The "Why" in Grace &amp; Why</span>
+      <div class="equ">Pretty&nbsp;&#8800;<br>booked.</div>
+      <p class="lede">A beautiful website that doesn't bring appointments is just expensive art. Every section we build earns the booking.</p>
+    </div>
+    <div class="lg"><i>Grace</i> &amp; Why</div>
+  </div>
+
+  <!-- POST 4 — sample work (anonymized) -->
+  <div class="post p4"><div class="num">04</div>
+    <div class="pad">
+      <span class="eyebrow">Sample concept</span>
+      <h2 class="mid" style="font-size:64px;margin-top:24px">A landing page for<br>a K-beauty clinic.</h2>
+      <div class="frame">
+        <div class="topbar"><i></i><i></i><i></i></div>
+        <div class="mock">
+          <div class="e">Eastwood · 4.5★ on Google</div>
+          <h3>Real Korean glow,<br><em>minutes from home.</em></h3>
+          <div class="pill">Book your visit</div>
+        </div>
+      </div>
+    </div>
+    <div class="lg" style="bottom:30px"><i>Grace</i> &amp; Why</div>
+  </div>
+
+  <!-- POST 5 — trust checklist -->
+  <div class="post p5"><div class="num">05</div>
+    <div class="pad">
+      <span class="eyebrow">Built for Sydney clinics</span>
+      <h2 class="mid" style="font-size:66px">Not generic<br>templates.</h2>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span><b>Korean &amp; English</b>, in the right voice</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span><b>AHPRA / TGA-aware</b> — no risky claims</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span>Google listing fixed <b>+</b> a page that books</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6L9 17l-5-5"/></svg><span>One person, <b>fast replies</b> — no agency queue</span></li>
+      </ul>
+      <div class="kr">시드니 한인 클리닉 전문입니다.</div>
+    </div>
+    <div class="lg"><i>Grace</i> &amp; Why</div>
+  </div>
+
+</body>
+</html>

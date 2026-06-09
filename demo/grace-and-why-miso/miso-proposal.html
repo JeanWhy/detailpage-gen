@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grace &amp; Why · Proposal for Miso Beauty Lab</title>
+<meta name="description" content="A proposal from Grace & Why: recover your Google listing and launch a landing page that turns searches into bookings — for Miso Beauty Lab, Eastwood." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --ink:#1C1A17; --paper:#FBF9F5; --gold:#A8803C; --gold-soft:#C9A567;
+    --soft:#F1EBE0; --sand:#EFE7D8; --muted:#857B6B; --line:rgba(28,26,23,.12);
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+    --maxw:1080px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--paper);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.14;letter-spacing:.005em}
+  p{max-width:64ch}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  .pad{padding:104px 0}.pad-sm{padding:72px 0}
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;padding:17px 36px;border-radius:2px;cursor:pointer;transition:.32s ease;border:1px solid transparent;white-space:nowrap}
+  .btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#8e6b30}
+  .btn-ink{background:var(--ink);color:var(--paper)}.btn-ink:hover{background:#000}
+  .btn-ghost{border-color:rgba(255,255,255,.5);color:#fff}.btn-ghost:hover{background:#fff;color:var(--ink)}
+  .btn-line{border-color:var(--ink);color:var(--ink)}.btn-line:hover{background:var(--ink);color:#fff}
+
+  /* topbar */
+  .bar{display:flex;align-items:center;justify-content:space-between;padding:22px 32px;border-bottom:1px solid var(--line);position:sticky;top:0;background:rgba(251,249,245,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);z-index:40}
+  .brand{font-family:var(--serif);font-size:23px;font-weight:600;letter-spacing:.01em}
+  .brand i{font-style:italic}.brand .amp{color:var(--gold)}
+  .bar .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted)}
+
+  /* hero */
+  .hero{background:var(--ink);color:#fff;padding:96px 0 104px}
+  .hero .eyebrow{color:var(--gold-soft)}
+  .hero h1{color:#fff;font-size:clamp(38px,5.4vw,68px);max-width:18ch;margin:22px 0 0;font-weight:500}
+  .hero h1 em{font-style:italic;color:var(--gold-soft)}
+  .hero .sub{font-size:clamp(18px,2vw,21px);color:rgba(255,255,255,.82);max-width:56ch;margin:30px 0 0;font-weight:300}
+  .hero .meta{margin-top:42px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.6)}
+  .hero .meta b{color:#fff;font-weight:500}
+
+  .head{margin-bottom:48px}
+  .head h2{font-size:clamp(30px,4vw,46px);margin-top:16px}
+  .head p{margin-top:18px;color:var(--muted);font-size:19px}
+  .center{text-align:center}.center p{margin-left:auto;margin-right:auto}
+
+  /* situation cards */
+  .cards3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:4px;padding:38px 30px}
+  .card .tagi{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:500;margin-bottom:16px;display:inline-flex;align-items:center;gap:8px}
+  .card.good .tagi{color:#5d7d52}.card.warn .tagi{color:#b06a2f}
+  .card .tagi::before{content:"";width:8px;height:8px;border-radius:50%;background:currentColor}
+  .card h3{font-size:23px;margin-bottom:10px}
+  .card p{font-size:15px;color:var(--muted)}
+
+  /* cost band */
+  .cost{background:var(--sand)}
+  .cost .big{font-family:var(--serif);font-size:clamp(26px,3.4vw,40px);font-style:italic;max-width:24ch;line-height:1.3}
+  .cost .big b{font-style:normal;font-weight:600;color:var(--gold)}
+
+  /* fix steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:34px}
+  .step .n{font-family:var(--serif);font-size:18px;color:var(--gold);border:1px solid var(--gold);width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:22px}
+  .step h3{font-size:24px;margin-bottom:10px}
+  .step p{font-size:15px;color:var(--muted)}
+  .step .nb{font-size:13px;color:var(--gold);margin-top:10px}
+
+  /* demo band */
+  .demo{background:var(--ink);color:#fff;text-align:center}
+  .demo h2{color:#fff;font-size:clamp(28px,3.6vw,44px);max-width:20ch;margin:0 auto}
+  .demo h2 em{font-style:italic;color:var(--gold-soft)}
+  .demo p{color:rgba(255,255,255,.8);margin:22px auto 34px;font-size:18px}
+  .demo .nb{font-size:13px;color:rgba(255,255,255,.5);margin-top:22px;letter-spacing:.02em}
+
+  /* pricing */
+  .price{background:var(--soft)}
+  .tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .tier{background:#fff;border:1px solid var(--line);border-radius:5px;padding:38px 30px;display:flex;flex-direction:column}
+  .tier.feat{border:1.5px solid var(--gold);box-shadow:0 18px 50px rgba(168,128,60,.14);position:relative}
+  .tier.feat::before{content:"Most clinics choose this";position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--gold);color:#fff;font-family:var(--sans);font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:6px 16px;border-radius:999px;white-space:nowrap}
+  .tier .nm{font-size:14px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .tier .pr{font-family:var(--serif);font-size:33px;margin:16px 0 2px;line-height:1.15}
+  .tier .pr small{font-size:15px;color:var(--muted)}
+  .tier .sub{font-size:14px;color:var(--muted);margin-bottom:22px;min-height:38px}
+  .tier ul{list-style:none;display:grid;gap:12px;margin-bottom:26px}
+  .tier li{font-size:15px;display:flex;gap:10px;align-items:flex-start;color:var(--ink)}
+  .tier li svg{width:18px;height:18px;color:var(--gold);flex:none;margin-top:3px}
+  .tier .foot{margin-top:auto;font-size:14px;color:var(--muted);font-style:italic}
+  .price .note{text-align:center;margin-top:34px;font-size:14px;color:var(--muted)}
+
+  /* why us */
+  .why-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+  .why{display:flex;gap:18px;align-items:flex-start}
+  .why svg{width:26px;height:26px;color:var(--gold);flex:none;margin-top:4px}
+  .why h4{font-size:21px;margin-bottom:6px}
+  .why p{font-size:15px;color:var(--muted);margin:0}
+
+  /* CTA */
+  .final{background:var(--ink);color:#fff;text-align:center}
+  .final h2{color:#fff;font-size:clamp(32px,4.4vw,56px);max-width:18ch;margin:0 auto}
+  .final h2 em{font-style:italic;color:var(--gold-soft)}
+  .final p{color:rgba(255,255,255,.82);margin:22px auto 38px;font-size:18px}
+  .final .actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+  .final-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:50px;padding-top:38px;border-top:1px solid rgba(255,255,255,.16)}
+  .final-info .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:7px}
+  .final-info div{font-size:14px;color:rgba(255,255,255,.8)}
+  .ph{color:var(--gold-soft);font-style:italic}
+
+  footer{background:#141310;color:rgba(255,255,255,.55);padding:52px 0;text-align:center;font-size:13px}
+  footer .brand{color:#fff;font-size:24px;display:inline-block;margin-bottom:14px}
+  .disc{max-width:680px;margin:18px auto 0;font-size:11px;color:rgba(255,255,255,.32);line-height:1.6}
+
+  .reveal{transition:opacity .8s ease,transform .8s ease}
+  .js .reveal{opacity:0;transform:translateY(24px)}
+  .reveal.in{opacity:1;transform:none}
+
+  @media(max-width:860px){
+    .pad{padding:72px 0}.pad-sm{padding:56px 0}
+    .cards3,.steps,.tiers,.why-grid{grid-template-columns:1fr;gap:18px}
+    .tier.feat{order:-1}
+    .bar .tag{display:none}
+    .final-info{gap:26px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 20px}
+    .btn{white-space:normal;text-align:center;line-height:1.3}
+    .final .actions{flex-direction:column}.final .actions .btn{width:100%;justify-content:center}
+    h1,h2,h3,p{overflow-wrap:break-word}
+    .tier .pr{font-size:27px}
+  }
+</style>
+</head>
+<body>
+<div class="bar">
+  <div class="brand"><i>Grace</i> <span class="amp">&amp;</span> Why</div>
+  <div class="tag">Proposal · Miso Beauty Lab</div>
+</div>
+
+<section class="hero"><div class="wrap">
+  <span class="eyebrow reveal">A note for Miso Beauty Lab, Eastwood</span>
+  <h1 class="reveal">Right now, Google tells your customers you've <em>permanently closed.</em></h1>
+  <p class="sub reveal">You're open. Your Instagram booking works. You have 53 five-star reviews. But anyone who Googles "Miso Beauty Eastwood" sees a closed business — and books somewhere else. Let's fix that, and give you a page worth sending them to.</p>
+  <div class="meta reveal">Prepared by <b>Grace &amp; Why</b> &nbsp;·&nbsp; <span class="ph">&lang;date&rang;</span></div>
+</div></section>
+
+<section class="pad"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Where things stand</span>
+  <h2>You've done the hard part.<br>The internet just hasn't caught up.</h2></div>
+  <div class="cards3">
+    <div class="card good reveal"><span class="tagi">You're thriving</span><h3>Real reputation</h3><p>4.5★ from ~53 Google reviews, 2,400+ on Instagram, and a booking link that works. People love the head spa and facials.</p></div>
+    <div class="card warn reveal"><span class="tagi">But invisible</span><h3>Google says "closed"</h3><p>Search your name and Google shows <b>permanently closed</b>. Your 53 reviews are trapped on that dead listing, doing nothing for you.</p></div>
+    <div class="card warn reveal"><span class="tagi">And no home</span><h3>A locked website</h3><p>Your website (misobeautylab.com.au) is a password-locked "Opening Soon" page — so there's nowhere to send a customer who wants to know more.</p></div>
+  </div>
+</div></section>
+
+<section class="cost pad-sm"><div class="wrap reveal">
+  <span class="eyebrow">What it quietly costs</span>
+  <p class="big" style="margin-top:18px">Every week, people search your name or "Korean head spa Eastwood," see <b>"closed,"</b> and never call. You never meet the customer you lost — but they were looking for <b>you.</b></p>
+</div></section>
+
+<section class="pad"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">What Grace &amp; Why does</span>
+  <h2>Three moves to turn<br>searches into bookings.</h2></div>
+  <div class="steps">
+    <div class="step reveal"><div class="n">1</div><h3>Reclaim your Google</h3><p>We recover the "permanently closed" listing, get the profile verified, and reconnect your 53 reviews — so you show up as open and trusted.</p><div class="nb">We set it all up &amp; guide you; the final verification step is yours.</div></div>
+    <div class="step reveal"><div class="n">2</div><h3>Build your page</h3><p>A fast, mobile-first landing page that takes a curious searcher and turns them into a booked appointment — built around your real reviews and treatments.</p><div class="nb">Already drafted — see it live below.</div></div>
+    <div class="step reveal"><div class="n">3</div><h3>Keep it growing</h3><p>Seasonal promo pages, ongoing edits, and a simple monthly report so you can actually see the calls and bookings coming in.</p></div>
+  </div>
+</div></section>
+
+<section class="demo pad"><div class="wrap reveal">
+  <span class="eyebrow" style="color:var(--gold-soft)">We didn't just write a proposal</span>
+  <h2>We already built your<br>page — <em>see it live.</em></h2>
+  <p>A working sample, made from your genuine Google reviews and treatments. No commitment — just take a look on your phone.</p>
+  <a class="btn btn-gold" href="https://miso-beauty-lab.pages.dev/" target="_blank" rel="noopener">View your live demo</a>
+  <div class="nb">Built to Australian advertising rules (AHPRA/TGA-aware) — reviews used safely, no risky claims.</div>
+</div></section>
+
+<section class="price pad"><div class="wrap">
+  <div class="head center reveal"><span class="eyebrow">Simple, honest pricing</span>
+  <h2>Pick the pace<br>that suits you.</h2><p>All prices in AUD. No lock-in beyond the month — stay because it works.</p></div>
+  <div class="tiers">
+    <div class="tier reveal"><div class="nm">Essentials</div>
+      <div class="pr">A$900 <small>one-time</small></div>
+      <div class="sub">Get found, and get a real page.</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Conversion landing page</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Google listing recovery &amp; setup</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Booking &amp; contact links, reviews reconnected</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>1 year hosting included</li>
+      </ul>
+      <div class="foot">Best if you just want the fire put out.</div>
+    </div>
+    <div class="tier feat reveal"><div class="nm">Grace Care</div>
+      <div class="pr">A$1,200 <small>setup</small><br><span style="font-size:21px">+ A$390<small>/month</small></span></div>
+      <div class="sub">Everything handled, every month.</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Everything in Essentials</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>1 seasonal promo page / month</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Monthly report: calls, clicks, bookings</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Ongoing edits + priority support</li>
+      </ul>
+      <div class="foot">The one most clinics are happiest on.</div>
+    </div>
+    <div class="tier reveal"><div class="nm">Growth Partner</div>
+      <div class="pr">A$1,200 <small>setup</small><br><span style="font-size:21px">+ A$690<small>/month</small></span></div>
+      <div class="sub">For when you're ready to advertise.</div>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Everything in Grace Care</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>A/B testing for more bookings</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Campaign / ad landing pages</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 6L9 17l-5-5"/></svg>Monthly strategy call</li>
+      </ul>
+      <div class="foot">When the bookings outgrow word of mouth.</div>
+    </div>
+  </div>
+  <p class="note reveal">Not sure which? Start with <b>Grace Care</b> — you can move up or pause anytime.</p>
+</div></section>
+
+<section class="pad-sm"><div class="wrap">
+  <div class="head reveal"><span class="eyebrow">Why Grace &amp; Why</span>
+  <h2>Beautiful pages —<br>built to actually book.</h2></div>
+  <div class="why-grid">
+    <div class="why reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l2.4 5 5.6.8-4 3.9 1 5.5-5-2.7-5 2.7 1-5.5-4-3.9 5.6-.8z"/></svg><div><h4>Grace &amp; Why, literally</h4><p>Grace is the design. Why is the reason it converts. We do both — pretty pages that turn into appointments.</p></div></div>
+    <div class="why reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 5h16M4 12h16M4 19h10"/></svg><div><h4>Korean &amp; English</h4><p>We write and design for both your Korean regulars and your wider Eastwood community, in the right voice for each.</p></div></div>
+    <div class="why reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg><div><h4>Compliance-aware</h4><p>Australian advertising rules (AHPRA/TGA) quietly trip up most beauty pages. Yours won't — we build it safe from the start.</p></div></div>
+    <div class="why reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="4"/></svg><div><h4>Local, fast, personal</h4><p>You deal with one person who answers quickly — not an agency queue. We move in days, not months.</p></div></div>
+  </div>
+</div></section>
+
+<section class="final pad"><div class="wrap reveal">
+  <span class="eyebrow" style="color:var(--gold-soft)">The next step</span>
+  <h2>Let's get you found<br><em>this week.</em></h2>
+  <p>Two easy ways to start: a quick 15-minute call, or just reply — and we'll begin with the Google fix straight away.</p>
+  <div class="actions">
+    <a class="btn btn-gold" href="#" data-contact>Book a 15-min call</a>
+    <a class="btn btn-ghost" href="https://miso-beauty-lab.pages.dev/" target="_blank" rel="noopener">See the demo again</a>
+  </div>
+  <div class="final-info">
+    <div><div class="t">Grace &amp; Why</div><span class="ph">&lang;your email&rang;</span><br><span class="ph">&lang;your phone&rang;</span></div>
+    <div><div class="t">Online</div><span class="ph">&lang;gracewhy.com&rang;</span><br><span class="ph">@grace.and.why</span></div>
+    <div><div class="t">For</div>Miso Beauty Lab<br>Eastwood, Sydney</div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="brand"><i>Grace</i> <span style="color:var(--gold)">&amp;</span> Why</div>
+  <div>Landing pages &amp; Google presence for Sydney clinics — beautiful, and built to book.</div>
+  <p class="disc">This is a proposal prepared for Miso Beauty Lab, not a contract. Pricing is in AUD and indicative; final scope confirmed in writing before any work begins. The "permanently closed" Google status and review figures reflect what was publicly visible at the time of writing and should be confirmed together. Items marked &lang;&nbsp;&rang; are to be completed by Grace &amp; Why before sending.</p>
+</div></footer>
+<script>
+  document.documentElement.classList.add('js');
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-contact]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.querySelector('.final-info').scrollIntoView({behavior:'smooth'});}));
+</script>
+</body>
+</html>
