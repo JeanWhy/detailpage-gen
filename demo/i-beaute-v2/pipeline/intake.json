@@ -1,0 +1,73 @@
+{
+  "slug": "i-beaute-v2",
+  "language": "en",
+  "brand": {
+    "name": "i-Beaute Skin + Body",
+    "logo_text": "i&#8209;Beaute",
+    "booking_url": "https://www.fresha.com/book-now/i-beaute-skin-body-kx5nin73/all-offer?pId=22008",
+    "location": "The Gallery, Suite 16, 445 Victoria Ave, Chatswood NSW 2067"
+  },
+  "product_name": "Sofwave™ Skin Tightening",
+  "one_liner": "Non-invasive ultrasound lifting that visibly tightens skin in a single session — with zero downtime.",
+  "target_audience": "Women 35+ in Sydney noticing early laxity on the jawline, brows and neck who want a natural lift without surgery or downtime.",
+  "main_problem": "Creams and facials stop working once skin laxity sets in, but a surgical facelift feels too drastic and the downtime is impossible to fit around work and family.",
+  "key_benefit": "Targeted ultrasound rebuilds collagen deep in the dermis for a natural lift; results keep improving over ~3 months and you walk out the same day.",
+  "pricing": { "model": "consultation", "note": "Treatment pricing is tailored to the areas treated and confirmed at consultation. Consultation is complimentary." },
+  "offer": null,
+  "testimonials": [
+    { "quote": "Feel so pampered after the treatment. Portia and her staff are very professional and friendly.", "name": "Maria W.", "meta": "Verified · Fresha" },
+    { "quote": "My skin was blocked, clogged and breaking out. The team analysed my needs…", "name": "Kelly B.", "meta": "Verified · Fresha" },
+    { "quote": "Extremely friendly staff. Highly recommend — will be going back. Amazing!", "name": "Ayva", "meta": "Verified review" }
+  ],
+  "testimonials_note": "Real, public reviews from i-Beaute's Fresha/Bookwell profiles. Clinic-wide (not Sofwave-specific). Do NOT fabricate Sofwave-specific reviews.",
+  "rating": "Rated 4.9 ★ · 193 reviews on Fresha",
+  "authority": {
+    "bio": "i-Beaute Skin + Body in Chatswood delivers advanced treatments through trained skin therapists who treat the face as a whole — never a single sale. Every Sofwave plan starts with a proper consultation and an honest answer about suitability.",
+    "credentials": [
+      "Trained, certified Sofwave practitioners",
+      "Personalised assessment before any treatment",
+      "The Gallery, Suite 16 · 445 Victoria Ave, Chatswood"
+    ]
+  },
+  "inclusions": [
+    "Complimentary skin & suitability consultation",
+    "Targeted Sofwave treatment (jaw, brow, neck or submental)",
+    "Comfort-first protocol with integrated cooling",
+    "Aftercare guidance and review"
+  ],
+  "guarantee": "",
+  "faq": [
+    { "q": "Does it hurt?", "a": "A warming sensation with brief moments of heat; integrated cooling keeps the surface comfortable and the therapist adjusts to you." },
+    { "q": "Is there really no downtime?", "a": "Yes. Mild redness or slight puffiness at most; no marks to hide, most people return to their day immediately." },
+    { "q": "When will I see results?", "a": "Some firmness in the first weeks; the real result builds as new collagen matures over ~3 months after a single session." },
+    { "q": "How long does it last?", "a": "New-collagen results are long-lasting though skin keeps ageing; many choose a maintenance session later. Honest, personalised view at consult." },
+    { "q": "Is it safe for my skin tone?", "a": "Yes — Sofwave's ultrasound works independently of melanin, suitable for all skin tones, year-round." },
+    { "q": "How do I start?", "a": "With a complimentary consultation. We assess suitability and only recommend Sofwave if it's genuinely right for you. Book on Fresha." }
+  ],
+  "comparison": {
+    "columns": ["Creams & facials", "Sofwave™", "Surgical facelift"],
+    "own_index": 1,
+    "axes": ["Reaches deep laxity", "Downtime", "Surgery / anaesthetic", "Natural, gradual result", "Time commitment"]
+  },
+  "target_fit": {
+    "yes": [
+      "Noticing early to moderate laxity on the jaw, brow or neck",
+      "Want a natural lift, not a dramatic change",
+      "Can't fit surgical downtime around work and family",
+      "Would rather invest once than chase results with creams"
+    ],
+    "no": [
+      "Significant, advanced sagging better suited to surgery",
+      "Expecting an instant, overnight transformation",
+      "Pregnant or certain medical conditions — advised honestly at consult"
+    ]
+  },
+  "facts": {
+    "tech": "Sofwave™ delivers ultrasound energy to the mid-dermis with integrated surface cooling; TGA & FDA cleared; works on all skin tones; ~30 min; one session; collagen rebuilds over ~3 months.",
+    "session": "single ~30-minute session, zero downtime"
+  },
+  "brand_colors": { "note": "i-Beaute brand is sage green + warm gold (see live site). Pipeline may confirm or refine." },
+  "vibe": "editorial luxury (Aesop / La Mer), calm, premium, honest",
+  "photos": ["01_hero", "04_story", "08_clinic", "13_cta"],
+  "photos_note": "Real client photos available; will be copied into assets/ after render."
+}

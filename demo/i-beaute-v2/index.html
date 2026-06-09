@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Sofwave™ Skin Tightening · i-Beaute Skin + Body, Chatswood</title>
+<meta name="description" content="A non-invasive ultrasound lift that tightens skin in one session with zero downtime — and an honest consultation that tells you if Sofwave is right for you. i-Beaute, Chatswood." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+:root{
+    --sage:#8AA292; --deep-sage:#384A40; --pale-sage:#CAD8CD;
+    --mist:#ECF1EC; --gold:#B08D57; --gold-soft:#CBAE82;
+    --charcoal:#262724; --ink:#3C3D38; --cream:#FBFAF6; --sand:#F2ECE1;
+    --line:rgba(43,43,43,.12);
+    --grad1:#7E988A; --grad2:#33453B; --overlay:30,38,33;
+    --serif:'Cormorant Garamond', Georgia, serif;
+    --sans:'Jost', system-ui, -apple-system, sans-serif;
+    --maxw:1180px;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);font-weight:300;line-height:1.7;-webkit-font-smoothing:antialiased;font-size:17px;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.12;color:var(--charcoal);letter-spacing:.005em}
+  p{max-width:62ch}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);display:inline-block}
+  section{position:relative}
+  .pad{padding:120px 0}
+  .pad-sm{padding:88px 0}
+  .center{text-align:center}
+  .lede{font-size:21px;color:var(--ink);font-weight:300}
+  .muted{color:#7C7B73}
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);font-size:14px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;padding:18px 38px;border-radius:2px;cursor:pointer;transition:.35s ease;border:1px solid transparent;white-space:nowrap}
+  .btn-primary{background:var(--charcoal);color:var(--cream)}
+  .btn-primary:hover{background:var(--deep-sage)}
+  .btn-gold{background:var(--gold);color:#fff}
+  .btn-gold:hover{background:#9c7a47}
+  .btn-ghost{border-color:rgba(255,255,255,.55);color:#fff}
+  .btn-ghost:hover{background:#fff;color:var(--charcoal);border-color:#fff}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:.4s ease}
+  header.scrolled{background:rgba(251,250,247,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:14px 40px;box-shadow:0 1px 0 var(--line)}
+  .logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#fff;transition:.4s}
+  .logo span{color:var(--gold-soft)}
+  header.scrolled .logo{color:var(--charcoal)}
+  .nav-cta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);padding:11px 22px;border-radius:2px;transition:.35s}
+  .nav-cta:hover{background:#fff;color:var(--charcoal)}
+  header.scrolled .nav-cta{color:var(--charcoal);border-color:var(--charcoal)}
+  header.scrolled .nav-cta:hover{background:var(--charcoal);color:#fff}
+  .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.30) 40%,rgba(var(--overlay),.62) 100%),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%);background-size:cover;background-position:center 30%}
+  .hero[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.30) 40%,rgba(var(--overlay),.62) 100%),var(--img),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%)}
+  .hero .wrap{padding-top:120px;padding-bottom:60px}
+  .hero-badge{display:inline-flex;align-items:center;gap:.6em;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.5);padding:9px 18px;border-radius:999px;margin-bottom:30px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+  .hero-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
+  .hero h1{font-size:clamp(44px,6.4vw,86px);color:#fff;font-weight:500;max-width:14ch}
+  .hero h1 em{font-style:italic;color:var(--pale-sage)}
+  .hero .sub{font-size:clamp(18px,2vw,22px);max-width:46ch;margin:28px 0 40px;color:rgba(255,255,255,.9);font-weight:300}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;align-items:center}
+  .hero-meta{display:flex;gap:34px;margin-top:54px;flex-wrap:wrap}
+  .hero-meta div{border-left:1px solid rgba(255,255,255,.35);padding-left:16px}
+  .hero-meta .n{font-family:var(--serif);font-size:30px;color:#fff;line-height:1}
+  .hero-meta .l{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.75);margin-top:6px}
+  .head{max-width:none;margin-bottom:56px}
+  .head h2{font-size:clamp(32px,4vw,52px)}
+  .head .eyebrow{margin-bottom:18px}
+  .head p{margin-top:20px}
+  .pain{background:var(--sand)}
+  .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
+  .pain-card{background:var(--cream);padding:42px 34px;border-radius:3px;border:1px solid var(--line)}
+  .pain-card .ic{width:40px;height:40px;color:var(--sage);margin-bottom:22px}
+  .pain-card h3{font-size:24px;margin-bottom:12px}
+  .pain-card p{font-size:16px;color:#6f6e67}
+  .problem{background:var(--deep-sage);color:#fff;text-align:center}
+  .problem h2{color:#fff;font-size:clamp(30px,4vw,50px);max-width:18ch;margin:0 auto}
+  .problem h2 em{font-style:italic;color:var(--gold-soft)}
+  .problem p{color:rgba(255,255,255,.82);margin:26px auto 0;font-size:19px}
+  .problem-row{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:64px;text-align:left}
+  .problem-row .n{font-family:var(--serif);font-size:40px;color:var(--gold-soft);line-height:1}
+  .problem-row h4{color:#fff;font-size:21px;margin:14px 0 8px}
+  .problem-row p{color:rgba(255,255,255,.72);font-size:15px;margin:0}
+  .split{display:grid;grid-template-columns:1.05fr 1fr;align-items:stretch;gap:0}
+  .split .media{min-height:560px;background:linear-gradient(135deg,var(--pale-sage),var(--sage));background-size:cover;background-position:center}
+  .split .media[data-img]{background-image:var(--img)}
+  .split .body{padding:96px 72px;display:flex;flex-direction:column;justify-content:center}
+  .split.reverse .media{order:2}
+  .timeline{margin-top:34px;border-left:1px solid var(--line);padding-left:0}
+  .tl{position:relative;padding:0 0 30px 30px}
+  .tl:last-child{padding-bottom:0}
+  .tl::before{content:"";position:absolute;left:-5px;top:4px;width:10px;height:10px;border-radius:50%;background:var(--gold)}
+  .tl .w{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
+  .tl h4{font-size:21px;margin:6px 0 4px}
+  .tl p{font-size:15px;color:#6f6e67;margin:0}
+  .solution{background:var(--mist);text-align:center}
+  .solution .mark{font-family:var(--serif);font-size:clamp(34px,4.6vw,58px);font-style:italic;color:var(--charcoal);max-width:20ch;margin:0 auto}
+  .solution .mark b{font-style:normal;font-weight:600;color:var(--deep-sage)}
+  .solution .tag{margin-top:22px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:8px}
+  .step .n{font-family:var(--serif);font-size:18px;color:var(--gold);border:1px solid var(--gold);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .step h3{font-size:25px;margin-bottom:10px}
+  .step p{font-size:16px;color:#6f6e67}
+  .science{display:flex;gap:18px;flex-wrap:wrap;margin-top:64px;padding-top:48px;border-top:1px solid var(--line)}
+  .chip{display:flex;align-items:center;gap:10px;font-size:14px;letter-spacing:.04em;color:var(--ink);background:var(--mist);padding:12px 20px;border-radius:999px}
+  .chip svg{width:18px;height:18px;color:var(--sage)}
+  .proof{background:var(--sand)}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:8px}
+  .quote{background:var(--cream);padding:40px 34px;border-radius:3px;border:1px solid var(--line);display:flex;flex-direction:column}
+  .stars{color:var(--gold);letter-spacing:3px;font-size:15px;margin-bottom:18px}
+  .quote p{font-family:var(--serif);font-size:21px;font-style:italic;color:var(--charcoal);line-height:1.45;margin-bottom:auto}
+  .who{display:flex;align-items:center;gap:14px;margin-top:28px}
+  .who .av{width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--pale-sage),var(--sage));flex:none}
+  .who .nm{font-size:15px;font-weight:500;color:var(--charcoal)}
+  .who .mt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9a988f}
+  .sample-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#b3b0a5;text-align:center;margin-top:34px}
+  .authority{background:var(--deep-sage);color:#fff}
+  .authority .split .body{padding:96px 72px}
+  .authority h2{color:#fff}
+  .authority p{color:rgba(255,255,255,.84)}
+  .creds{list-style:none;margin-top:30px;display:grid;gap:14px}
+  .creds li{display:flex;gap:14px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.9)}
+  .creds svg{width:20px;height:20px;color:var(--gold-soft);flex:none;margin-top:3px}
+  .benefits-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:48px;margin-top:8px}
+  .incl{list-style:none;display:grid;gap:2px}
+  .incl li{display:flex;gap:18px;align-items:flex-start;padding:22px 0;border-bottom:1px solid var(--line)}
+  .incl li:first-child{padding-top:0}
+  .incl svg{width:22px;height:22px;color:var(--sage);flex:none;margin-top:3px}
+  .incl h4{font-size:20px;margin-bottom:4px}
+  .incl p{font-size:15px;color:#6f6e67;margin:0}
+  .offer-card{background:var(--charcoal);color:#fff;border-radius:4px;padding:44px 38px;align-self:start;position:sticky;top:100px}
+  .offer-card .eyebrow{color:var(--gold-soft)}
+  .offer-card h3{color:#fff;font-size:28px;margin:14px 0 6px}
+  .offer-card .price{font-family:var(--serif);font-size:46px;color:#fff;margin:18px 0 4px}
+  .offer-card .price small{font-size:16px;color:rgba(255,255,255,.6)}
+  .offer-card .was{color:rgba(255,255,255,.55);text-decoration:line-through;font-size:17px}
+  .offer-card ul{list-style:none;margin:24px 0;display:grid;gap:12px}
+  .offer-card li{font-size:15px;color:rgba(255,255,255,.85);display:flex;gap:10px}
+  .offer-card li::before{content:"\2713";color:var(--gold-soft)}
+  .offer-card .btn{width:100%;justify-content:center;margin-top:6px}
+  .offer-card .fine{font-size:12px;color:rgba(255,255,255,.5);margin-top:16px;text-align:center}
+  .compare{background:var(--mist)}
+  .ctable{margin-top:8px;border:1px solid var(--line);border-radius:4px;overflow:hidden;background:var(--cream)}
+  .ctable .row{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr}
+  .ctable .row > div{padding:22px 24px;border-bottom:1px solid var(--line);font-size:15px}
+  .ctable .row:last-child > div{border-bottom:none}
+  .ctable .h{background:var(--charcoal);color:#fff}
+  .ctable .h > div{font-family:var(--serif);font-size:19px;color:#fff;border-color:rgba(255,255,255,.12)}
+  .ctable .h .feat-col{color:rgba(255,255,255,.6);font-family:var(--sans);font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+  .ctable .own{background:var(--mist)}
+  .ctable .h .own{background:transparent;color:var(--gold-soft)}
+  .ctable .feat{font-weight:500;color:var(--charcoal)}
+  .yes{color:var(--sage);font-weight:500}
+  .no{color:#bdbbb1}
+  .ctable .own .yes{color:var(--deep-sage)}
+  .target-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:8px}
+  .tcol{padding:46px 40px;border-radius:4px}
+  .tcol.yes-col{background:var(--mist);border:1px solid var(--pale-sage)}
+  .tcol.no-col{background:var(--sand);border:1px solid var(--line)}
+  .tcol h3{font-size:24px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+  .tcol ul{list-style:none;display:grid;gap:16px}
+  .tcol li{display:flex;gap:14px;font-size:16px;color:var(--ink)}
+  .tcol li svg{width:20px;height:20px;flex:none;margin-top:3px}
+  .yes-col li svg{color:var(--sage)}
+  .no-col li svg{color:#bdbbb1}
+  .faq{max-width:820px;margin:0 auto}
+  .faq details{border-bottom:1px solid var(--line);padding:6px 0}
+  .faq summary{list-style:none;cursor:pointer;padding:26px 0;font-family:var(--serif);font-size:23px;color:var(--charcoal);display:flex;justify-content:space-between;align-items:center;gap:20px}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";font-family:var(--sans);font-weight:300;font-size:28px;color:var(--gold);transition:.3s;line-height:1}
+  .faq details[open] summary::after{transform:rotate(45deg)}
+  .faq details p{padding:0 0 28px;color:#6f6e67;font-size:16px;max-width:none}
+  .final{color:#fff;text-align:center;background:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.88)),linear-gradient(120deg,var(--grad1),var(--grad2));background-size:cover;background-position:center}
+  .final[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.88)),var(--img)}
+  .final h2{color:#fff;font-size:clamp(36px,5vw,68px);max-width:16ch;margin:0 auto}
+  .final h2 em{font-style:italic;color:var(--pale-sage)}
+  .final p{color:rgba(255,255,255,.85);margin:24px auto 40px;font-size:19px}
+  .final .btn{font-size:15px;padding:20px 46px}
+  .final-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:54px;padding-top:40px;border-top:1px solid rgba(255,255,255,.18)}
+  .final-info div{font-size:14px;color:rgba(255,255,255,.8);letter-spacing:.02em}
+  .final-info .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:8px}
+  footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:60px 0;text-align:center;font-size:13px;letter-spacing:.04em}
+  footer .logo{color:#fff;font-size:26px;display:inline-block;margin-bottom:18px}
+  footer a{color:var(--gold-soft)}
+  .disclaimer{max-width:680px;margin:24px auto 0;font-size:11px;color:rgba(255,255,255,.32);line-height:1.6}
+  .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:60;display:none;background:rgba(251,250,247,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
+  .sticky-cta .p{font-family:var(--serif);font-size:18px;color:var(--charcoal)}
+  .sticky-cta .p small{display:block;font-family:var(--sans);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--gold)}
+  .sticky-cta .btn{padding:14px 26px;flex:none}
+  .reveal{transition:opacity .9s ease,transform .9s ease}
+  .js .reveal{opacity:0;transform:translateY(28px)}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:900px){
+    .pad{padding:84px 0}.pad-sm{padding:64px 0}
+    .pain-grid,.steps,.quotes,.problem-row{grid-template-columns:1fr;gap:20px}
+    .split{grid-template-columns:1fr}
+    .split .media{min-height:340px;order:-1!important}
+    .split .body,.authority .split .body{padding:60px 32px}
+    .benefits-grid,.target-cols{grid-template-columns:1fr;gap:24px}
+    .offer-card{position:static}
+    .ctable{overflow-x:auto}.ctable .row{min-width:620px}
+    .hero-meta{gap:22px}
+    header{padding:16px 22px}.nav-cta{display:none}
+    .sticky-cta{display:flex}
+    body{padding-bottom:72px}
+    .final-info{gap:26px}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 22px}
+    .pain-card,.quote{padding:32px 26px}
+  }
+
+</style>
+</head>
+<body>
+<header id="topbar">
+  <div class="logo">i&#8209;Beaute<span>.</span></div>
+  <a class="nav-cta" href="#book" data-book>Book a Consultation</a>
+</header>
+<section class="hero" id="top" data-photo="01_hero">
+  <div class="wrap">
+    <span class="hero-badge reveal">Sofwave™ · Zero downtime · ~30-min session</span>
+    <h1 class="reveal">The honest<br>way to <em>lift</em>.</h1>
+    <p class="sub reveal">Past the point where creams reach. Not ready for surgery. Sofwave ultrasound rebuilds collagen deep in the skin — a natural lift to the jaw, brow and neck from a single session, with zero downtime.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-gold" href="#book" data-book>Book a complimentary consultation</a>
+      <a class="btn btn-ghost" href="#target">Is it right for me?</a>
+    </div>
+    <div class="hero-meta reveal"><div><div class="n">~30<span style="font-size:16px">min</span></div><div class="l">Single session</div></div><div><div class="n">0</div><div class="l">Days downtime</div></div><div><div class="n">~3<span style="font-size:16px">mo</span></div><div class="l">Results keep building</div></div><div><div class="n">4.9<span style="font-size:16px">★</span></div><div class="l">193 Fresha reviews</div></div></div>
+  </div>
+</section>
+<section class="pain pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">The in-between</span>
+    <h2>You're past creams —<br>but not ready for a scalpel.</h2></div>
+    <div class="pain-grid"><div class="pain-card reveal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M4 7h16M6 7l1 12a2 2 0 002 2h6a2 2 0 002-2l1-12"/><path d="M10 11v6M14 11v6"/></svg>
+        <h3>The serums sit on top now</h3><p>What used to be enough now stays on the surface, while the jawline keeps softening underneath where nothing topical can reach.</p></div><div class="pain-card reveal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M9 15c.8-1 2-1.5 3-1.5s2.2.5 3 1.5"/><path d="M9 9h.01M15 9h.01"/></svg>
+        <h3>Small slips that read as tired</h3><p>A heavier jaw, a hooding brow, a looser neck. Nothing dramatic — but enough that the mirror says 'tired' on a day you feel fine.</p></div><div class="pain-card reveal"><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+        <h3>Surgery doesn't fit your life</h3><p>A facelift feels too drastic, and weeks of downtime simply don't slot around work and family. So you keep waiting.</p></div></div></div></section>
+<section class="problem pad"><div class="wrap">
+    <div class="reveal center"><span class="eyebrow">It isn't your skincare failing</span>
+    <h2>The change is happening<br>where <em>creams can't go.</em></h2><p>Laxity isn't a surface problem you can correct from a bottle. It sits in the mid-dermis — the same layer a surgeon works in — and that's the honest reason the routine stopped delivering.</p></div>
+    <div class="problem-row"><div class="reveal"><div class="n">01</div><h4>It's depth, not diligence</h4><p>Once laxity sets in, the change is in the deep dermis. No matter how good the routine, topicals physically can't reach that layer.</p></div><div class="reveal"><div class="n">02</div><h4>The structure is loosening</h4><p>Collagen and elastin in the mid-dermis thin and slacken with age. Creams work above that layer, so the slide quietly continues underneath.</p></div><div class="reveal"><div class="n">03</div><h4>You were only offered two extremes</h4><p>Keep buying creams that can't reach it, or have surgery you don't want. The useful middle option rarely gets properly explained.</p></div></div></div></section>
+<section class="story"><div class="split">
+    <div class="media reveal" data-photo="04_story"></div>
+    <div class="body"><span class="eyebrow reveal">What actually happens</span>
+    <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">A lift that arrives the way<br>your skin does — <em>gradually.</em></h2>
+    <div class="timeline"><div class="tl reveal"><div class="w">Day 0</div><h4>One ~30-minute session</h4><p>Targeted ultrasound reaches the mid-dermis; integrated cooling keeps the surface comfortable. You leave the same day — maybe slight redness, nothing to hide.</p></div><div class="tl reveal"><div class="w">First weeks</div><h4>Early firmness</h4><p>Skin begins responding and feels a little tauter. Subtle, never a sudden 'new face' — exactly as a real result should start.</p></div><div class="tl reveal"><div class="w">~3 months</div><h4>The lift settles in</h4><p>New collagen matures and the result arrives. The jaw, brow and neck read tighter and more defined — gradually enough that it looks well-rested, not 'done.'</p></div></div></div></div></section>
+<section class="solution pad-sm"><div class="wrap reveal">
+    <span class="eyebrow">The treatment</span>
+    <p class="mark" style="margin-top:18px"><b>Sofwave™</b> uses ultrasound to rebuild your own collagen in the layer where firmness is actually lost — so the lift comes from your skin, not from a knife.</p>
+    <div class="tag">Non-invasive · Zero downtime · One session</div></div></section>
+<section class="pad" id="how"><div class="wrap">
+    <div class="head reveal"><span class="eyebrow">How it works</span>
+    <h2>Three steps — and the<br>first one is the honest part.</h2><p class="lede">Sofwave delivers controlled ultrasound energy to the mid-dermis to trigger new collagen, with integrated cooling keeping the surface comfortable and unmarked. But it only starts if it's genuinely right for you.</p></div>
+    <div class="steps"><div class="step reveal"><div class="n">1</div><h3>Consultation first</h3><p>A trained therapist assesses your skin and the areas in question — and tells you honestly whether Sofwave will actually help, or whether it won't.</p></div><div class="step reveal"><div class="n">2</div><h3>Targeted ultrasound</h3><p>Energy is delivered to the mid-dermis across the chosen areas — jaw, brow, neck or submental — with integrated cooling for comfort, in about 30 minutes.</p></div><div class="step reveal"><div class="n">3</div><h3>Collagen rebuilds</h3><p>Over ~3 months your own new collagen matures and lifts. We review with you and suggest maintenance only if and when it's genuinely useful.</p></div></div><div class="science reveal"><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>TGA cleared</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>FDA cleared</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>All skin tones</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Year-round</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Integrated cooling</span><span class="chip"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Single session</span></div></div></section>
+<section class="proof pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Rated 4.9 ★ · 193 reviews on Fresha</span>
+    <h2>The clinic Chatswood<br>keeps coming back to.</h2></div>
+    <div class="quotes"><div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"Feel so pampered after the treatment. Portia and her staff are very professional and friendly."</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">Maria W.</div><div class="mt">Verified · Fresha</div></div></div></div><div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"My skin was blocked, clogged and breaking out. The team analysed my needs…"</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">Kelly B.</div><div class="mt">Verified · Fresha</div></div></div></div><div class="quote reveal"><div class="stars">★★★★★</div>
+        <p>"Extremely friendly staff. Highly recommend — will be going back. Amazing!"</p>
+        <div class="who"><div class="av"></div><div>
+        <div class="nm">Ayva</div><div class="mt">Verified review</div></div></div></div></div><p class="sample-tag">Verified, public reviews from i-Beaute's Fresha and Bookwell profiles. These are clinic-wide — about the team, care and professionalism — not Sofwave-specific results.</p></div></section>
+<section class="authority"><div class="split reverse">
+    <div class="media reveal" data-photo="08_clinic"></div>
+    <div class="body"><span class="eyebrow reveal">Why i-Beaute</span>
+    <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">We'll tell you when<br><em>Sofwave isn't the answer.</em></h2>
+    <p class="reveal" style="margin-top:22px">At i&#8209;Beaute Skin&nbsp;+&nbsp;Body in Chatswood, advanced treatments are delivered by trained skin therapists who treat your face as a whole — never a single sale. Every Sofwave plan starts with a proper consultation and an honest answer about suitability, even when that answer is no.</p>
+    <ul class="creds"><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Trained, certified Sofwave practitioners — not a sideline add-on</li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>A real assessment before any treatment; the face treated as a whole</li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Established Chatswood clinic — The Gallery, Suite 16, 445 Victoria Ave</li></ul></div></div></section>
+<section class="pad" id="book"><div class="wrap">
+    <div class="head reveal"><span class="eyebrow">What it gives you</span>
+    <h2>What a fair lift looks like.</h2></div>
+    <div class="benefits-grid"><ul class="incl"><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Reaches where creams can't</h4><p>Ultrasound targets the mid-dermis to rebuild collagen at the exact layer responsible for laxity.</p></div></li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Zero downtime</h4><p>Mild redness at most; most people return to their day immediately, with no marks to hide.</p></div></li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>Natural, gradual result</h4><p>The lift builds over ~3 months, so it reads as well-rested — never surgically altered.</p></div></li><li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg><div><h4>One session, all skin tones</h4><p>A single ~30-minute treatment that works independently of melanin, suitable year-round.</p></div></li></ul>
+    <div class="offer-card reveal"><span class="eyebrow">Start here</span>
+    <h3>Complimentary skin &amp; suitability consultation</h3>
+    <div class="was"></div>
+    <div class="price">Complimentary<small> skin consultation</small></div>
+    <ul><li>Complimentary skin &amp; suitability consultation</li><li>Targeted Sofwave treatment (jaw, brow, neck or submental)</li><li>Comfort-first protocol with integrated cooling</li><li>Aftercare guidance and review</li></ul>
+    <a class="btn btn-gold" href="https://www.fresha.com/book-now/i-beaute-skin-body-kx5nin73/all-offer?pId=22008" target="_blank" rel="noopener">Book your free consultation</a>
+    <div class="fine">Consultation is complimentary; treatment pricing is tailored to the areas treated and confirmed at your consultation.</div></div></div></div></section>
+<section class="compare pad"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Where it honestly sits</span>
+    <h2>The lift between a cream<br>and a scalpel.</h2></div>
+    <div class="ctable reveal"><div class="row h"><div class="feat-col">&nbsp;</div><div>Creams &amp; facials</div><div class="own">Sofwave™</div><div>Surgical facelift</div></div>
+    <div class="row"><div class="feat">Reaches deep laxity</div><div><span class="no">Surface only</span></div><div class="own"><span class="yes">Yes — mid-dermis</span></div><div><span class="yes">Yes — goes furthest</span></div></div><div class="row"><div class="feat">Downtime</div><div><span class="yes">None</span></div><div class="own"><span class="yes">None / zero</span></div><div><span class="no">Weeks</span></div></div><div class="row"><div class="feat">Surgery / anaesthetic</div><div><span class="yes">No</span></div><div class="own"><span class="yes">No — non-invasive</span></div><div><span class="no">Yes</span></div></div><div class="row"><div class="feat">Natural, gradual result</div><div><span class="no">Minimal lift</span></div><div class="own"><span class="yes">Yes — builds over ~3 mo</span></div><div><span class="no">Dramatic, all at once</span></div></div><div class="row"><div class="feat">Time commitment</div><div><span class="no">Ongoing forever</span></div><div class="own"><span class="yes">Single ~30-min session</span></div><div><span class="no">Procedure + recovery</span></div></div></div></div></section>
+<section class="pad-sm"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">Is it for you?</span>
+    <h2>Honest about who it suits.</h2></div>
+    <div class="target-cols">
+    <div class="tcol yes-col reveal"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>Sofwave is for you if…</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You're noticing early to moderate laxity on the jaw, brow or neck</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You want a natural lift, not a dramatic change</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You can't fit surgical downtime around work and family</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>You'd rather invest once than keep chasing results with creams</li></ul></div>
+    <div class="tcol no-col reveal"><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>Maybe not, if…</h3><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>You have significant, advanced sagging that's genuinely better suited to surgery</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>You're expecting an instant, overnight transformation</li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 6l12 12M18 6L6 18"/></svg>You're pregnant or have certain medical conditions — we'll tell you honestly at consult</li></ul></div>
+    </div></div></section>
+<section class="pad" style="background:var(--sand)"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">No surprises</span>
+    <h2>The questions everyone asks.</h2></div>
+    <div class="faq"><details class="reveal"><summary>Does it hurt?</summary><p>Most clients describe a warming sensation with brief moments of heat. Sofwave's integrated cooling keeps the surface comfortable, and your therapist adjusts to you throughout.</p></details><details class="reveal"><summary>Is there really no downtime?</summary><p>Yes. Mild redness or slight puffiness at most, and no marks to hide. Most people return to their day immediately.</p></details><details class="reveal"><summary>When will I see results?</summary><p>Some firmness appears in the first weeks, but the real result builds as new collagen matures — typically over about three months after a single session.</p></details><details class="reveal"><summary>How long does it last?</summary><p>Results from new collagen are long-lasting, though skin keeps ageing naturally. Many choose a maintenance session later. We'll give you an honest, personalised view at your consult.</p></details><details class="reveal"><summary>Is it safe for my skin tone?</summary><p>Yes. Sofwave's ultrasound works independently of melanin, so it's suitable for all skin tones, year-round.</p></details><details class="reveal"><summary>How do I start, and what does it cost?</summary><p>With a complimentary consultation, where we assess suitability and recommend Sofwave only if it's genuinely right for you. Pricing is tailored to the areas treated and confirmed there. Book on Fresha.</p></details></div></div></section>
+<section class="final pad" data-photo="13_cta"><div class="wrap reveal">
+    <span class="eyebrow">Chatswood · Sofwave™</span>
+    <h2>If the creams have stopped<br>and surgery feels <em>too far.</em></h2>
+    <p>This is the honest middle. No pressure, no single sale — just a real assessment and a straight answer about whether Sofwave suits you. Start with a complimentary consultation.</p>
+    <a class="btn btn-gold" href="https://www.fresha.com/book-now/i-beaute-skin-body-kx5nin73/all-offer?pId=22008" target="_blank" rel="noopener">Book a complimentary consultation</a>
+    <div class="final-info"><div><div class="t">Where</div>The Gallery, Suite 16<br>445 Victoria Ave, Chatswood NSW 2067</div><div><div class="t">Session</div>Single ~30-min treatment<br>Zero downtime</div><div><div class="t">Booking</div>Via Fresha<br>Consultation complimentary</div></div></div></section>
+<footer><div class="wrap">
+    <div class="logo">i&#8209;Beaute<span style="color:var(--gold-soft)">.</span></div>
+    <div>i-Beaute Skin + Body · The Gallery, Suite 16, 445 Victoria Ave, Chatswood NSW 2067</div>
+    <div style="margin-top:8px"><a href="https://www.fresha.com/book-now/i-beaute-skin-body-kx5nin73/all-offer?pId=22008" target="_blank" rel="noopener">Book on Fresha</a></div>
+    <p class="disclaimer">Client reviews are genuine, sourced from i-Beaute's public Fresha and Bookwell profiles (4.9★ from 193 reviews at time of writing) and reflect the clinic's treatments overall — they are not Sofwave-specific results. Treatment pricing is tailored to the areas treated and confirmed at consultation. Sofwave™ is a trademark of its respective owner. Individual results vary; treatment suitability is determined at consultation.</p></div></footer>
+<div class="sticky-cta">
+    <div class="p">Sofwave™ Lift<small>Complimentary consult</small></div>
+    <a class="btn btn-gold" href="https://www.fresha.com/book-now/i-beaute-skin-body-kx5nin73/all-offer?pId=22008" target="_blank" rel="noopener">Book</a></div>
+<script>
+  document.documentElement.classList.add('js');
+  const bar=document.getElementById('topbar');
+  const onScroll=()=>bar.classList.toggle('scrolled',window.scrollY>60);
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-photo]').forEach(el=>{
+    const name=el.getAttribute('data-photo');const img=new Image();const src='assets/'+name+'.jpg';
+    img.onload=()=>{el.style.setProperty('--img',`url('${src}')`);el.setAttribute('data-img','');};img.src=src;
+  });
+  document.querySelectorAll('a[data-book]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('book').scrollIntoView({behavior:'smooth'})});});
+</script>
+</body>
+</html>

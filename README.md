@@ -3,8 +3,9 @@
 브리프 JSON 하나로 **13개 섹션의 고전환·고퀄리티 랜딩페이지(상세페이지)**를 생성합니다.
 출력은 **반응형 HTML** — 실제 선택 가능한 텍스트 + 사진 슬롯으로, 텍스트가 선명하고 편집·반응형·브라우저 데모가 모두 됩니다.
 
-**▶ 라이브 데모 (i-Beaute · Sofwave):** https://i-beaute-sofwave.pages.dev
-&nbsp;·&nbsp; 소스/사진: [`demo/i-beaute/`](demo/i-beaute/)
+**▶ 라이브 데모 (i-Beaute · Sofwave) — 같은 사실, 다른 설득 전략 A/B:**
+- 결과중심(핸드크래프트): https://i-beaute-sofwave.pages.dev &nbsp;·&nbsp; [`demo/i-beaute/`](demo/i-beaute/)
+- 신뢰중심(에이전트 파이프라인 생성): https://i-beaute-sofwave-v2.pages.dev &nbsp;·&nbsp; [`demo/i-beaute-v2/`](demo/i-beaute-v2/) (파이프라인 중간 산출물 포함)
 
 > **v2 (현재):** HTML 렌더링. 디자인 시스템(CSS)은 고정이고, 브랜드별로 바뀌는 건 `:root` 변수(컬러/폰트)와 13섹션 콘텐츠뿐 → **JSON만 바꾸면 어떤 업종도 같은 품질**로 나옵니다.
 > **v1 (레거시):** 13개 섹션을 이미지로 생성해 PNG로 스티칭하던 방식(`scripts/generate_page.py`, `scripts/stitch_images.py`). 텍스트가 흐릿/깨져 고퀄 데모엔 부적합 — 보존만 해둠.

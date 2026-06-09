@@ -1,0 +1,134 @@
+{
+  "slug": "i-beaute-v2",
+  "strategy_note": "Angle = 'the honest lift.' Differentiator is not the machine (Sofwave is widely available) but i-Beaute's restraint: a real consultation that will tell you Sofwave is NOT right for you. We sell the in-between space — past creams, not ready for surgery — and let zero-downtime + gradual-natural result carry the logic. Tone: editorial, calm, never hype.",
+
+  "hero_angle": {
+    "promise": "A natural lift without surgery or downtime — visible tightening from a single ultrasound session.",
+    "headline_gist": "Lift the jaw, brow and neck back — no knife, no downtime. Emphasis word: 'lift' / 'naturally'.",
+    "sub_gist": "Sofwave ultrasound rebuilds collagen deep in the skin; you walk out the same day and results keep improving for ~3 months.",
+    "badge_gist": "Zero downtime · single ~30-min session (honest framing, not false urgency)",
+    "stats": [
+      { "n": "~30 min", "l": "Single session" },
+      { "n": "0", "l": "Days downtime" },
+      { "n": "~3 mo", "l": "Results keep building" }
+    ],
+    "cta_primary": "Book a complimentary consultation",
+    "cta_secondary": "Is it right for me?"
+  },
+
+  "pain": [
+    { "icon": "bottle", "point": "Serums and facials used to be enough — now they sit on the surface while the jawline keeps softening." },
+    { "icon": "face", "point": "The mirror shows a heavier jaw, a hooding brow, a looser neck — small slips that read as 'tired' even when you're not." },
+    { "icon": "clock", "point": "A surgical facelift feels too drastic, and weeks of downtime simply don't fit around work and family." }
+  ],
+
+  "problem_points": [
+    { "n": "01", "point": "It's not your skincare routine failing you — once laxity sets in, the change is in the deep dermis where creams physically can't reach." },
+    { "n": "02", "point": "Laxity is structural: collagen and elastin in the mid-dermis thin and loosen with age. Topicals work above that layer, so the slide continues underneath." },
+    { "n": "03", "point": "You've been offered two extremes — keep buying creams that can't reach it, or have surgery you don't want. The useful middle option rarely gets explained." }
+  ],
+
+  "story_timeline": [
+    { "when": "Day 0", "point": "One ~30-minute session. Targeted ultrasound reaches the mid-dermis; integrated cooling keeps the surface comfortable. You leave the same day — maybe slight redness, nothing to hide." },
+    { "when": "First weeks", "point": "Early firmness as the skin begins responding — subtle, not a sudden 'new face.'" },
+    { "when": "~3 months", "point": "New collagen matures and the real lift settles in — jaw, brow and neck look tighter and more defined, gradually enough that it reads as 'well-rested,' not 'done.'" }
+  ],
+
+  "how_steps": [
+    "Consultation first — a trained therapist assesses your skin and the areas in question, and tells you honestly whether Sofwave will actually help.",
+    "Targeted ultrasound — energy is delivered to the mid-dermis across the chosen areas (jaw, brow, neck or submental), with integrated cooling for comfort, in about 30 minutes.",
+    "Collagen rebuilds — over ~3 months your own new collagen matures and lifts; we review with you and advise on maintenance only if and when it's useful."
+  ],
+  "chips": ["TGA cleared", "FDA cleared", "All skin tones", "Year-round", "Integrated cooling", "Single session"],
+
+  "proof_strategy": "Use ONLY real assets: 'Rated 4.9 ★ · 193 reviews on Fresha' as the headline trust number, plus the three real clinic-wide reviews (Maria W., Kelly B., Ayva). Frame them honestly as overall clinic reviews — about the team, care and professionalism — NOT as Sofwave-specific results. sample_note must state reviews are clinic-wide, verified on Fresha/Bookwell. No invented names, numbers, or before/after claims.",
+  "proof_quotes_use": [
+    { "quote": "Feel so pampered after the treatment. Portia and her staff are very professional and friendly.", "name": "Maria W.", "meta": "Verified · Fresha" },
+    { "quote": "My skin was blocked, clogged and breaking out. The team analysed my needs…", "name": "Kelly B.", "meta": "Verified · Fresha" },
+    { "quote": "Extremely friendly staff. Highly recommend — will be going back. Amazing!", "name": "Ayva", "meta": "Verified review" }
+  ],
+  "proof_sample_note": "Verified, public reviews from i-Beaute's Fresha/Bookwell profiles. Clinic-wide (about the team and care), not Sofwave-specific results.",
+
+  "authority": [
+    "Trained, certified Sofwave practitioners — not a sideline add-on.",
+    "Every plan starts with a real assessment; they treat the face as a whole and will say no if Sofwave isn't right for you.",
+    "Established Chatswood clinic — The Gallery, Suite 16, 445 Victoria Ave."
+  ],
+  "authority_angle": "Lead with restraint as the credibility signal: 'never a single sale — an honest answer about suitability.' This is the spine of the whole page.",
+
+  "benefits": [
+    { "title": "Reaches where creams can't", "body": "Ultrasound targets the mid-dermis to rebuild collagen at the layer responsible for laxity." },
+    { "title": "Zero downtime", "body": "Mild redness at most; most people return to their day immediately — no marks to hide." },
+    { "title": "Natural, gradual result", "body": "The lift builds over ~3 months, so it reads as well-rested, not surgically altered." },
+    { "title": "One session, all skin tones", "body": "A single ~30-minute treatment; works independently of melanin, suitable year-round." }
+  ],
+  "offer": {
+    "model": "consultation",
+    "eyebrow_gist": "Start here",
+    "title_gist": "Complimentary skin & suitability consultation",
+    "no_price": true,
+    "price_note": "Treatment pricing is tailored to the areas treated and confirmed at consultation. Do NOT invent a price, 'was' value, or discount.",
+    "bullets": [
+      "Complimentary skin & suitability consultation",
+      "Targeted Sofwave treatment (jaw, brow, neck or submental)",
+      "Comfort-first protocol with integrated cooling",
+      "Aftercare guidance and review"
+    ],
+    "button_label": "Book your free consultation",
+    "fine_gist": "Consultation complimentary; treatment pricing confirmed at consult. No guarantee stated by clinic — do not invent one."
+  },
+
+  "comparison": {
+    "columns": ["Creams & facials", "Sofwave™", "Surgical facelift"],
+    "own_index": 1,
+    "rows": [
+      { "feat": "Reaches deep laxity", "verdict": "Creams=no (surface only), Sofwave=yes (mid-dermis), Surgery=yes" },
+      { "feat": "Downtime", "verdict": "Creams=none, Sofwave=none/zero, Surgery=weeks (no)" },
+      { "feat": "Surgery / anaesthetic", "verdict": "Creams=no, Sofwave=no (non-invasive), Surgery=yes (no)" },
+      { "feat": "Natural, gradual result", "verdict": "Creams=minimal, Sofwave=yes (~3-mo build), Surgery=dramatic/sudden" },
+      { "feat": "Time commitment", "verdict": "Creams=ongoing forever, Sofwave=single ~30-min session, Surgery=procedure + recovery" }
+    ],
+    "framing": "Sofwave wins by sitting in the middle — surgical-level depth without surgical cost in time/recovery. Be fair to surgery (it goes furthest for advanced sagging); honesty reinforces the brand."
+  },
+
+  "target": {
+    "yes": [
+      "Noticing early to moderate laxity on the jaw, brow or neck",
+      "Want a natural lift, not a dramatic change",
+      "Can't fit surgical downtime around work and family",
+      "Would rather invest once than keep chasing results with creams"
+    ],
+    "no": [
+      "Significant, advanced sagging that's genuinely better suited to surgery",
+      "Expecting an instant, overnight transformation",
+      "Pregnant or with certain medical conditions — we'll tell you honestly at consult"
+    ]
+  },
+
+  "faq": [
+    { "q": "Does it hurt?", "a_gist": "A warming sensation with brief moments of heat; integrated cooling keeps the surface comfortable and the therapist adjusts to you." },
+    { "q": "Is there really no downtime?", "a_gist": "Yes — mild redness or slight puffiness at most, no marks to hide; most people return to their day immediately." },
+    { "q": "When will I see results?", "a_gist": "Some firmness in the first weeks; the real result builds as new collagen matures over ~3 months after a single session." },
+    { "q": "How long does it last?", "a_gist": "New-collagen results are long-lasting, though skin keeps ageing — many choose a maintenance session later. Honest, personalised view at consult." },
+    { "q": "Is it safe for my skin tone?", "a_gist": "Yes — Sofwave's ultrasound works independently of melanin, suitable for all skin tones, year-round." },
+    { "q": "How do I start, and what does it cost?", "a_gist": "With a complimentary consultation where we assess suitability and recommend Sofwave only if it's genuinely right; pricing is tailored to the areas treated and confirmed there. Book on Fresha." }
+  ],
+
+  "final_angle": {
+    "headline_gist": "If the creams have stopped working but surgery feels too far — this is the honest middle. Start with a free consultation.",
+    "body_gist": "Reassure: no pressure, real assessment, and a straight answer about whether Sofwave suits you.",
+    "button_label": "Book a complimentary consultation",
+    "info": [
+      { "t": "Where", "body": "The Gallery, Suite 16 · 445 Victoria Ave, Chatswood NSW 2067" },
+      { "t": "Session", "body": "Single ~30-min treatment · zero downtime" },
+      { "t": "Booking", "body": "Via Fresha · consultation complimentary" }
+    ]
+  },
+
+  "compliance_notes": [
+    "Cosmetic/medical advertising: avoid guarantee/outcome promises. Hedge results ('visibly', '~3 months', 'many', 'most people') — never 'will'.",
+    "No before/after claims tied to named individuals; reviews are clinic-wide, not Sofwave-specific.",
+    "No invented price, discount, urgency, or guarantee. Pricing = consultation-based.",
+    "TGA & FDA cleared is a factual claim from intake.facts — safe to state as 'cleared,' not 'approved-to-cure.'"
+  ]
+}
