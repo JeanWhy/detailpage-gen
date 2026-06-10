@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grace &amp; Why — Profile mark variants</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&amp;family=Jost:wght@500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1080px}
+  body{display:flex;align-items:center;justify-content:center;overflow:hidden;font-family:'Cormorant Garamond',serif}
+  .sq{width:1080px;height:1080px;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative}
+  .ring{position:absolute;inset:60px;border-radius:50%}
+  .mono{font-weight:600;line-height:1;letter-spacing:.01em;display:flex;align-items:baseline;justify-content:center}
+  .mono .amp{font-style:italic}
+  .sub{font-family:'Jost',sans-serif;font-weight:500;text-transform:uppercase;letter-spacing:.34em;padding-left:.34em}
+  body[data-v]{display:none}
+
+  /* V1 — cream bg, ink G&W, gold & (highest contrast in IG dark feed) */
+  body.v1{display:flex;background:#FBF9F5}
+  .v1 .sq .ring{border:3px solid rgba(28,26,23,.16)}
+  .v1 .mono{font-size:430px}
+  .v1 .mono .g,.v1 .mono .w{color:#1C1A17}
+  .v1 .mono .amp{color:#A8803C;font-size:360px;margin:0 6px}
+  .v1 .sub{display:none}
+
+  /* V2 — ink bg, big gold ampersand mark */
+  body.v2{display:flex;background:radial-gradient(circle at 50% 44%,#27241F,#1C1A17 70%)}
+  .v2 .sq .ring{border:3px solid rgba(201,165,103,.5)}
+  .v2 .amp-big{font-style:italic;font-weight:600;color:#C9A567;font-size:600px;line-height:.8}
+  .v2 .sub{color:rgba(251,249,245,.72);font-size:34px;margin-top:30px}
+
+  /* V3 — gold bg, ink G&W (bold, warm, pops) */
+  body.v3{display:flex;background:#A8803C}
+  .v3 .sq .ring{border:3px solid rgba(255,255,255,.42)}
+  .v3 .mono{font-size:430px}
+  .v3 .mono .g,.v3 .mono .w{color:#FBF9F5}
+  .v3 .mono .amp{color:#1C1A17;font-size:360px;margin:0 6px}
+  .v3 .sub{display:none}
+</style>
+</head>
+<body class="v1">
+  <div class="sq">
+    <div class="ring"></div>
+    <!-- V1 / V3 monogram -->
+    <div class="mono mono-gw"><span class="g">G</span><span class="amp">&amp;</span><span class="w">W</span></div>
+    <!-- V2 ampersand (shown only in v2 via JS swap) -->
+  </div>
+<script>
+  var v = new URLSearchParams(location.search).get('v') || '1';
+  document.body.className = 'v' + v;
+  if(v === '2'){
+    var sq = document.querySelector('.sq');
+    sq.querySelector('.mono-gw').remove();
+    var amp = document.createElement('div'); amp.className='amp-big'; amp.innerHTML='&amp;';
+    var sub = document.createElement('div'); sub.className='sub'; sub.textContent='Grace & Why';
+    sq.appendChild(amp); sq.appendChild(sub);
+  }
+</script>
+</body>
+</html>

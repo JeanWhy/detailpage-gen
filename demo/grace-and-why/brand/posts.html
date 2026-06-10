@@ -139,5 +139,16 @@
     <div class="lg"><i>Grace</i> &amp; Why</div>
   </div>
 
+<script>
+  // ?post=N renders only that post as a standalone 1080x1350 card (for PNG export)
+  var p = new URLSearchParams(location.search).get('post');
+  if(p){
+    document.body.style.padding='0';
+    document.body.style.gap='0';
+    document.querySelectorAll('.post').forEach(function(el,i){
+      el.style.display=(i==(p-1))?'block':'none';
+    });
+  }
+</script>
 </body>
 </html>

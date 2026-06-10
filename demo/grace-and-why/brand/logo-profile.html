@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Grace &amp; Why — Profile (circular-safe)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600&amp;display=swap" rel="stylesheet" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1080px}
+  body{display:flex;align-items:center;justify-content:center;background:#1C1A17;font-family:'Cormorant Garamond',serif;overflow:hidden}
+  .sq{width:1080px;height:1080px;background:radial-gradient(circle at 50% 42%, #27241F 0%, #1C1A17 68%);display:flex;align-items:center;justify-content:center;position:relative}
+  /* gold ring aligned to Instagram's circular crop */
+  .sq::before{content:"";position:absolute;inset:74px;border:2px solid rgba(168,128,60,.45);border-radius:50%}
+  .mark{text-align:center;color:#FBF9F5;line-height:.98;font-weight:500;letter-spacing:.01em}
+  .mark .g,.mark .w{font-size:188px;display:block}
+  .mark .g{font-style:italic}
+  .mark .amp{color:#C9A567;font-style:italic;font-size:140px;display:block;margin:14px 0}
+</style>
+</head>
+<body>
+  <div class="sq">
+    <div class="mark"><span class="g">Grace</span><span class="amp">&amp;</span><span class="w">Why</span></div>
+  </div>
+</body>
+</html>
