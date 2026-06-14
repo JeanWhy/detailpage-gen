@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confidence in Communication — A Masterclass</title>
+<meta name="description" content="A hands-on 2-hour public speaking masterclass on speaking with confidence and owning your message. Save your spot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   BRAND TOKENS — swap these to match The Public Speaking Club
+   (pull the exact values from thepublicspeakingclub.com.au)
+   ============================================================ */
+:root{
+  --bg:        #ECEAE3;   /* page "desk" — warm greige */
+  --card:      #FFFFFF;   /* floating cue-card white */
+  --ink:       #1C1B1A;   /* primary text */
+  --ink-soft:  #595650;   /* secondary text */
+  --cta:       #1C1B1A;   /* button colour — calm ink. Set to a brand colour for a coloured button */
+  --cta-ink:   #FFFFFF;   /* text on button */
+  --accent:    #2C46C9;   /* small accents: links, numbers (placeholder cobalt) */
+  --highlight: #FFD964;   /* the highlighter swipe (signature) */
+  --line:      #D9D6CD;   /* hairlines */
+
+  --display: "Fraunces", Georgia, serif;
+  --body:    "Hanken Grotesk", system-ui, sans-serif;
+
+  --max: 580px;
+  --radius: 14px;
+  --gap: 22px;            /* vertical rhythm; titles get ~2x this in clear space above */
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--body);
+  color:var(--ink);
+  background:var(--bg);
+  line-height:1.5;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:22px}
+
+/* uniform vertical rhythm */
+section{padding-block:var(--gap)}
+/* a section with a top rule gets the title the same clear air below the rule
+   that a rule-less section's title gets above it */
+.ruled{border-top:1px solid var(--line);padding-top:calc(var(--gap) * 2)}
+
+.eyebrow{
+  font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--ink-soft);
+}
+h1{font-family:var(--display);font-weight:400;line-height:1.04;letter-spacing:-.01em;font-size:clamp(2.6rem,11vw,3.6rem)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,6vw,2rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:16px}
+p{color:var(--ink-soft);font-size:1.02rem}
+a{color:var(--accent)}
+
+/* ---- highlighter signature ---- */
+.mark{position:relative;white-space:nowrap;color:var(--ink);font-style:italic;font-weight:500}
+.mark::before{
+  content:"";position:absolute;left:-.06em;right:-.06em;top:.18em;bottom:.04em;
+  background:var(--highlight);border-radius:3px;z-index:-1;
+  transform:rotate(-1.4deg) scaleX(0);transform-origin:left center;
+  animation:swipe .75s .45s cubic-bezier(.2,.8,.2,1) forwards;
+}
+@keyframes swipe{to{transform:rotate(-1.4deg) scaleX(1)}}
+
+/* ---- hero ---- */
+.hero{padding-top:40px;padding-bottom:26px}
+.hero .eyebrow{margin-bottom:18px}
+.hero h1{margin-bottom:18px}
+.lede{font-size:1.12rem;color:var(--ink-soft);text-wrap:pretty}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 24px}
+.chip{
+  display:inline-flex;align-items:center;gap:7px;
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:8px 14px;font-size:.9rem;font-weight:600;color:var(--ink)
+}
+.chip span{font-size:1rem;line-height:1}
+
+/* ---- buttons ---- */
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--cta);color:var(--cta-ink);
+  font-family:var(--body);font-weight:700;font-size:1.02rem;
+  border:none;border-radius:999px;padding:15px 30px;cursor:pointer;
+  text-decoration:none;transition:transform .15s ease, filter .15s ease;
+}
+.btn:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.btn:active{transform:translateY(0)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+.btn-block{width:100%}
+
+/* ---- generic blocks ---- */
+.lead-copy{font-size:1.08rem;color:var(--ink);text-wrap:pretty}
+
+/* outcomes */
+.outcomes{list-style:none;margin-top:6px;display:grid;gap:0}
+.outcomes li{
+  display:flex;gap:14px;align-items:flex-start;
+  padding:18px 0;border-top:1px solid var(--line)
+}
+.outcomes li:last-child{border-bottom:1px solid var(--line)}
+.outcomes .n{font-family:var(--display);font-size:1.05rem;color:var(--accent);font-weight:600;min-width:1.4em}
+.outcomes .t{font-weight:600;color:var(--ink)}
+.outcomes .d{display:block;font-weight:400;color:var(--ink-soft);font-size:.96rem;margin-top:3px}
+
+/* host */
+.host{display:flex;gap:18px;align-items:center;margin-top:6px}
+.host .photo{
+  width:84px;height:84px;border-radius:50%;flex:none;
+  background:var(--line) center/cover no-repeat;
+  display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:.7rem;text-align:center
+}
+.host .name{font-family:var(--display);font-size:1.25rem}
+.host .role{font-size:.85rem;color:var(--ink-soft);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.bio{margin-top:16px}
+
+/* details panel */
+.panel{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:6px 22px}
+.panel .row{display:flex;justify-content:space-between;gap:16px;padding:16px 0;border-bottom:1px solid var(--line)}
+.panel .row:last-child{border-bottom:0}
+.panel .k{color:var(--ink-soft);font-weight:600}
+.panel .v{color:var(--ink);font-weight:700;text-align:right}
+
+/* testimonial */
+.quote{font-family:var(--display);font-size:1.25rem;line-height:1.35;color:var(--ink);font-style:italic}
+.quote-by{margin-top:12px;font-size:.9rem;font-weight:600;color:var(--ink-soft)}
+
+/* ---- form: the cue card ---- */
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 22px;box-shadow:0 18px 40px -24px rgba(0,0,0,.35);
+  position:relative
+}
+.card::before{ /* a strip of masking tape straddling the top edge */
+  content:"";position:absolute;top:-13px;left:30px;width:104px;height:27px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.30), rgba(255,255,255,0) 45%),
+    color-mix(in srgb, var(--highlight) 68%, transparent);
+  border-left:1px solid rgba(0,0,0,.05);
+  border-right:1px solid rgba(0,0,0,.05);
+  border-radius:2px;
+  transform:rotate(-2.5deg);
+  box-shadow:0 3px 7px -3px rgba(0,0,0,.22);
+}
+.card{will-change:transform,opacity}
+.card.armed{opacity:0}
+.card.stick{animation:stick .6s cubic-bezier(.2,.85,.25,1) both}
+@keyframes stick{
+  0%{opacity:0;transform:translateY(26px) rotate(-2.6deg)}
+  55%{opacity:1;transform:translateY(0) rotate(.9deg)}
+  100%{opacity:1;transform:translateY(0) rotate(0)}
+}
+.card h2{margin-bottom:4px}
+.card .sub{font-size:.96rem;margin-bottom:20px}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.82rem;font-weight:700;margin-bottom:6px;color:var(--ink)}
+.field input{
+  width:100%;font-family:var(--body);font-size:1rem;color:var(--ink);
+  background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:13px 14px;
+}
+.field input:focus{outline:2px solid var(--accent);outline-offset:1px;border-color:var(--accent)}
+.consent{display:flex;gap:10px;align-items:flex-start;margin:6px 0 20px;font-size:.9rem;color:var(--ink-soft)}
+.consent input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--accent)}
+.spots{font-size:.86rem;font-weight:600;color:var(--accent);margin-top:14px;text-align:center}
+.success{display:none;text-align:center;padding:14px 0}
+.success.show{display:block}
+.success .big{font-family:var(--display);font-size:1.6rem;margin-bottom:8px}
+
+/* footer */
+footer{padding:34px 0 60px;text-align:center}
+footer .series{font-size:.84rem;color:var(--ink-soft);margin:14px 0;line-height:1.7}
+footer .series b{color:var(--ink)}
+footer .copy{font-size:.78rem;color:var(--ink-soft);margin-top:18px}
+
+/* sticky CTA */
+.sticky{
+  position:fixed;left:0;right:0;bottom:0;z-index:40;
+  background:color-mix(in srgb, var(--bg) 86%, transparent);
+  backdrop-filter:blur(8px);border-top:1px solid var(--line);
+  padding:12px 22px;transform:translateY(120%);transition:transform .3s ease
+}
+.sticky.show{transform:translateY(0)}
+.sticky .inner{max-width:var(--max);margin:0 auto}
+
+@media (prefers-reduced-motion:reduce){
+  .mark::before{animation:none;transform:rotate(-1.4deg) scaleX(1)}
+  .card.armed{opacity:1}
+  .card.stick{animation:none}
+  html{scroll-behavior:auto}
+  .btn,.sticky{transition:none}
+}
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<header class="hero wrap">
+  <!-- SWAP: brand wordmark / logo -->
+  <div class="eyebrow">A masterclass from The Public Speaking Club</div>
+  <h1>Learn to speak<br>with <span class="mark">confidence</span>.</h1>
+  <p class="lede">A hands-on 2-hour masterclass on owning why you speak — and why your message matters.</p>
+
+  <!-- SWAP: date · time · location -->
+  <div class="chips">
+    <span class="chip"><span>&#128197;</span> Thursday 24 July</span>
+    <span class="chip"><span>&#128338;</span> 6:00&ndash;8:00pm</span>
+    <span class="chip"><span>&#128205;</span> City Campus</span>
+  </div>
+
+  <a class="btn" href="#signup">Save your spot</a>
+</header>
+
+<!-- ============ WHY ============ -->
+<section class="wrap ruled">
+  <h2>Why this masterclass</h2>
+  <p class="lead-copy">Most of us were never taught how to feel confident when it&rsquo;s our turn to speak. This is a relaxed, practical first session where you&rsquo;ll learn to take ownership of your message &mdash; and actually enjoy delivering it. It&rsquo;s the first in a series, and a small first group, so come as you are.</p>
+</section>
+
+<!-- ============ OUTCOMES ============ -->
+<section class="wrap">
+  <h2>What you&rsquo;ll walk away with</h2>
+  <ul class="outcomes">
+    <li><span class="n">1</span><div><span class="t">Confidence under the spotlight</span><span class="d">Tools to act and feel steady when every eye is on you.</span></div></li>
+    <li><span class="n">2</span><div><span class="t">Ownership of your message</span><span class="d">Get clear on why you&rsquo;re speaking and why it matters &mdash; the part most people skip.</span></div></li>
+    <li><span class="n">3</span><div><span class="t">Something you can use immediately</span><span class="d">Practical techniques for your very next presentation, not just theory.</span></div></li>
+  </ul>
+</section>
+
+<!-- ============ SIGN-UP (cue card) — moved up so it's reachable fast ============ -->
+<section class="wrap" id="signup">
+  <div class="card">
+    <div id="formView">
+      <h2>Save your spot</h2>
+      <p class="sub">Pop your details in and Sharna will be in touch with everything you need.</p>
+      <form id="signupForm" novalidate>
+        <div class="field">
+          <label for="name">Your name</label>
+          <input id="name" name="name" type="text" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" autocomplete="email" required>
+        </div>
+        <label class="consent">
+          <input type="checkbox" id="consent" required>
+          <span>I&rsquo;m happy to be contacted about this masterclass.</span>
+        </label>
+        <button class="btn btn-block" type="submit">Count me in</button>
+        <p class="spots">Only a handful of spots &mdash; first in, best dressed.</p>
+      </form>
+    </div>
+    <div class="success" id="successView">
+      <div class="big">You&rsquo;re in! &#127881;</div>
+      <p>Sharna will be in touch with the details. See you there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOST ============ -->
+<section class="wrap ruled">
+  <h2>Your host</h2>
+  <div class="host">
+    <!-- SWAP: host photo -> background-image on .photo -->
+    <div class="photo">photo</div>
+    <div>
+      <div class="name">Sharna</div>
+      <div class="role">The Public Speaking Club</div>
+    </div>
+  </div>
+  <!-- SWAP: short bio -->
+  <p class="bio">A short, warm bio goes here &mdash; who Sharna is, why she runs these sessions, and what makes her someone you&rsquo;d want in your corner before you speak.</p>
+</section>
+
+<!-- ============ DETAILS ============ -->
+<section class="wrap">
+  <h2>The details</h2>
+  <div class="panel">
+    <div class="row"><span class="k">Date</span><span class="v">Thursday 24 July</span></div>      <!-- SWAP -->
+    <div class="row"><span class="k">Time</span><span class="v">6:00&ndash;8:00pm (2 hrs)</span></div>    <!-- SWAP -->
+    <div class="row"><span class="k">Location</span><span class="v">City Campus</span></div>        <!-- SWAP -->
+    <div class="row"><span class="k">Cost</span><span class="v">Free trial session</span></div>     <!-- SWAP: Free / $XX -->
+    <div class="row"><span class="k">Spots</span><span class="v">Limited to the first 20</span></div><!-- SWAP -->
+  </div>
+</section>
+
+<!-- ============ TESTIMONIAL ============ -->
+<section class="wrap">
+  <!-- SWAP: pull a real quote from the Testimonials page -->
+  <p class="quote">&ldquo;I went from dreading presentations to actually looking forward to them.&rdquo;</p>
+  <p class="quote-by">&mdash; Past attendee</p>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="wrap ruled">
+  <div class="eyebrow">The Public Speaking Club</div>
+  <p class="series">
+    First in the series:<br>
+    <b>Confidence in Communication</b> &middot; Preparing a Great Speech &middot; Presenting Like a Pro
+  </p>
+  <!-- SWAP: real site URL -->
+  <a href="https://www.thepublicspeakingclub.com.au/">thepublicspeakingclub.com.au</a>
+  <div class="copy">&copy; 2026 The Public Speaking Club</div>
+</footer>
+
+<!-- ============ STICKY CTA ============ -->
+<div class="sticky" id="sticky">
+  <div class="inner"><a class="btn btn-block" href="#signup">Save your spot</a></div>
+</div>
+
+<script>
+/* ---- form handling ----
+   Demo mode: shows a confirmation without sending anywhere.
+   To go live, set SHEET_ENDPOINT to a Google Apps Script Web App URL
+   bound to Sharna's own Google Sheet (she stays the owner of all leads),
+   and uncomment the fetch below. */
+const SHEET_ENDPOINT = ""; // e.g. "https://script.google.com/macros/s/XXXX/exec"
+
+const form = document.getElementById('signupForm');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!form.checkValidity()){ form.reportValidity(); return; }
+  const data = {
+    name:    document.getElementById('name').value.trim(),
+    email:   document.getElementById('email').value.trim(),
+    consent: document.getElementById('consent').checked,
+    ts:      new Date().toISOString()
+  };
+
+  // if (SHEET_ENDPOINT) {
+  //   try { await fetch(SHEET_ENDPOINT, { method:'POST', body: JSON.stringify(data) }); }
+  //   catch (err) { /* handle gracefully */ }
+  // }
+
+  document.getElementById('formView').style.display = 'none';
+  document.getElementById('successView').classList.add('show');
+  document.getElementById('signup').scrollIntoView({behavior:'smooth', block:'center'});
+});
+
+/* ---- sticky CTA: show after hero, hide when the form is on screen ---- */
+const sticky = document.getElementById('sticky');
+const hero   = document.querySelector('.hero');
+const signup = document.getElementById('signup');
+let heroOut = false, formIn = false;
+const sync = () => sticky.classList.toggle('show', heroOut && !formIn);
+new IntersectionObserver(([e]) => { heroOut = !e.isIntersecting; sync(); }, {threshold:0}).observe(hero);
+new IntersectionObserver(([e]) => { formIn = e.isIntersecting; sync(); }, {threshold:.2}).observe(signup);
+
+/* ---- post-it: the card "sticks" into place when scrolled to ---- */
+const card = document.querySelector('.card');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (card && !reduce && 'IntersectionObserver' in window){
+  card.classList.add('armed');
+  const io = new IntersectionObserver(([e], obs) => {
+    if (e.isIntersecting){ card.classList.remove('armed'); card.classList.add('stick'); obs.disconnect(); }
+  }, {threshold:.35});
+  io.observe(card);
+}
+</script>
+</body>
+</html>
