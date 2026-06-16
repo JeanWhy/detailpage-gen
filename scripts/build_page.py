@@ -32,6 +32,15 @@ def raw(brief_field, default=""):
     return brief_field if brief_field is not None else default
 
 
+def book_link(book_url):
+    """Booking anchor attrs: smooth-scroll when booking_url is an on-page
+    #anchor (embedded widget), otherwise open an external booking page."""
+    u = str(book_url)
+    if u.startswith("#"):
+        return f'href="{esc(u)}" data-book'
+    return f'href="{esc(u)}" target="_blank" rel="noopener"'
+
+
 ICONS = {
     "check": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>',
     "check_bold": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 6L9 17l-5-5"/></svg>',
@@ -42,6 +51,10 @@ ICONS = {
     "spark": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l2 6 6 2-6 2-2 6-2-6-6-2 6-2z"/></svg>',
     "clock": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>',
     "heart": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 20s-7-4.5-9.2-8.6C1.2 8.3 2.9 5 6 5c2 0 3.2 1.2 4 2.4C10.8 6.2 12 5 14 5c3.1 0 4.8 3.3 3.2 6.4C19 15.5 12 20 12 20z"/></svg>',
+    "shield": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M12 3l7 3v5c0 4.4-3 7.6-7 9-4-1.4-7-4.6-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>',
+    "leaf": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M20 4S9 4 6 11c-1.6 3.7 0 7 3 8 5-1 8-5 9-13"/><path d="M6 19c2-6 6-9 11-11"/></svg>',
+    "chat": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M21 12a8 8 0 01-11.6 7.1L4 20l1-5.2A8 8 0 1121 12z"/><path d="M8.5 12h.01M12 12h.01M15.5 12h.01"/></svg>',
+    "phone": '<svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A15 15 0 014 5a2 2 0 011-1z"/></svg>',
 }
 
 
@@ -76,7 +89,7 @@ STATIC_CSS = r"""
   img{max-width:100%;display:block}
   .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
   .eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);display:inline-block}
-  section{position:relative}
+  section{position:relative;scroll-margin-top:84px}
   .pad{padding:120px 0}
   .pad-sm{padding:88px 0}
   .center{text-align:center}
@@ -91,16 +104,31 @@ STATIC_CSS = r"""
   .btn-ghost:hover{background:#fff;color:var(--charcoal);border-color:#fff}
   header{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:22px 40px;transition:.4s ease}
   header.scrolled{background:rgba(251,250,247,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:14px 40px;box-shadow:0 1px 0 var(--line)}
-  .logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#fff;transition:.4s}
+  .logo{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:.02em;color:#fff;transition:.4s;display:inline-flex;align-items:center;gap:9px}
+  .logo-mark{display:inline-flex;align-items:center}
+  .logo-mark .sprig{height:30px;width:auto;display:block}
+  .logo-stack{flex-direction:column;gap:7px}
+  .logo-stack .logo-word{font-size:24px;letter-spacing:.12em;text-transform:uppercase}
+  .logo-mark-lg .sprig{height:46px}
   .logo span{color:var(--gold-soft)}
   header.scrolled .logo{color:var(--charcoal)}
+  .nav-menu{display:flex;gap:32px;align-items:center;margin:0 auto}
+  .nav-link{font-family:var(--sans);font-size:12px;font-weight:400;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.82);transition:.3s;position:relative}
+  .nav-link:hover{color:#fff}
+  .nav-link::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--gold-soft);transform:scaleX(0);transition:transform .3s ease}
+  .nav-link:hover::after{transform:scaleX(1)}
+  header.scrolled .nav-link{color:var(--ink)}
+  header.scrolled .nav-link:hover{color:var(--gold)}
   .nav-cta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);padding:11px 22px;border-radius:2px;transition:.35s}
   .nav-cta:hover{background:#fff;color:var(--charcoal)}
   header.scrolled .nav-cta{color:var(--charcoal);border-color:var(--charcoal)}
   header.scrolled .nav-cta:hover{background:var(--charcoal);color:#fff}
   .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.30) 40%,rgba(var(--overlay),.62) 100%),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%);background-size:cover;background-position:center 30%}
   .hero[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.55) 0%,rgba(var(--overlay),.30) 40%,rgba(var(--overlay),.62) 100%),var(--img),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%)}
-  .hero .wrap{padding-top:120px;padding-bottom:60px}
+  .hero.hero-dark[data-img]{background-image:linear-gradient(180deg,rgba(48,45,33,.74) 0%,rgba(48,45,33,.56) 45%,rgba(48,45,33,.82) 100%),var(--img),linear-gradient(120deg,var(--grad1) 0%,var(--grad2) 100%)}
+  .hero .wrap{padding-top:120px;padding-bottom:60px;position:relative;z-index:1}
+  .hero-leaf{position:absolute;right:-26px;bottom:-30px;width:300px;color:#fff;opacity:.09;pointer-events:none;z-index:0}
+  .hero-leaf .sprig{width:100%;height:auto}
   .hero-badge{display:inline-flex;align-items:center;gap:.6em;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.5);padding:9px 18px;border-radius:999px;margin-bottom:30px;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
   .hero-badge::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--gold-soft)}
   .hero h1{font-size:clamp(44px,6.4vw,86px);color:#fff;font-weight:500;max-width:14ch}
@@ -115,10 +143,25 @@ STATIC_CSS = r"""
   .head h2{font-size:clamp(32px,4vw,52px)}
   .head .eyebrow{margin-bottom:18px}
   .head p{margin-top:20px}
+  .intro{background:var(--cream);text-align:center;overflow:hidden}
+  .intro .wrap{position:relative;max-width:900px}
+  .intro-deco{position:absolute;top:42%;width:300px;color:var(--gold-soft);opacity:.5;pointer-events:none}
+  .intro-deco svg{width:100%;height:auto}
+  .intro-deco-l{left:-340px}
+  .intro-deco-r{right:-340px;transform:scaleX(-1)}
+  .intro-photo{width:172px;height:172px;border-radius:50%;margin:0 auto 42px;background:radial-gradient(120% 120% at 30% 20%,var(--mist),var(--pale-sage) 55%,var(--sage));background-size:cover;background-position:center;box-shadow:0 18px 50px rgba(43,51,45,.16)}
+  .intro-photo[data-img]{background-image:var(--img)}
+  .intro-quote{font-family:var(--serif);font-style:italic;font-size:clamp(21px,2.5vw,30px);line-height:1.5;color:var(--ink);max-width:30ch;max-width:760px;margin:0 auto}
+  .intro-link{font-style:normal;color:var(--gold);transition:.3s;border-bottom:1px solid transparent}
+  .intro-link:hover{border-bottom-color:var(--gold)}
+  .intro-rule{width:1px;height:62px;background:var(--line);margin:42px auto 0}
+  .intro-name{margin-top:32px;font-family:var(--sans);font-size:16px;letter-spacing:.18em;color:var(--gold)}
+  .intro-sub{margin-top:10px;font-size:12.5px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--charcoal)}
+  .intro-reg{margin-top:9px;font-size:13px;letter-spacing:.04em;color:#a3a299}
   .pain{background:var(--sand)}
   .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:8px}
   .pain-card{background:var(--cream);padding:42px 34px;border-radius:3px;border:1px solid var(--line)}
-  .pain-card .ic{width:40px;height:40px;color:var(--sage);margin-bottom:22px}
+  .pain-card .ic,.pain-card>svg{width:40px;height:40px;color:var(--sage);margin-bottom:22px}
   .pain-card h3{font-size:24px;margin-bottom:12px}
   .pain-card p{font-size:16px;color:#6f6e67}
   .problem{background:var(--deep-sage);color:#fff;text-align:center}
@@ -141,12 +184,15 @@ STATIC_CSS = r"""
   .tl .w{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:500}
   .tl h4{font-size:21px;margin:6px 0 4px}
   .tl p{font-size:15px;color:#6f6e67;margin:0}
-  .solution{background:var(--mist);text-align:center}
+  .solution{background:var(--mist);text-align:center;position:relative;overflow:hidden}
+  .solution .wrap{position:relative;z-index:1}
+  .leaf-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:480px;color:var(--deep-sage);opacity:.05;pointer-events:none;z-index:0}
+  .leaf-wm .sprig{width:100%;height:auto}
   .solution .mark{font-family:var(--serif);font-size:clamp(34px,4.6vw,58px);font-style:italic;color:var(--charcoal);max-width:20ch;margin:0 auto}
   .solution .mark b{font-style:normal;font-weight:600;color:var(--deep-sage)}
   .solution .tag{margin-top:22px;font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
   .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:36px;margin-top:8px}
-  .step .n{font-family:var(--serif);font-size:18px;color:var(--gold);border:1px solid var(--gold);width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
+  .step .n{font-family:var(--serif);font-size:27px;color:var(--gold);border:1px solid var(--gold);width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin-bottom:24px}
   .step h3{font-size:25px;margin-bottom:10px}
   .step p{font-size:16px;color:#6f6e67}
   .science{display:flex;gap:18px;flex-wrap:wrap;margin-top:64px;padding-top:48px;border-top:1px solid var(--line)}
@@ -162,6 +208,7 @@ STATIC_CSS = r"""
   .who .nm{font-size:15px;font-weight:500;color:var(--charcoal)}
   .who .mt{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:#9a988f}
   .sample-tag{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:#b3b0a5;text-align:center;margin-top:34px}
+  .assure-note{font-size:14px;line-height:1.6;color:#9a988f;text-align:center;max-width:52ch;margin:38px auto 0;text-wrap:balance}
   .authority{background:var(--deep-sage);color:#fff}
   .authority .split .body{padding:96px 72px}
   .authority h2{color:#fff}
@@ -206,6 +253,9 @@ STATIC_CSS = r"""
   .tcol.yes-col{background:var(--mist);border:1px solid var(--pale-sage)}
   .tcol.no-col{background:var(--sand);border:1px solid var(--line)}
   .tcol h3{font-size:24px;margin-bottom:24px;display:flex;align-items:center;gap:12px}
+  .tcol h3 svg{width:36px;height:36px;flex:none}
+  .tcol.yes-col h3 svg{color:var(--sage)}
+  .tcol.no-col h3 svg{color:#c2bfb4}
   .tcol ul{list-style:none;display:grid;gap:16px}
   .tcol li{display:flex;gap:14px;font-size:16px;color:var(--ink)}
   .tcol li svg{width:20px;height:20px;flex:none;margin-top:3px}
@@ -218,6 +268,16 @@ STATIC_CSS = r"""
   .faq summary::after{content:"+";font-family:var(--sans);font-weight:300;font-size:28px;color:var(--gold);transition:.3s;line-height:1}
   .faq details[open] summary::after{transform:rotate(45deg)}
   .faq details p{padding:0 0 28px;color:#6f6e67;font-size:16px;max-width:none}
+  .booking{background:var(--mist)}
+  .booking .head p{margin-left:auto;margin-right:auto}
+  .book-tabs{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:8px 0 32px}
+  .book-tab{font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.12em;text-transform:uppercase;padding:14px 30px;border:1px solid var(--line);background:var(--cream);color:var(--ink);border-radius:2px;cursor:pointer;transition:.3s}
+  .book-tab:hover{border-color:var(--sage);color:var(--deep-sage)}
+  .book-tab.is-active{background:var(--charcoal);color:#fff;border-color:var(--charcoal)}
+  .book-panels{max-width:940px;margin:0 auto}
+  .book-panel{display:none;background:#fff;border:1px solid var(--line);border-radius:4px;overflow:hidden;box-shadow:0 18px 50px rgba(43,51,45,.08)}
+  .book-panel.is-active{display:block}
+  .book-panel iframe{display:block;width:100%;border:0}
   .final{color:#fff;text-align:center;background:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.88)),linear-gradient(120deg,var(--grad1),var(--grad2));background-size:cover;background-position:center}
   .final[data-img]{background-image:linear-gradient(180deg,rgba(var(--overlay),.78),rgba(var(--overlay),.88)),var(--img)}
   .final h2{color:#fff;font-size:clamp(36px,5vw,68px);max-width:16ch;margin:0 auto}
@@ -226,9 +286,10 @@ STATIC_CSS = r"""
   .final .btn{font-size:15px;padding:20px 46px}
   .final-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:54px;padding-top:40px;border-top:1px solid rgba(255,255,255,.18)}
   .final-info div{font-size:14px;color:rgba(255,255,255,.8);letter-spacing:.02em}
+  .final-info .wide{flex-basis:100%;margin-bottom:14px;padding-bottom:18px;border-bottom:1px solid rgba(255,255,255,.12)}
   .final-info .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-soft);margin-bottom:8px}
   footer{background:var(--charcoal);color:rgba(255,255,255,.6);padding:60px 0;text-align:center;font-size:13px;letter-spacing:.04em}
-  footer .logo{color:#fff;font-size:26px;display:inline-block;margin-bottom:18px}
+  footer .logo{color:#fff;font-size:26px;display:inline-flex;margin-bottom:18px}
   footer a{color:var(--gold-soft)}
   .disclaimer{max-width:680px;margin:24px auto 0;font-size:11px;color:rgba(255,255,255,.32);line-height:1.6}
   .sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:60;display:none;background:rgba(251,250,247,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
@@ -249,6 +310,8 @@ STATIC_CSS = r"""
     .ctable{overflow-x:auto}.ctable .row{min-width:620px}
     .hero-meta{gap:22px}
     header{padding:16px 22px}.nav-cta{display:none}
+    .nav-menu{display:none}
+    .intro-deco{display:none}
     .sticky-cta{display:flex}
     body{padding-bottom:72px}
     .final-info{gap:26px}
@@ -280,10 +343,55 @@ JS = r"""
     img.onload=()=>{el.style.setProperty('--img',`url('${src}')`);el.setAttribute('data-img','');};img.src=src;
   });
   document.querySelectorAll('a[data-book]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();document.getElementById('book').scrollIntoView({behavior:'smooth'})});});
+  document.querySelectorAll('.book-tab').forEach(t=>{t.addEventListener('click',()=>{
+    const k=t.getAttribute('data-tab');
+    document.querySelectorAll('.book-tab').forEach(x=>x.classList.toggle('is-active',x===t));
+    document.querySelectorAll('.book-panel').forEach(p=>p.classList.toggle('is-active',p.getAttribute('data-panel')===k));
+  });});
 """
 
 
 # ---------------------------------------------------------------- sections
+# Willow brand mark — a delicate botanical sprig (line art) matching the logo.
+# No ids inside, so it can be inlined multiple times (logo + watermarks) safely.
+_LEAF = "M0 0C7 -6 17 -6 23 0C17 6 7 6 0 0Z M4 0H19"
+SPRIG = (
+    '<svg class="sprig" viewBox="0 0 100 122" fill="none" stroke="currentColor"'
+    ' stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"'
+    ' xmlns="http://www.w3.org/2000/svg">'
+    '<path d="M50 118C47 96 51 76 50 48"/>'
+    f'<g transform="translate(50,48) rotate(-90)"><path d="{_LEAF}"/></g>'
+    f'<g transform="translate(50,70) rotate(-145)"><path d="{_LEAF}"/></g>'
+    f'<g transform="translate(50,70) rotate(-35)"><path d="{_LEAF}"/></g>'
+    f'<g transform="translate(50,92) rotate(-150)"><path d="{_LEAF}"/></g>'
+    f'<g transform="translate(50,92) rotate(-30)"><path d="{_LEAF}"/></g>'
+    '</svg>'
+)
+
+SQUIGGLE ='<svg viewBox="0 0 420 240" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 70C70 8 120 6 168 64c40 49 92 70 150 28 44-32 80-30 94 18" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>'
+
+
+def render_intro(i):
+    if not i:
+        return ""
+    photo = f' data-photo="{esc(i["photo"])}"' if i.get("photo") else ""
+    link = i.get("link") or {}
+    link_html = (
+        f' <a class="intro-link" href="{esc(link.get("href", "#"))}">{esc(link.get("label", ""))}</a>'
+        if link.get("label") else ""
+    )
+    sub = f'<div class="intro-sub">{esc(i["sub"])}</div>' if i.get("sub") else ""
+    reg = f'<div class="intro-reg">{esc(i["reg"])}</div>' if i.get("reg") else ""
+    return f"""<section class="intro pad"><div class="wrap reveal">
+    <span class="intro-deco intro-deco-l" aria-hidden="true">{SQUIGGLE}</span>
+    <span class="intro-deco intro-deco-r" aria-hidden="true">{SQUIGGLE}</span>
+    <div class="intro-photo"{photo}></div>
+    <p class="intro-quote">&ldquo;{raw(i.get('quote_html',''))}{link_html}&rdquo;</p>
+    <div class="intro-rule"></div>
+    <div class="intro-name">{esc(i.get('name',''))}</div>{sub}{reg}
+    </div></section>"""
+
+
 def render_hero(h, book_url):
     stats = "".join(
         f'<div><div class="n">{raw(s.get("n"))}</div><div class="l">{raw(s.get("l"))}</div></div>'
@@ -295,7 +403,9 @@ def render_hero(h, book_url):
         f'<a class="btn btn-ghost" href="{esc(cta2["href"])}">{esc(cta2["label"])}</a>'
         if cta2 else ""
     )
-    return f"""<section class="hero" id="top"{photo}>
+    dark = " hero-dark" if h.get("overlay_strong") else ""
+    return f"""<section class="hero{dark}" id="top"{photo}>
+  <span class="hero-leaf" aria-hidden="true">{SPRIG}</span>
   <div class="wrap">
     <span class="hero-badge reveal">{raw(h.get('badge',''))}</span>
     <h1 class="reveal">{raw(h.get('headline_html',''))}</h1>
@@ -349,7 +459,7 @@ def render_story(s):
 
 
 def render_solution(s):
-    return f"""<section class="solution pad-sm"><div class="wrap reveal">
+    return f"""<section class="solution pad-sm"><span class="leaf-wm" aria-hidden="true">{SPRIG}</span><div class="wrap reveal">
     <span class="eyebrow">{esc(s.get('eyebrow',''))}</span>
     <p class="mark" style="margin-top:18px">{raw(s.get('mark_html',''))}</p>
     <div class="tag">{esc(s.get('tag',''))}</div></div></section>"""
@@ -373,6 +483,21 @@ def render_how(h):
 
 
 def render_proof(p):
+    # Assurance variant: trust band WITHOUT star-testimonials (icon cards).
+    # Use for regulated verticals (e.g. AHPRA psychologists) where client
+    # testimonials are prohibited. Triggered by variant=="assurance" or `cards`.
+    if p.get("variant") == "assurance" or p.get("cards"):
+        cards = "".join(
+            f"""<div class="pain-card reveal">{icon(c.get('icon','shield'))}
+            <h3>{esc(c.get('title',''))}</h3><p>{esc(c.get('body',''))}</p></div>"""
+            for c in p.get("cards", [])
+        )
+        note = f'<p class="assure-note">{esc(p["note"])}</p>' if p.get("note") else ""
+        lede = f'<p class="lede center" style="max-width:60ch;margin:0 auto 8px">{esc(p["lede"])}</p>' if p.get("lede") else ""
+        return f"""<section class="proof pad"><div class="wrap">
+        <div class="head center reveal"><span class="eyebrow">{esc(p.get('eyebrow',''))}</span>
+        <h2>{raw(p.get('title_html',''))}</h2>{lede}</div>
+        <div class="pain-grid">{cards}</div>{note}</div></section>"""
     quotes = "".join(
         f"""<div class="quote reveal"><div class="stars">★★★★★</div>
         <p>"{esc(q.get('quote',''))}"</p>
@@ -393,7 +518,7 @@ def render_authority(a):
     )
     photo = f' data-photo="{esc(a["photo"])}"' if a.get("photo") else ""
     rev = " reverse" if a.get("reverse", True) else ""
-    return f"""<section class="authority"><div class="split{rev}">
+    return f"""<section class="authority" id="about"><div class="split{rev}">
     <div class="media reveal"{photo}></div>
     <div class="body"><span class="eyebrow reveal">{esc(a.get('eyebrow',''))}</span>
     <h2 class="reveal" style="font-size:clamp(30px,3.6vw,46px);margin-top:16px">{raw(a.get('title_html',''))}</h2>
@@ -409,7 +534,7 @@ def render_benefits(b, book_url):
     )
     o = b.get("offer", {})
     bullets = "".join(f"<li>{esc(x)}</li>" for x in o.get("bullets", []))
-    return f"""<section class="pad" id="book"><div class="wrap">
+    return f"""<section class="pad" id="fees"><div class="wrap">
     <div class="head reveal"><span class="eyebrow">{esc(b.get('eyebrow',''))}</span>
     <h2>{esc(b.get('title',''))}</h2></div>
     <div class="benefits-grid"><ul class="incl">{items}</ul>
@@ -418,7 +543,7 @@ def render_benefits(b, book_url):
     <div class="was">{esc(o.get('was',''))}</div>
     <div class="price">{esc(o.get('price',''))}<small> {esc(o.get('price_small',''))}</small></div>
     <ul>{bullets}</ul>
-    <a class="btn btn-gold" href="{esc(book_url)}" target="_blank" rel="noopener">{esc(o.get('button_label','Book'))}</a>
+    <a class="btn btn-gold" {book_link(book_url)}>{esc(o.get('button_label','Book'))}</a>
     <div class="fine">{esc(o.get('fine',''))}</div></div></div></div></section>"""
 
 
@@ -464,23 +589,50 @@ def render_faq(f):
         f'<p>{esc(it.get("a",""))}</p></details>'
         for it in f.get("items", [])
     )
-    return f"""<section class="pad" style="background:var(--sand)"><div class="wrap">
+    return f"""<section class="pad" id="faq" style="background:var(--sand)"><div class="wrap">
     <div class="head center reveal"><span class="eyebrow">{esc(f.get('eyebrow',''))}</span>
     <h2>{esc(f.get('title',''))}</h2></div>
     <div class="faq">{items}</div></div></section>"""
 
 
+def render_booking(b):
+    """Embedded booking section (e.g. Halaxy widgets) with optional tabs.
+    Each tab carries a raw `embed` HTML string (an iframe). id=book so all
+    booking CTAs scroll here."""
+    if not b:
+        return ""
+    tabs = b.get("tabs", [])
+    btns = "".join(
+        f'<button class="book-tab{" is-active" if i == 0 else ""}" type="button" '
+        f'data-tab="{esc(t.get("key", ""))}">{esc(t.get("label", ""))}</button>'
+        for i, t in enumerate(tabs)
+    )
+    panels = "".join(
+        f'<div class="book-panel{" is-active" if i == 0 else ""}" '
+        f'data-panel="{esc(t.get("key", ""))}">{raw(t.get("embed", ""))}</div>'
+        for i, t in enumerate(tabs)
+    )
+    tabbar = f'<div class="book-tabs reveal">{btns}</div>' if len(tabs) > 1 else ""
+    lede = f'<p style="margin-top:18px">{esc(b["lede"])}</p>' if b.get("lede") else ""
+    note = f'<p class="assure-note" style="margin-top:26px">{esc(b["note"])}</p>' if b.get("note") else ""
+    return f"""<section class="booking pad" id="book"><div class="wrap">
+    <div class="head center reveal"><span class="eyebrow">{esc(b.get('eyebrow',''))}</span>
+    <h2>{raw(b.get('title_html',''))}</h2>{lede}</div>
+    {tabbar}
+    <div class="book-panels reveal">{panels}</div>{note}</div></section>"""
+
+
 def render_final(fi, book_url):
     info = "".join(
-        f'<div><div class="t">{esc(x.get("t",""))}</div>{raw(x.get("body_html",""))}</div>'
+        f'<div class="{"wide" if x.get("wide") else ""}"><div class="t">{esc(x.get("t",""))}</div>{raw(x.get("body_html",""))}</div>'
         for x in fi.get("info", [])
     )
     photo = f' data-photo="{esc(fi["photo"])}"' if fi.get("photo") else ""
-    return f"""<section class="final pad"{photo}><div class="wrap reveal">
+    return f"""<section class="final pad" id="contact"{photo}><div class="wrap reveal">
     <span class="eyebrow">{esc(fi.get('eyebrow',''))}</span>
     <h2>{raw(fi.get('title_html',''))}</h2>
     <p>{esc(fi.get('body',''))}</p>
-    <a class="btn btn-gold" href="{esc(book_url)}" target="_blank" rel="noopener">{esc(fi.get('button_label','Book'))}</a>
+    <a class="btn btn-gold" {book_link(book_url)}>{esc(fi.get('button_label','Book'))}</a>
     <div class="final-info">{info}</div></div></section>"""
 
 
@@ -496,6 +648,7 @@ def build(brief):
 
     body = "\n".join([
         render_hero(brief.get("hero", {}), book_url),
+        render_intro(brief.get("intro")),
         render_pain(brief.get("pain", {})),
         render_problem(brief.get("problem", {})),
         render_story(brief.get("story", {})),
@@ -507,19 +660,35 @@ def build(brief):
         render_comparison(brief.get("comparison", {})),
         render_target(brief.get("target", {})),
         render_faq(brief.get("faq", {})),
+        render_booking(brief.get("booking")),
         render_final(brief.get("final", {}), book_url),
     ])
 
     ft = brief.get("footer", {})
     footer = f"""<footer><div class="wrap">
-    <div class="logo">{logo}<span style="color:var(--gold-soft)">.</span></div>
+    <div class="logo logo-stack"><span class="logo-mark logo-mark-lg">{SPRIG}</span><span class="logo-word">{logo}<span style="color:var(--gold-soft)">.</span></span></div>
     <div>{esc(ft.get('line',''))}</div>
-    <div style="margin-top:8px"><a href="{esc(book_url)}" target="_blank" rel="noopener">{esc(ft.get('link_label','Book'))}</a></div>
+    <div style="margin-top:8px"><a {book_link(book_url)}>{esc(ft.get('link_label','Book'))}</a></div>
     <p class="disclaimer">{esc(ft.get('disclaimer',''))}</p></div></footer>"""
 
     sticky = f"""<div class="sticky-cta">
     <div class="p">{raw(sc.get('title',''))}<small>{esc(sc.get('sub',''))}</small></div>
-    <a class="btn btn-gold" href="{esc(book_url)}" target="_blank" rel="noopener">{esc(sc.get('button','Book'))}</a></div>"""
+    <a class="btn btn-gold" {book_link(book_url)}>{esc(sc.get('button','Book'))}</a></div>"""
+
+    # Optional schema.org JSON-LD for SEO (local business / professional service).
+    jsonld = meta.get("jsonld")
+    jsonld_html = (
+        f'<script type="application/ld+json">{json.dumps(jsonld, ensure_ascii=False)}</script>'
+        if jsonld else ""
+    )
+    canonical = f'<link rel="canonical" href="{esc(meta["canonical"])}" />' if meta.get("canonical") else ""
+
+    # Optional fixed section menu in the header (driven by brief.nav_links).
+    menu = "".join(
+        f'<a class="nav-link" href="{esc(l.get("href", "#"))}">{esc(l.get("label", ""))}</a>'
+        for l in brief.get("nav_links", [])
+    )
+    menu_html = f'<nav class="nav-menu">{menu}</nav>' if menu else ""
 
     return f"""<!DOCTYPE html>
 <html lang="{esc(meta.get('lang','en'))}">
@@ -528,6 +697,11 @@ def build(brief):
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>{esc(meta.get('title',''))}</title>
 <meta name="description" content="{esc(meta.get('description',''))}" />
+{canonical}
+<meta property="og:title" content="{esc(meta.get('title',''))}" />
+<meta property="og:description" content="{esc(meta.get('description',''))}" />
+<meta property="og:type" content="website" />
+{jsonld_html}
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="{esc(font_link)}" rel="stylesheet" />
@@ -538,7 +712,8 @@ def build(brief):
 </head>
 <body>
 <header id="topbar">
-  <div class="logo">{logo}<span>.</span></div>
+  <div class="logo"><span class="logo-mark">{SPRIG}</span><span class="logo-word">{logo}<span>.</span></span></div>
+  {menu_html}
   <a class="nav-cta" href="#book" data-book>{esc(brief.get('nav_cta','Book'))}</a>
 </header>
 {body}

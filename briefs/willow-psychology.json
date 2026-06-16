@@ -1,0 +1,285 @@
+{
+  "meta": {
+    "slug": "willow-psychology",
+    "lang": "en",
+    "title": "Willow Psychology Practice | Registered Psychologist in Lindfield, Sydney",
+    "description": "Soo Lim, AHPRA-registered psychologist in Lindfield on Sydney's North Shore. Warm, evidence-based therapy for anxiety, depression, stress and relationships — in person or online. English & Korean. Medicare rebates available. Book a free 15-minute call.",
+    "canonical": "https://soopsychology.com",
+    "jsonld": {
+      "@context": "https://schema.org",
+      "@type": ["Psychologist", "LocalBusiness"],
+      "name": "Willow Psychology Practice",
+      "alternateName": "Soo Psychology",
+      "description": "AHPRA-registered psychologist in Lindfield, Sydney. Warm, evidence-based therapy for anxiety, depression, stress and relationships, in person or via telehealth. Sessions in English and Korean.",
+      "url": "https://soopsychology.com",
+      "telephone": "+61423085723",
+      "email": "soo.psychology@gmail.com",
+      "priceRange": "$$",
+      "founder": { "@type": "Person", "name": "Soo Lim", "jobTitle": "Principal Registered Psychologist", "identifier": "AHPRA PSY0002187304" },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Shop 2, First Floor, 356 Pacific Highway",
+        "addressLocality": "Lindfield",
+        "addressRegion": "NSW",
+        "postalCode": "2070",
+        "addressCountry": "AU"
+      },
+      "areaServed": ["Lindfield", "North Shore Sydney", "New South Wales"],
+      "availableLanguage": ["English", "Korean"],
+      "knowsAbout": ["Anxiety", "Depression", "Stress", "Relationships", "Cognitive Behavioural Therapy", "Acceptance and Commitment Therapy"]
+    }
+  },
+
+  "theme": {
+    "colors": {
+      "sage": "#7E9B86", "deep_sage": "#48624F", "pale_sage": "#C9D7CB", "mist": "#E9F1EA",
+      "gold": "#A98C6B", "gold_soft": "#C5AC85", "charcoal": "#2B332D", "ink": "#3C453E",
+      "cream": "#FAFBF8", "sand": "#F1EFE8"
+    },
+    "gradients": { "grad1": "#6f8c79", "grad2": "#3a5044", "overlay_rgb": "36,46,40" },
+    "fonts": {
+      "serif": "'Cormorant Garamond', Georgia, serif",
+      "sans": "'Jost', system-ui, -apple-system, sans-serif",
+      "google": "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@300;400;500&display=swap"
+    }
+  },
+
+  "brand": {
+    "logo_text": "Willow",
+    "booking_url": "#book"
+  },
+  "nav_cta": "Book a Free Call",
+  "nav_links": [
+    { "label": "About", "href": "#about" },
+    { "label": "How it works", "href": "#how" },
+    { "label": "Fees", "href": "#fees" },
+    { "label": "Book", "href": "#book" },
+    { "label": "FAQ", "href": "#faq" },
+    { "label": "Contact", "href": "#contact" }
+  ],
+  "sticky_cta": {
+    "title": "Free 15-min call",
+    "sub": "No referral needed to start",
+    "button": "Book now"
+  },
+
+  "hero": {
+    "photo": "01_hero",
+    "overlay_strong": true,
+    "badge": "Willow Psychology Practice · formerly Soo Psychology",
+    "headline_html": "Therapy that feels <em>safe</em> to begin.",
+    "sub": "Warm, evidence-based psychology in Lindfield and online, with Soo Lim — registered psychologist. Support for anxiety, low mood, stress and relationships, at your own pace.",
+    "cta_primary": { "label": "Book a free 15-min call", "href": "#book" },
+    "cta_secondary": { "label": "How it works", "href": "#how" },
+    "stats": [
+      { "n": "AHPRA", "l": "Registered psychologist" },
+      { "n": "Lindfield", "l": "In person + online" },
+      { "n": "Medicare", "l": "Rebates available" },
+      { "n": "EN / KO", "l": "English & Korean" }
+    ]
+  },
+
+  "intro": {
+    "photo": "02_intro",
+    "quote_html": "I aim to offer a warm, non-judgemental space &mdash; to really listen, with care and curiosity, and to work alongside you at a pace that feels right. ",
+    "link": { "label": "Learn more about my approach", "href": "#how" },
+    "name": "Soo Lim",
+    "sub": "Principal Registered Psychologist",
+    "reg": "AHPRA Reg: PSY0002187304 · SIRA Allied Health: 2004273"
+  },
+
+  "pain": {
+    "eyebrow": "You're not alone in this",
+    "title_html": "If life has felt like <em>too much</em> lately…",
+    "cards": [
+      { "icon": "heart", "title": "The worry won't stop", "body": "Your mind won't switch off — racing thoughts, tension, that low hum of anxiety that follows you through the day." },
+      { "icon": "chat", "title": "Flat, tired, stuck", "body": "Low mood and no motivation. You're coping on the outside, but it's heavier than anyone around you knows." },
+      { "icon": "spark", "title": "Things feel strained", "body": "Tension in your relationships, or with yourself — patterns you can see but can't quite seem to shift alone." }
+    ]
+  },
+
+  "problem": {
+    "eyebrow": "Why it's so hard alone",
+    "title_html": "It isn't a lack of willpower — and it isn't your fault",
+    "lede": "When you're stuck, \"just think positive\" never reaches the real thing. A few honest reasons it's hard to shift on your own:",
+    "points": [
+      { "n": "01", "title": "You're too close to it", "body": "It's hard to see your own patterns clearly from the inside. A trained, caring outside perspective changes what's visible." },
+      { "n": "02", "title": "Old patterns run deep", "body": "Ways of coping built up over years feel automatic. Lasting change needs the right tools, not simply more effort." },
+      { "n": "03", "title": "You've had nowhere safe", "body": "Somewhere genuinely confidential and non-judgemental — to say it out loud and be met with understanding — is rarer than it should be." }
+    ]
+  },
+
+  "story": {
+    "photo": "04_story",
+    "eyebrow": "What it's like to work together",
+    "title_html": "Therapy that moves at <em>your</em> pace",
+    "timeline": [
+      { "when": "To begin", "title": "A space that's yours", "body": "We start by simply understanding what's going on for you — no pressure, no judgement, no script to follow." },
+      { "when": "Together", "title": "Make sense of it", "body": "Using evidence-based approaches like CBT and ACT, we connect the dots between what you feel, think and do." },
+      { "when": "Forward", "title": "Tools you can use", "body": "You leave with practical strategies and a clearer, steadier sense of yourself — built around your goals, reviewed as you go." }
+    ]
+  },
+
+  "solution": {
+    "eyebrow": "The approach",
+    "mark_html": "Clinical skill with genuine human <b>warmth</b> — <b>evidence-based</b> therapy, always at your own pace.",
+    "tag": "Soo Lim · Registered Psychologist"
+  },
+
+  "how": {
+    "eyebrow": "Getting started",
+    "title_html": "Starting is simpler than you think",
+    "lede": "Most people feel a little lighter just knowing what the first step is. Here it is:",
+    "steps": [
+      { "title": "Book a free 15-min call", "body": "A relaxed, no-obligation chat to see if we're a good fit and answer your questions. No referral needed for this step." },
+      { "title": "Your first session", "body": "We meet in Lindfield or online. You share what's bringing you in, and together we map out where to start." },
+      { "title": "Ongoing support", "body": "Regular sessions built around your goals and reviewed together. You stay in the driver's seat the whole way." }
+    ],
+    "chips": ["CBT", "ACT", "DBT", "Schema therapy", "Attachment-based", "Mindfulness"]
+  },
+
+  "proof": {
+    "variant": "assurance",
+    "eyebrow": "Safe, private, professional",
+    "title_html": "A space you can trust",
+    "lede": "Reaching out takes courage. Here's what you can count on, from the very first moment.",
+    "cards": [
+      { "icon": "shield", "title": "Completely confidential", "body": "What you share stays private, within the clear legal and ethical limits a psychologist explains up front. This is your space." },
+      { "icon": "check", "title": "Qualified & accountable", "body": "Soo is an AHPRA-registered psychologist, bound by professional standards — evidence-based care, never guesswork." },
+      { "icon": "leaf", "title": "Warm & non-judgemental", "body": "No labels, no being \"too much\". Just steady, compassionate support that meets you exactly where you are." }
+    ],
+    "note": "In line with AHPRA advertising guidelines, this practice does not publish client reviews or testimonials."
+  },
+
+  "authority": {
+    "photo": "08_clinic",
+    "reverse": true,
+    "eyebrow": "Your psychologist",
+    "title_html": "Meet Soo Lim",
+    "body": "I provide a warm, non-judgemental space, and integrate evidence-based clinical practice with genuine, relational warmth. I work <em>collaboratively</em> with you — really listening, at a pace that feels right — to help you make the most of therapy.<br><br>Willow Psychology Practice is the new name for Soo Psychology — same psychologist, same care.",
+    "creds": [
+      "Principal Registered Psychologist · AHPRA Reg PSY0002187304",
+      "SIRA Allied Health provider · 2004273",
+      "Associate member, Australian Psychological Society",
+      "Bachelor of Psychology (Honours), University of Sydney",
+      "Sessions in English and Korean",
+      "In person in Lindfield · online across NSW"
+    ]
+  },
+
+  "benefits": {
+    "eyebrow": "How I can help",
+    "title": "What we can work through together",
+    "items": [
+      { "title": "Anxiety & stress", "body": "Racing thoughts, worry, panic, burnout and the feeling of being overwhelmed." },
+      { "title": "Depression & low mood", "body": "Low motivation, flatness, and finding your way back to feeling like you." },
+      { "title": "Relationships", "body": "Communication, conflict and boundaries — with others, and with yourself." },
+      { "title": "Self-esteem & identity", "body": "Self-criticism, confidence, and cross-cultural or identity questions." },
+      { "title": "Life transitions", "body": "Study, work, parenthood, moving countries and other big changes." }
+    ],
+    "offer": {
+      "eyebrow": "Fees",
+      "title": "Individual session",
+      "was": "",
+      "price": "$200",
+      "price_small": "/ 50 min",
+      "bullets": [
+        "About $96.65 back with a Medicare rebate*",
+        "Free 15-minute intro call to start",
+        "Couples sessions available ($250)",
+        "In person in Lindfield or online"
+      ],
+      "button_label": "Book a free call",
+      "fine": "*With a GP Mental Health Care Plan. Private health rebates may also apply. 24 hours' notice for changes."
+    }
+  },
+
+  "comparison": {
+    "eyebrow": "Sessions & fees",
+    "title_html": "Find what fits you",
+    "columns": ["Free intro call", "Individual", "Couples"],
+    "own_index": 1,
+    "rows": [
+      { "feat": "Length", "cells": [ { "t": "15 min", "k": "yes" }, { "t": "50 min", "k": "yes" }, { "t": "60 min", "k": "yes" } ] },
+      { "feat": "For", "cells": [ { "t": "First contact", "k": "yes" }, { "t": "1-to-1 support", "k": "yes" }, { "t": "You & partner", "k": "yes" } ] },
+      { "feat": "Fee", "cells": [ { "t": "Free", "k": "yes" }, { "t": "$200", "k": "yes" }, { "t": "$250", "k": "yes" } ] },
+      { "feat": "Medicare rebate", "cells": [ { "t": "—", "k": "no" }, { "t": "Yes · ~$96.65", "k": "yes" }, { "t": "Not eligible", "k": "no" } ] },
+      { "feat": "In person or online", "cells": [ { "t": "By phone", "k": "yes" }, { "t": "Both", "k": "yes" }, { "t": "Both", "k": "yes" } ] }
+    ]
+  },
+
+  "target": {
+    "eyebrow": "Is this the right fit?",
+    "title": "Let's make sure it's right for you",
+    "yes": {
+      "title": "This could be a good fit",
+      "items": [
+        "Feeling anxious, low, stressed or stuck and wanting support",
+        "You'd value a warm, collaborative, non-judgemental approach",
+        "You'd like in-person sessions in Lindfield, or online",
+        "You'd appreciate a psychologist who speaks English or Korean"
+      ]
+    },
+    "no": {
+      "title": "Other support may suit better",
+      "items": [
+        "In immediate danger or crisis — please call 000 or Lifeline 13 11 14 now",
+        "Looking only for medication management — that's a GP or psychiatrist",
+        "Needing a court-ordered or medico-legal assessment only"
+      ]
+    }
+  },
+
+  "faq": {
+    "eyebrow": "Good to know",
+    "title": "Questions, answered",
+    "items": [
+      { "q": "Do I need a referral?", "a": "Not to book a free call or a private session. For a Medicare rebate you'll need a Mental Health Care Plan from your GP — I'm happy to guide you through how that works." },
+      { "q": "What will it cost me?", "a": "Individual sessions are $200, with about $96.65 back through a Medicare rebate. Couples sessions are $250. The first 15-minute phone call is free." },
+      { "q": "Is everything confidential?", "a": "Yes. What you share is private, within the standard legal and ethical limits every psychologist explains at the start of working together." },
+      { "q": "Can we meet online?", "a": "Yes — secure telehealth sessions are available across NSW, as well as in person in Lindfield." },
+      { "q": "What happens in the first session?", "a": "Mostly listening. You share what's bringing you in, ask anything you like, and together we decide where to start. There's no pressure." },
+      { "q": "Do you offer sessions in Korean?", "a": "Yes — Soo works in both English and Korean. 한국어 상담도 편하게 가능합니다." },
+      { "q": "How do I know if therapy is for me?", "a": "That's exactly what the free 15-minute call is for — a no-obligation way to see if it feels right before you commit to anything." }
+    ]
+  },
+
+  "booking": {
+    "eyebrow": "Book online",
+    "title_html": "Book your session",
+    "lede": "Choose in person in Lindfield or online via telehealth, and pick a time that suits you. Secure booking through Halaxy.",
+    "tabs": [
+      {
+        "key": "inperson",
+        "label": "In person · Lindfield",
+        "embed": "<iframe src=\"https://www.halaxy.com/book/widget/in-person/location/1283731\" allow=\"payment\" title=\"Book an in-person session in Lindfield\" loading=\"lazy\" style=\"border:0;width:100%;height:1000px;\"></iframe>"
+      },
+      {
+        "key": "telehealth",
+        "label": "Telehealth · Online",
+        "embed": "<iframe src=\"https://www.halaxy.com/book/widget/telehealth/location/1294611\" allow=\"payment\" title=\"Book a telehealth session online\" loading=\"lazy\" style=\"border:0;width:100%;height:1000px;\"></iframe>"
+      }
+    ],
+    "note": "Bookings are handled securely by Halaxy. Prefer to talk first? Call 0423 085 723 to arrange a free 15-minute consultation."
+  },
+
+  "final": {
+    "photo": "13_cta",
+    "eyebrow": "When you're ready",
+    "title_html": "Taking the first step, <em>together</em>",
+    "body": "There's no rush and no pressure — just a calm, confidential space whenever you're ready. The easiest way to begin is a free 15-minute call.",
+    "button_label": "Book a free 15-min call",
+    "info": [
+      { "t": "In a crisis?", "wide": true, "body_html": "Call <b>000</b> if in immediate danger. Urgent support: Lifeline <b>13 11 14</b> · Beyond Blue <b>1300 22 4636</b>." },
+      { "t": "Find me", "body_html": "Shop 2, First Floor<br>356 Pacific Hwy, Lindfield NSW" },
+      { "t": "Get in touch", "body_html": "0423 085 723<br>soo.psychology@gmail.com" },
+      { "t": "Sessions in", "body_html": "English &amp; Korean" }
+    ]
+  },
+
+  "footer": {
+    "line": "Willow Psychology Practice — formerly Soo Psychology · Soo Lim, Principal Registered Psychologist · AHPRA PSY0002187304 · Lindfield NSW",
+    "link_label": "Book a free call",
+    "disclaimer": "Willow Psychology Practice provides general psychological services and is not a crisis or emergency service. If you are in immediate danger, call 000, or Lifeline 13 11 14. In line with AHPRA advertising guidelines, this site does not publish client testimonials or reviews. Information here is general and not a substitute for personalised clinical advice."
+  }
+}
