@@ -140,9 +140,9 @@ footer .copy{font-size:.78rem;color:var(--soft);margin-top:14px}
   <div class="hero-photo" aria-hidden="true"></div>
   <div class="hero-text"><div class="inner">
     <div class="eyebrow" style="color:#fff;opacity:.9;margin-bottom:13px">The Public Speaking Club · Workshop</div>
-    <span class="badge">&#127891; Macquarie MBA students only</span>
+    <span class="badge">&#127891; Macquarie students only</span>
     <h1>Become a confident communicator.</h1>
-    <p class="blurb">A free, hands-on workshop to quickly improve your public speaking and boost your confidence for your next presentation.</p>
+    <p class="blurb">A free, hands-on workshop to improve your public speaking and boost your confidence for your next presentation.</p>
     <div class="chips">
       <span class="chip">&#128197; Mon 13 July</span>
       <span class="chip">&#128338; 6:00–8:00pm</span>
@@ -156,7 +156,7 @@ footer .copy{font-size:.78rem;color:var(--soft);margin-top:14px}
 <!-- ELIGIBILITY -->
 <section class="wrap" style="padding-top:18px">
   <div class="eligible">
-    <p><b>For current Macquarie University MBA students only.</b> This workshop is exclusive to MBA students &mdash; please register with your student email. Unfortunately we can&rsquo;t host external guests this time.</p>
+    <p><b>This workshop is available to current Macquarie University students only.</b></p>
   </div>
 </section>
 
@@ -187,7 +187,7 @@ footer .copy{font-size:.78rem;color:var(--soft);margin-top:14px}
           <div class="field"><label for="fn">First name</label><input id="fn" type="text" autocomplete="given-name" required></div>
           <div class="field"><label for="ln">Last name</label><input id="ln" type="text" autocomplete="family-name" required></div>
         </div>
-        <div class="field"><label for="email">Macquarie student email</label><input id="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="email">Email <span style="color:var(--soft);font-weight:400">(one you'll still check after you graduate)</span></label><input id="email" type="email" autocomplete="email" required></div>
         <div class="field"><label for="mob">Mobile <span style="color:var(--soft);font-weight:400">(optional)</span></label><input id="mob" type="tel" autocomplete="tel"></div>
         <label class="check"><input type="checkbox" id="mba" required><span>I&rsquo;m a current Macquarie University MBA student.</span></label>
         <button class="btn btn-block" type="submit">Count me in</button>
@@ -224,7 +224,7 @@ footer .copy{font-size:.78rem;color:var(--soft);margin-top:14px}
       <div class="role">The Public Speaking Club</div>
     </div>
   </div>
-  <p class="bio">Sharna has a background in marketing and communication, and has hosted and presented at events ranging from casual pub trivia to formal charity concerts. She&rsquo;s also trained hundreds of staff in public speaking &mdash; and is excited to run this workshop for her fellow MBA students!</p>
+  <p class="bio">Sharna has a background in marketing and communication, and has hosted and presented at events ranging from pub trivia to charity concerts. She&rsquo;s also trained hundreds of staff in public speaking &mdash; and is excited to run this workshop for her fellow MBA students!</p>
 </section>
 
 <!-- TESTIMONIAL -->
@@ -247,13 +247,25 @@ footer .copy{font-size:.78rem;color:var(--soft);margin-top:14px}
 <div class="sticky" id="sticky"><div class="inner"><a class="btn btn-block" href="#signup">Save your spot — 15 only</a></div></div>
 
 <script>
+// On-page form posts to Sharna's Google Form in the background (no redirect, single entry)
+const GFORM="https://docs.google.com/forms/d/e/1FAIpQLSdnrX-VjmFhmdI44bsYypbrUNMYzh0dc9NRaTHunL7nZSkRwQ/formResponse";
 const form=document.getElementById('signupForm');
 form.addEventListener('submit',function(e){
   e.preventDefault();
   if(!form.checkValidity()){form.reportValidity();return;}
-  document.getElementById('formView').style.display='none';
-  document.getElementById('successView').classList.add('show');
-  document.getElementById('signup').scrollIntoView({behavior:'smooth',block:'center'});
+  const fd=new FormData();
+  fd.append('entry.1863521300', document.getElementById('fn').value.trim());   // First name
+  fd.append('entry.894581596',  document.getElementById('ln').value.trim());   // Last name
+  fd.append('entry.1401426809', document.getElementById('email').value.trim());// Email
+  const mob=document.getElementById('mob').value.trim();
+  if(mob) fd.append('entry.1175268774', mob);                                  // Mobile (optional)
+  fd.append('entry.581648528','Yes');                                          // MBA confirmation
+  const btn=form.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Saving your spot…';
+  fetch(GFORM,{method:'POST',mode:'no-cors',body:fd}).catch(function(){}).finally(function(){
+    document.getElementById('formView').style.display='none';
+    document.getElementById('successView').classList.add('show');
+    document.getElementById('signup').scrollIntoView({behavior:'smooth',block:'center'});
+  });
 });
 const sticky=document.getElementById('sticky'),hero=document.querySelector('.hero'),signup=document.getElementById('signup');
 let heroOut=false,formIn=false;
