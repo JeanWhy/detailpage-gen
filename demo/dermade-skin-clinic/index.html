@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dermade Skin Clinic · Korean Skin Clinic, Chatswood</title>
+<meta name="description" content="Dermade Skin Clinic — Korean skin clinic in Chatswood. Considered, science-led skin treatments in a calm, private studio." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300;400;500&amp;display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --wine:#4A1F28; --wine-deep:#37151C; --plum:#5E2A34;
+    --cream:#F7F1EC; --sand:#EFE5DD; --rose:#C98B86; --champ:#C9A36B;
+    --ink:#2A1A1E; --muted:#8A7670; --line:rgba(74,31,40,.14);
+    --serif:'Cormorant Garamond',Georgia,serif; --sans:'Jost',system-ui,sans-serif;
+    --maxw:1100px; --ov:55,21,28;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:var(--sans);color:var(--ink);background:var(--cream);font-weight:300;line-height:1.75;-webkit-font-smoothing:antialiased;font-size:17px;overflow-x:hidden}
+  h1,h2,h3,h4{font-family:var(--serif);font-weight:500;line-height:1.12;color:var(--wine-deep)}
+  p{max-width:60ch}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+  .eyebrow{font-family:var(--sans);font-size:12px;font-weight:500;letter-spacing:.34em;text-transform:uppercase;color:var(--champ);display:inline-block}
+  .pad{padding:110px 0}.pad-sm{padding:76px 0}
+  .center{text-align:center}.center p{margin-left:auto;margin-right:auto}
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-family:var(--sans);font-size:13px;font-weight:500;letter-spacing:.18em;text-transform:uppercase;padding:17px 38px;border-radius:2px;cursor:pointer;transition:.32s ease;border:1px solid transparent;white-space:nowrap}
+  .btn-wine{background:var(--wine);color:var(--cream)}.btn-wine:hover{background:var(--wine-deep)}
+  .btn-cream{background:var(--cream);color:var(--wine)}.btn-cream:hover{background:#fff}
+  .btn-ghost{border-color:rgba(255,255,255,.55);color:#fff}.btn-ghost:hover{background:#fff;color:var(--wine)}
+  .btn-line{border-color:var(--wine);color:var(--wine)}.btn-line:hover{background:var(--wine);color:var(--cream)}
+  .demo-ribbon{background:var(--wine-deep);color:var(--rose);font-family:var(--sans);font-size:12px;letter-spacing:.05em;text-align:center;padding:9px 16px;line-height:1.5}
+  .demo-ribbon b{color:#fff;font-weight:500}
+
+  header{position:absolute;top:34px;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:20px 40px;transition:.4s}
+  header.scrolled{position:fixed;top:0;background:rgba(247,241,236,.95);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);padding:14px 40px;box-shadow:0 1px 0 var(--line)}
+  .logo{font-family:var(--serif);font-size:25px;font-weight:600;letter-spacing:.04em;color:#fff;transition:.4s}
+  .logo .dot{color:var(--champ)}
+  header.scrolled .logo{color:var(--wine-deep)}
+  .nav-cta{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:#fff;border:1px solid rgba(255,255,255,.6);padding:11px 22px;border-radius:2px;transition:.35s}
+  .nav-cta:hover{background:#fff;color:var(--wine)}
+  header.scrolled .nav-cta{color:var(--wine);border-color:var(--wine)}
+  header.scrolled .nav-cta:hover{background:var(--wine);color:#fff}
+
+  .hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;color:#fff;background:linear-gradient(180deg,rgba(var(--ov),.62),rgba(var(--ov),.5) 45%,rgba(var(--ov),.72)),radial-gradient(120% 120% at 70% 20%,var(--plum),var(--wine-deep) 70%)}
+  .hero .wrap{padding-top:120px;padding-bottom:60px}
+  .hero .eyebrow{color:var(--champ)}
+  .hero h1{font-size:clamp(44px,6.6vw,84px);color:#fff;font-weight:500;max-width:15ch;margin-top:20px}
+  .hero h1 em{font-style:italic;color:var(--rose)}
+  .hero .sub{font-size:clamp(18px,2vw,22px);max-width:46ch;margin:28px 0 40px;color:rgba(255,255,255,.88);font-weight:300}
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
+  .hero-meta{display:flex;gap:34px;margin-top:52px;flex-wrap:wrap}
+  .hero-meta div{border-left:1px solid rgba(255,255,255,.32);padding-left:16px}
+  .hero-meta .n{font-family:var(--serif);font-size:27px;color:#fff;line-height:1}
+  .hero-meta .l{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.72);margin-top:6px}
+
+  .head{margin-bottom:50px}
+  .head h2{font-size:clamp(30px,4vw,50px)}
+  .head .eyebrow{margin-bottom:16px}
+  .head p{margin-top:18px;color:var(--muted);font-size:19px}
+
+  .intro{background:var(--cream);text-align:center}
+  .intro .mark{font-family:var(--serif);font-size:clamp(26px,3.4vw,42px);font-style:italic;color:var(--wine-deep);max-width:24ch;margin:0 auto;line-height:1.32}
+  .intro .mark b{font-style:normal;font-weight:600}
+
+  .treat{background:var(--sand)}
+  .tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:8px}
+  .tcard{background:var(--cream);border:1px solid var(--line);border-radius:4px;padding:38px 30px;transition:.3s}
+  .tcard:hover{box-shadow:0 16px 44px rgba(74,31,40,.1);transform:translateY(-3px)}
+  .tcard .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--champ);font-weight:500}
+  .tcard h3{font-size:23px;margin:10px 0 8px}
+  .tcard p{font-size:15px;color:var(--muted);margin:0}
+
+  .split{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+  .split .media{min-height:520px;background:linear-gradient(135deg,var(--plum),var(--wine-deep))}
+  .split .media[data-img]{background-image:var(--img);background-size:cover;background-position:center}
+  .split .body{padding:90px 70px;display:flex;flex-direction:column;justify-content:center;background:var(--wine);color:#fff}
+  .split .body .eyebrow{color:var(--champ)}
+  .split .body h2{color:#fff}
+  .split .body p{color:rgba(255,255,255,.85);margin-top:18px}
+  .creds{list-style:none;margin-top:28px;display:grid;gap:14px}
+  .creds li{display:flex;gap:14px;align-items:flex-start;font-size:16px;color:rgba(255,255,255,.9)}
+  .creds svg{width:20px;height:20px;color:var(--champ);flex:none;margin-top:3px}
+  .ph{color:var(--rose);font-style:italic}
+
+  .proof{background:var(--wine-deep);color:#fff;text-align:center}
+  .proof .stars{color:var(--champ);letter-spacing:4px;font-size:22px}
+  .proof .big{font-family:var(--serif);font-size:clamp(30px,4vw,50px);color:#fff;margin:18px auto 0;max-width:18ch;font-style:italic}
+  .proof .big b{font-style:normal;font-weight:600;color:var(--rose)}
+  .proof .note{margin-top:22px;font-size:13px;letter-spacing:.04em;color:rgba(255,255,255,.55);max-width:60ch;margin-left:auto;margin-right:auto}
+
+  .final{color:#fff;text-align:center;background:linear-gradient(180deg,rgba(var(--ov),.8),rgba(var(--ov),.9)),radial-gradient(120% 120% at 30% 10%,var(--plum),var(--wine-deep) 70%)}
+  .final h2{color:#fff;font-size:clamp(34px,5vw,62px);max-width:16ch;margin:0 auto}
+  .final h2 em{font-style:italic;color:var(--rose)}
+  .final p{color:rgba(255,255,255,.85);margin:22px auto 38px;font-size:18px}
+  .final-info{display:flex;gap:40px;justify-content:center;flex-wrap:wrap;margin-top:50px;padding-top:38px;border-top:1px solid rgba(255,255,255,.18)}
+  .final-info .t{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--champ);margin-bottom:7px}
+  .final-info div{font-size:14px;color:rgba(255,255,255,.82)}
+
+  footer{background:var(--wine-deep);color:rgba(255,255,255,.6);padding:54px 0;text-align:center;font-size:13px}
+  footer .logo{color:#fff;font-size:24px;display:inline-block;margin-bottom:14px}
+  .disc{max-width:700px;margin:18px auto 0;font-size:11px;color:rgba(255,255,255,.34);line-height:1.6}
+
+  .reveal{transition:opacity .8s ease,transform .8s ease}
+  .js .reveal{opacity:0;transform:translateY(24px)}
+  .reveal.in{opacity:1;transform:none}
+  .sticky{position:fixed;bottom:0;left:0;right:0;z-index:60;display:none;background:rgba(247,241,236,.96);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 16px;align-items:center;justify-content:space-between;gap:12px}
+  .sticky .p{font-family:var(--serif);font-size:18px;color:var(--wine-deep)}
+  .sticky .btn{padding:13px 24px;flex:none}
+
+  @media(max-width:860px){
+    .pad{padding:78px 0}.pad-sm{padding:56px 0}
+    .tgrid{grid-template-columns:1fr;gap:18px}
+    .split{grid-template-columns:1fr}.split .media{min-height:300px;order:-1}.split .body{padding:56px 30px}
+    header{padding:16px 22px}.nav-cta{display:none}
+    .sticky{display:flex}body{padding-bottom:70px}
+    .final-info{gap:26px}
+  }
+  @media(max-width:540px){
+    .wrap{padding:0 20px}
+    .btn{white-space:normal;text-align:center;line-height:1.3}
+    .hero-actions{flex-direction:column;align-items:stretch}.hero-actions .btn{width:100%;justify-content:center}
+    .hero-meta{gap:18px}
+    h1,h2,h3,p{overflow-wrap:break-word}
+  }
+</style>
+</head>
+<body>
+<div class="demo-ribbon">Sample concept prepared for <b>Dermade Skin Clinic</b> &nbsp;·&nbsp; by <b>Grace &amp; Why</b> &nbsp;·&nbsp; items marked &lang;&nbsp;&rang; are placeholders to confirm</div>
+<header id="topbar">
+  <div class="logo">Dermade<span class="dot">.</span></div>
+  <a class="nav-cta" href="#book">Book a consult</a>
+</header>
+
+<section class="hero" id="top">
+  <div class="wrap">
+    <span class="eyebrow reveal">Korean Skin Clinic · Chatswood</span>
+    <h1 class="reveal">Considered skin,<br><em>quietly transformed.</em></h1>
+    <p class="sub reveal">Science-led Korean skin treatments in a calm, private studio — read first, treated with intention, never rushed or oversold.</p>
+    <div class="hero-actions reveal">
+      <a class="btn btn-cream" href="#book">Book a consult</a>
+      <a class="btn btn-ghost" href="#treatments">Explore treatments</a>
+    </div>
+    <div class="hero-meta reveal">
+      <div><div class="n">4.<span style="font-size:18px">x</span>&#9733;</div><div class="l">&lang;Google rating&rang;</div></div>
+      <div><div class="n">한국식</div><div class="l">Korean skin science</div></div>
+      <div><div class="n">Chatswood</div><div class="l">By appointment</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="intro pad-sm"><div class="wrap reveal">
+  <span class="eyebrow">Why Dermade</span>
+  <p class="mark" style="margin-top:18px"><b>Dermade</b> is skin care that starts with a proper read of your skin — then a tailored plan, honest advice, and results you can see, not a treatment pushed off a menu.</p>
+</div></section>
+
+<section class="treat pad" id="treatments"><div class="wrap">
+  <div class="head center reveal"><span class="eyebrow">The menu</span>
+  <h2>Treatments, chosen for you.</h2>
+  <p style="margin:18px auto 0">Each plan is tailored at your consult. <span class="ph">&lang;Confirm your treatment list &amp; prices&rang;</span></p></div>
+  <div class="tgrid">
+    <div class="tcard reveal" style="border-color:var(--champ)"><div class="k">Signature</div><h3>Skin Analysis &amp; Plan</h3><p>A proper read of your skin first — so everything that follows is matched to you, not guessed.</p></div>
+    <div class="tcard reveal"><div class="k">Glow</div><h3>Skin Boosters &amp; Hydration</h3><p>Deep hydration and glow treatments for tired, dull or dehydrated skin. <span class="ph">&lang;confirm&rang;</span></p></div>
+    <div class="tcard reveal"><div class="k">Resurface</div><h3>Laser &amp; Pigmentation</h3><p>Targeted laser and toning for tone, texture and pigmentation concerns. <span class="ph">&lang;confirm&rang;</span></p></div>
+    <div class="tcard reveal"><div class="k">Lift</div><h3>HIFU &amp; Firming</h3><p>Non-surgical firming for those wanting a tighter, more lifted look. <span class="ph">&lang;confirm availability&rang;</span></p></div>
+    <div class="tcard reveal"><div class="k">Calm</div><h3>Acne &amp; Sensitive Care</h3><p>Gentle, considered care for breakouts and reactive skin. <span class="ph">&lang;confirm&rang;</span></p></div>
+    <div class="tcard reveal" style="background:var(--sand);border-style:dashed"><div class="k">More</div><h3>&amp; your full menu</h3><p>Your other treatments &amp; packages live here — <span class="ph">&lang;to confirm&rang;</span>.</p></div>
+  </div>
+</div></section>
+
+<section class="authority"><div class="split">
+  <div class="media reveal" data-photo="clinic"></div>
+  <div class="body">
+    <span class="eyebrow reveal">In good hands</span>
+    <h2 class="reveal" style="font-size:clamp(28px,3.4vw,44px);margin-top:14px">Skin you can<br><em>trust us with.</em></h2>
+    <p class="reveal">Dermade brings genuine Korean skin expertise to Chatswood — careful, personalised, and honest. We'd rather do less and do it right than sell you more.</p>
+    <ul class="creds">
+      <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Korean skin technique &amp; considered, science-led care</li>
+      <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Personalised plans — read first, treated to suit you</li>
+      <li class="reveal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M20 6L9 17l-5-5"/></svg>Led by <span class="ph">&lang;practitioner name &amp; credentials to confirm&rang;</span></li>
+    </ul>
+  </div>
+</div></section>
+
+<section class="proof pad"><div class="wrap reveal">
+  <div class="stars">★★★★★</div>
+  <p class="big">Rated <b>4.<span style="font-style:normal">x</span>&#9733;</b> by clients on Google.</p>
+  <p class="note">Your real Google rating &amp; recent reviews would sit here as social proof. <span class="ph">&lang;We'll add your live rating&rang;</span> — kept compliant with Australian advertising rules (no testimonials tied to specific clinical treatments).</p>
+</div></section>
+
+<section class="pad center" id="book" style="background:var(--cream)"><div class="wrap reveal">
+  <span class="eyebrow">Book a consult</span>
+  <h2 style="margin-top:14px;font-size:clamp(30px,4vw,50px)">Start with a proper<br>read of your skin.</h2>
+  <p style="margin:20px auto 36px;color:var(--muted)">Every plan begins with a consultation — no pressure, just honest advice on what your skin actually needs.</p>
+  <a class="btn btn-wine" href="#" data-book>Book online</a>
+  <p style="margin-top:20px;font-size:13px;color:var(--muted)"><span class="ph">&lang;Connect your booking link &amp; a $50 deposit note&rang;</span></p>
+</div></section>
+
+<section class="final pad"><div class="wrap reveal">
+  <span class="eyebrow">Dermade Skin Clinic · Chatswood</span>
+  <h2>Your skin will<br><em>thank you.</em></h2>
+  <p>Considered Korean skin care, in a calm private studio. Book a consult and let's start with what your skin really needs.</p>
+  <a class="btn btn-cream" href="#" data-book>Book your consult</a>
+  <div class="final-info">
+    <div><div class="t">Where</div>Chatswood, NSW<br><span class="ph">&lang;full address&rang;</span></div>
+    <div><div class="t">Hours</div><span class="ph">&lang;opening hours&rang;</span></div>
+    <div><div class="t">Book</div><span class="ph">&lang;booking link&rang;</span><br>@dermadeskinclinic</div>
+  </div>
+</div></section>
+
+<footer><div class="wrap">
+  <div class="logo">Dermade<span style="color:var(--champ)">.</span></div>
+  <div>Dermade Skin Clinic · Korean Skin Clinic · Chatswood, NSW · @dermadeskinclinic</div>
+  <p class="disc">This is a sample landing-page concept prepared for Dermade Skin Clinic by Grace &amp; Why — not a live website, and not affiliated with or endorsed by the clinic. Treatments, pricing, practitioner details, rating, hours and booking link marked &lang;&nbsp;&rang; are placeholders to be confirmed by the clinic. Designed to comply with Australian advertising rules (AHPRA/TGA): no testimonials or outcome claims tied to regulated treatments. Individual results vary.</p>
+</div></footer>
+<div class="sticky"><div class="p">Book a consult</div><a class="btn btn-wine" href="#book" data-book>Book</a></div>
+<script>
+  document.documentElement.classList.add('js');
+  const bar=document.getElementById('topbar'),rib=document.querySelector('.demo-ribbon'),rh=rib?rib.offsetHeight:0;
+  const onScroll=()=>bar.classList.toggle('scrolled',window.scrollY>rh+40);
+  onScroll();addEventListener('scroll',onScroll,{passive:true});
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+  document.querySelectorAll('[data-book]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();document.getElementById('book').scrollIntoView({behavior:'smooth'})}));
+</script>
+</body>
+</html>

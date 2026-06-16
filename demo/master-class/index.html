@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confident Communicator Workshop — The Public Speaking Club</title>
+<meta name="description" content="A free 2-hour public speaking workshop for Macquarie MBA students. Build confidence for your next presentation. Monday 13 July, Macquarie City Campus. Save your spot.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#1c5a7f; --blue-deep:#163f57; --orange:#ec8e39; --orange-deep:#d97a25;
+  --ink:#1d2a33; --soft:#5d6f7a; --bg:#ffffff; --mist:#eef4f7; --line:#dbe5ea;
+  --font:'Be Vietnam Pro',system-ui,-apple-system,sans-serif;
+  --max:620px; --radius:16px; --gap:24px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--font);color:var(--ink);background:var(--bg);line-height:1.55;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:22px}
+section{padding-block:var(--gap)}
+.ruled{border-top:1px solid var(--line);padding-top:calc(var(--gap)*1.7)}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--orange)}
+h1{font-weight:700;line-height:1.05;letter-spacing:-.02em;font-size:clamp(2.3rem,9vw,3.1rem)}
+h2{font-weight:600;font-size:clamp(1.5rem,5.5vw,1.95rem);line-height:1.12;letter-spacing:-.01em;color:var(--blue);margin-bottom:14px}
+p{color:var(--soft);font-size:1.02rem}
+a{color:var(--blue)}
+.lead-copy{font-size:1.08rem;color:var(--ink)}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--orange);color:#fff;font-family:var(--font);font-weight:600;font-size:1.02rem;border:none;border-radius:999px;padding:15px 32px;cursor:pointer;text-decoration:none;transition:transform .15s ease,filter .15s ease}
+.btn:hover{filter:brightness(1.06);transform:translateY(-1px)}
+.btn-block{width:100%}
+.btn-ghost{background:transparent;color:#fff;border:1.5px solid rgba(255,255,255,.6)}
+.btn-ghost:hover{background:#fff;color:var(--blue)}
+
+/* header over hero */
+header{position:absolute;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:34px clamp(20px,4vw,44px) 18px}
+@media(min-width:820px){header{padding:40px clamp(28px,4vw,56px) 20px}}
+header .logo{display:flex;align-items:center;gap:10px}
+header .logo img{width:48px;height:48px;border-radius:11px;display:block;box-shadow:0 0 0 1.5px rgba(255,255,255,.6),0 3px 10px rgba(0,0,0,.18)}
+header .navlink{color:#fff;font-size:.8rem;font-weight:600;letter-spacing:.03em;border:1px solid rgba(255,255,255,.55);padding:9px 18px;border-radius:999px;white-space:nowrap}
+
+/* hero */
+.hero{position:relative;color:#fff;overflow:hidden;min-height:94svh;display:flex;align-items:flex-end}
+.hero-photo{position:absolute;inset:0;z-index:0;background:url('assets/stage.jpg') center top/cover}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(22,63,87,.32) 0%,rgba(22,63,87,.12) 26%,rgba(22,63,87,.62) 52%,rgba(22,63,87,.94) 80%)}
+.hero-text{position:relative;z-index:2;width:100%}
+.hero .inner{max-width:620px;margin:0 auto;padding:120px 22px 16px}
+@media(min-width:820px){
+  .hero{display:grid;grid-template-columns:1.04fr .96fr;align-items:stretch;min-height:86svh}
+  .hero::before{display:none}
+  .hero-photo{position:relative;order:2;background-position:center 12%}
+  .hero-text{order:1;display:flex;align-items:flex-start;background:var(--blue)}
+  .hero .inner{max-width:none;margin:0;width:100%;padding:clamp(128px,18vh,188px) clamp(40px,5vw,72px) 56px}
+  .hero .inner>*{max-width:520px}
+}
+.hero .badge{display:inline-flex;align-items:center;gap:7px;background:var(--orange);color:#fff;font-size:.74rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:7px 14px;border-radius:999px;margin-bottom:16px}
+.hero h1{color:#fff;margin-bottom:13px;font-size:clamp(2.05rem,7.6vw,3.1rem)}
+.hero .blurb{font-size:1.1rem;color:rgba(255,255,255,.92);max-width:30ch}
+.hero .chips{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 22px}
+.hero .chip{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:999px;padding:8px 14px;font-size:.88rem;font-weight:500;color:#fff;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+
+/* eligibility note */
+.eligible{background:var(--mist);border:1px solid var(--line);border-left:4px solid var(--orange);border-radius:10px;padding:16px 18px;margin-top:6px}
+.eligible b{color:var(--blue)}
+.eligible p{font-size:.96rem;color:var(--ink);margin:0}
+
+/* outcomes */
+.outcomes{list-style:none;margin-top:8px;display:grid;gap:0}
+.outcomes li{display:flex;gap:16px;align-items:flex-start;padding:20px 0;border-top:1px solid var(--line)}
+.outcomes li:last-child{border-bottom:1px solid var(--line)}
+.outcomes .n{font-weight:700;font-size:1.1rem;color:#fff;background:var(--blue);min-width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none}
+.outcomes .t{font-weight:600;color:var(--ink);font-size:1.05rem}
+.outcomes .d{display:block;font-weight:400;color:var(--soft);font-size:.97rem;margin-top:3px}
+
+/* details panel */
+.panel{background:var(--mist);border:1px solid var(--line);border-radius:var(--radius);padding:6px 22px}
+.panel .row{display:flex;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--line)}
+.panel .row:last-child{border-bottom:0}
+.panel .k{color:var(--soft);font-weight:500}
+.panel .v{color:var(--blue);font-weight:700;text-align:right}
+
+/* form card */
+.card{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:26px 22px;box-shadow:0 20px 44px -28px rgba(22,63,87,.45);will-change:transform,opacity}
+.card::before{content:"";position:absolute;top:-13px;left:28px;width:110px;height:28px;z-index:2;background:linear-gradient(180deg,rgba(255,255,255,.4),rgba(255,255,255,0) 48%),color-mix(in srgb,var(--orange) 80%,transparent);border-left:1px solid rgba(0,0,0,.06);border-right:1px solid rgba(0,0,0,.06);border-radius:2px;transform:rotate(-2.6deg);box-shadow:0 3px 8px -3px rgba(0,0,0,.28)}
+.card.armed{opacity:0}
+.card.stick{animation:stick .62s cubic-bezier(.2,.85,.25,1) both}
+@keyframes stick{0%{opacity:0;transform:translateY(28px) rotate(-2.4deg)}55%{opacity:1;transform:translateY(0) rotate(.8deg)}100%{opacity:1;transform:translateY(0) rotate(0)}}
+.card h2{margin-bottom:4px}
+.card .sub{font-size:.96rem;margin-bottom:18px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field{margin-bottom:13px}
+.field label{display:block;font-size:.8rem;font-weight:600;margin-bottom:6px;color:var(--ink)}
+.field input{width:100%;font-family:var(--font);font-size:1rem;color:var(--ink);background:var(--mist);border:1px solid var(--line);border-radius:10px;padding:13px 14px}
+.field input:focus{outline:2px solid var(--blue);outline-offset:1px;border-color:var(--blue)}
+.check{display:flex;gap:10px;align-items:flex-start;margin:4px 0 16px;font-size:.92rem;color:var(--ink)}
+.check input{margin-top:3px;width:18px;height:18px;flex:none;accent-color:var(--orange)}
+.spots{font-size:.86rem;font-weight:600;color:var(--orange-deep);margin-top:14px;text-align:center}
+.success{display:none;text-align:center;padding:16px 0}
+.success.show{display:block}
+.success .big{font-weight:700;font-size:1.5rem;color:var(--blue);margin-bottom:8px}
+
+/* host */
+.host{display:flex;gap:18px;align-items:center;margin-top:4px}
+.host img{width:104px;height:104px;border-radius:50%;object-fit:cover;flex:none;border:3px solid var(--mist)}
+.host .name{font-weight:700;font-size:1.3rem;color:var(--blue)}
+.host .role{font-size:.82rem;color:var(--soft);font-weight:600;text-transform:uppercase;letter-spacing:.07em}
+.bio{margin-top:16px}
+
+/* testimonial with orange quote motif */
+.testi{background:var(--blue);color:#fff;border-radius:var(--radius);padding:30px 26px;position:relative;overflow:hidden}
+.testi .mark{font-family:Georgia,serif;font-size:5rem;line-height:.7;color:var(--orange);font-weight:700}
+.testi .q{font-size:1.12rem;line-height:1.5;color:#fff;margin:6px 0 16px;font-weight:400}
+.testi .by{font-size:.9rem;font-weight:600;color:rgba(255,255,255,.85)}
+.testi .by b{color:var(--orange)}
+
+footer{padding:34px 0 80px;text-align:center}
+footer img{width:84px;height:84px;border-radius:12px;margin-bottom:14px}
+footer .series{font-size:.84rem;color:var(--soft);line-height:1.7;margin-bottom:8px}
+footer .copy{font-size:.78rem;color:var(--soft);margin-top:14px}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(255,255,255,.92);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 22px;transform:translateY(120%);transition:transform .3s ease}
+.sticky.show{transform:translateY(0)}
+.sticky .inner{max-width:var(--max);margin:0 auto}
+
+@media(max-width:420px){.row2{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.btn,.sticky{transition:none}.card.armed{opacity:1}.card.stick{animation:none}}
+</style>
+</head>
+<body>
+
+<header>
+  <a class="logo" href="https://www.thepublicspeakingclub.com.au/" target="_blank" rel="noopener" aria-label="The Public Speaking Club — visit website"><img src="assets/logo.png" alt="The Public Speaking Club"></a>
+  <a class="navlink" href="#signup">Save your spot</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo" aria-hidden="true"></div>
+  <div class="hero-text"><div class="inner">
+    <div class="eyebrow" style="color:#fff;opacity:.9;margin-bottom:13px">The Public Speaking Club · Workshop</div>
+    <span class="badge">&#127891; Macquarie MBA students only</span>
+    <h1>Become a confident communicator.</h1>
+    <p class="blurb">A free, hands-on workshop to quickly improve your public speaking and boost your confidence for your next presentation.</p>
+    <div class="chips">
+      <span class="chip">&#128197; Mon 13 July</span>
+      <span class="chip">&#128338; 6:00–8:00pm</span>
+      <span class="chip">&#128205; Macquarie City Campus</span>
+      <span class="chip">&#127881; Free</span>
+    </div>
+    <a class="btn" href="#signup">Save your spot</a>
+  </div></div>
+</section>
+
+<!-- ELIGIBILITY -->
+<section class="wrap" style="padding-top:18px">
+  <div class="eligible">
+    <p><b>For current Macquarie University MBA students only.</b> This workshop is exclusive to MBA students &mdash; please register with your student email. Unfortunately we can&rsquo;t host external guests this time.</p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="wrap ruled">
+  <h2>Why come along</h2>
+  <p class="lead-copy">Most of us were never actually taught how to feel confident when it&rsquo;s our turn to speak. This is a relaxed, practical session where you&rsquo;ll pick up tools you can use straight away &mdash; and maybe even start to enjoy presenting.</p>
+</section>
+
+<!-- OUTCOMES -->
+<section class="wrap">
+  <h2>What you&rsquo;ll walk away with</h2>
+  <ul class="outcomes">
+    <li><span class="n">1</span><div><span class="t">Confidence under the spotlight</span><span class="d">Learn how to feel prepared and act confident during presentations.</span></div></li>
+    <li><span class="n">2</span><div><span class="t">Ownership of your message</span><span class="d">Get clear on why you&rsquo;re speaking and why it matters to you and your audience.</span></div></li>
+    <li><span class="n">3</span><div><span class="t">Practical tips to try immediately</span><span class="d">Take away simple, effective techniques that&rsquo;ll help with your very next presentation.</span></div></li>
+  </ul>
+</section>
+
+<!-- SIGN UP -->
+<section class="wrap" id="signup">
+  <div class="card">
+    <div id="formView">
+      <h2>Save your spot</h2>
+      <p class="sub">Pop your details in and Sharna will send through everything you need.</p>
+      <form id="signupForm" novalidate>
+        <div class="row2">
+          <div class="field"><label for="fn">First name</label><input id="fn" type="text" autocomplete="given-name" required></div>
+          <div class="field"><label for="ln">Last name</label><input id="ln" type="text" autocomplete="family-name" required></div>
+        </div>
+        <div class="field"><label for="email">Macquarie student email</label><input id="email" type="email" autocomplete="email" required></div>
+        <div class="field"><label for="mob">Mobile <span style="color:var(--soft);font-weight:400">(optional)</span></label><input id="mob" type="tel" autocomplete="tel"></div>
+        <label class="check"><input type="checkbox" id="mba" required><span>I&rsquo;m a current Macquarie University MBA student.</span></label>
+        <button class="btn btn-block" type="submit">Count me in</button>
+        <p class="spots">Limited to 15 spots — first in, best dressed.</p>
+      </form>
+    </div>
+    <div class="success" id="successView">
+      <div class="big">You&rsquo;re in! &#127881;</div>
+      <p>Sharna will be in touch with the details. See you on 13 July.</p>
+    </div>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section class="wrap ruled">
+  <h2>The details</h2>
+  <div class="panel">
+    <div class="row"><span class="k">Date</span><span class="v">Monday 13 July</span></div>
+    <div class="row"><span class="k">Time</span><span class="v">6:00–8:00pm (6:15 start)</span></div>
+    <div class="row"><span class="k">Location</span><span class="v">Level 23, Macquarie City Campus</span></div>
+    <div class="row"><span class="k">Cost</span><span class="v">Free — registration required</span></div>
+    <div class="row"><span class="k">Spots</span><span class="v">Limited to 15</span></div>
+    <div class="row"><span class="k">Who</span><span class="v">Macquarie MBA students</span></div>
+  </div>
+</section>
+
+<!-- HOST -->
+<section class="wrap ruled">
+  <h2>Your host</h2>
+  <div class="host">
+    <img src="assets/headshot.jpg" alt="Sharna">
+    <div>
+      <div class="name">Sharna</div>
+      <div class="role">The Public Speaking Club</div>
+    </div>
+  </div>
+  <p class="bio">Sharna has a background in marketing and communication, and has hosted and presented at events ranging from casual pub trivia to formal charity concerts. She&rsquo;s also trained hundreds of staff in public speaking &mdash; and is excited to run this workshop for her fellow MBA students!</p>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="wrap">
+  <div class="testi">
+    <div class="mark">&ldquo;</div>
+    <p class="q">Sharna delivered outstanding public speaking and communication training to our team. Her engaging presentation style and practical insights improved our staff&rsquo;s confidence and skills.</p>
+    <p class="by">&mdash; Justin Stafford · <b>CEO &amp; co-founder, Blueshift</b></p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="wrap ruled">
+  <img src="assets/logo.png" alt="The Public Speaking Club">
+  <p class="series"><b style="color:var(--blue)">The Public Speaking Club</b><br>Confident Communicator Workshop · Macquarie MBA</p>
+  <a href="https://www.thepublicspeakingclub.com.au/" target="_blank" rel="noopener">thepublicspeakingclub.com.au</a>
+  <div class="copy">&copy; 2026 The Public Speaking Club</div>
+</footer>
+
+<div class="sticky" id="sticky"><div class="inner"><a class="btn btn-block" href="#signup">Save your spot — 15 only</a></div></div>
+
+<script>
+const form=document.getElementById('signupForm');
+form.addEventListener('submit',function(e){
+  e.preventDefault();
+  if(!form.checkValidity()){form.reportValidity();return;}
+  document.getElementById('formView').style.display='none';
+  document.getElementById('successView').classList.add('show');
+  document.getElementById('signup').scrollIntoView({behavior:'smooth',block:'center'});
+});
+const sticky=document.getElementById('sticky'),hero=document.querySelector('.hero'),signup=document.getElementById('signup');
+let heroOut=false,formIn=false;
+const sync=()=>sticky.classList.toggle('show',heroOut&&!formIn);
+new IntersectionObserver(([e])=>{heroOut=!e.isIntersecting;sync()},{threshold:0}).observe(hero);
+new IntersectionObserver(([e])=>{formIn=e.isIntersecting;sync()},{threshold:.2}).observe(signup);
+
+// post-it: the form card "sticks" into place when scrolled to
+const card=document.querySelector('.card');
+const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(card && !reduceM && 'IntersectionObserver' in window){
+  card.classList.add('armed');
+  const safety=setTimeout(()=>card.classList.remove('armed'),6000); // never leave the form hidden
+  new IntersectionObserver(([e],obs)=>{if(e.isIntersecting){clearTimeout(safety);card.classList.remove('armed');card.classList.add('stick');obs.disconnect();}},{threshold:.3}).observe(card);
+}
+</script>
+</body>
+</html>

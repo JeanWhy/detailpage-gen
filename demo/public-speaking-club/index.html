@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Public Speaking Club — Speak with confidence, with Sharna</title>
+<meta name="description" content="Confidence coaching for speaking up — 1-on-1, group masterclasses and corporate workshops with Sharna at The Public Speaking Club, Sydney.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#ECEAE3; --card:#FFFFFF; --ink:#1C1B1A; --ink-soft:#595650;
+  --cta:#1C1B1A; --cta-ink:#FFFFFF; --accent:#2C46C9; --highlight:#FFD964; --line:#D9D6CD;
+  --display:"Fraunces",Georgia,serif; --body:"Hanken Grotesk",system-ui,sans-serif;
+  --max:600px; --radius:14px; --gap:22px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--body);color:var(--ink);background:var(--bg);line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--max);margin:0 auto;padding-inline:22px}
+section{padding-block:var(--gap)}
+.ruled{border-top:1px solid var(--line);padding-top:calc(var(--gap) * 2)}
+.eyebrow{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-soft)}
+h1{font-family:var(--display);font-weight:400;line-height:1.04;letter-spacing:-.01em;font-size:clamp(2.6rem,11vw,3.7rem)}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(1.6rem,6vw,2.05rem);line-height:1.1;letter-spacing:-.01em;margin-bottom:16px}
+p{color:var(--ink-soft);font-size:1.02rem}
+a{color:var(--accent)}
+.ph{color:var(--accent);font-style:italic;font-weight:500}
+
+.mark{position:relative;isolation:isolate;white-space:nowrap;color:var(--ink);font-style:italic;font-weight:500}
+.mark::before{content:"";position:absolute;left:-.06em;right:-.06em;top:.18em;bottom:.04em;background:var(--highlight);border-radius:3px;z-index:-1;transform:rotate(-1.4deg) scaleX(0);transform-origin:left center;animation:swipe .75s .45s cubic-bezier(.2,.8,.2,1) forwards}
+@keyframes swipe{to{transform:rotate(-1.4deg) scaleX(1)}}
+
+.ribbon{background:var(--ink);color:var(--bg);font-size:.74rem;letter-spacing:.02em;text-align:center;padding:8px 16px;line-height:1.5}
+.ribbon b{color:var(--highlight);font-weight:600}
+
+.stage{position:relative;color:#fff;overflow:hidden;background:radial-gradient(125% 85% at 50% 14%,rgba(255,217,100,.13),transparent 58%),radial-gradient(110% 130% at 74% 22%,rgba(70,66,120,.55),transparent 55%),#131110}
+.stage[data-img]{background-image:linear-gradient(180deg,rgba(15,13,12,.5),rgba(15,13,12,.8)),var(--img);background-size:cover;background-position:center}
+.stage-inner{padding-top:60px;padding-bottom:46px}
+.stage .eyebrow{color:rgba(255,255,255,.7);margin-bottom:18px}
+.stage h1{color:#fff;margin-bottom:18px}
+.stage .lede{color:rgba(255,255,255,.85)}
+.stage .chip{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);color:#fff;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.stage .btn{background:var(--highlight);color:var(--ink)}
+.photo-note{margin-top:22px;font-size:.74rem;letter-spacing:.03em;color:rgba(255,255,255,.4);font-style:italic}
+.lede{font-size:1.14rem;color:var(--ink-soft);text-wrap:pretty}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:26px 0 24px}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:8px 14px;font-size:.9rem;font-weight:600;color:var(--ink)}
+.chip span{font-size:1rem;line-height:1}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--cta);color:var(--cta-ink);font-family:var(--body);font-weight:700;font-size:1.02rem;border:none;border-radius:999px;padding:15px 30px;cursor:pointer;text-decoration:none;transition:transform .15s ease, filter .15s ease}
+.btn:hover{filter:brightness(1.18);transform:translateY(-1px)}
+.btn-block{width:100%}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--ink)}
+
+.lead-copy{font-size:1.08rem;color:var(--ink);text-wrap:pretty}
+
+/* ways to work — offering cards */
+.ways{display:grid;gap:14px;margin-top:6px}
+.way{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 20px;display:block;text-decoration:none}
+.way:hover{border-color:var(--ink)}
+.way .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.way h3{font-family:var(--display);font-weight:500;font-size:1.22rem;color:var(--ink)}
+.way .price{font-size:.84rem;font-weight:700;color:var(--accent);white-space:nowrap}
+.way p{font-size:.96rem;margin-top:6px}
+.way .go{margin-top:12px;font-size:.84rem;font-weight:700;color:var(--ink);letter-spacing:.02em}
+
+/* outcomes */
+.outcomes{list-style:none;margin-top:6px;display:grid;gap:0}
+.outcomes li{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-top:1px solid var(--line)}
+.outcomes li:last-child{border-bottom:1px solid var(--line)}
+.outcomes .n{font-family:var(--display);font-size:1.05rem;color:var(--accent);font-weight:600;min-width:1.4em}
+.outcomes .t{font-weight:600;color:var(--ink)}
+.outcomes .d{display:block;font-weight:400;color:var(--ink-soft);font-size:.96rem;margin-top:3px}
+
+/* host / founder */
+.host{display:flex;gap:18px;align-items:center;margin-top:6px}
+.host .photo{width:96px;height:96px;border-radius:50%;flex:none;background:var(--line) center/cover no-repeat;display:flex;align-items:center;justify-content:center;color:var(--ink-soft);font-size:.7rem;text-align:center}
+.host .name{font-family:var(--display);font-size:1.4rem}
+.host .role{font-size:.85rem;color:var(--ink-soft);font-weight:600;text-transform:uppercase;letter-spacing:.08em}
+.bio{margin-top:16px}
+.creds{list-style:none;margin-top:16px;display:grid;gap:10px}
+.creds li{display:flex;gap:10px;align-items:flex-start;font-size:.98rem;color:var(--ink)}
+.creds .tick{color:var(--accent);font-weight:700}
+
+/* quote */
+.quote{font-family:var(--display);font-size:1.3rem;line-height:1.35;color:var(--ink);font-style:italic}
+.quote-by{margin-top:12px;font-size:.9rem;font-weight:600;color:var(--ink-soft)}
+
+/* experience */
+.exp{display:grid;gap:22px;margin-top:6px}
+.exp-col h3{font-family:var(--display);font-weight:500;font-size:1.18rem;color:var(--ink);margin-bottom:9px}
+.exp-col ul{list-style:none;display:grid;gap:7px}
+.exp-col li{font-size:.97rem;color:var(--ink-soft);padding-left:16px;position:relative}
+.exp-col li::before{content:"";position:absolute;left:0;top:.62em;width:5px;height:5px;border-radius:50%;background:var(--accent)}
+.presented{margin-top:24px;font-size:.97rem;color:var(--ink-soft);padding-top:18px;border-top:1px solid var(--line)}
+.presented b{color:var(--ink);font-weight:600}
+
+/* testimonials */
+.quotes{display:grid;gap:0;margin-top:6px}
+.quotes blockquote{padding:22px 0;border-top:1px solid var(--line)}
+.quotes blockquote:last-child{border-bottom:1px solid var(--line)}
+.quotes .q{font-family:var(--display);font-size:1.12rem;line-height:1.42;color:var(--ink);font-style:italic}
+.quotes .by{margin-top:10px;font-size:.85rem;font-weight:700;color:var(--ink-soft)}
+
+/* final cta card */
+.cta-card{background:var(--ink);color:var(--bg);border-radius:var(--radius);padding:30px 24px;text-align:center}
+.cta-card h2{color:var(--bg);margin-bottom:10px}
+.cta-card p{color:rgba(236,234,227,.8);margin-bottom:22px}
+.cta-card .btn{background:var(--highlight);color:var(--ink)}
+
+footer{padding:30px 0 70px;text-align:center}
+footer .series{font-size:.84rem;color:var(--ink-soft);margin:14px 0;line-height:1.7}
+footer .series b{color:var(--ink)}
+footer .copy{font-size:.78rem;color:var(--ink-soft);margin-top:18px}
+.disc{font-size:.72rem;color:var(--ink-soft);max-width:48ch;margin:14px auto 0;line-height:1.6;opacity:.85}
+
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:40;background:color-mix(in srgb,var(--bg) 86%,transparent);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:12px 22px;transform:translateY(120%);transition:transform .3s ease}
+.sticky.show{transform:translateY(0)}
+.sticky .inner{max-width:var(--max);margin:0 auto}
+
+@media (prefers-reduced-motion:reduce){.mark::before{animation:none;transform:rotate(-1.4deg) scaleX(1)}html{scroll-behavior:auto}.btn,.sticky{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="ribbon">Draft concept for <b>Sharna · The Public Speaking Club</b> — by Grace &amp; Why · &lang;&nbsp;&rang; items to confirm</div>
+
+<!-- HERO — dramatic "stage" full-bleed (real on-stage photo drops in behind) -->
+<section class="stage" id="top" data-photo="stage">
+  <div class="wrap stage-inner">
+    <div class="eyebrow">The Public Speaking Club · Sydney</div>
+    <h1>Speak like you<br><span class="mark">mean it</span>.</h1>
+    <p class="lede">Confidence coaching for anyone who freezes, rushes, or shrinks when it&rsquo;s their turn to speak — so you can own the room and actually enjoy it.</p>
+    <div class="chips">
+      <span class="chip"><span>&#127908;</span> 1-on-1 coaching</span>
+      <span class="chip"><span>&#128483;</span> Group masterclasses</span>
+      <span class="chip"><span>&#128188;</span> Corporate workshops</span>
+    </div>
+    <a class="btn" href="#contact">Work with Sharna</a>
+    <p class="photo-note">&lang; Sharna mid-talk, on stage — a real photo drops in behind this &rang;</p>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="wrap ruled">
+  <h2>You were never taught this.</h2>
+  <p class="lead-copy">Most of us were never actually shown how to feel steady when every eye is on us. The good news: confidence on your feet is a skill, not a personality type — and it&rsquo;s very learnable. That&rsquo;s the whole point of the Club: a warm, practical place to build it, at your pace.</p>
+</section>
+
+<!-- WAYS TO WORK -->
+<section class="wrap">
+  <h2>Ways to work together</h2>
+  <div class="ways">
+    <a class="way" href="#contact">
+      <div class="top"><h3>1-on-1 coaching</h3><span class="price">&lang;from $XXX&rang;</span></div>
+      <p>Private, tailored sessions for a specific talk, interview, or a long-standing fear of speaking. We work on exactly what you need.</p>
+      <div class="go">Enquire &rarr;</div>
+    </a>
+    <a class="way" href="https://master-class-3bu.pages.dev" target="_blank" rel="noopener">
+      <div class="top"><h3>Group masterclasses</h3><span class="price">Free trial session</span></div>
+      <p>Small, friendly group sessions — starting with <em>Confidence in Communication</em>. Learn by doing, alongside others in the same boat.</p>
+      <div class="go">See the next masterclass &rarr;</div>
+    </a>
+    <a class="way" href="#contact">
+      <div class="top"><h3>Corporate &amp; teams</h3><span class="price">&lang;on request&rang;</span></div>
+      <p>Workshops that help your team present, pitch and speak up with confidence. Tailored to your people and your goals.</p>
+      <div class="go">Enquire &rarr;</div>
+    </a>
+  </div>
+</section>
+
+<!-- OUTCOMES -->
+<section class="wrap ruled">
+  <h2>What changes for you</h2>
+  <ul class="outcomes">
+    <li><span class="n">1</span><div><span class="t">Steady under the spotlight</span><span class="d">Practical tools to feel calm and present when it&rsquo;s your turn — not just &ldquo;be confident&rdquo;.</span></div></li>
+    <li><span class="n">2</span><div><span class="t">Ownership of your message</span><span class="d">Get clear on why you&rsquo;re speaking and why it matters — the part most people skip.</span></div></li>
+    <li><span class="n">3</span><div><span class="t">A voice that sounds like you</span><span class="d">Speak naturally and persuasively, without performing or putting on a &ldquo;presenting voice&rdquo;.</span></div></li>
+  </ul>
+</section>
+
+<!-- MEET SHARNA -->
+<section class="wrap">
+  <h2>Meet Sharna</h2>
+  <div class="host">
+    <div class="photo">&lang;photo&rang;</div>
+    <div>
+      <div class="name">Sharna</div>
+      <div class="role">Founder · The Public Speaking Club</div>
+    </div>
+  </div>
+  <p class="bio">I&rsquo;m a natural chatterbox, a daily SPF proponent and a wannabe runner. I&rsquo;ve spent a <em>lot</em> of time improving my own public speaking &mdash; so I know how stressful preparing a presentation can be, and how insecure those pesky filler words make you feel.</p>
+  <p class="bio">That&rsquo;s exactly why I started The Public Speaking Club. I genuinely love public speaking now &mdash; and I&rsquo;ve realised I love helping other people get there too.</p>
+</section>
+
+<!-- EXPERIENCE -->
+<section class="wrap ruled">
+  <h2>A little experience</h2>
+  <div class="exp">
+    <div class="exp-col"><h3>Speaker</h3><ul>
+      <li>DDC Toastmaster of the Year (2019)</li>
+      <li>President, DDC Toastmaster Club</li>
+      <li>First place in Toastmaster contests</li>
+      <li>Trained 100+ staff in presenting skills</li>
+    </ul></div>
+    <div class="exp-col"><h3>Host</h3><ul>
+      <li>Breakfast radio · pub &amp; corporate trivia</li>
+      <li>Charity &amp; youth events</li>
+      <li>40+ events hosted in 12 months</li>
+    </ul></div>
+    <div class="exp-col"><h3>Professional</h3><ul>
+      <li>8+ years across presenting, marketing, content creation, copywriting &amp; student recruitment</li>
+    </ul></div>
+    <div class="exp-col"><h3>Qualifications</h3><ul>
+      <li>BA (Communication &amp; Marketing)</li>
+      <li>Graduate Certificate in Business Administration</li>
+    </ul></div>
+  </div>
+  <p class="presented">Presented for <b>Avondale University · Macquarie University · Quiz Meisters · blueshift</b> &amp; more.</p>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="wrap ruled">
+  <h2>Kind words</h2>
+  <div class="quotes">
+    <blockquote>
+      <p class="q">&ldquo;Sharna is one of the best hosts in NSW &mdash; oozing charisma, an ever-present smile, and always cool and calm under pressure. Anyone wanting to develop their skills speaking in front of a crowd will do well to take lessons from Sharna.&rdquo;</p>
+      <p class="by">&mdash; Konrad W · Quiz Meisters NSW Talent Manager</p>
+    </blockquote>
+    <blockquote>
+      <p class="q">&ldquo;Sharna has a natural gift for communication. Her style is genuine and engaging, and her humour, attention to detail and love for public speaking make her an incredible mentor.&rdquo;</p>
+      <p class="by">&mdash; Jessica K · Lawyer</p>
+    </blockquote>
+    <blockquote>
+      <p class="q">&ldquo;Sharna&rsquo;s genuine warmth and professionalism have enhanced our events. She connects effortlessly with audiences and presents with confidence, leaving a lasting impression.&rdquo;</p>
+      <p class="by">&mdash; Ben M · Sing Series Founder &amp; Artistic Director</p>
+    </blockquote>
+  </div>
+</section>
+
+<!-- CONTACT / CTA -->
+<section class="wrap" id="contact">
+  <div class="cta-card">
+    <h2>Ready to find your voice?</h2>
+    <p>Tell Sharna a little about what you&rsquo;re working towards, and she&rsquo;ll be in touch.</p>
+    <a class="btn" href="mailto:&lang;Sharna's email&rang;">Get in touch</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="wrap ruled">
+  <div class="eyebrow">The Public Speaking Club</div>
+  <p class="series">Masterclass series:<br><b>Confidence in Communication</b> &middot; Preparing a Great Speech &middot; Presenting Like a Pro</p>
+  <a href="https://www.thepublicspeakingclub.com.au/" target="_blank" rel="noopener">thepublicspeakingclub.com.au</a>
+  <p class="disc">Draft concept page prepared for The Public Speaking Club by Grace &amp; Why. Items marked &lang;&nbsp;&rang; (bio, photo, pricing, testimonials, email) are placeholders to confirm with Sharna before going live.</p>
+  <div class="copy">&copy; 2026 The Public Speaking Club</div>
+</footer>
+
+<div class="sticky" id="sticky"><div class="inner"><a class="btn btn-block" href="#contact">Work with Sharna</a></div></div>
+
+<script>
+  const sticky=document.getElementById('sticky'),hero=document.querySelector('.stage'),contact=document.getElementById('contact');
+  let heroOut=false,contactIn=false;
+  const sync=()=>sticky.classList.toggle('show',heroOut&&!contactIn);
+  new IntersectionObserver(([e])=>{heroOut=!e.isIntersecting;sync()},{threshold:0}).observe(hero);
+  new IntersectionObserver(([e])=>{contactIn=e.isIntersecting;sync()},{threshold:.2}).observe(contact);
+
+  // drop a real on-stage photo in at assets/stage.jpg and it auto-loads behind the hero
+  (function(){var el=document.querySelector('[data-photo]');if(!el)return;var src='assets/'+el.getAttribute('data-photo')+'.jpg';var img=new Image();img.onload=function(){el.style.setProperty('--img',"url('"+src+"')");el.setAttribute('data-img','')};img.src=src;})();
+</script>
+</body>
+</html>
