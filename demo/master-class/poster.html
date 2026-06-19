@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Confident Communicator Workshop — Poster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{--blue:#1c5a7f;--blue-deep:#143a52;--orange:#ec8e39;--cream:#fbf3e9;--font:'Be Vietnam Pro',system-ui,sans-serif}
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1080px;height:1528px}
+  body{font-family:var(--font);overflow:hidden}
+  .poster{width:1080px;height:1528px;background:var(--blue);color:#fff;position:relative;display:flex;flex-direction:column}
+
+  /* photo band */
+  .photo{height:476px;position:relative;background:url('assets/stage.jpg') center 16%/cover;flex:none}
+  .photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,58,82,.12) 0%,rgba(20,58,82,0) 32%,rgba(20,58,82,.4) 72%,var(--blue) 100%)}
+  .brandrow{position:absolute;top:40px;left:48px;right:48px;z-index:2;display:flex;align-items:center;justify-content:space-between}
+  .brandrow .lg{display:flex;align-items:center;gap:16px}
+  .brandrow img{width:74px;height:74px;border-radius:14px;box-shadow:0 0 0 2px rgba(255,255,255,.55)}
+  .brandrow .wm{font-weight:700;font-size:25px;letter-spacing:.01em;text-shadow:0 1px 6px rgba(0,0,0,.3)}
+  .free{background:var(--orange);color:#fff;font-weight:800;font-size:23px;letter-spacing:.06em;padding:11px 22px;border-radius:999px;box-shadow:0 6px 18px -6px rgba(0,0,0,.5)}
+
+  /* body */
+  .body{flex:1;padding:8px 56px 48px;display:flex;flex-direction:column}
+  .eyebrow{color:var(--orange);font-weight:700;font-size:26px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:14px}
+  h1{font-weight:800;font-size:76px;line-height:1;letter-spacing:-.02em}
+  .sub{font-size:27px;color:rgba(255,255,255,.9);font-weight:400;margin-top:16px;max-width:26ch}
+
+  .details{margin-top:22px;display:grid;gap:12px}
+  .drow{display:flex;align-items:center;gap:16px;font-size:30px;font-weight:500}
+  .drow .ic{width:46px;height:46px;flex:none;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:11px;font-size:24px}
+  .drow b{font-weight:700}
+  .note{margin-top:16px;font-size:24px;color:rgba(255,255,255,.78)}
+  .note .pill{display:inline-block;background:rgba(236,142,57,.22);border:1px solid rgba(236,142,57,.55);color:#ffd9b0;font-weight:600;font-size:22px;padding:5px 14px;border-radius:999px}
+
+  /* QR card — bigger QR on the right, sits in the central-lower zone */
+  .qrcard{margin-top:30px;background:#fff;border-radius:26px;padding:34px 40px;display:flex;align-items:center;justify-content:space-between;gap:30px;box-shadow:0 24px 54px -18px rgba(0,0,0,.55)}
+  .qrcard .qr{width:330px;height:330px;flex:none;border-radius:12px;order:2}
+  .qrcard .t{color:var(--blue-deep);order:1}
+  .qrcard .t .scan{font-weight:800;font-size:50px;line-height:1.02;letter-spacing:-.01em}
+  .qrcard .t .arrow{color:var(--orange)}
+  .qrcard .t .url{display:block;margin-top:16px;font-size:27px;font-weight:700;color:var(--orange)}
+  .qrcard .t .free2{display:block;margin-top:8px;font-size:24px;color:#5d6f7a;font-weight:500}
+
+  .foot{margin-top:auto;padding-top:24px;text-align:center;font-size:24px;color:rgba(255,255,255,.7);font-weight:500}
+</style>
+</head>
+<body>
+  <div class="poster">
+    <div class="photo">
+      <div class="brandrow">
+        <span class="lg"><img src="assets/logo.png" alt=""><span class="wm">The Public Speaking Club</span></span>
+        <span class="free">FREE</span>
+      </div>
+    </div>
+    <div class="body">
+      <div class="eyebrow">Public Speaking Workshop</div>
+      <h1>Become a<br>Confident<br>Communicator.</h1>
+      <p class="sub">A free, hands-on public speaking workshop.</p>
+
+      <div class="details">
+        <div class="drow"><span class="ic">&#128197;</span><span><b>Monday 13 July</b> &middot; 6:00&ndash;8:00pm</span></div>
+        <div class="drow"><span class="ic">&#128205;</span><span>Level 23, Macquarie City Campus</span></div>
+      </div>
+      <div class="note">For current <span class="pill">Macquarie MBA students</span> &middot; limited spots</div>
+
+      <div class="qrcard">
+        <img class="qr" src="assets/qr.png" alt="Scan to register">
+        <div class="t">
+          <div class="scan">Scan to<br>save your spot <span class="arrow">&rarr;</span></div>
+          <span class="url">master-class-3bu.pages.dev</span>
+          <span class="free2">Register in 30 seconds</span>
+        </div>
+      </div>
+      <div class="foot">thepublicspeakingclub.com.au</div>
+    </div>
+  </div>
+</body>
+</html>
