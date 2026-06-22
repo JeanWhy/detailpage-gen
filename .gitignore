@@ -40,3 +40,4 @@ deploy/
 
 # Wrangler local cache
 .wrangler/
+lottie-player/

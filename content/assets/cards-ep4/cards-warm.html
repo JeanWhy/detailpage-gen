@@ -1,0 +1,161 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#2e2419}
+.card{width:1080px;height:1350px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:92px 84px 84px;
+  font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#F6EFE2;
+  background:linear-gradient(158deg,#8c7359 0%,#614d3b 52%,#3d2f23 100%)}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);
+  filter:brightness(0.6) contrast(1.05) sepia(0.45) saturate(1.45) hue-rotate(-10deg);z-index:0}
+.scrim{position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(34,24,14,0.28) 0%,rgba(34,24,14,0.55) 44%,rgba(28,20,12,0.94) 100%)}
+.topbar{position:absolute;top:0;left:0;right:0;height:8px;background:#E8693B;z-index:3}
+.glow{position:absolute;top:-150px;right:-150px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(244,144,90,0.22),rgba(244,144,90,0));pointer-events:none;z-index:1}
+.header{display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+.label{font-size:26px;letter-spacing:5px;color:#D6C7B0;font-weight:600}
+.count{font-size:26px;color:#D6C7B0;font-weight:600;letter-spacing:2px}
+.spacer{flex:1}
+.date{color:#F6A06A;font-size:40px;font-weight:700;letter-spacing:3px;margin-bottom:30px;z-index:2}
+.kicker{color:#F6A06A;font-size:40px;font-weight:700;margin-bottom:30px;letter-spacing:1px;z-index:2}
+.headline{font-size:90px;font-weight:800;line-height:1.2;letter-spacing:-2px;z-index:2;
+  text-shadow:0 2px 30px rgba(20,12,4,0.6)}
+.cover .headline{font-size:96px;line-height:1.16}
+.body{font-size:40px;line-height:1.6;color:#EBE1CF;margin-top:46px;font-weight:500;z-index:2;
+  text-shadow:0 2px 18px rgba(20,12,4,0.65)}
+.step{display:inline-block;font-size:30px;font-weight:700;color:#1f1810;background:#F6A06A;
+  border-radius:999px;padding:6px 26px;margin-bottom:26px;letter-spacing:1px;z-index:2;align-self:flex-start}
+.o{color:#F6A06A}
+.w{color:#FFFFFF;font-weight:700}
+.footer{margin-top:56px;font-size:30px;color:#D6C7B0;font-weight:600;z-index:2}
+.footer .h{color:#FFFFFF}
+</style></head><body>
+
+<section class="card cover" id="s1">
+  <div class="bg" style="background-image:url('photo/p1.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">01 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="date">· EP.4 · SEO</div>
+  <div class="headline">월 5만 클릭 SEO 비법,<br><span class="o">배우고도 안 썼다</span></div>
+  <div class="body">유튜브에서 본 'SEO 치트키',<br>두 번, 세 번 정독했어요.<br>하지만 내 클라이언트엔 <span class="w">한 줄도 안 썼어요.</span></div>
+</section>
+
+<section class="card" id="s2">
+  <div class="bg" style="background-image:url('photo/p2.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">02 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">왜 SEO?</div>
+  <div class="headline">못 찾으면<br><span class="o">명함일 뿐이다</span></div>
+  <div class="body">페이지를 5분 만에 잘 뽑아도,<br>검색에서 안 뜨면 소용없어요.<br><span class="o">URL 아는 사람만 보는 명함</span>이 되니까.</div>
+</section>
+
+<section class="card" id="s3">
+  <div class="bg" style="background-image:url('photo/p3.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">03 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">발견</div>
+  <div class="headline">"월 5만 클릭<br><span class="o">만든 법"</span></div>
+  <div class="body">제목부터 솔깃한 영상 하나.<br>"AI로 SEO 트래픽 폭발시키기."<br>혹해서 <span class="w">두 번, 세 번 돌려봤어요.</span></div>
+</section>
+
+<section class="card" id="s4">
+  <div class="bg" style="background-image:url('photo/p4.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">04 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">정체</div>
+  <div class="headline">템플릿 하나로<br><span class="o">수천 장 찍기</span></div>
+  <div class="body">'프로그래매틱 SEO'예요.<br>템플릿 하나 + 데이터를 합쳐<br>페이지 <span class="o">수천 장을 자동으로</span> 만들어내요.</div>
+</section>
+
+<section class="card" id="s5">
+  <div class="bg" style="background-image:url('photo/p5.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">05 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">왜 강력한가</div>
+  <div class="headline">질문 1만 개에<br><span class="o">답 1만 개</span></div>
+  <div class="body">'마이애미 지붕 수리', '치과용 CRM'…<br>구체적인 질문마다 딱 맞는 페이지를.<br>큰 사이트라면 <span class="w">트래픽이 터져요.</span></div>
+</section>
+
+<section class="card" id="s6">
+  <div class="bg" style="background-image:url('photo/p6.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">06 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">그런데</div>
+  <div class="headline">내 클라이언트는<br><span class="o">지점이 하나다</span></div>
+  <div class="body">시드니에 상담실 딱 한 곳.<br>'수천 장 양산' 전략이<br><span class="o">통째로 안 맞는</span> 상대였어요.</div>
+</section>
+
+<section class="card" id="s7">
+  <div class="bg" style="background-image:url('photo/p7.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">07 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">판단</div>
+  <div class="headline">방법이 통하는<br><span class="o">'조건'부터 보기</span></div>
+  <div class="body">프로그래매틱 SEO는<br><span class="w">'조합이 폭발하는' 사업</span>을 위한 거예요.<br>조합이 하나면 정반대 전략이 필요하죠.</div>
+</section>
+
+<section class="card" id="s8">
+  <div class="bg" style="background-image:url('photo/p8.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">08 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">버린 것</div>
+  <div class="headline">양산하면<br><span class="o">구글이 걸러낸다</span></div>
+  <div class="body">도시가 하나라 찍을 게 없고,<br>'상담사 A vs B' 비교는 신뢰만 깎아요.<br>알맹이 없는 양산은 <span class="o">순위만 깎여요.</span></div>
+</section>
+
+<section class="card" id="s9">
+  <div class="bg" style="background-image:url('photo/p9.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">09 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">챙긴 것 ①</div>
+  <div class="headline">검색 말고<br><span class="o">'AI의 답'에 실리기</span></div>
+  <div class="body">이제 사람들은 구글 대신 AI에게 물어요.<br>답에 인용되기 좋게 또렷이 정리하면,<br>한 장짜리도 <span class="w">AI 답변의 출처</span>가 돼요. (AEO)</div>
+</section>
+
+<section class="card" id="s10">
+  <div class="bg" style="background-image:url('photo/p10.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">10 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">챙긴 것 ②</div>
+  <div class="headline">기계에게<br><span class="o">또렷이 알려주기</span></div>
+  <div class="body">'정보 이름표'(JSON-LD)로<br>'어떤 클리닉이 어디서 뭘 하는지'를<br>검색엔진·AI에 또렷이 알려주면<br><span class="w">로컬 노출이 달라져요.</span></div>
+</section>
+
+<section class="card" id="s11">
+  <div class="bg" style="background-image:url('photo/p11.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">11 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">챙긴 것 ③</div>
+  <div class="headline">양이 아니라<br><span class="o">'깊이'로</span></div>
+  <div class="body">영상은 '똑같은 1만 장 말고 고유한 1만 장'.<br>개수가 아니라 '퀄리티'가 핵심이라는 말이죠.<br>로컬에선 <span class="w">얕은 1만 장보다 깊은 1장</span>이 이겨요.</div>
+</section>
+
+<section class="card" id="s12">
+  <div class="bg" style="background-image:url('photo/p12.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">12 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="headline">'어떻게'는 공짜,<br><span class="o">'쓸까 말까'는<br>오로지 나의 판단</span></div>
+  <div class="body">좋은 레시피를 보고도<br>'내 식당엔 안 맞는다'고 덮을 수 있는 것.<br>그게 도구가 흔해진 시대의 진짜 실력이에요.</div>
+  <div class="footer">팔로우하고 다음 편 보기 → <span class="h">@graceandwhy.ai</span></div>
+</section>
+
+<script>
+const s=new URLSearchParams(location.search).get('s');
+if(s){document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+const el=document.getElementById('s'+s);if(el)el.style.display='flex';}
+</script>
+</body></html>

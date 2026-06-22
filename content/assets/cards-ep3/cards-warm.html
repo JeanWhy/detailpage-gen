@@ -1,0 +1,161 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#2e2419}
+.card{width:1080px;height:1350px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:92px 84px 84px;
+  font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#F6EFE2;
+  background:linear-gradient(158deg,#8c7359 0%,#614d3b 52%,#3d2f23 100%)}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);
+  filter:brightness(0.6) contrast(1.05) sepia(0.45) saturate(1.45) hue-rotate(-10deg);z-index:0}
+.scrim{position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(34,24,14,0.28) 0%,rgba(34,24,14,0.55) 44%,rgba(28,20,12,0.94) 100%)}
+.topbar{position:absolute;top:0;left:0;right:0;height:8px;background:#E8693B;z-index:3}
+.glow{position:absolute;top:-150px;right:-150px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(244,144,90,0.22),rgba(244,144,90,0));pointer-events:none;z-index:1}
+.header{display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+.label{font-size:26px;letter-spacing:5px;color:#D6C7B0;font-weight:600}
+.count{font-size:26px;color:#D6C7B0;font-weight:600;letter-spacing:2px}
+.spacer{flex:1}
+.date{color:#F6A06A;font-size:40px;font-weight:700;letter-spacing:3px;margin-bottom:30px;z-index:2}
+.kicker{color:#F6A06A;font-size:40px;font-weight:700;margin-bottom:30px;letter-spacing:1px;z-index:2}
+.headline{font-size:90px;font-weight:800;line-height:1.2;letter-spacing:-2px;z-index:2;
+  text-shadow:0 2px 30px rgba(20,12,4,0.6)}
+.cover .headline{font-size:100px;line-height:1.16}
+.body{font-size:40px;line-height:1.6;color:#EBE1CF;margin-top:46px;font-weight:500;z-index:2;
+  text-shadow:0 2px 18px rgba(20,12,4,0.65)}
+.step{display:inline-block;font-size:30px;font-weight:700;color:#1f1810;background:#F6A06A;
+  border-radius:999px;padding:6px 26px;margin-bottom:26px;letter-spacing:1px;z-index:2;align-self:flex-start}
+.o{color:#F6A06A}
+.w{color:#FFFFFF;font-weight:700}
+.footer{margin-top:56px;font-size:30px;color:#D6C7B0;font-weight:600;z-index:2}
+.footer .h{color:#FFFFFF}
+</style></head><body>
+
+<section class="card cover" id="s1">
+  <div class="bg" style="background-image:url('photo/p1.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">01 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="date">· EP.3 · 운영</div>
+  <div class="headline">페이지 제작은<br>빨라졌는데,<br><span class="o">일은 안 빨라졌다</span></div>
+  <div class="body">AI로 제작은 하루면 끝나요.<br>근데 1인으로 굴려보니<br><span class="w">진짜 병목은 딴 데</span> 있었어요.</div>
+</section>
+
+<section class="card" id="s2">
+  <div class="bg" style="background-image:url('photo/p2.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">02 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">착각</div>
+  <div class="headline">"제작이 빨라지면<br><span class="o">일도 빨라지겠지"</span></div>
+  <div class="body">AI가 페이지 만드는 시간을 확 줄여줬으니<br>당연히 그럴 줄 알았어요.<br><span class="o">완전히 틀린 생각</span>이었죠.</div>
+</section>
+
+<section class="card" id="s3">
+  <div class="bg" style="background-image:url('photo/p3.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">03 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">상황</div>
+  <div class="headline">페이지는<br><span class="o">'시작'일 뿐이었다</span></div>
+  <div class="body">시드니의 한 스피치 코칭 클래스.<br>강사가 원한 건 '예쁜 소개 페이지'가 아니라<br><span class="w">실제로 굴러가는 무언가</span>였어요.</div>
+</section>
+
+<section class="card" id="s4">
+  <div class="bg" style="background-image:url('photo/p4.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">04 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">진짜 요구</div>
+  <div class="headline">원한 건 페이지가<br>아니라 <span class="o">'통로'</span>였다</div>
+  <div class="body">맛보기 클래스 등록을 받는 페이지.<br>강사가 원한 건 그럴듯한 소개가 아니라<br>사람들이 실제로 <span class="o">등록하는 '통로'</span>였어요.</div>
+</section>
+
+<section class="card" id="s5">
+  <div class="bg" style="background-image:url('photo/p5.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">05 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">병목 ①</div>
+  <div class="headline">끝없이 도는<br><span class="o">피드백 루프</span></div>
+  <div class="body">강사가 카피에 피드백을 주면<br>→ 반영하고 → 다시 확인받고.<br>이 루프가 <span class="o">매번 손으로</span> 돌아갔어요.</div>
+</section>
+
+<section class="card" id="s6">
+  <div class="bg" style="background-image:url('photo/p6.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">06 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">병목 ②</div>
+  <div class="headline">신청은 받아서<br><span class="o">어디로 보내지?</span></div>
+  <div class="body">방문자가 신청을 하면<br>그 정보가 어딘가 쌓이고,<br><span class="w">강사에게 전달</span>돼야 했어요. 매번.</div>
+</section>
+
+<section class="card" id="s7">
+  <div class="bg" style="background-image:url('photo/p7.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">07 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">깨달음</div>
+  <div class="headline">AI가 줄여준 건<br><span class="o">'제작'뿐이었다</span></div>
+  <div class="body">1인의 시간을 잡아먹는 건<br>제작이 아니라 <span class="o">'운영'</span>이었어요.<br>만드는 일보다 <span class="w">굴리는 일</span>이 어려웠죠.</div>
+</section>
+
+<section class="card" id="s8">
+  <div class="bg" style="background-image:url('photo/p8.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">08 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">해법 ①</div>
+  <div class="headline">수정은 '한 곳만'<br><span class="o">고치면 끝나게</span></div>
+  <div class="body">매번 페이지를 통째로 다시 만지지 않게,<br>원본 한 곳만 바꾸면 실제 페이지가 <span class="w">알아서 따라오게</span>.<br>피드백 → 반영 → 재확인이 <span class="o">한 번</span>으로.</div>
+</section>
+
+<section class="card" id="s9">
+  <div class="bg" style="background-image:url('photo/p9.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">09 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">해법 ②</div>
+  <div class="headline">신청은<br><span class="o">백그라운드로</span></div>
+  <div class="body">신청 폼을 구글 폼에 조용히 연동.<br>방문자는 페이지 안에서 자연스럽게 신청,<br>강사는 <span class="w">나를 안 거치고 직접</span> 받아봐요.</div>
+</section>
+
+<section class="card" id="s10">
+  <div class="bg" style="background-image:url('photo/p10.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">10 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">해법 ③</div>
+  <div class="headline">페이지는 '끝'이<br><span class="o">아니라 '한 단계'</span></div>
+  <div class="body">유입 → 신청 → 전달로 이어지는<br>흐름의 <span class="w">한 단계</span>로 보니,<br>뭘 자동화할지 분명해졌어요.</div>
+</section>
+
+<section class="card" id="s11">
+  <div class="bg" style="background-image:url('photo/p11.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">11 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">남는 원칙</div>
+  <div class="headline">'잘 만들기'보다<br><span class="o">'손이 덜 가게'</span></div>
+  <div class="body">AI가 제작을 압축할수록,<br>차별화는 제작 <span class="o">'앞뒤'</span>에서 나요.<br>유입·전달·운영이 진짜 경쟁력이에요.</div>
+</section>
+
+<section class="card" id="s12">
+  <div class="bg" style="background-image:url('photo/p12.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">12 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="headline">당신의 일에서<br><span class="o">진짜 병목</span>은<br>어디인가요?</div>
+  <div class="body">'1인 AI 에이전시 만들기' —<br>실제 클라이언트 사례 웹페이지를 만들며<br>배운 판단을 기록합니다.</div>
+  <div class="footer">팔로우하고 다음 편 보기 → <span class="h">@graceandwhy.ai</span></div>
+</section>
+
+<script>
+const s=new URLSearchParams(location.search).get('s');
+if(s){document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+const el=document.getElementById('s'+s);if(el)el.style.display='flex';}
+</script>
+</body></html>

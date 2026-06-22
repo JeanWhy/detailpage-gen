@@ -1,0 +1,119 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#2e2419}
+.card{width:1080px;height:1350px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:92px 84px 84px;
+  font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#F6EFE2;
+  background:linear-gradient(158deg,#8c7359 0%,#614d3b 52%,#3d2f23 100%)}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);
+  filter:brightness(0.6) contrast(1.05) sepia(0.45) saturate(1.45) hue-rotate(-10deg);z-index:0}
+.scrim{position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(34,24,14,0.28) 0%,rgba(34,24,14,0.55) 44%,rgba(28,20,12,0.94) 100%)}
+.topbar{position:absolute;top:0;left:0;right:0;height:8px;background:#E8693B;z-index:3}
+.glow{position:absolute;top:-150px;right:-150px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(244,144,90,0.22),rgba(244,144,90,0));pointer-events:none;z-index:1}
+.header{display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+.label{font-size:26px;letter-spacing:5px;color:#D6C7B0;font-weight:600}
+.count{font-size:26px;color:#D6C7B0;font-weight:600;letter-spacing:2px}
+.spacer{flex:1}
+.date{color:#F6A06A;font-size:40px;font-weight:700;letter-spacing:3px;margin-bottom:30px;z-index:2}
+.kicker{color:#F6A06A;font-size:40px;font-weight:700;margin-bottom:30px;letter-spacing:1px;z-index:2}
+.headline{font-size:90px;font-weight:800;line-height:1.2;letter-spacing:-2px;z-index:2;
+  text-shadow:0 2px 30px rgba(20,12,4,0.6)}
+.cover .headline{font-size:100px;line-height:1.16}
+.body{font-size:40px;line-height:1.6;color:#EBE1CF;margin-top:46px;font-weight:500;z-index:2;
+  text-shadow:0 2px 18px rgba(20,12,4,0.65)}
+.o{color:#F6A06A}
+.w{color:#FFFFFF;font-weight:700}
+.footer{margin-top:56px;font-size:30px;color:#D6C7B0;font-weight:600;z-index:2}
+.footer .h{color:#FFFFFF}
+</style></head><body>
+
+<section class="card cover" id="s1">
+  <div class="bg" style="background-image:url('photo/p1.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">01 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="date">· EP.1 · 심리상담</div>
+  <div class="headline">별점도, 후기도<br><span class="o">못 쓴다면?</span></div>
+  <div class="body">심리상담 페이지엔 규정상 후기를 못 써요.<br>전환의 최강 무기 없이 <span class="w">신뢰를 설계한</span> 이야기.</div>
+</section>
+
+<section class="card" id="s2">
+  <div class="bg" style="background-image:url('photo/p2.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">02 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">왜 어려웠나</div>
+  <div class="headline">가장 센 무기를<br><span class="o">통째로 빼야 했다</span></div>
+  <div class="body">호주 심리상담은 규정상(AHPRA) 후기가 금지.<br>별점·후기·긴급성 —<br>전환 공식의 절반이 <span class="o">못 쓰는 카드</span>였다.</div>
+</section>
+
+<section class="card" id="s3">
+  <div class="bg" style="background-image:url('photo/p3.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">03 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">발상의 전환</div>
+  <div class="headline">후기의 본질은<br><span class="o">'후기'가 아니다</span></div>
+  <div class="body">후기가 하는 진짜 일은 <span class="o">'안심'</span>이다.<br>그럼 후기 없이도 안심을 만들<br>다른 재료를 찾으면 된다.</div>
+</section>
+
+<section class="card" id="s4">
+  <div class="bg" style="background-image:url('photo/p4.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">04 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">방법 ① 자격</div>
+  <div class="headline">자랑이 아니라<br><span class="o">'사실'로 말한다</span></div>
+  <div class="body">'최고의' 같은 말을 다 빼고 검증되는 자격만.<br>심지어 <span class="o">"이런 경우엔 제가 적임자가<br>아닐 수 있어요"</span>까지. 한계 인정이 신뢰가 됐다.</div>
+</section>
+
+<section class="card" id="s5">
+  <div class="bg" style="background-image:url('photo/p5.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">05 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">방법 ② 비용</div>
+  <div class="headline">숨기지 않는 것<br><span class="o">자체가 신뢰다</span></div>
+  <div class="body">많은 곳이 가격을 감춘다. 우리는 공개했다.<br>'얼마 나올지 모르는' 불안이 제일 크니까.<br>투명함이 후기 없이 <span class="o">'정직하다'를 증명</span>했다.</div>
+</section>
+
+<section class="card" id="s6">
+  <div class="bg" style="background-image:url('photo/p6.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">06 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">방법 ③ 안전</div>
+  <div class="headline">전환보다<br><span class="o">'안전'을 앞에</span></div>
+  <div class="body">버튼을 누르게 하기보다,<br>위기의 사람에게 상담 핫라인을 먼저 안내했다.<br><span class="o">"당신을 고객이 아니라 사람으로 본다"</span>는 신호.</div>
+</section>
+
+<section class="card" id="s7">
+  <div class="bg" style="background-image:url('photo/p7.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">07 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">남는 원칙</div>
+  <div class="headline">정직이<br><span class="o">전환 전술이 된다</span></div>
+  <div class="body">신뢰가 전부인 곳 — 헬스케어·법률·교육에선<br><span class="w">'안 파는 듯한 페이지'가 더 잘 판다.</span><br>규제 업종이 아니어도 통하는 원리.</div>
+</section>
+
+<section class="card" id="s8">
+  <div class="bg" style="background-image:url('photo/p8.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">08 / 08</div></div>
+  <div class="spacer"></div>
+  <div class="headline">당신의 업종엔<br>어떤 <span class="o">'안심'</span>이<br>필요할까?</div>
+  <div class="body">'1인 AI 에이전시 만들기' —<br>실제 클라이언트 사례 웹페이지를 만들며<br>배운 판단을 기록합니다.</div>
+  <div class="footer">팔로우하고 다음 편 보기 → <span class="h">@graceandwhy.ai</span></div>
+</section>
+
+<script>
+const s=new URLSearchParams(location.search).get('s');
+if(s){document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+const el=document.getElementById('s'+s);if(el)el.style.display='flex';}
+</script>
+</body></html>
