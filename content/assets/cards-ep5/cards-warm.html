@@ -1,0 +1,185 @@
+<!DOCTYPE html><html><head><meta charset="utf-8">
+<style>
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css');
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{background:#2e2419}
+.card{width:1080px;height:1350px;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;padding:92px 84px 84px;
+  font-family:'Pretendard','Apple SD Gothic Neo','Noto Sans KR',sans-serif;color:#F6EFE2;
+  background:linear-gradient(158deg,#8c7359 0%,#614d3b 52%,#3d2f23 100%)}
+.bg{position:absolute;inset:0;background-size:cover;background-position:center;transform:scale(1.04);
+  filter:brightness(0.6) contrast(1.05) sepia(0.45) saturate(1.45) hue-rotate(-10deg);z-index:0}
+.scrim{position:absolute;inset:0;z-index:0;
+  background:linear-gradient(180deg,rgba(34,24,14,0.28) 0%,rgba(34,24,14,0.55) 44%,rgba(28,20,12,0.94) 100%)}
+.topbar{position:absolute;top:0;left:0;right:0;height:8px;background:#E8693B;z-index:3}
+.glow{position:absolute;top:-150px;right:-150px;width:520px;height:520px;border-radius:50%;
+  background:radial-gradient(circle,rgba(244,144,90,0.22),rgba(244,144,90,0));pointer-events:none;z-index:1}
+.header{display:flex;justify-content:space-between;align-items:flex-start;z-index:2}
+.label{font-size:26px;letter-spacing:5px;color:#D6C7B0;font-weight:600}
+.count{font-size:26px;color:#D6C7B0;font-weight:600;letter-spacing:2px}
+.spacer{flex:1}
+.date{color:#F6A06A;font-size:40px;font-weight:700;letter-spacing:3px;margin-bottom:30px;z-index:2}
+.kicker{color:#F6A06A;font-size:40px;font-weight:700;margin-bottom:30px;letter-spacing:1px;z-index:2}
+.headline{font-size:90px;font-weight:800;line-height:1.2;letter-spacing:-2px;z-index:2;
+  text-shadow:0 2px 30px rgba(20,12,4,0.6)}
+.cover .headline{font-size:96px;line-height:1.16}
+.body{font-size:40px;line-height:1.6;color:#EBE1CF;margin-top:46px;font-weight:500;z-index:2;
+  text-shadow:0 2px 18px rgba(20,12,4,0.65)}
+.step{display:inline-block;font-size:30px;font-weight:700;color:#1f1810;background:#F6A06A;
+  border-radius:999px;padding:6px 26px;margin-bottom:26px;letter-spacing:1px;z-index:2;align-self:flex-start}
+.o{color:#F6A06A}
+.w{color:#FFFFFF;font-weight:700}
+/* before / after */
+.ba{margin-top:44px;z-index:2}
+.xrow{font-size:39px;line-height:1.4;color:#C2A88C;margin-bottom:22px;text-shadow:0 2px 18px rgba(20,12,4,0.65)}
+.vrow{font-size:39px;line-height:1.4;color:#FFFFFF;font-weight:700;text-shadow:0 2px 18px rgba(20,12,4,0.65)}
+.tag{font-weight:800;margin-right:14px}
+.xrow .tag{color:#B0876A}
+.vrow .tag{color:#F6A06A}
+.xrow .k{text-decoration:line-through;text-decoration-color:#E8693B;text-decoration-thickness:3px}
+.vrow .k{color:#F6A06A}
+.footer{margin-top:56px;font-size:30px;color:#D6C7B0;font-weight:600;z-index:2}
+.footer .h{color:#FFFFFF}
+</style></head><body>
+
+<section class="card cover" id="s1">
+  <div class="bg" style="background-image:url('photo/p1.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">01 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="date">· EP.5 · 한글 카피</div>
+  <div class="headline">AI가 쓴 한글은<br><span class="o">왜 어색할까</span></div>
+  <div class="body">문법도 맞고 단어도 맞는데,<br>읽으면 묘하게 사람 말이 아니에요.<br>그 <span class="w">'번역 투'</span>를 걷어낸 이야기.</div>
+</section>
+
+<section class="card" id="s2">
+  <div class="bg" style="background-image:url('photo/p2.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">02 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">증상</div>
+  <div class="headline">문법은 맞는데<br><span class="o">사람 말이 아니다</span></div>
+  <div class="body">"치유를 향한 첫 걸음, 지금 바로 시작하세요."<br>틀린 곳은 없어요. 그런데 어색해요.<br>이걸 <span class="o">'번역 투'</span>라고 불러요.</div>
+</section>
+
+<section class="card" id="s3">
+  <div class="bg" style="background-image:url('photo/p3.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">03 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">사례</div>
+  <div class="headline">심리상담 페이지를<br><span class="o">다듬다가</span></div>
+  <div class="body">AI가 뽑은 한글은 깔끔했어요.<br>근데 소리 내 읽으니 전부<br><span class="w">입에 안 붙었어요.</span></div>
+</section>
+
+<section class="card" id="s4">
+  <div class="bg" style="background-image:url('photo/p4.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">04 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">진짜 원인</div>
+  <div class="headline">단어가 아니라<br><span class="o">'온도'였다</span></div>
+  <div class="body">격식체·피동·한자어가 거리를 만들어요.<br>AI는 단어를 옮기지만,<br><span class="o">'말의 온도'</span>는 못 옮기거든요.</div>
+</section>
+
+<section class="card" id="s5">
+  <div class="bg" style="background-image:url('photo/p5.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">05 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">기준자</div>
+  <div class="headline">감 말고<br><span class="o">'체크리스트'로</span></div>
+  <div class="body">해요체 · 능동 · 긍정 · 존칭 덜기 ·<br>한자어 풀기 — <span class="w">이 다섯 가지를<br>기준 삼아</span> 한 문장씩 통과시켰어요.</div>
+</section>
+
+<section class="card" id="s6">
+  <div class="bg" style="background-image:url('photo/p6.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">06 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">고치기 ①</div>
+  <div class="headline">관공서 말투를<br><span class="o">벗기기</span></div>
+  <div class="ba">
+    <div class="xrow"><span class="tag">✕</span>평온함을 전하겠다는 약속<span class="k">입니다</span></div>
+    <div class="vrow"><span class="tag">✓</span>평온함을 전하겠다는 약속<span class="k">이에요</span></div>
+  </div>
+</section>
+
+<section class="card" id="s7">
+  <div class="bg" style="background-image:url('photo/p7.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">07 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">고치기 ②</div>
+  <div class="headline">피동을<br><span class="o">능동으로</span></div>
+  <div class="ba">
+    <div class="xrow"><span class="tag">✕</span>이름이 <span class="k">변경되나요?</span></div>
+    <div class="vrow"><span class="tag">✓</span>이름이 <span class="k">바뀌나요?</span></div>
+  </div>
+</section>
+
+<section class="card" id="s8">
+  <div class="bg" style="background-image:url('photo/p8.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">08 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">고치기 ③</div>
+  <div class="headline">한자어를<br><span class="o">말하듯이</span></div>
+  <div class="ba">
+    <div class="xrow"><span class="tag">✕</span><span class="k">통화 조율을 통해</span> 시작하실 수 있습니다</div>
+    <div class="vrow"><span class="tag">✓</span><span class="k">통화로 일정을 잡고</span> 시작해 보세요</div>
+  </div>
+</section>
+
+<section class="card" id="s9">
+  <div class="bg" style="background-image:url('photo/p9.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">09 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">고치기 ④</div>
+  <div class="headline">명령 말고<br><span class="o">제안하기</span></div>
+  <div class="ba">
+    <div class="xrow"><span class="tag">✕</span>지금 바로 <span class="k">시작하세요</span></div>
+    <div class="vrow"><span class="tag">✓</span>지금 <span class="k">시작해 보세요</span></div>
+  </div>
+</section>
+
+<section class="card" id="s10">
+  <div class="bg" style="background-image:url('photo/p10.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">10 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="step">고치기 ⑤</div>
+  <div class="headline">딱딱한 단어는<br><span class="o">평소 말로</span></div>
+  <div class="ba">
+    <div class="xrow"><span class="tag">✕</span>정보를 <span class="k">기재해</span> 주세요</div>
+    <div class="vrow"><span class="tag">✓</span>정보를 <span class="k">적어</span> 주세요</div>
+  </div>
+</section>
+
+<section class="card" id="s11">
+  <div class="bg" style="background-image:url('photo/p11.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">11 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="kicker">남는 원칙</div>
+  <div class="headline">마지막 단계는<br><span class="o">'소리 내 읽기'</span></div>
+  <div class="body">AI 한글 카피는 '완성'이 아니라 '초안'.<br>입에 붙는 말로 고쳐 써요.<br>정보가 아니라 <span class="w">'말투'</span>를 바꾸는 거예요.</div>
+</section>
+
+<section class="card" id="s12">
+  <div class="bg" style="background-image:url('photo/p12.jpg')"></div><div class="scrim"></div>
+  <div class="topbar"></div><div class="glow"></div>
+  <div class="header"><div class="label">1인 AI 에이전시 만들기</div><div class="count">12 / 12</div></div>
+  <div class="spacer"></div>
+  <div class="headline">당신의 페이지는<br><span class="o">'사람 말'</span>로<br>말하고 있나요?</div>
+  <div class="body">'1인 AI 에이전시 만들기' —<br>실제 클라이언트 사례 웹페이지를 만들며<br>배운 판단을 기록합니다.</div>
+  <div class="footer">팔로우하고 다음 편 보기 → <span class="h">@graceandwhy.ai</span></div>
+</section>
+
+<script>
+const s=new URLSearchParams(location.search).get('s');
+if(s){document.querySelectorAll('.card').forEach(c=>c.style.display='none');
+const el=document.getElementById('s'+s);if(el)el.style.display='flex';}
+</script>
+</body></html>
