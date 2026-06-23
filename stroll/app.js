@@ -79,7 +79,7 @@ function buildHookStats(){
   const tN=runs.filter(m=>m==='train').length, fN=runs.filter(m=>m==='ferry').length;
   const cells=[[DATA.total_km,'KM'],[stops,'곳 STOPS'],[DATA.n_photos,'컷 MOMENTS']];
   el('#hook-stats').innerHTML =
-    cells.map(c=>`<div class="hk"><b>${c[0]}</b><span>${c[1]}</span></div>`).join('') +
+    `<div class="hk-pill">` + cells.map(c=>`<div class="hk"><b>${c[0]}</b><span>${c[1]}</span></div>`).join('') + `</div>` +
     `<div class="hk-modes">🚶 도보 · 🚆 기차 ×${tN} · ⛴️ 페리 ×${fN}</div>`;
 }
 async function hookSequence(){
