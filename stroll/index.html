@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<title>오늘 하루, 시드니 한 바퀴</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="map"></div>
+<div id="tint"></div>
+<div class="watermark" id="watermark">@graceandwhy.ai</div>
+
+<div id="chip"><span class="mode">📍</span><span class="place">시드니</span><span class="sep"></span><span class="time">--:--</span></div>
+
+<div id="stage"></div>
+
+<div id="bar">
+  <button id="playpause">❚❚</button>
+  <div id="track"></div>
+</div>
+
+<!-- opening hook (export 릴스 전용) -->
+<div class="hook hide" id="hook">
+  <div class="hook-photo" id="hook-photo"></div>
+  <div class="hook-grad"></div>
+  <div class="hook-layer" id="hook-title">
+    <span class="chip c-hey" style="--r:-4deg">Hey 👋</span>
+    <span class="chip c-main" style="--r:1.5deg">One Day Around Sydney</span>
+    <span class="chip c-kr" style="--r:-2.5deg">오늘 하루 · 시드니 한 바퀴</span>
+    <div class="hook-meta">📍 Sydney · 2026.06.21</div>
+  </div>
+  <div class="hook-layer hide" id="hook-stats"></div>
+</div>
+
+<!-- intro -->
+<div class="card" id="intro">
+  <h1>One Day Around Sydney</h1>
+  <div class="kr-line">오늘 하루, 시드니 한 바퀴</div>
+  <div class="date">2026 · 06 · 21</div>
+  <button class="btn" id="start">▶  Follow the day · 하루 따라가기</button>
+  <div class="hint">A June day in photos &amp; clips · 사진과 영상이 그린 하루</div>
+</div>
+
+<!-- outro -->
+<div class="card hide" id="outro">
+  <h1>Home again, what a day</h1>
+  <div class="kr-line">오늘 하루, 잘 다녀왔어요</div>
+  <div class="subline">On foot, by rail, by ferry — and home again<span class="kr">걷고, 타고, 또 걷고 — 집으로 돌아온 하루</span></div>
+  <div class="stats">
+    <div class="stat"><b id="o-km">0</b><span>km · 이동</span></div>
+    <div class="stat"><b id="o-stops">0</b><span>stops · 머문 곳</span></div>
+    <div class="stat"><b id="o-photos">0</b><span>moments · 순간</span></div>
+  </div>
+  <div class="modes" id="o-modes"></div>
+  <div class="route-line" id="o-route"></div>
+  <div class="cta">
+    <div class="cta-msg">📸 내 하루도 · 우리 브랜드 콘텐츠도 이렇게</div>
+    <div class="cta-handle">DM @graceandwhy.ai</div>
+    <div class="cta-sub">EP.6 · 저장 💾 · 친구 태그 👯</div>
+  </div>
+  <button class="btn" id="replay">↺  다시 보기</button>
+</div>
+
+<div class="credit">GPS 사진으로 자동 생성 · base map: OpenStreetMap (Google Maps 전환 예정)</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

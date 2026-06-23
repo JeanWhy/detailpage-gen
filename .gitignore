@@ -41,3 +41,10 @@ deploy/
 # Wrangler local cache
 .wrangler/
 lottie-player/
+
+# Node deps
+node_modules/
+
+# 하루 여행기(stroll): 생성물·대용량·개인 사진 (build_stroll.py / export_reel.js로 재생성)
+stroll/exports/
+stroll/assets/

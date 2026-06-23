@@ -15,6 +15,7 @@ const TYPES = {
   '.jpg': 'image/jpeg', '.jpeg': 'image/jpeg',
   '.png': 'image/png', '.svg': 'image/svg+xml',
   '.webp': 'image/webp', '.ico': 'image/x-icon',
+  '.mp4': 'video/mp4', '.webm': 'video/webm', '.mov': 'video/quicktime',
 };
 
 http.createServer((req, res) => {
@@ -22,9 +23,26 @@ http.createServer((req, res) => {
   if (urlPath === '/') urlPath = '/index.html';
   const filePath = path.join(root, urlPath);
   if (!filePath.startsWith(root)) { res.writeHead(403); return res.end('Forbidden'); }
-  fs.readFile(filePath, (err, data) => {
-    if (err) { res.writeHead(404); return res.end('Not found'); }
-    res.writeHead(200, { 'Content-Type': TYPES[path.extname(filePath).toLowerCase()] || 'application/octet-stream' });
-    res.end(data);
+  fs.stat(filePath, (err, stat) => {
+    if (err || !stat.isFile()) { res.writeHead(404); return res.end('Not found'); }
+    const type = TYPES[path.extname(filePath).toLowerCase()] || 'application/octet-stream';
+    const range = req.headers.range;
+    if (range) {
+      // partial content for media seeking/streaming
+      const m = /bytes=(\d*)-(\d*)/.exec(range);
+      let start = m && m[1] ? parseInt(m[1], 10) : 0;
+      let end = m && m[2] ? parseInt(m[2], 10) : stat.size - 1;
+      if (start > end || end >= stat.size) end = stat.size - 1;
+      res.writeHead(206, {
+        'Content-Type': type,
+        'Accept-Ranges': 'bytes',
+        'Content-Range': `bytes ${start}-${end}/${stat.size}`,
+        'Content-Length': end - start + 1,
+      });
+      fs.createReadStream(filePath, { start, end }).pipe(res);
+    } else {
+      res.writeHead(200, { 'Content-Type': type, 'Accept-Ranges': 'bytes', 'Content-Length': stat.size });
+      fs.createReadStream(filePath).pipe(res);
+    }
   });
 }).listen(port, () => console.log(`Preview at http://localhost:${port} (root: ${root})`));
