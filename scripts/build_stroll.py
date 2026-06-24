@@ -28,41 +28,43 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 DEFAULT_SRC = "/Users/jean/Documents/Today's stroll/Photos-3-001"
 OUT = os.path.join(ROOT, "stroll")
 
-# ── 수동 보정 ───────────────────────────────────────────────
-# 이동수단을 GPS만으로 100% 맞히긴 어려워서, 여기서 구간을 바로잡는다.
-# WAYPOINTS: 사진이 없는 경유지(환승역·귀가 등)를 끼워넣는다.
-#   after_index = 이 인덱스의 정류장 "다음"에 삽입 (0 = 첫 정류장 뒤, "end" = 맨 끝에 추가)
-#   mode        = 경유지로 들어가는 이동수단,  icon = 지도 마커(기본 🚉)
-WAYPOINTS = [
-    {"after_index": 0, "name": "Milsons Point역", "lat": -33.8466, "lon": 151.2112,
-     "time": "11:58", "mode": "train"},
-    {"after_index": "end", "name": "Wynyard역", "lat": -33.8659, "lon": 151.2058,
-     "time": "15:48", "mode": "walk"},
-    {"after_index": "end", "name": "Home 🏠", "lat": -33.79656, "lon": 151.18002,
-     "time": "16:20", "mode": "train", "icon": "🏠"},
-]
-# MODE_OVERRIDES: 특정 정류장으로 들어가는 구간의 이동수단 강제 (name 기준)
-MODE_OVERRIDES = {}   # 예: {"The Rocks": "ferry"}
-# NAME_OVERRIDES: 역지오코딩이 애매하게 잡은 지명을 보기 좋게 교정
-NAME_OVERRIDES = {"Brown Street": "Home 🏠", "Chatswood": "Home 🏠"}
-# HERO_PHOTOS: 오프닝 훅에 쓸 대표 컷(주인공 셀카 등). 첫 장 = 풀스크린 히어로
-HERO_PHOTOS = ["20260621_141107.jpg", "20260621_141105.jpg"]
-# MERGE: GPS 노이즈로 잘게 쪼개진 연속 정류장을 하나로 합친다(지그재그 제거).
-#   names = 합칠 대상 지명들,  into = 합쳐진 하나의 정류장(이름·대표 좌표)
-MERGE = [
-    {"names": ["페리 위", "Dawes Point", "Barangaroo"],
-     "into": {"name": "Darling Harbour", "lat": -33.8668, "lon": 151.2007}},
-]
-# RAIL_ROUTES: 기차 구간을 실제 지나는 역들로 그린다(노선도 스타일).
-#   between = [출발 정류장명, 도착 정류장명],  stations = 통과 역(순서대로, OSM에서 좌표 자동 조회)
-RAIL_ROUTES = [
-    {"between": ["Home 🏠", "Milsons Point역"],
-     "stations": ["Chatswood", "Artarmon", "St Leonards", "Wollstonecraft",
-                  "Waverton", "North Sydney", "Milsons Point"]},
-    {"between": ["Wynyard역", "Home 🏠"],
-     "stations": ["Wynyard", "Milsons Point", "North Sydney", "Waverton",
-                  "Wollstonecraft", "St Leonards", "Artarmon", "Chatswood"]},
-]
+# ── 수동 보정값(이벤트 브리프) ─────────────────────────────────
+# GPS는 "어디·언제"(뼈대)만 준다. "무슨 이벤트·집·출발선·제목·톤" 같은 의미는
+# 그날 거기 있던 사람만 안다 → 폴더별 brief.json에서 주입한다(없으면 순수 자동).
+# 스키마:
+#   title           오프닝/마무리 제목 (없으면 "오늘 하루")
+#   date            "YYYY.MM.DD" (없으면 사진 EXIF에서 자동)
+#   waypoints[]     사진 없는 경유지(환승역·귀가). after_index(0=첫 정류장 뒤,"end"=맨끝),
+#                   name, lat, lon, time, mode, icon(기본 🚉)
+#   mode_overrides{}  특정 정류장으로 들어가는 구간 이동수단 강제 (name 기준)
+#   name_overrides{}  역지오코딩이 애매하게 잡은 지명 교정
+#   hero_photos[]   오프닝 훅 대표 컷(첫 장=풀스크린 히어로). 비우면 첫 사진 자동
+#   merge[]         GPS 노이즈로 쪼개진 연속 정류장 병합. names[], into{name,lat,lon}
+#   rail_routes[]   기차 구간을 실제 통과 역들로 그림. between[출발명,도착명], stations[]
+# 예시는 시드니 폴더의 brief.json 참고.
+WAYPOINTS = []
+MODE_OVERRIDES = {}
+NAME_OVERRIDES = {}
+HERO_PHOTOS = []
+MERGE = []
+RAIL_ROUTES = []
+
+
+def load_brief(src):
+    """폴더별 이벤트 브리프(brief.json)를 읽어 수동 보정값으로 주입한다."""
+    p = os.path.join(src, "brief.json")
+    if os.path.exists(p):
+        b = json.load(open(p, encoding="utf-8"))
+        print(f"      브리프: {os.path.basename(p)}  «{b.get('title','(제목 자동)')}»")
+    else:
+        b = {}
+        print("      브리프 없음 → 순수 자동 (제목·이동수단 GPS로만 추정)")
+    for k, d in (("waypoints", []), ("mode_overrides", {}), ("name_overrides", {}),
+                 ("hero_photos", []), ("merge", []), ("rail_routes", []),
+                 ("landmarks", []), ("force_mode", None), ("collapse_dupes", False),
+                 ("copy", {})):
+        b.setdefault(k, d)
+    return b
 # ────────────────────────────────────────────────────────────
 
 GPSIFD = {v: k for k, v in ExifTags.GPSTAGS.items()}
@@ -283,8 +285,8 @@ def google_leg(a, b, mode):
         return None
     base = "https://maps.googleapis.com/maps/api/directions/json"
     try:
-        if mode in ("walk", "ride"):
-            gm = "walking" if mode == "walk" else "driving"
+        if mode in ("walk", "ride", "run"):
+            gm = "driving" if mode == "ride" else "walking"  # 러닝도 보도 경로(walking)로 스냅
             d = curl_json(f"{base}?origin={a[0]},{a[1]}&destination={b[0]},{b[1]}&mode={gm}&key={GKEY}")
             if d.get("status") != "OK":
                 return None
@@ -312,9 +314,9 @@ def google_leg(a, b, mode):
         return None
 
 def leg_geom(a, b, mode):
-    if mode in ("walk", "ride"):
+    if mode in ("walk", "ride", "run"):
         try:
-            g = valhalla(a, b, "pedestrian" if mode == "walk" else "auto")
+            g = valhalla(a, b, "auto" if mode == "ride" else "pedestrian")
             if g and len(g) >= 2: return g
         except Exception as e:
             print(f"   valhalla fail ({e}); arc fallback")
@@ -388,6 +390,12 @@ def main():
     if not os.path.isdir(src):
         sys.exit(f"소스 폴더 없음: {src}")
 
+    global WAYPOINTS, MODE_OVERRIDES, NAME_OVERRIDES, HERO_PHOTOS, MERGE, RAIL_ROUTES
+    BRIEF = load_brief(src)
+    WAYPOINTS = BRIEF["waypoints"]; MODE_OVERRIDES = BRIEF["mode_overrides"]
+    NAME_OVERRIDES = BRIEF["name_overrides"]; HERO_PHOTOS = BRIEF["hero_photos"]
+    MERGE = BRIEF["merge"]; RAIL_ROUTES = BRIEF["rail_routes"]
+
     print(f"[1/5] 미디어 읽기 + 리사이즈  ({src})")
     media = extract_media(src)
     print(f"      사진 {sum(1 for m in media if m['type']=='photo')}장, "
@@ -414,6 +422,12 @@ def main():
         prev_t1 = c[-1]["t"]
     print(f"      {len(stops)}개 정류장")
 
+    # force_mode: 전 구간 한 가지 이동수단으로 고정(예: 러닝 이벤트) → 속도 오분류 무력화
+    if BRIEF["force_mode"]:
+        for s in stops[1:]:
+            s["mode_in"] = BRIEF["force_mode"]
+        print(f"      이동수단 고정 → {BRIEF['force_mode']}")
+
     print("[3/5] 역지오코딩 (지명 자동)")
     for s in stops:
         nm = geocode(s["lat"], s["lon"])
@@ -423,6 +437,11 @@ def main():
     for i, s in enumerate(stops):
         if s["mode_in"] == "ferry" and i > 0 and stops[i-1]["mode_in"] == "ferry":
             s["name"] = "페리 위"
+    # landmarks: 좌표로 아는 지점 이름을 덮어쓴다(출발선·반환점·집 등). 먼저 잡힌 것 우선.
+    for s in stops:
+        for lm in BRIEF["landmarks"]:
+            if hav((s["lat"], s["lon"]), (lm["lat"], lm["lon"])) <= lm.get("r", 120):
+                s["name"] = lm["name"]; break
     # 연속 노이즈 정류장 병합 (지그재그 제거)
     def find_merge(name):
         for mg in MERGE:
@@ -445,6 +464,19 @@ def main():
         else:
             merged_stops.append(stops[i]); i += 1
     stops = merged_stops
+
+    # collapse_dupes: 연속으로 같은 이름인 정류장을 하나로(landmarks 후 지그재그 정리)
+    if BRIEF["collapse_dupes"]:
+        collapsed = []
+        for s in stops:
+            if collapsed and collapsed[-1]["name"] == s["name"]:
+                collapsed[-1]["t1"] = s["t1"]
+                collapsed[-1]["media"] += s["media"]
+            else:
+                collapsed.append(s)
+        if len(collapsed) < len(stops):
+            print(f"      연속 중복 병합 {len(stops)} → {len(collapsed)}곳")
+        stops = collapsed
 
     # 경유지(환승역·귀가) 삽입
     def wp_stop(wp):
@@ -500,12 +532,14 @@ def main():
         km = geom_len(lg["geom"]) / 1000
         a = agg.setdefault(lg["mode"], {"km": 0.0, "count": 0})
         a["km"] += km; a["count"] += 1
-    LABEL = {"walk": "도보", "ferry": "페리", "train": "기차", "ride": "차"}
+    LABEL = {"walk": "도보", "ferry": "페리", "train": "기차", "ride": "차", "run": "러닝"}
     modes = [{"mode": k, "label": LABEL.get(k, k), "km": round(v["km"], 1), "count": v["count"]}
              for k, v in sorted(agg.items(), key=lambda kv: -kv[1]["km"])]
     total = sum(v["km"] for v in agg.values())
     real_stops = [s for s in stops if not s.get("waypoint")]
-    data = {"title": "오늘 하루, 시드니 한 바퀴", "date": "2026.06.21",
+    data = {"title": BRIEF.get("title") or "오늘 하루",
+            "date": BRIEF.get("date") or media[0]["t"].strftime("%Y.%m.%d"),
+            "copy": BRIEF["copy"],
             "total_km": round(total, 1),
             "n_photos": sum(1 for m in media if m["type"] == "photo"),
             "n_videos": sum(1 for m in media if m["type"] == "video"),

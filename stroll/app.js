@@ -5,6 +5,7 @@
 const MODE = {
   start: { emoji:'📍', cls:'',      zoom:16 },
   walk:  { emoji:'🚶', cls:'',      zoom:16 },
+  run:   { emoji:'🏃', cls:'',      zoom:16 },
   ferry: { emoji:'⛴️', cls:'ferry', zoom:14.5 },
   train: { emoji:'🚆', cls:'train', zoom:13.5 },
   ride:  { emoji:'🚗', cls:'ride',  zoom:15 },
@@ -29,8 +30,30 @@ const EXPORT = new URLSearchParams(location.search).has('export');  // 릴스 �
 const MK = EXPORT ? 2 : 1;   // export(1080x1920)에선 지도 마커도 2배로
 const ZB = EXPORT ? 1 : 0;   // export는 뷰포트가 2배라 줌을 +1 당겨 같은 프레이밍 유지
 
+// 카피 주입: brief의 copy{}로 훅·인트로·아웃트로 문구를 덮어쓴다(없으면 HTML 기본=시드니 유지)
+function setText(sel, val){ if(val==null) return; const n=document.querySelector(sel); if(n) n.textContent=val; }
+function applyCopy(){
+  const c = DATA.copy || {};
+  if(DATA.date) setText('#intro .date', DATA.date.replace(/\./g,' · '));
+  setText('#hook-title .c-main', c.hook_title_en);
+  setText('#hook-title .c-kr',   c.hook_title_kr);
+  setText('#hook-title .hook-meta', c.hook_meta);
+  setText('#intro h1', c.intro_title);
+  setText('#intro .kr-line', c.intro_kr);
+  setText('#intro .hint', c.intro_hint);
+  setText('#start', c.intro_btn);
+  setText('#outro h1', c.outro_title);
+  setText('#outro .kr-line', c.outro_kr);
+  if(c.outro_sub_en || c.outro_sub_kr){
+    const sub=document.querySelector('#outro .subline');
+    if(sub){ const kr=sub.querySelector('.kr');
+      sub.innerHTML=(c.outro_sub_en||'')+`<span class="kr">${c.outro_sub_kr||(kr?kr.textContent:'')}</span>`; }
+  }
+}
+
 async function boot(){
   DATA = await (await fetch('data.json')).json();
+  applyCopy();
 
   map = L.map('map',{ zoomControl:false, attributionControl:false, zoomSnap:0.25 });
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
@@ -53,7 +76,7 @@ async function boot(){
   el('#o-stops').textContent = new Set(DATA.stops.filter(s=>!s.waypoint).map(s=>s.name)).size;
   el('#o-photos').textContent = DATA.n_photos;
   el('#o-route').innerHTML = uniqueRouteNames().join('<span class="arrow">→</span>');
-  const MODE_EN={walk:'Walk',train:'Train',ferry:'Ferry',ride:'Ride'};
+  const MODE_EN={walk:'Walk',run:'Run',train:'Train',ferry:'Ferry',ride:'Ride'};
   el('#o-modes').innerHTML = (DATA.modes||[]).map(m=>{
     const emoji=(MODE[m.mode]||MODE.walk).emoji;
     return `<span class="mchip"><i>${emoji}</i> ${MODE_EN[m.mode]||m.mode} ${m.km}km<span class="kr">${m.label}</span></span>`;
@@ -74,13 +97,15 @@ async function boot(){
 // 오프닝 훅: 히어로 셀카 → 스탯 티저 → 사진 플래시 → 지도로 전환
 function buildHookStats(){
   const stops=new Set(DATA.stops.filter(s=>!s.waypoint).map(s=>s.name)).size;
-  const runs=[]; let prev=null;
-  (DATA.legs||[]).forEach(l=>{ if(l.mode!==prev){ runs.push(l.mode); prev=l.mode; } });
-  const tN=runs.filter(m=>m==='train').length, fN=runs.filter(m=>m==='ferry').length;
+  // 이동수단 줄: data.modes에서 동적 생성 (러닝/도보/기차/페리 무엇이든 자동)
+  const modeStr=(DATA.modes||[]).map(m=>{
+    const e=(MODE[m.mode]||MODE.walk).emoji;
+    return `${e} ${m.label}${m.count>1?' ×'+m.count:''}`;
+  }).join(' · ');
   const cells=[[DATA.total_km,'KM'],[stops,'곳 STOPS'],[DATA.n_photos,'컷 MOMENTS']];
   el('#hook-stats').innerHTML =
     `<div class="hk-pill">` + cells.map(c=>`<div class="hk"><b>${c[0]}</b><span>${c[1]}</span></div>`).join('') + `</div>` +
-    `<div class="hk-modes">🚶 도보 · 🚆 기차 ×${tN} · ⛴️ 페리 ×${fN}</div>`;
+    `<div class="hk-modes">${modeStr}</div>`;
 }
 async function hookSequence(){
   const hook=el('#hook'), photo=el('#hook-photo'), H=DATA.hook||{};
