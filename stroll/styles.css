@@ -133,14 +133,17 @@ html,body{height:100%;font-family:'Pretendard','Apple SD Gothic Neo',system-ui,s
 .hook-grad{position:absolute;inset:0;background:linear-gradient(180deg,transparent 0%,transparent 72%,rgba(14,13,18,.32) 100%)}
 .hook-layer{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#fff;padding:18% 24px 0}
 .hook-meta{margin-top:16px;font-size:15px;letter-spacing:2px;color:#fff;opacity:0;text-shadow:0 1px 8px rgba(0,0,0,.5)}
-#hook-title{transition:opacity .4s, transform .5s ease}
+#hook-title{justify-content:flex-start;padding-top:11%;transition:opacity .4s, transform .5s ease}
 #hook-title.out{opacity:0;transform:translateY(-22px)}
 /* 글로시 말풍선 칩 — 통통 튀며 팝업 */
 .chip{display:inline-block;margin:6px 0;padding:10px 22px;border-radius:999px;font-weight:800;letter-spacing:-.3px;
   box-shadow:0 9px 22px rgba(0,0,0,.3), inset 0 2px 0 rgba(255,255,255,.45);
   transform:scale(0) rotate(var(--r,0deg));opacity:0;transform-origin:center}
 .c-hey{background:linear-gradient(180deg,#2ed3c0,#16c2ae);color:#fff;font-size:21px}
-.c-main{background:linear-gradient(180deg,#ffffff,#f1ece3);color:#2b2724;font-size:33px;padding:13px 28px}
+.c-main{background:linear-gradient(180deg,#ffffff,#f1ece3);color:#2b2724;font-size:33px;padding:13px 28px;position:relative;overflow:hidden}
+.c-main::after{content:"";position:absolute;top:0;left:-65%;width:55%;height:100%;
+  background:linear-gradient(100deg,transparent,rgba(255,255,255,.9),transparent);
+  transform:skewX(-18deg);opacity:0;pointer-events:none}
 .c-kr{background:linear-gradient(180deg,#ff8b7e,#ff6b5e);color:#fff;font-size:18px}
 #hook-title.go .chip{animation:chippop .62s cubic-bezier(.18,1.55,.4,1) forwards}
 #hook-title.go .c-hey{animation-delay:0s}
@@ -149,6 +152,12 @@ html,body{height:100%;font-family:'Pretendard','Apple SD Gothic Neo',system-ui,s
 #hook-title.go .hook-meta{animation:metafade .5s ease .62s forwards}
 @keyframes chippop{0%{transform:scale(0) rotate(var(--r));opacity:0}55%{opacity:1}100%{transform:scale(1) rotate(var(--r));opacity:1}}
 @keyframes metafade{from{opacity:0;transform:translateY(8px)}to{opacity:.95;transform:translateY(0)}}
+/* 시네마틱 강화: 칩 위로 빛이 한 번 훑는 글로시 샤인 + 착지 후 미세 플로팅(텍스트는 정지=선명) */
+#hook-title.go .c-main::after{animation:shine 1.15s ease 1s forwards}
+@keyframes shine{0%{left:-65%;opacity:0}25%{opacity:.95}100%{left:135%;opacity:0}}
+#hook-title.go:not(.out){animation:hookfloat 3.6s ease-in-out 1.2s infinite}
+@keyframes hookfloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+#hook-title.out{animation:none}
 /* 칩/스탯 레이어는 숨길 때 완전히 제거(backdrop-filter·배경이 히어로를 흐리지 않도록) */
 #hook-stats.hide,#hook-title.hide{display:none}
 #hook-stats{justify-content:center;flex-direction:column;align-items:center;gap:0}
@@ -170,6 +179,7 @@ html,body{height:100%;font-family:'Pretendard','Apple SD Gothic Neo',system-ui,s
 
 /* ---- 릴스 세로영상 export 레이아웃: 1080x1920 네이티브 캡처용, UI 2배 ---- */
 body.export .hook-layer{padding:18% 60px 0}
+body.export #hook-title{padding-top:10%}   /* 타이틀 칩은 인물 얼굴 피해 상단으로 */
 body.export .chip{margin:11px 0;padding:18px 40px;border-radius:999px}
 body.export .c-hey{font-size:40px}
 body.export .c-main{font-size:62px;padding:24px 52px}

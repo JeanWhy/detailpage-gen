@@ -108,28 +108,17 @@ function buildHookStats(){
     `<div class="hk-modes">${modeStr}</div>`;
 }
 async function hookSequence(){
-  const hook=el('#hook'), photo=el('#hook-photo'), H=DATA.hook||{};
+  // 인트로는 ~2.4초로 짧게: 히어로+타이틀만 보여주고 바로 지도로(차별점=지도 미디어를 3초 안에).
+  // 스탯 티저·플래시 몽타주는 마무리에서 다시 나오므로 인트로에선 생략.
+  const hook=el('#hook'), H=DATA.hook||{};
   if(!H.hero) return;
-  // 히어로(밝은 스티커)를 잠깐 보여준 뒤 말풍선 칩 팝업
-  await sleep(800);
+  await sleep(400);
   el('#hook-title').classList.add('go');
-  await sleep(2100);
-  // Beat 2 — 스탯 티저
+  await sleep(1400);
   el('#hook-title').classList.add('out');
-  buildHookStats();
-  const hs=el('#hook-stats'); hs.classList.remove('hide');
-  requestAnimationFrame(()=>hs.classList.add('in'));
-  await sleep(1500);
-  // Beat 3 — 사진 플래시 몽타주
-  hs.classList.add('out'); el('#hook-title').classList.add('hide');
-  for(const src of (H.flash||[]).slice(0,4)){
-    photo.style.backgroundImage=`url("${src}")`;   // 정적 스왑(줌 없이)
-    await sleep(360);
-  }
-  await sleep(140);
-  // 지도로 전환
-  hook.classList.add('zoomout');
-  await sleep(550);
+  await sleep(150);
+  hook.classList.add('zoomout');   // 지도로 전환
+  await sleep(500);
   hook.classList.add('hide');
 }
 
@@ -238,12 +227,17 @@ function dropStopDot(stop){
 
 async function showStop(stop, tok){
   const stage=el('#stage');
-  const photos=EXPORT?stop.media.slice(0,3):stop.media;   // 릴스는 정류장당 3장까지 빠르게
+  // 연출 룰: 출발·결승 등 feature stop = 여러 장 느긋하게 / 러닝 구간 = 1장 빠르게
+  const isFeat=!!stop.feature;
+  const cap=isFeat?(EXPORT?5:6):1;
+  const photos=stop.media.slice(0,cap);
   for(let i=0;i<photos.length;i++){
     if(tok!==cancelToken) return;
     const m=photos[i];
     const isVid=m.type==='video';
-    const dwell=EXPORT?(isVid?1500:520):(isVid?2600:(photos.length>6?760:1100));
+    const dwell=EXPORT
+      ? (isVid?(isFeat?1700:1300):(isFeat?780:560))
+      : (isVid?2600:(isFeat?1300:1100));
     const rot=(Math.sin(stop.id*3+i*1.7)*4).toFixed(1);
     const card=document.createElement('div');
     card.className='polaroid';

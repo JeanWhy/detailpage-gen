@@ -48,9 +48,9 @@ const URL = `http://localhost:${PORT}/?export=1`;
 
   console.log('▶ ffmpeg 변환 → 인스타 규격 mp4 (1080x1920, H.264 고화질)…');
   // 캡처가 이미 1080x1920이므로 업스케일 없음 — 고화질 재인코딩만
-  // 훅 구간(t<=6.5s)에만 밝기/채도 보정 → 히어로·칩을 원본처럼 쨍하게 (지도/다른 사진은 그대로)
+  // 훅 구간(t<=3.0s, 인트로 단축)에만 밝기/채도 보정 → 히어로·칩 쨍하게 (지도/다른 사진은 그대로)
   execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-i', webm,
-    '-vf', "scale=1080:1920:flags=lanczos,eq=gamma=1.4:saturation=1.25:contrast=1.05:enable='lte(t\\,6.5)',eq=saturation=1.13:contrast=1.04:enable='gt(t\\,6.5)',fps=30",
+    '-vf', "scale=1080:1920:flags=lanczos,eq=gamma=1.4:saturation=1.25:contrast=1.05:enable='lte(t\\,3.0)',eq=saturation=1.13:contrast=1.04:enable='gt(t\\,3.0)',fps=30",
     '-c:v', 'libx264', '-profile:v', 'high', '-pix_fmt', 'yuv420p', '-crf', '17',
     '-preset', 'slow', '-movflags', '+faststart', OUT], { stdio: 'inherit' });
   fs.unlinkSync(webm);

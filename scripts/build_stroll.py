@@ -48,6 +48,8 @@ NAME_OVERRIDES = {}
 HERO_PHOTOS = []
 MERGE = []
 RAIL_ROUTES = []
+HERO_MASK = None   # 히어로 컷아웃에서 지울 영역 [x0,y0,x1,y1] (0~1 비율) — 같이 잡힌 타인 제거용
+HERO_CUTOUT = True  # False면 컷아웃/흰 테두리 없이 보정한 사진 그대로 히어로로
 
 
 def load_brief(src):
@@ -62,7 +64,7 @@ def load_brief(src):
     for k, d in (("waypoints", []), ("mode_overrides", {}), ("name_overrides", {}),
                  ("hero_photos", []), ("merge", []), ("rail_routes", []),
                  ("landmarks", []), ("force_mode", None), ("collapse_dupes", False),
-                 ("copy", {})):
+                 ("copy", {}), ("hero_mask", None), ("hero_cutout", True)):
         b.setdefault(k, d)
     return b
 # ────────────────────────────────────────────────────────────
@@ -348,16 +350,11 @@ def make_hero_sticker(orig_path):
     # 원본 고해상도에서 생성 → Ken Burns 줌해도 선명(번짐 방지). 채도/대비/샤픈으로 쨍하게.
     from PIL import Image, ImageEnhance, ImageFilter, ImageOps
     outdir = os.path.join(OUT, "assets/hook"); os.makedirs(outdir, exist_ok=True)
-    outp = os.path.join(outdir, "hero-sticker.png")
-    rel = "assets/hook/hero-sticker.png"
+    stem = os.path.splitext(os.path.basename(orig_path))[0]   # 소스별 캐시(데이터셋 바뀌면 새로 생성)
+    outp = os.path.join(outdir, f"hero-{stem}.png")
+    rel = f"assets/hook/hero-{stem}.png"
     if os.path.exists(outp) and os.path.getmtime(outp) >= os.path.getmtime(orig_path):
         return rel
-    try:
-        from rembg import remove, new_session
-        hseg = new_session("u2net_human_seg")     # 사람만 분리(기둥 등 전경 제외)
-    except Exception as e:
-        print(f"   rembg 없음 → 스티커 건너뜀 ({e})")
-        return None
     TW = 1600                                            # 뷰포트 1080 + 줌 여유분
     base = ImageOps.exif_transpose(Image.open(orig_path).convert("RGB"))
     if base.width != TW:
@@ -367,10 +364,56 @@ def make_hero_sticker(orig_path):
     base = ImageEnhance.Contrast(base).enhance(1.1)
     base = base.filter(ImageFilter.UnsharpMask(radius=2, percent=90, threshold=2))
     W, H = base.size
+    if not HERO_CUTOUT:                  # 컷아웃/흰 테두리 없이 보정한 사진 그대로 히어로로
+        base.convert("RGB").save(outp, quality=94)
+        print(f"   히어로(컷아웃·테두리 없이 보정 사진) → {rel}")
+        return rel
+    try:
+        from rembg import remove, new_session
+        hseg = new_session("u2net_human_seg")     # 사람만 분리(기둥 등 전경 제외)
+    except Exception as e:
+        print(f"   rembg 없음 → 스티커 건너뜀 ({e})")
+        return None
     bg = base
     cut = remove(base.convert("RGBA"), session=hseg)
     alpha = cut.split()[3]
-    dil = alpha.filter(ImageFilter.MaxFilter(55)).filter(ImageFilter.GaussianBlur(1.5)).point(lambda v: 255 if v > 40 else 0)
+    # 컷아웃에 같이 잡힌 '떨어진 타인'(중앙 주제와 안 붙은 가장자리 조각) 제거
+    try:
+        import numpy as np
+        from scipy import ndimage
+        am = np.array(alpha); mask = am > 60
+        lbl, n = ndimage.label(mask)
+        if n > 1:
+            sizes = ndimage.sum(mask, lbl, range(1, n + 1))
+            big_idx = int(np.argmax(sizes)) + 1; big = sizes.max()
+            xs = np.indices(mask.shape)[1]
+            keep = np.zeros_like(mask)
+            for i in range(1, n + 1):
+                if sizes[i - 1] < big * 0.04:        # 자잘한 노이즈 무시
+                    continue
+                comp = lbl == i
+                cx = xs[comp].mean()                 # 조각의 가로 중심
+                if i == big_idx or (0.20 * W <= cx <= 0.90 * W):
+                    keep |= comp                     # 가장 큰 덩어리 + 중앙대 조각만 유지
+            alpha = Image.fromarray(np.where(keep, am, 0).astype("uint8"))
+            cut = Image.merge("RGBA", (*cut.split()[:3], alpha))
+            if int(n) - 1:
+                print(f"   컷아웃 조각 {n}개 중 가장자리 타인 정리")
+    except Exception as e:
+        print(f"   컷아웃 정리 건너뜀 ({e})")
+    # 브리프 지정 영역(같이 잡힌 타인 등) 비우기 — [x0,y0,x1,y1] 비율, 가장자리는 부드럽게
+    if HERO_MASK:
+        from PIL import ImageDraw
+        x0, y0, x1, y1 = HERO_MASK
+        clr = Image.new("L", (W, H), 255)
+        ImageDraw.Draw(clr).rectangle([int(x0*W), int(y0*H), int(x1*W), int(y1*H)], fill=0)
+        clr = clr.filter(ImageFilter.GaussianBlur(8))
+        import numpy as _np
+        alpha = Image.fromarray((_np.array(alpha) * (_np.array(clr)/255.0)).astype("uint8"))
+        cut = Image.merge("RGBA", (*cut.split()[:3], alpha))
+        print(f"   히어로 마스크 적용 {HERO_MASK}")
+    # 흰 테두리: 실루엣을 자연스럽게 따라가는 얇은 윤곽(과한 두께 X)
+    dil = alpha.filter(ImageFilter.MaxFilter(23)).filter(ImageFilter.GaussianBlur(2.2)).point(lambda v: 255 if v > 80 else 0)
     white = Image.new("RGBA", (W, H), (255, 255, 255, 255)); white.putalpha(dil)
     sh_a = dil.filter(ImageFilter.GaussianBlur(20)).point(lambda v: int(v * 0.45))
     sh = Image.new("RGBA", (W, H), (20, 20, 28, 255)); sh.putalpha(sh_a)
@@ -390,11 +433,12 @@ def main():
     if not os.path.isdir(src):
         sys.exit(f"소스 폴더 없음: {src}")
 
-    global WAYPOINTS, MODE_OVERRIDES, NAME_OVERRIDES, HERO_PHOTOS, MERGE, RAIL_ROUTES
+    global WAYPOINTS, MODE_OVERRIDES, NAME_OVERRIDES, HERO_PHOTOS, MERGE, RAIL_ROUTES, HERO_MASK, HERO_CUTOUT
     BRIEF = load_brief(src)
     WAYPOINTS = BRIEF["waypoints"]; MODE_OVERRIDES = BRIEF["mode_overrides"]
     NAME_OVERRIDES = BRIEF["name_overrides"]; HERO_PHOTOS = BRIEF["hero_photos"]
-    MERGE = BRIEF["merge"]; RAIL_ROUTES = BRIEF["rail_routes"]
+    MERGE = BRIEF["merge"]; RAIL_ROUTES = BRIEF["rail_routes"]; HERO_MASK = BRIEF["hero_mask"]
+    HERO_CUTOUT = BRIEF["hero_cutout"]
 
     print(f"[1/5] 미디어 읽기 + 리사이즈  ({src})")
     media = extract_media(src)
@@ -441,7 +485,10 @@ def main():
     for s in stops:
         for lm in BRIEF["landmarks"]:
             if hav((s["lat"], s["lon"]), (lm["lat"], lm["lon"])) <= lm.get("r", 120):
-                s["name"] = lm["name"]; break
+                s["name"] = lm["name"]
+                if lm.get("feature"):     # 출발·결승·기념 등 = 여러 장 느긋하게(연출)
+                    s["feature"] = True
+                break
     # 연속 노이즈 정류장 병합 (지그재그 제거)
     def find_merge(name):
         for mg in MERGE:
