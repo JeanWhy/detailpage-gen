@@ -293,13 +293,16 @@ def google_leg(a, b, mode):
             if d.get("status") != "OK":
                 return None
             return [[round(p[0], 6), round(p[1], 6)] for p in decode_polyline5(d["routes"][0]["overview_polyline"]["points"])]
-        # transit: 기차/페리 — 실제 노선 step만 추출
+        # transit: 기차/트램/페리 — 실제 노선 step만 추출
         dep = int(time.time()) + 86400
-        tm = "&transit_mode=train" if mode == "train" else ""
+        tm = {"train": "&transit_mode=train", "tram": "&transit_mode=tram"}.get(mode, "")
         d = curl_json(f"{base}?origin={a[0]},{a[1]}&destination={b[0]},{b[1]}&mode=transit{tm}&departure_time={dep}&key={GKEY}")
         if d.get("status") != "OK":
             return None
-        want = ("HEAVY_RAIL", "RAIL", "COMMUTER_TRAIN", "SUBWAY", "METRO_RAIL", "HIGH_SPEED_TRAIN") if mode == "train" else ("FERRY",)
+        WANT = {"train": ("HEAVY_RAIL", "RAIL", "COMMUTER_TRAIN", "SUBWAY", "METRO_RAIL", "HIGH_SPEED_TRAIN"),
+                "tram": ("TRAM", "LIGHT_RAIL", "STREET_CAR", "CABLE_CAR"),
+                "ferry": ("FERRY",)}
+        want = WANT.get(mode, ("FERRY",))
         seg = []
         for s in d["routes"][0]["legs"][0]["steps"]:
             if s.get("travel_mode") == "TRANSIT":
@@ -324,7 +327,7 @@ def leg_geom(a, b, mode):
             print(f"   valhalla fail ({e}); arc fallback")
         return arc(a, b, 0.05, 12)
     if mode == "ferry": return arc(a, b, 0.16, 30)
-    if mode == "train": return arc(a, b, 0.10, 40)
+    if mode in ("train", "tram"): return arc(a, b, 0.10, 40)
     return [a, b]
 
 # ── 5. 영상 6초 클립 변환 ───────────────────────────────────
@@ -579,7 +582,7 @@ def main():
         km = geom_len(lg["geom"]) / 1000
         a = agg.setdefault(lg["mode"], {"km": 0.0, "count": 0})
         a["km"] += km; a["count"] += 1
-    LABEL = {"walk": "도보", "ferry": "페리", "train": "기차", "ride": "차", "run": "러닝"}
+    LABEL = {"walk": "도보", "ferry": "페리", "train": "기차", "ride": "차", "run": "러닝", "tram": "트램"}
     modes = [{"mode": k, "label": LABEL.get(k, k), "km": round(v["km"], 1), "count": v["count"]}
              for k, v in sorted(agg.items(), key=lambda kv: -kv[1]["km"])]
     total = sum(v["km"] for v in agg.values())

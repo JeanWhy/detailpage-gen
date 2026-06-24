@@ -7,6 +7,7 @@ const MODE = {
   walk:  { emoji:'🚶', cls:'',      zoom:16 },
   run:   { emoji:'🏃', cls:'',      zoom:16 },
   ferry: { emoji:'⛴️', cls:'ferry', zoom:14.5 },
+  tram:  { emoji:'🚊', cls:'train', zoom:13.8 },
   train: { emoji:'🚆', cls:'train', zoom:13.5 },
   ride:  { emoji:'🚗', cls:'ride',  zoom:15 },
 };
@@ -76,7 +77,7 @@ async function boot(){
   el('#o-stops').textContent = new Set(DATA.stops.filter(s=>!s.waypoint).map(s=>s.name)).size;
   el('#o-photos').textContent = DATA.n_photos;
   el('#o-route').innerHTML = uniqueRouteNames().join('<span class="arrow">→</span>');
-  const MODE_EN={walk:'Walk',run:'Run',train:'Train',ferry:'Ferry',ride:'Ride'};
+  const MODE_EN={walk:'Walk',run:'Run',tram:'Tram',train:'Train',ferry:'Ferry',ride:'Ride'};
   el('#o-modes').innerHTML = (DATA.modes||[]).map(m=>{
     const emoji=(MODE[m.mode]||MODE.walk).emoji;
     return `<span class="mchip"><i>${emoji}</i> ${MODE_EN[m.mode]||m.mode} ${m.km}km<span class="kr">${m.label}</span></span>`;
@@ -167,9 +168,24 @@ const FERRY_SVG = `<svg viewBox="0 0 60 42" xmlns="http://www.w3.org/2000/svg">
   <path d="M2 38 q6 2.6 11 0 q6 2.6 12 0 q6 2.6 12 0 q5 2.6 10 0" fill="none" stroke="#a7d8e0" stroke-width="2.6" stroke-linecap="round"/>
 </svg>`;
 
+// 시드니 경전철(트램) — 빨강 바디 + 검정 창띠 + 흰 스트라이프, 팬터그래프. 오른쪽 진행 기준
+const TRAM_SVG = `<svg viewBox="0 0 66 34" xmlns="http://www.w3.org/2000/svg">
+  <rect x="7" y="27" width="52" height="3.2" rx="1.6" fill="#6f777d"/>
+  <circle cx="19" cy="30.4" r="2.3" fill="#39424a"/><circle cx="47" cy="30.4" r="2.3" fill="#39424a"/>
+  <path d="M50 6 l5 -3.5" stroke="#2b2f36" stroke-width="1.3" stroke-linecap="round"/>
+  <rect x="4" y="7.5" width="56" height="19.5" rx="6.5" fill="#d6232e"/>
+  <path d="M55 7.5 q5 0 5 6 v7.5 q0 6 -5 6 z" fill="#23272d"/>
+  <rect x="9" y="11" width="45" height="7.5" rx="2.2" fill="#23272d"/>
+  <rect x="6.5" y="20" width="51" height="2.4" fill="#f2f2f2"/>
+  <rect x="21" y="12" width="5.5" height="13.5" rx="1" fill="#ffd84f"/>
+  <rect x="37" y="12" width="5.5" height="13.5" rx="1" fill="#ffd84f"/>
+  <circle cx="57.5" cy="23.5" r="1.5" fill="#fff"/>
+</svg>`;
+
 function travelerIcon(mode, flip){
   const f = flip ? ' flip' : '';
   if(mode==='train') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner train">${TRAIN_SVG}</div></div>`,iconSize:[66*MK,34*MK],iconAnchor:[33*MK,28*MK]});
+  if(mode==='tram') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner train">${TRAM_SVG}</div></div>`,iconSize:[66*MK,34*MK],iconAnchor:[33*MK,28*MK]});
   if(mode==='ferry') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner ferry">${FERRY_SVG}</div></div>`,iconSize:[60*MK,42*MK],iconAnchor:[30*MK,34*MK]});
   return L.divIcon({className:'',html:`<div class="traveler">${MASCOT}</div>`,iconSize:[50*MK,50*MK],iconAnchor:[25*MK,25*MK]});
 }
@@ -229,15 +245,19 @@ async function showStop(stop, tok){
   const stage=el('#stage');
   // 연출 룰: 출발·결승 등 feature stop = 여러 장 느긋하게 / 러닝 구간 = 1장 빠르게
   const isFeat=!!stop.feature;
-  const cap=isFeat?(EXPORT?5:6):1;
-  const photos=stop.media.slice(0,cap);
+  const cap=isFeat?9:1;
+  let photos;
+  if(stop.media.length<=cap) photos=stop.media;
+  else if(isFeat){            // 시간축 고르게 샘플 → 도착(트램)·중간(어항/식사)·후식까지 다 포함
+    photos=[]; for(let k=0;k<cap;k++) photos.push(stop.media[Math.round(k*(stop.media.length-1)/(cap-1))]);
+  } else photos=stop.media.slice(0,cap);
   for(let i=0;i<photos.length;i++){
     if(tok!==cancelToken) return;
     const m=photos[i];
     const isVid=m.type==='video';
     const dwell=EXPORT
-      ? (isVid?(isFeat?1700:1300):(isFeat?780:560))
-      : (isVid?2600:(isFeat?1300:1100));
+      ? (isVid?3000:(isFeat?780:560))     // 영상은 끝까지(6초 클립@2x=3초)
+      : (isVid?3000:(isFeat?1300:1100));
     const rot=(Math.sin(stop.id*3+i*1.7)*4).toFixed(1);
     const card=document.createElement('div');
     card.className='polaroid';
@@ -292,7 +312,7 @@ async function play(){
     map.flyTo(lg.geom[0], z, {duration:.6});
     await sleep(EXPORT?300:450); if(tok!==cancelToken) return;
     if(lg.mode==='train') dropRailStations(lg);
-    const dur = lg.mode==='train' ? (EXPORT?2200:3200)
+    const dur = (lg.mode==='train'||lg.mode==='tram') ? (EXPORT?2200:3200)
               : lg.mode==='ferry' ? (EXPORT?1800:2800)
               : (EXPORT?Math.min(1500,700+lg.geom.length*9):Math.min(2600,1100+lg.geom.length*14));
     await travelLeg(lg.geom, lg.mode, dur, tok);

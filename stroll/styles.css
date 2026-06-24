@@ -196,10 +196,10 @@ body.export #chip{top:36px;padding:18px 36px;font-size:30px;gap:24px}
 body.export #chip .mode{font-size:40px}
 body.export #chip .sep{width:2px;height:32px}
 /* 폴라로이드 (지도 위쪽 / 사진 아래쪽) */
-body.export #stage{right:auto;bottom:auto;left:50%;top:39%;transform:translateX(-50%);width:720px}
-body.export .polaroid{width:720px;padding:26px 26px 0;border-radius:8px}
-body.export .polaroid img,body.export .polaroid video{height:720px}
-body.export .polaroid .cap{font-size:52px;padding:12px 0 24px}
+body.export #stage{right:auto;bottom:auto;left:50%;top:36%;transform:translateX(-50%);width:864px}
+body.export .polaroid{width:864px;padding:31px 31px 0;border-radius:9px}
+body.export .polaroid img,body.export .polaroid video{height:864px}
+body.export .polaroid .cap{font-size:62px;padding:14px 0 28px}
 body.export .polaroid .badge{top:36px;left:36px;font-size:24px;padding:6px 18px}
 body.export .polaroid .vtag{top:36px;right:36px;font-size:22px;padding:6px 16px}
 /* 진행 바 */
