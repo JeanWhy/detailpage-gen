@@ -30,6 +30,7 @@ const URL = `http://localhost:${PORT}/?export=1`;
 
   console.log(`▶ 페이지 로드: ${URL}`);
   await page.goto(URL, { waitUntil: 'load', timeout: 60000 });
+  await page.evaluate(() => { window.__recorder = true; });   // 페이지 폴백 자동재생 끔 — 녹화는 명시 트리거만
   await new Promise(r => setTimeout(r, 1500));            // 초기 타일 로드
   console.log('▶ 경로 타일 프리로드(블럭팝 방지)…');
   try { await page.evaluate(() => window.__preloadRoute && window.__preloadRoute()); }

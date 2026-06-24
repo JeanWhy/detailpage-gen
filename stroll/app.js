@@ -95,7 +95,7 @@ async function boot(){
     el('#hook').classList.remove('hide');
     let started=false;
     window.__startReel = async()=>{ if(started) return; started=true; await hookSequence(); play(); };
-    setTimeout(()=>window.__startReel(), 30000);   // 폴백(수동 열람용). 녹화기 명시 트리거가 항상 먼저 — 느린 로드 레이스 방지
+    setTimeout(()=>{ if(!window.__recorder) window.__startReel(); }, 30000);   // 폴백(수동 열람 전용). 녹화기(__recorder)는 명시 트리거만 — 레이스 차단
     // 녹화 전 경로 타일을 미리 받아 캐시(팬 중 블럭팝 방지). 녹화기가 호출.
     window.__preloadRoute = async()=>{
       const tileWait = max => new Promise(res=>{ let done=false;
@@ -103,11 +103,11 @@ async function boot(){
         tiles.on('load',fin); setTimeout(fin,max); });
       for(const lg of (DATA.legs||[])){
         const z=Math.round((MODE[lg.mode]||MODE.walk).zoom+ZB), g=lg.geom||[];
-        const step=Math.max(1,Math.floor(g.length/14));
-        for(let i=0;i<g.length;i+=step){ map.setView(g[i],z,{animate:false}); await tileWait(800); }
+        const step=Math.max(1,Math.floor(g.length/8));
+        for(let i=0;i<g.length;i+=step){ map.setView(g[i],z,{animate:false}); await tileWait(500); }
       }
       const f=(DATA.stops||[])[0];
-      if(f){ map.setView([f.lat,f.lon],Math.round(MODE.start.zoom+ZB),{animate:false}); await tileWait(800); }
+      if(f){ map.setView([f.lat,f.lon],Math.round(MODE.start.zoom+ZB),{animate:false}); await tileWait(500); }
     };
   }
 }
