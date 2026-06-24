@@ -51,6 +51,23 @@ RAIL_ROUTES = []
 HERO_MASK = None   # 히어로 컷아웃에서 지울 영역 [x0,y0,x1,y1] (0~1 비율) — 같이 잡힌 타인 제거용
 HERO_CUTOUT = True  # False면 컷아웃/흰 테두리 없이 보정한 사진 그대로 히어로로
 
+# ── 테마 프리셋 ──────────────────────────────────────────────
+# brief의 "theme" 한 줄이 아래 묶음을 기본값으로 깔아준다(개별 필드로 덮어쓰기 가능).
+#   force_mode/collapse_dupes/hero_cutout = 빌드 동작, accent = 강조색(경로선·칩),
+#   pace = 연출(feature stop 컷 수·도보/영상 체류시간) → data.json으로 앱에 전달.
+DEFAULT_PACE = {"feature": 9, "route": 1, "photo": 760, "video": 3000}
+THEMES = {
+    # 러닝/운동: 속도감(빠른 컷, route 1컷), 러닝 고정, 보정 사진 히어로(테두리X), 쨍한 레드
+    "run":   {"force_mode": "run", "collapse_dupes": True, "hero_cutout": False,
+              "accent": "#ff5a4d", "pace": {"feature": 7, "route": 1, "photo": 560, "video": 3000}},
+    # 도심 하루: 여유로운 페이싱, 자동 이동수단, 사진 그대로 히어로, 브랜드 코랄
+    "city":  {"force_mode": None, "collapse_dupes": True, "hero_cutout": False,
+              "accent": "#ff6b5e", "pace": {"feature": 9, "route": 1, "photo": 780, "video": 3000}},
+    # 교외·자연: 더 느긋, 그린 강조색 (지형 타일은 추후)
+    "nature": {"force_mode": None, "collapse_dupes": True, "hero_cutout": False,
+               "accent": "#3f9d6b", "pace": {"feature": 9, "route": 1, "photo": 900, "video": 3200}},
+}
+
 
 def load_brief(src):
     """폴더별 이벤트 브리프(brief.json)를 읽어 수동 보정값으로 주입한다."""
@@ -61,10 +78,20 @@ def load_brief(src):
     else:
         b = {}
         print("      브리프 없음 → 순수 자동 (제목·이동수단 GPS로만 추정)")
+    # 테마가 기본값을 깔고, 브리프에 명시된 값이 우선한다
+    t = THEMES.get(b.get("theme"), {})
+    if b.get("theme") and not t:
+        print(f"      ⚠️ 알 수 없는 theme '{b.get('theme')}' — 무시")
+    for k in ("force_mode", "collapse_dupes", "hero_cutout", "accent", "pace"):
+        if k not in b and k in t:
+            b[k] = t[k]
+    if b.get("theme") in THEMES:
+        print(f"      테마: {b['theme']}")
     for k, d in (("waypoints", []), ("mode_overrides", {}), ("name_overrides", {}),
                  ("hero_photos", []), ("merge", []), ("rail_routes", []),
                  ("landmarks", []), ("force_mode", None), ("collapse_dupes", False),
-                 ("copy", {}), ("hero_mask", None), ("hero_cutout", True)):
+                 ("copy", {}), ("hero_mask", None), ("hero_cutout", True),
+                 ("theme", None), ("accent", None), ("pace", DEFAULT_PACE)):
         b.setdefault(k, d)
     return b
 # ────────────────────────────────────────────────────────────
@@ -590,6 +617,7 @@ def main():
     data = {"title": BRIEF.get("title") or "오늘 하루",
             "date": BRIEF.get("date") or media[0]["t"].strftime("%Y.%m.%d"),
             "copy": BRIEF["copy"],
+            "theme": BRIEF["theme"], "accent": BRIEF["accent"], "pace": BRIEF["pace"],
             "total_km": round(total, 1),
             "n_photos": sum(1 for m in media if m["type"] == "photo"),
             "n_videos": sum(1 for m in media if m["type"] == "video"),

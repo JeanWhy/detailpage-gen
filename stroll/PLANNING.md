@@ -61,7 +61,7 @@ GPS 태그된 **하루치 사진·영상**을 넣으면, **지도 위에 그날 
 - **렌더 선호(확정):** 폴라로이드 장소명은 **영어**, 프레임은 크게(1.2×), 이미지 크롭은 센터 기본(전역 top 정렬은 어색).
 
 ## 8. 제품화 로드맵 / 열린 질문
-- **테마 프리셋 1급화:** `theme: run|city|nature|overseas` 한 줄로 지도 스타일·마커·페이싱·팔레트·카피톤·음악 큐를 묶기 (지금은 force_mode+copy로 수동 조립). → 분위기 축의 최고 레버리지.
+- **테마 프리셋** ✅ *1차 구현됨(2026-06-24)*: `theme: run|city|nature` 한 줄이 force_mode·collapse_dupes·hero_cutout·accent(강조색)·pace(컷 수·체류시간)를 기본값으로 깔고, 개별 brief 필드로 덮어쓰기. `THEMES` 딕셔너리(build_stroll.py)에 정의, data.json으로 앱에 accent/pace 전달. Hoka=run, OneFineDay=city로 검증. **남은 확장:** overseas 테마, 지도 타일 스타일(nature=그린/지형), 음악 비트싱크, 카피 톤 자동.
 - **비전 자동 브리프:** 사진을 읽어 모드·하이라이트·캡션·히어로를 자동 제안(triage_photos.py 기반, OpenAI 키 필요 — 현재 키 만료 상태).
 - **공유 강화:** 음악 비트싱크, 멀티 비율 export(9:16+1:1+커버), 테마 컬러그레이드.
 - **구조:** stroll을 별도 레포로 분리 + 정식 PRD (현재 detailpage-gen 레포에 얹혀 있음).

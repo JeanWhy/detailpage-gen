@@ -55,6 +55,8 @@ function applyCopy(){
 async function boot(){
   DATA = await (await fetch('data.json')).json();
   applyCopy();
+  // 테마 강조색: 경로선·칩·점 등에 반영
+  if(DATA.accent) document.documentElement.style.setProperty('--coral', DATA.accent);
 
   map = L.map('map',{ zoomControl:false, attributionControl:false, zoomSnap:0.25 });
   L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
@@ -64,8 +66,9 @@ async function boot(){
   DATA.legs.forEach(lg => lg.geom.forEach(p=>full.push(p)));
   map.fitBounds(L.latLngBounds(full).pad(0.15));
 
-  planned = L.polyline(full,{color:'#ff6b5e',weight:3,opacity:.16,dashArray:'2 9',lineCap:'round'}).addTo(map);
-  trail   = L.polyline([],{color:'#ff6b5e',weight:5,opacity:.95,lineCap:'round',lineJoin:'round'}).addTo(map);
+  const ACC = DATA.accent || '#ff6b5e';
+  planned = L.polyline(full,{color:ACC,weight:3,opacity:.16,dashArray:'2 9',lineCap:'round'}).addTo(map);
+  trail   = L.polyline([],{color:ACC,weight:5,opacity:.95,lineCap:'round',lineJoin:'round'}).addTo(map);
 
   // number real (non-waypoint) stops in visit order; track dots only for real stops
   let n=0;
@@ -244,8 +247,9 @@ function dropStopDot(stop){
 async function showStop(stop, tok){
   const stage=el('#stage');
   // 연출 룰: 출발·결승 등 feature stop = 여러 장 느긋하게 / 러닝 구간 = 1장 빠르게
+  const P=DATA.pace||{feature:9,route:1,photo:760,video:3000};
   const isFeat=!!stop.feature;
-  const cap=isFeat?9:1;
+  const cap=isFeat?(P.feature||9):(P.route||1);
   let photos;
   if(stop.media.length<=cap) photos=stop.media;
   else if(isFeat){            // 시간축 고르게 샘플 → 도착(트램)·중간(어항/식사)·후식까지 다 포함
@@ -256,7 +260,7 @@ async function showStop(stop, tok){
     const m=photos[i];
     const isVid=m.type==='video';
     const dwell=EXPORT
-      ? (isVid?3000:(isFeat?780:560))     // 영상은 끝까지(6초 클립@2x=3초)
+      ? (isVid?(P.video||3000):(isFeat?(P.photo||780):560))   // 테마 페이싱(영상은 끝까지)
       : (isVid?3000:(isFeat?1300:1100));
     const rot=(Math.sin(stop.id*3+i*1.7)*4).toFixed(1);
     const card=document.createElement('div');
