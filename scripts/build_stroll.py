@@ -560,8 +560,10 @@ def main():
         return {"lat": wp["lat"], "lon": wp["lon"], "t0": wp["time"], "t1": wp["time"],
                 "mode_in": wp["mode"], "name": wp["name"], "waypoint": True,
                 "icon": wp.get("icon", "🚉"), "media": []}
-    # 숫자 인덱스는 뒤에서부터(인덱스 안 밀리게), "end"는 나열 순서대로 맨 끝에
-    for wp in sorted([w for w in WAYPOINTS if w["after_index"] != "end"],
+    # "start"=맨 앞(집 등 출발지), 숫자=그 정류장 뒤(뒤에서부터 삽입), "end"=맨 끝
+    for wp in [w for w in WAYPOINTS if w["after_index"] == "start"]:
+        stops.insert(0, wp_stop(wp))
+    for wp in sorted([w for w in WAYPOINTS if w["after_index"] not in ("end", "start")],
                      key=lambda w: -w["after_index"]):
         if wp["after_index"] < len(stops):
             stops.insert(wp["after_index"]+1, wp_stop(wp))

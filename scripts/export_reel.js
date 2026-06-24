@@ -37,7 +37,7 @@ const URL = `http://localhost:${PORT}/?export=1`;
   const recorder = await page.screencast({ path: webm });
   // 녹화가 실제로 돌기 시작한 뒤 훅을 트리거 → Beat1(타이틀)부터 온전히 캡처
   await new Promise(r => setTimeout(r, 500));
-  await page.evaluate(() => window.__startReel && window.__startReel());
+  await page.evaluate(() => { window.__exportDone = false; window.__startReel && window.__startReel(); });
 
   console.log('… 애니메이션 진행 중 (끝나면 자동 종료)');
   await page.waitForFunction('window.__exportDone === true', { timeout: 240000, polling: 500 });

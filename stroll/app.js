@@ -94,7 +94,7 @@ async function boot(){
     el('#hook').classList.remove('hide');
     let started=false;
     window.__startReel = async()=>{ if(started) return; started=true; await hookSequence(); play(); };
-    setTimeout(()=>window.__startReel(), 6000);   // 트리거 없을 때 폴백
+    setTimeout(()=>window.__startReel(), 30000);   // 폴백(수동 열람용). 녹화기 명시 트리거가 항상 먼저 — 느린 로드 레이스 방지
   }
 }
 
