@@ -269,6 +269,13 @@ async function showStop(stop, tok){
   else if(isFeat){            // 시간축 고르게 샘플 → 도착(트램)·중간(어항/식사)·후식까지 다 포함
     photos=[]; for(let k=0;k<cap;k++) photos.push(stop.media[Math.round(k*(stop.media.length-1)/(cap-1))]);
   } else photos=stop.media.slice(0,cap);
+  // 핀 미디어(꼭 보여줄 영상 등) 보장 — 스프레드에서 빠졌으면 추가하고 시간순 유지
+  const pins=(DATA.pin||[]);
+  if(pins.length){
+    stop.media.forEach(m=>{ const id=(m.video||m.file||'');
+      if(pins.some(p=>id.includes(p.replace(/\.[^.]+$/,''))) && !photos.includes(m)) photos.push(m); });
+    photos.sort((a,b)=>stop.media.indexOf(a)-stop.media.indexOf(b));
+  }
   for(let i=0;i<photos.length;i++){
     if(tok!==cancelToken) return;
     const m=photos[i];

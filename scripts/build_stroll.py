@@ -50,6 +50,7 @@ MERGE = []
 RAIL_ROUTES = []
 HERO_MASK = None   # 히어로 컷아웃에서 지울 영역 [x0,y0,x1,y1] (0~1 비율) — 같이 잡힌 타인 제거용
 HERO_CUTOUT = True  # False면 컷아웃/흰 테두리 없이 보정한 사진 그대로 히어로로
+CLIP_OFFSETS = {}   # {영상파일명: 시작초} — 긴 영상에서 액션 구간부터 6초 잘라쓰기
 
 # ── 테마 프리셋 ──────────────────────────────────────────────
 # brief의 "theme" 한 줄이 아래 묶음을 기본값으로 깔아준다(개별 필드로 덮어쓰기 가능).
@@ -91,7 +92,8 @@ def load_brief(src):
                  ("hero_photos", []), ("merge", []), ("rail_routes", []),
                  ("landmarks", []), ("force_mode", None), ("collapse_dupes", False),
                  ("copy", {}), ("hero_mask", None), ("hero_cutout", True),
-                 ("theme", None), ("accent", None), ("pace", DEFAULT_PACE)):
+                 ("theme", None), ("accent", None), ("pace", DEFAULT_PACE),
+                 ("pin_media", []), ("clip_offsets", {})):
         b.setdefault(k, d)
     return b
 # ────────────────────────────────────────────────────────────
@@ -368,12 +370,16 @@ def transcode_videos(src, media, skip):
         return
     for name in sorted(wanted):
         out = os.path.join(vdir, name)
-        if os.path.exists(out):
+        off = CLIP_OFFSETS.get(name, 0)
+        if os.path.exists(out) and not off:   # 오프셋 지정 영상은 항상 재생성(구간 반영)
             continue
         srcf = os.path.join(src, name)
-        subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-i", srcf, "-t", "6", "-an",
-                        "-vf", "scale=540:-2,fps=24", "-c:v", "libx264", "-crf", "30",
-                        "-preset", "veryfast", "-movflags", "+faststart", out])
+        cmd = ["ffmpeg", "-y", "-loglevel", "error"]
+        if off:
+            cmd += ["-ss", str(off)]           # 액션 구간부터
+        cmd += ["-i", srcf, "-t", "6", "-an", "-vf", "scale=540:-2,fps=24",
+                "-c:v", "libx264", "-crf", "30", "-preset", "veryfast", "-movflags", "+faststart", out]
+        subprocess.run(cmd)
 
 # ── 오프닝 훅: 인물 컷아웃 + 흰 테두리 스티커 (rembg) ─────────
 def make_hero_sticker(orig_path):
@@ -463,12 +469,12 @@ def main():
     if not os.path.isdir(src):
         sys.exit(f"소스 폴더 없음: {src}")
 
-    global WAYPOINTS, MODE_OVERRIDES, NAME_OVERRIDES, HERO_PHOTOS, MERGE, RAIL_ROUTES, HERO_MASK, HERO_CUTOUT
+    global WAYPOINTS, MODE_OVERRIDES, NAME_OVERRIDES, HERO_PHOTOS, MERGE, RAIL_ROUTES, HERO_MASK, HERO_CUTOUT, CLIP_OFFSETS
     BRIEF = load_brief(src)
     WAYPOINTS = BRIEF["waypoints"]; MODE_OVERRIDES = BRIEF["mode_overrides"]
     NAME_OVERRIDES = BRIEF["name_overrides"]; HERO_PHOTOS = BRIEF["hero_photos"]
     MERGE = BRIEF["merge"]; RAIL_ROUTES = BRIEF["rail_routes"]; HERO_MASK = BRIEF["hero_mask"]
-    HERO_CUTOUT = BRIEF["hero_cutout"]
+    HERO_CUTOUT = BRIEF["hero_cutout"]; CLIP_OFFSETS = BRIEF["clip_offsets"]
 
     print(f"[1/5] 미디어 읽기 + 리사이즈  ({src})")
     media = extract_media(src)
@@ -620,6 +626,7 @@ def main():
             "date": BRIEF.get("date") or media[0]["t"].strftime("%Y.%m.%d"),
             "copy": BRIEF["copy"],
             "theme": BRIEF["theme"], "accent": BRIEF["accent"], "pace": BRIEF["pace"],
+            "pin": BRIEF["pin_media"],
             "total_km": round(total, 1),
             "n_photos": sum(1 for m in media if m["type"] == "photo"),
             "n_videos": sum(1 for m in media if m["type"] == "video"),
