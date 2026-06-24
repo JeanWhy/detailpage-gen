@@ -30,8 +30,11 @@ const URL = `http://localhost:${PORT}/?export=1`;
 
   console.log(`▶ 페이지 로드: ${URL}`);
   await page.goto(URL, { waitUntil: 'load', timeout: 60000 });
-  // 지도 타일이 깔릴 시간을 충분히 준다 (자동재생은 1.7s 뒤 시작)
-  await new Promise(r => setTimeout(r, 2500));
+  await new Promise(r => setTimeout(r, 1500));            // 초기 타일 로드
+  console.log('▶ 경로 타일 프리로드(블럭팝 방지)…');
+  try { await page.evaluate(() => window.__preloadRoute && window.__preloadRoute()); }
+  catch (e) { console.log('  프리로드 건너뜀:', e.message); }
+  await new Promise(r => setTimeout(r, 500));             // 시작 뷰 안정화
 
   console.log('● 녹화 시작…');
   const recorder = await page.screencast({ path: webm });

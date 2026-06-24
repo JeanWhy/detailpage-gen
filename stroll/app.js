@@ -26,7 +26,7 @@ const ease = t => t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
 function dist(a,b){ const dx=a[0]-b[0],dy=a[1]-b[1]; return Math.hypot(dx,dy); }
 
-let DATA, map, trail, planned, traveler, running=false, cancelToken=0;
+let DATA, map, tiles, trail, planned, traveler, running=false, cancelToken=0;
 const EXPORT = new URLSearchParams(location.search).has('export');  // 릴스 세로영상 녹화 모드
 const MK = EXPORT ? 2 : 1;   // export(1080x1920)에선 지도 마커도 2배로
 const ZB = EXPORT ? 1 : 0;   // export는 뷰포트가 2배라 줌을 +1 당겨 같은 프레이밍 유지
@@ -59,7 +59,8 @@ async function boot(){
   if(DATA.accent) document.documentElement.style.setProperty('--coral', DATA.accent);
 
   map = L.map('map',{ zoomControl:false, attributionControl:false, zoomSnap:0.25 });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
+  tiles = L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png',
+    {maxZoom:19, keepBuffer:8, updateWhenZooming:false}).addTo(map);   // keepBuffer↑: 팬 중 타일 유지(블럭팝 완화)
 
   // full planned route = all legs concatenated
   const full = [];
@@ -95,6 +96,19 @@ async function boot(){
     let started=false;
     window.__startReel = async()=>{ if(started) return; started=true; await hookSequence(); play(); };
     setTimeout(()=>window.__startReel(), 30000);   // 폴백(수동 열람용). 녹화기 명시 트리거가 항상 먼저 — 느린 로드 레이스 방지
+    // 녹화 전 경로 타일을 미리 받아 캐시(팬 중 블럭팝 방지). 녹화기가 호출.
+    window.__preloadRoute = async()=>{
+      const tileWait = max => new Promise(res=>{ let done=false;
+        const fin=()=>{ if(done)return; done=true; tiles.off('load',fin); res(); };
+        tiles.on('load',fin); setTimeout(fin,max); });
+      for(const lg of (DATA.legs||[])){
+        const z=Math.round((MODE[lg.mode]||MODE.walk).zoom+ZB), g=lg.geom||[];
+        const step=Math.max(1,Math.floor(g.length/14));
+        for(let i=0;i<g.length;i+=step){ map.setView(g[i],z,{animate:false}); await tileWait(800); }
+      }
+      const f=(DATA.stops||[])[0];
+      if(f){ map.setView([f.lat,f.lon],Math.round(MODE.start.zoom+ZB),{animate:false}); await tileWait(800); }
+    };
   }
 }
 
