@@ -62,7 +62,11 @@ GPS 태그된 **하루치 사진·영상**을 넣으면, **지도 위에 그날 
 
 ## 8. 제품화 로드맵 / 열린 질문
 - **테마 프리셋** ✅ *1차 구현됨(2026-06-24)*: `theme: run|city|nature` 한 줄이 force_mode·collapse_dupes·hero_cutout·accent(강조색)·pace(컷 수·체류시간)를 기본값으로 깔고, 개별 brief 필드로 덮어쓰기. `THEMES` 딕셔너리(build_stroll.py)에 정의, data.json으로 앱에 accent/pace 전달. Hoka=run, OneFineDay=city로 검증. **남은 확장:** overseas 테마, 지도 타일 스타일(nature=그린/지형), 음악 비트싱크, 카피 톤 자동.
-- **비전 자동 브리프:** 사진을 읽어 모드·하이라이트·캡션·히어로를 자동 제안(triage_photos.py 기반, OpenAI 키 필요 — 현재 키 만료 상태).
+- **[TODO] 비전 자동 브리프:** 사진을 읽어 모드·하이라이트·캡션·히어로·안내판여부를 자동 제안(triage_photos.py 기반). **OpenAI 필수 아님** — 백엔드 선택지:
+  - *지금/대화형:* Claude(나)가 직접 읽어 triage.json·brief 작성 (키·비용 0, 품질 최고, OneFineDay에 사용함)
+  - *무인 자동화 추천:* **로컬 Ollama**(llava/qwen2-VL) — 무료·키없음·프라이버시. triage_photos.py가 OpenAI 호환 포맷이라 base URL·모델명만 교체하면 됨 (사용자가 `ollama pull` 만)
+  - *대안:* Gemini API(구글 생태계·무료티어) / Claude API(유료·고품질) / Apple Vision 온디바이스(OCR·장면, 캡션 약함)
+  - 사람 컷아웃(rembg)은 이미 로컬이라 키 0. 키가 필요했던 건 캡션·분류 한 조각뿐.
 - **공유 강화:** 음악 비트싱크, 멀티 비율 export(9:16+1:1+커버), 테마 컬러그레이드.
 - **구조:** stroll을 별도 레포로 분리 + 정식 PRD (현재 detailpage-gen 레포에 얹혀 있음).
 - **비즈니스 방향:** 개인 소비자(내 하루) vs 브랜드 B2B(클리닉·카페·여행 = 1인 에이전시 수익모델). 이중 CTA로 양쪽 수요 관찰 중.
