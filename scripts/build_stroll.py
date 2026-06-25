@@ -12,7 +12,7 @@
 
 사진을 추가/삭제한 뒤 이 스크립트만 다시 돌리면 경로가 새로 그려진다.
 """
-import os, sys, json, glob, math, subprocess, argparse, time
+import os, sys, json, glob, math, subprocess, argparse, time, re
 from datetime import datetime
 from PIL import Image, ExifTags
 
@@ -525,7 +525,17 @@ def main():
                 s["name"] = lm["name"]
                 if lm.get("feature"):     # 출발·결승·기념 등 = 여러 장 느긋하게(연출)
                     s["feature"] = True
+                if lm.get("icon"):        # Sydney Icon Pack 슬러그(아웃트로 스티커 컬렉션)
+                    s["icon"] = lm["icon"]
                 break
+    # 아이콘 자동 매칭: 명시 안 했으면 지명 슬러그로 assets/icons/<slug>.png 존재 시 연결
+    _icondir = os.path.join(OUT, "assets/icons")
+    def _slug(n): return re.sub(r"[^a-z0-9]+", "-", n.lower()).strip("-")
+    for s in stops:
+        if not s.get("icon") and not s.get("waypoint"):
+            cand = _slug(s["name"])
+            if os.path.exists(os.path.join(_icondir, cand + ".png")):
+                s["icon"] = cand
     # 연속 노이즈 정류장 병합 (지그재그 제거)
     def find_merge(name):
         for mg in MERGE:

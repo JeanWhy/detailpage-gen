@@ -82,11 +82,24 @@ async function boot(){
   el('#o-stops').textContent = new Set(DATA.stops.filter(s=>!s.waypoint).map(s=>s.name)).size;
   el('#o-photos').textContent = DATA.n_photos;
   el('#o-route').innerHTML = uniqueRouteNames().join('<span class="arrow">→</span>');
-  const MODE_EN={walk:'Walk',run:'Run',tram:'Tram',train:'Train',ferry:'Ferry',ride:'Ride'};
+  const MODE_EN={walk:'Walk',run:'Run',tram:'Tram',train:'Train',ferry:'Ferry',ride:'Ride',flight:'Flight'};
   el('#o-modes').innerHTML = (DATA.modes||[]).map(m=>{
     const emoji=(MODE[m.mode]||MODE.walk).emoji;
     return `<span class="mchip"><i>${emoji}</i> ${MODE_EN[m.mode]||m.mode} ${m.km}km<span class="kr">${m.label}</span></span>`;
   }).join('');
+  // 스티커 컬렉션 — 방문한 곳의 Sydney Icon Pack 일러스트를 모아 보여줌(여정 순서)
+  const sk=el('#o-stickers');
+  if(sk){
+    const got=DATA.stops.filter(s=>!s.waypoint && s.icon);
+    sk.innerHTML = got.length
+      ? `<div class="sk-title">📍 모은 곳 · collected <b>${got.length}</b></div>`
+        + `<div class="sk-row">`
+        + got.map((s,i)=>{const rot=((i%2)?1:-1)*(2.5+(i%3)*1.5);   // 손도장처럼 살짝 삐뚤
+            const d=(0.5+i*0.32).toFixed(2);   // 카드 페이드인 후 쾅...쾅 순차로
+            return `<figure class="sk" style="--d:${d}s;--rot:${rot}deg"><img src="assets/icons/${s.icon}.png" alt=""><figcaption>${s.name}</figcaption></figure>`;}).join('')
+        + `</div>`
+      : '';
+  }
 
   if(EXPORT){                          // 릴스 녹화: 녹화기가 트리거할 때까지 대기 → 훅 → 재생
     document.body.classList.add('export');
@@ -295,6 +308,13 @@ function dropStopDot(stop){
     const icon=L.divIcon({className:'',html:`<div class="waydot">${stop.icon||'🚉'}</div>`,iconSize:[24*MK,24*MK],iconAnchor:[12*MK,12*MK]});
     L.marker([stop.lat,stop.lon],{icon}).addTo(map); return;
   }
+  // 랜드마크 일러스트 아이콘(Sydney Icon Pack 슬러그)이 있으면 지도에 핀처럼 톡 등장
+  if(stop.icon && /[a-z]/.test(stop.icon)){
+    const html=`<div class="map-sticker"><img src="assets/icons/${stop.icon}.png" alt=""><span class="ms-pin"></span></div>`;
+    const icon=L.divIcon({className:'',html,iconSize:[104*MK,98*MK],iconAnchor:[52*MK,92*MK]});
+    L.marker([stop.lat,stop.lon],{icon,zIndexOffset:600,interactive:false}).addTo(map);
+    return;
+  }
   // numbered by visit order among real stops
   const icon=L.divIcon({className:'',html:`<div class="stopdot">${stop.num}</div>`,iconSize:[26*MK,26*MK],iconAnchor:[13*MK,13*MK]});
   L.marker([stop.lat,stop.lon],{icon}).addTo(map);
@@ -367,9 +387,11 @@ async function play(){
   const first=stops[0];
   placeTraveler([first.lat,first.lon], 'start');
   trail.setLatLngs([[first.lat,first.lon]]);
-  map.flyTo([first.lat,first.lon], MODE.start.zoom+ZB, {duration:1.2});
-  await sleep(1300); if(tok!==cancelToken) return;
+  const firstWp=first.waypoint;     // 비행 출발지 등 미디어 없는 경유지면 오프닝 짧게(죽은 시간 제거)
+  map.flyTo([first.lat,first.lon], MODE.start.zoom+ZB, {duration:firstWp?0.8:1.2});
+  await sleep(firstWp?(EXPORT?450:600):1300); if(tok!==cancelToken) return;
   setChip(first,'start'); markTrack(first.num-1); dropStopDot(first);
+  if(first.icon && /[a-z]/.test(first.icon)) await sleep(EXPORT?800:650);
   await showStop(first, tok); if(tok!==cancelToken) return;
 
   for(let i=0;i<legs.length;i++){
@@ -377,9 +399,9 @@ async function play(){
     const lg=legs[i], B=stops[i+1];
     const z=(MODE[lg.mode]||MODE.walk).zoom+ZB;
     const isFly=lg.mode==='flight';
-    if(isFly) map.flyToBounds(L.latLngBounds(lg.geom), {paddingTopLeft:[90,150], paddingBottomRight:[90,230], duration:1.8});  // 한국↔호주 arc 전체를 한 화면에
+    if(isFly) map.flyToBounds(L.latLngBounds(lg.geom), {paddingTopLeft:[90,150], paddingBottomRight:[90,230], duration:1.5});  // 한국↔호주 arc 전체를 한 화면에
     else map.flyTo(lg.geom[0], z, {duration:.6});
-    await sleep(EXPORT?(isFly?1900:300):(isFly?2000:450)); if(tok!==cancelToken) return;
+    await sleep(EXPORT?(isFly?1500:300):(isFly?1600:450)); if(tok!==cancelToken) return;
     if(lg.mode==='train') dropRailStations(lg);
     const dur = lg.mode==='flight' ? (EXPORT?3200:3800)
               : (lg.mode==='train'||lg.mode==='tram') ? (EXPORT?2200:3200)
@@ -387,15 +409,22 @@ async function play(){
               : (EXPORT?Math.min(1500,700+lg.geom.length*9):Math.min(2600,1100+lg.geom.length*14));
     await travelLeg(lg.geom, lg.mode, dur, tok);
     if(tok!==cancelToken) return;
+    if(isFly && !B.waypoint){                              // 비행 후엔 arc 줌 → 도착 도시로 '컷'(애니메이션 줌은 트레일이 번져서 과함 → 스냅)
+      map.setView([B.lat,B.lon], 12+ZB, {animate:false}); await sleep(EXPORT?500:500); if(tok!==cancelToken) return; }
     if(!B.waypoint) placeTraveler([B.lat,B.lon],'walk');   // 도착하면 내려서 사람으로
     setChip(B, lg.mode); dropStopDot(B);
     if(B.waypoint){ await sleep(EXPORT?550:900); }          // 환승역 등은 잠깐 지나감
-    else { markTrack(B.num-1); await showStop(B, tok); }
+    else {
+      markTrack(B.num-1);
+      if(B.icon && /[a-z]/.test(B.icon)) await sleep(EXPORT?800:650);   // 랜드마크 아이콘이 톡 등장하는 순간을 보여줌
+      await showStop(B, tok);
+    }
   }
   if(tok!==cancelToken) return;
   running=false; await sleep(400);
   el('#chip').classList.remove('show'); el('#bar').classList.remove('show');
   el('#outro').classList.remove('hide');
+  const sk=el('#o-stickers'); if(sk){ sk.classList.remove('go'); void sk.offsetWidth; sk.classList.add('go'); }  // 아웃트로 뜰 때 스탬프 쾅쾅 재생
   if(EXPORT){ await sleep(3200); window.__exportDone = true; }   // 녹화 종료 신호
 }
 
