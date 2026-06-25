@@ -32,6 +32,8 @@ html,body{height:100%;font-family:'Pretendard','Apple SD Gothic Neo',system-ui,s
 .veh-inner svg{width:100%;height:100%;display:block;overflow:visible}
 .veh-inner.train{animation:chug .55s ease-in-out infinite}
 .veh-inner.ferry{animation:rock 1.9s ease-in-out infinite}
+.veh-inner.ride{animation:chug .5s ease-in-out infinite}
+.veh-inner.flight{transform:rotate(28deg);animation:bob 2.4s ease-in-out infinite}
 .traveler.ferry{animation:rock 1.6s ease-in-out infinite}
 .traveler.train{animation:chug .7s ease-in-out infinite}
 .traveler .vbadge{position:absolute;right:-2px;bottom:-1px;width:21px;height:21px;

@@ -10,6 +10,7 @@ const MODE = {
   tram:  { emoji:'🚊', cls:'train', zoom:13.8 },
   train: { emoji:'🚆', cls:'train', zoom:13.5 },
   ride:  { emoji:'🚗', cls:'ride',  zoom:15 },
+  flight:{ emoji:'✈️', cls:'flight',zoom:2.4 },   // 대륙 간 — 줌 확 빼서 한국↔호주가 다 보이게
 };
 
 function tintFor(hm){
@@ -199,8 +200,49 @@ const TRAM_SVG = `<svg viewBox="0 0 66 34" xmlns="http://www.w3.org/2000/svg">
   <circle cx="57.5" cy="23.5" r="1.5" fill="#fff"/>
 </svg>`;
 
+// 드라이브 — 코랄 바디 해치백(오른쪽 진행 기준). 라이드 모드 마커.
+const CAR_SVG = `<svg viewBox="0 0 64 34" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="18" cy="27.5" r="5.4" fill="#2b2f36"/><circle cx="18" cy="27.5" r="2.2" fill="#cfd4d8"/>
+  <circle cx="46" cy="27.5" r="5.4" fill="#2b2f36"/><circle cx="46" cy="27.5" r="2.2" fill="#cfd4d8"/>
+  <path d="M4.5 25 v-5 q0 -2 2.2 -2.6 l5.6 -1.5 q3 -6.6 9.2 -6.6 h12.6 q5.6 0 9.1 4.3 l5.6 3 q6 0.6 7 4 l0.4 1.9 q0.3 2.5 -2.4 2.5 z" fill="#ff6b5e"/>
+  <path d="M16.4 16.6 q2.5 -4.7 6.7 -4.7 h10.5 q3.9 0 6.5 3.5 l1.5 2 z" fill="#bfe6f2"/>
+  <rect x="27.6" y="11.9" width="1.8" height="6" fill="#ff6b5e"/>
+  <rect x="6" y="20.2" width="50" height="2" fill="#ffffff" opacity="0.45"/>
+  <circle cx="55.6" cy="19.6" r="1.7" fill="#ffe08a"/>
+</svg>`;
+
+// 국제선 — 대한항공 도장(스카이블루+화이트+태극). 노즈 오른쪽 기준, CSS로 우하향 기울임.
+const KAL_TAEGEUK = (cx,cy,r)=>`
+    <circle cx="${cx}" cy="${cy}" r="${r}" fill="#fff"/>
+    <path d="M${cx} ${cy-r} a${r} ${r} 0 0 1 0 ${2*r} a${r/2} ${r/2} 0 0 1 0 ${-r} a${r/2} ${r/2} 0 0 0 0 ${-r} z" fill="#d22730"/>
+    <path d="M${cx} ${cy+r} a${r} ${r} 0 0 1 0 ${-2*r} a${r/2} ${r/2} 0 0 1 0 ${r} a${r/2} ${r/2} 0 0 0 0 ${r} z" fill="#0b3d91"/>`;
+const PLANE_SVG = `<svg viewBox="0 0 84 60" xmlns="http://www.w3.org/2000/svg">
+  <g stroke="#cdd6df" stroke-width="0.7" stroke-linejoin="round">
+    <!-- tail fin (sky blue) -->
+    <path d="M9 33 L5 9 Q4.4 6 8 7.5 L25 30 Z" fill="#8fc3ec" stroke="none"/>
+    <!-- swept wing (grey) -->
+    <path d="M34 35 L20 53 Q19 55 23 53.6 L47 36 Z" fill="#aeb9c4"/>
+    <!-- fuselage white -->
+    <path d="M9 37 Q6.5 31 15 30 L62 26.5 Q76 26.5 81 32.5 Q83 34.5 81 36.5 Q75 41 61 40 L17 40.5 Q10 40.5 9 37 Z" fill="#ffffff"/>
+    <!-- sky-blue top cheatline -->
+    <path d="M15 30 L62 26.7 Q73 26.7 79 31 L17 33.4 Q11 33.4 15 30 Z" fill="#8fc3ec" stroke="none"/>
+    <!-- engine -->
+    <ellipse cx="44" cy="40.6" rx="8.5" ry="3.6" fill="#9aa6b3"/>
+  </g>
+  <!-- windows -->
+  <g fill="#41525f">${[26,30,34,38,42,46,50,54,58].map(x=>`<rect x="${x}" y="31.6" width="2.1" height="1.7" rx="0.7"/>`).join('')}</g>
+  <!-- cockpit -->
+  <path d="M75 31.5 Q80 32.4 81 34.4 L74.5 33.6 Z" fill="#41525f"/>
+  <!-- taegeuk on tail -->
+  ${KAL_TAEGEUK(12.5,17,4.4)}
+  <!-- taegeuk on engine -->
+  ${KAL_TAEGEUK(40,40.6,2.4)}
+</svg>`;
+
 function travelerIcon(mode, flip){
   const f = flip ? ' flip' : '';
+  if(mode==='flight') return L.divIcon({className:'',html:`<div class="vehicle"><div class="veh-inner flight">${PLANE_SVG}</div></div>`,iconSize:[72*MK,72*MK],iconAnchor:[36*MK,36*MK]});
+  if(mode==='ride') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner ride">${CAR_SVG}</div></div>`,iconSize:[64*MK,34*MK],iconAnchor:[32*MK,28*MK]});
   if(mode==='train') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner train">${TRAIN_SVG}</div></div>`,iconSize:[66*MK,34*MK],iconAnchor:[33*MK,28*MK]});
   if(mode==='tram') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner train">${TRAM_SVG}</div></div>`,iconSize:[66*MK,34*MK],iconAnchor:[33*MK,28*MK]});
   if(mode==='ferry') return L.divIcon({className:'',html:`<div class="vehicle${f}"><div class="veh-inner ferry">${FERRY_SVG}</div></div>`,iconSize:[60*MK,42*MK],iconAnchor:[30*MK,34*MK]});
@@ -235,7 +277,7 @@ function travelLeg(geom, mode, dur, tok){
       const pos=[lat,lon];
       traveler.setLatLng(pos);
       trail.setLatLngs(base.concat(geom.slice(0,k)).concat([pos]));
-      map.panTo(pos,{animate:false});
+      if(mode!=='flight') map.panTo(pos,{animate:false});   // 비행은 arc 전체를 고정해 보여줌(팬 안 함)
       if(t<1) requestAnimationFrame(frame); else res();
     }
     requestAnimationFrame(frame);
@@ -334,10 +376,13 @@ async function play(){
     if(tok!==cancelToken) return;
     const lg=legs[i], B=stops[i+1];
     const z=(MODE[lg.mode]||MODE.walk).zoom+ZB;
-    map.flyTo(lg.geom[0], z, {duration:.6});
-    await sleep(EXPORT?300:450); if(tok!==cancelToken) return;
+    const isFly=lg.mode==='flight';
+    if(isFly) map.flyToBounds(L.latLngBounds(lg.geom), {paddingTopLeft:[90,150], paddingBottomRight:[90,230], duration:1.8});  // 한국↔호주 arc 전체를 한 화면에
+    else map.flyTo(lg.geom[0], z, {duration:.6});
+    await sleep(EXPORT?(isFly?1900:300):(isFly?2000:450)); if(tok!==cancelToken) return;
     if(lg.mode==='train') dropRailStations(lg);
-    const dur = (lg.mode==='train'||lg.mode==='tram') ? (EXPORT?2200:3200)
+    const dur = lg.mode==='flight' ? (EXPORT?3200:3800)
+              : (lg.mode==='train'||lg.mode==='tram') ? (EXPORT?2200:3200)
               : lg.mode==='ferry' ? (EXPORT?1800:2800)
               : (EXPORT?Math.min(1500,700+lg.geom.length*9):Math.min(2600,1100+lg.geom.length*14));
     await travelLeg(lg.geom, lg.mode, dur, tok);

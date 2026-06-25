@@ -312,7 +312,7 @@ def decode_polyline5(s):
     return coords
 
 def google_leg(a, b, mode):
-    if not GKEY:
+    if not GKEY or mode == "flight":   # 국제선 비행은 도로/대중교통 경로가 없음 → 곡선 arc로
         return None
     base = "https://maps.googleapis.com/maps/api/directions/json"
     try:
@@ -348,6 +348,7 @@ def google_leg(a, b, mode):
         return None
 
 def leg_geom(a, b, mode):
+    if mode == "flight": return arc(a, b, 0.12, 72)   # 대륙 간 비행 곡선
     if mode in ("walk", "ride", "run"):
         try:
             g = valhalla(a, b, "auto" if mode == "ride" else "pedestrian")
@@ -617,7 +618,7 @@ def main():
         km = geom_len(lg["geom"]) / 1000
         a = agg.setdefault(lg["mode"], {"km": 0.0, "count": 0})
         a["km"] += km; a["count"] += 1
-    LABEL = {"walk": "도보", "ferry": "페리", "train": "기차", "ride": "차", "run": "러닝", "tram": "트램"}
+    LABEL = {"walk": "도보", "ferry": "페리", "train": "기차", "ride": "차", "run": "러닝", "tram": "트램", "flight": "비행"}
     modes = [{"mode": k, "label": LABEL.get(k, k), "km": round(v["km"], 1), "count": v["count"]}
              for k, v in sorted(agg.items(), key=lambda kv: -kv[1]["km"])]
     total = sum(v["km"] for v in agg.values())

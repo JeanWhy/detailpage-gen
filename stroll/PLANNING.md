@@ -59,9 +59,12 @@ GPS 태그된 **하루치 사진·영상**을 넣으면, **지도 위에 그날 
 - **연출 페이싱:** stop 성격별로 컷 수·체류시간을 다르게(러닝=1컷 빠르게 / 출발·결승·기념=여러 컷 느긋, 시간축 고르게 샘플해 도착~후식까지 포함). 영상은 끝까지 재생(클립 6초@2× = 3초 dwell).
 - **큐레이션:** 검수 안 한 사진을 다 넣으면 폴라로이드가 안 예쁨 → 자동 선별(비전 triage)이 옵션이 아니라 핵심 기능.
 - **렌더 선호(확정):** 폴라로이드 장소명은 **영어**, 프레임은 크게(1.2×), 이미지 크롭은 센터 기본(전역 top 정렬은 어색).
+- **이동수단 = 7종 + 모드별 마커(2026-06-25):** 도보🚶/러닝🏃/트램🚊/기차🚆/페리⛴️/**차🚗**/**비행✈️**. 모드마다 ① 마커 SVG(app.js `travelerIcon`, 서쪽 진행 시 좌우 반전) ② 경로 geometry 규칙(차=driving 스냅, 기차/트램=transit 실노선, 비행=arc 베지어) ③ 한글 라벨(build_stroll `LABEL`)이 한 세트. **교훈:** 새 이동수단 = "마커 + geometry + 라벨" 세 곳만 추가하면 끝(설계가 모드 단위로 잘 쪼개져 있음).
+- **거리 집계:** 레그별 실제 geometry 길이(haversine)를 **모드별로 합산** → `data.modes[{mode,label,km,count}]` + `total_km`. 훅·아웃트로 통계에 그대로 노출. 비행은 arc 길이라 대권거리보다 약간 길지만 표시용으론 충분(예: 인천→시드니 8,417km).
+- **대륙간 비행 카메라(2026-06-25):** 비행 레그는 마커를 따라 panTo 하면 베이지 땅만 보임 → **`flyToBounds(arc 전체)`로 출발·도착 대륙을 한 프레임에 고정**하고 비행 중엔 panTo를 끈다(`travelLeg`에서 flight 제외). 그래야 "대양을 가로지르는" 장면이 산다. 줌은 확 빼고(world zoom), 마커는 키우고, 항로 점선이 도착지까지 미리 보이게.
 
 ## 8. 제품화 로드맵 / 열린 질문
-- **테마 프리셋** ✅ *1차 구현됨(2026-06-24)*: `theme: run|city|nature` 한 줄이 force_mode·collapse_dupes·hero_cutout·accent(강조색)·pace(컷 수·체류시간)를 기본값으로 깔고, 개별 brief 필드로 덮어쓰기. `THEMES` 딕셔너리(build_stroll.py)에 정의, data.json으로 앱에 accent/pace 전달. Hoka=run, OneFineDay=city로 검증. **남은 확장:** overseas 테마, 지도 타일 스타일(nature=그린/지형), 음악 비트싱크, 카피 톤 자동.
+- **테마 프리셋** ✅ *1차 구현됨(2026-06-24)*: `theme: run|city|nature` 한 줄이 force_mode·collapse_dupes·hero_cutout·accent(강조색)·pace(컷 수·체류시간)를 기본값으로 깔고, 개별 brief 필드로 덮어쓰기. `THEMES` 딕셔너리(build_stroll.py)에 정의, data.json으로 앱에 accent/pace 전달. Hoka=run, OneFineDay=city로 검증. **남은 확장:** overseas 테마(✈️ 비행 모드·대륙간 카메라는 2026-06-25 구현됨 — WelcomeToSydney 인천→시드니로 검증), 지도 타일 스타일(nature=그린/지형), 음악 비트싱크, 카피 톤 자동.
 - **[TODO] 비전 자동 브리프:** 사진을 읽어 모드·하이라이트·캡션·히어로·안내판여부를 자동 제안(triage_photos.py 기반). **OpenAI 필수 아님** — 백엔드 선택지:
   - *지금/대화형:* Claude(나)가 직접 읽어 triage.json·brief 작성 (키·비용 0, 품질 최고, OneFineDay에 사용함)
   - *무인 자동화 추천:* **로컬 Ollama**(llava/qwen2-VL) — 무료·키없음·프라이버시. triage_photos.py가 OpenAI 호환 포맷이라 base URL·모델명만 교체하면 됨 (사용자가 `ollama pull` 만)
