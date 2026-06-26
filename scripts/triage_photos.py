@@ -6,23 +6,40 @@
 안내판·흐림·중복을 빼고, stop 성격에 따라 베스트 컷만 고르고, 폴라로이드에
 캡션을 붙인다.
 
+백엔드(둘 다 OpenAI 호환 chat 포맷):
+  - Gemini Flash(추천·무료티어): .env 에 GEMINI_API_KEY 넣으면 자동 선택.
+      GEMINI_VISION_MODEL 기본 gemini-2.0-flash. (무료티어 RPM 제한 → --workers 2 권장)
+  - OpenAI: OPENAI_API_KEY 사용(기본 gpt-4o-mini).
+  - 강제: --backend gemini|openai  또는 VISION_BACKEND 환경변수.
+
 사용법:
-  python3 scripts/triage_photos.py --src "<폴더>"   [--force] [--workers 4]
+  python3 scripts/triage_photos.py --src "<폴더>"   [--backend gemini] [--force] [--workers 2]
 
 의존성: requests, Pillow, python-dotenv  (추가 SDK 없음, REST 직접 호출)
 캐시: 이미 분석된 파일은 건너뜀(--force 로 재분석). 중간 저장으로 중단돼도 재개 가능.
 """
 
-import os, sys, io, json, base64, argparse, threading, time
+import os, sys, io, json, re, base64, argparse, threading, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import requests
 from PIL import Image, ImageOps
 from dotenv import load_dotenv
 
 load_dotenv()
-API_KEY = os.getenv("OPENAI_API_KEY")
-MODEL = os.getenv("OPENAI_VISION_MODEL", "gpt-4o-mini")
-URL = "https://api.openai.com/v1/chat/completions"
+
+def _pick_backend(force=None):
+    """GEMINI_API_KEY 있으면 Gemini, 아니면 OpenAI. force로 덮어쓰기. (둘 다 OpenAI 호환)"""
+    b = (force or os.getenv("VISION_BACKEND") or
+         ("gemini" if os.getenv("GEMINI_API_KEY") else "openai")).lower()
+    if b == "gemini":
+        return ("gemini", os.getenv("GEMINI_API_KEY"),
+                os.getenv("GEMINI_VISION_MODEL", "gemini-2.0-flash"),
+                "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions")
+    return ("openai", os.getenv("OPENAI_API_KEY"),
+            os.getenv("OPENAI_VISION_MODEL", "gpt-4o-mini"),
+            "https://api.openai.com/v1/chat/completions")
+
+BACKEND, API_KEY, MODEL, URL = _pick_backend()
 
 SYSTEM = (
     "너는 여행 vlog 사진 에디터야. 인스타 릴스에 넣을 '오늘 하루' 폴라로이드로 "
@@ -73,7 +90,12 @@ def analyze(path, max_dim=512, retries=2):
             r = requests.post(URL, headers=headers, json=payload, timeout=60)
             if r.status_code == 200:
                 txt = r.json()["choices"][0]["message"]["content"]
-                return json.loads(txt)
+                try:
+                    return json.loads(txt)
+                except Exception:
+                    m = re.search(r"\{.*\}", txt, re.S)   # 코드펜스/잡텍스트 안의 첫 JSON 블록
+                    if m: return json.loads(m.group(0))
+                    return {"error": "parse: " + txt[:160]}
             if r.status_code in (429, 500, 502, 503) and k < retries:
                 time.sleep(2 * (k + 1)); continue
             return {"error": f"{r.status_code}: {r.text[:160]}"}
@@ -84,14 +106,18 @@ def analyze(path, max_dim=512, retries=2):
 
 
 def main():
-    if not API_KEY:
-        sys.exit("OPENAI_API_KEY 없음 (.env 확인)")
+    global BACKEND, API_KEY, MODEL, URL
     ap = argparse.ArgumentParser()
     ap.add_argument("--src", required=True)
+    ap.add_argument("--backend", choices=["gemini", "openai"], help="기본: GEMINI_API_KEY 있으면 gemini")
     ap.add_argument("--force", action="store_true")
     ap.add_argument("--workers", type=int, default=4)
     ap.add_argument("--max-dim", type=int, default=512)
     args = ap.parse_args()
+    if args.backend:
+        BACKEND, API_KEY, MODEL, URL = _pick_backend(args.backend)
+    if not API_KEY:
+        sys.exit(f"{BACKEND} 키 없음 — .env 에 {'GEMINI_API_KEY' if BACKEND=='gemini' else 'OPENAI_API_KEY'} 설정 (.env 확인)")
     src = os.path.expanduser(args.src)
     out = os.path.join(src, "triage.json")
 
