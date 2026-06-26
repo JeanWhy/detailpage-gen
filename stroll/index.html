@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
 <title>오늘 하루, 시드니 한 바퀴</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&family=Playfair+Display:wght@700;800;900&family=Caveat:wght@600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/static/pretendard.min.css">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <link rel="stylesheet" href="styles.css">
@@ -46,23 +46,38 @@
   <div class="hint">A June day in photos &amp; clips · 사진과 영상이 그린 하루</div>
 </div>
 
-<!-- outro -->
-<div class="card hide" id="outro">
-  <h1>Home again, what a day</h1>
-  <div class="kr-line">오늘 하루, 잘 다녀왔어요</div>
-  <div class="subline">On foot, by rail, by ferry — and home again<span class="kr">걷고, 타고, 또 걷고 — 집으로 돌아온 하루</span></div>
-  <div class="stats">
-    <div class="stat"><b id="o-km">0</b><span>km · 이동</span></div>
-    <div class="stat"><b id="o-stops">0</b><span>stops · 머문 곳</span></div>
-    <div class="stat"><b id="o-photos">0</b><span>moments · 순간</span></div>
+<!-- outro — Journey Card (Concept 3) -->
+<div class="card hide outro-jc" id="outro">
+  <div class="oj-sky" id="o-sky">
+    <span class="oj-sun"></span>
+    <img class="s1" src="assets/icons/sydney-harbour-bridge.png" alt="">
+    <img class="s2" src="assets/icons/sydney-opera-house.png" alt="">
+    <img class="s3" src="assets/icons/darling-harbour.png" alt="">
+    <span class="oj-wave"></span>
   </div>
-  <div class="modes" id="o-modes"></div>
-  <div class="route-line" id="o-route"></div>
-  <div class="sticker-collection" id="o-stickers"></div>
-  <div class="cta">
-    <div class="cta-msg">📸 내 하루도 · 우리 브랜드 콘텐츠도 이렇게</div>
-    <div class="cta-handle">DM @graceandwhy.ai</div>
+  <span class="oj-stamp">SYDNEY<br>· AUS ·</span>
+  <div class="oj-brand">✈&nbsp; GRACE &amp; WHY</div>
+  <div class="oj-hello">Hello,</div>
+  <h1 class="oj-syd">SYDNEY</h1>
+  <div class="oj-uline"></div>
+  <div class="oj-jc">✦&nbsp; JOURNEY COMPLETE &nbsp;✦</div>
+
+  <div class="oj-stats">
+    <div class="oj-st"><i>✈️</i><b id="o-km">0</b><span>KM · DISTANCE</span></div>
+    <div class="oj-st"><i>📷</i><b id="o-photos">0</b><span>MOMENTS</span></div>
+    <div class="oj-st"><i>📍</i><b id="o-stops">0</b><span>STOPS</span></div>
   </div>
+
+  <div class="oj-sec">✧&nbsp; COLLECTED TODAY &nbsp;✧</div>
+  <div class="oj-stamps" id="o-stickers"></div>
+
+  <div class="oj-coll">
+    <div class="oj-coll-h"><span>SYDNEY COLLECTION</span><span class="oj-cnt"><b id="o-colln">0</b> / <span id="o-collt">86</span></span></div>
+    <div class="oj-grid" id="o-collgrid"></div>
+  </div>
+
+  <div class="oj-tag" id="o-tag">Collect them all ✦</div>
+  <div class="oj-cta">📸 내 여행도 이렇게 · <b>DM @graceandwhy.ai</b></div>
   <button class="btn" id="replay">↺  다시 보기</button>
 </div>
 

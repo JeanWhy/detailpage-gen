@@ -25,6 +25,10 @@ const el = s => document.querySelector(s);
 const lerp = (a,b,t) => a + (b-a)*t;
 const ease = t => t<.5 ? 2*t*t : 1-Math.pow(-2*t+2,2)/2;
 const sleep = ms => new Promise(r=>setTimeout(r,ms));
+// 현재 뷰 타일이 다 로드될 때까지 대기(헤드리스 녹화에서 지도 깨짐 방지). max까지만.
+const waitTiles = max => new Promise(res=>{ if(!tiles) return res(); let done=false;
+  const fin=()=>{ if(done) return; done=true; tiles.off('load',fin); res(); };
+  tiles.on('load',fin); setTimeout(fin,max); });
 function dist(a,b){ const dx=a[0]-b[0],dy=a[1]-b[1]; return Math.hypot(dx,dy); }
 
 let DATA, map, tiles, trail, planned, traveler, running=false, cancelToken=0;
@@ -44,13 +48,9 @@ function applyCopy(){
   setText('#intro .kr-line', c.intro_kr);
   setText('#intro .hint', c.intro_hint);
   setText('#start', c.intro_btn);
-  setText('#outro h1', c.outro_title);
-  setText('#outro .kr-line', c.outro_kr);
-  if(c.outro_sub_en || c.outro_sub_kr){
-    const sub=document.querySelector('#outro .subline');
-    if(sub){ const kr=sub.querySelector('.kr');
-      sub.innerHTML=(c.outro_sub_en||'')+`<span class="kr">${c.outro_sub_kr||(kr?kr.textContent:'')}</span>`; }
-  }
+  setText('#outro .oj-hello', c.outro_hello || 'Hello,');
+  setText('#outro .oj-syd', c.outro_big || 'SYDNEY');
+  setText('#o-tag', c.outro_tag);
 }
 
 async function boot(){
@@ -78,28 +78,32 @@ async function boot(){
   const track = el('#track');
   DATA.stops.filter(s=>!s.waypoint).forEach(()=>{ const d=document.createElement('div'); d.className='t'; track.appendChild(d); });
 
-  el('#o-km').textContent = DATA.total_km;
+  el('#o-km').textContent = Math.round(DATA.total_km).toLocaleString();
   el('#o-stops').textContent = new Set(DATA.stops.filter(s=>!s.waypoint).map(s=>s.name)).size;
   el('#o-photos').textContent = DATA.n_photos;
-  el('#o-route').innerHTML = uniqueRouteNames().join('<span class="arrow">→</span>');
-  const MODE_EN={walk:'Walk',run:'Run',tram:'Tram',train:'Train',ferry:'Ferry',ride:'Ride',flight:'Flight'};
-  el('#o-modes').innerHTML = (DATA.modes||[]).map(m=>{
-    const emoji=(MODE[m.mode]||MODE.walk).emoji;
-    return `<span class="mchip"><i>${emoji}</i> ${MODE_EN[m.mode]||m.mode} ${m.km}km<span class="kr">${m.label}</span></span>`;
-  }).join('');
-  // 스티커 컬렉션 — 방문한 곳의 Sydney Icon Pack 일러스트를 모아 보여줌(여정 순서)
-  const sk=el('#o-stickers');
-  if(sk){
-    const got=DATA.stops.filter(s=>!s.waypoint && s.icon);
-    sk.innerHTML = got.length
-      ? `<div class="sk-title">📍 모은 곳 · collected <b>${got.length}</b></div>`
-        + `<div class="sk-row">`
-        + got.map((s,i)=>{const rot=((i%2)?1:-1)*(2.5+(i%3)*1.5);   // 손도장처럼 살짝 삐뚤
-            const d=(0.5+i*0.32).toFixed(2);   // 카드 페이드인 후 쾅...쾅 순차로
-            return `<figure class="sk" style="--d:${d}s;--rot:${rot}deg"><img src="assets/icons/${s.icon}.png" alt=""><figcaption>${s.name}</figcaption></figure>`;}).join('')
-        + `</div>`
-      : '';
+  const _r=el('#o-route'); if(_r) _r.innerHTML = uniqueRouteNames().join('<span class="arrow">→</span>');
+  const _m=el('#o-modes'); if(_m){
+    const MODE_EN={walk:'Walk',run:'Run',tram:'Tram',train:'Train',ferry:'Ferry',ride:'Ride',flight:'Flight'};
+    _m.innerHTML = (DATA.modes||[]).map(m=>{const emoji=(MODE[m.mode]||MODE.walk).emoji;
+      return `<span class="mchip"><i>${emoji}</i> ${MODE_EN[m.mode]||m.mode} ${m.km}km<span class="kr">${m.label}</span></span>`;}).join('');
   }
+  // ----- Journey Card 아웃트로: 오늘 수집한 스탬프(COLLECTED TODAY) + Sydney Collection 진행 -----
+  const got = DATA.stops.filter(s=>!s.waypoint && s.icon);
+  const sk=el('#o-stickers');
+  if(sk){ sk.innerHTML = got.map((s,i)=>{
+      const rot=((i%2)?1:-1)*(2.5+(i%3)*1.5); const d=(0.5+i*0.34).toFixed(2);  // 페이드인 후 쾅...쾅
+      return `<figure class="oj-stmp" style="--d:${d}s;--rot:${rot}deg"><span class="oj-new">NEW!</span><img src="assets/icons/${s.icon}.png" alt=""><figcaption>${s.name}</figcaption></figure>`;
+    }).join(''); }
+  const grid=el('#o-collgrid');
+  if(grid){
+    let html=''; got.forEach((s,i)=>{ const d=(0.6+i*0.34).toFixed(2);
+      html+=`<div class="oj-cell on" style="--d:${d}s;--rot:${(((i%2)?1:-1)*2.2).toFixed(1)}deg"><img src="assets/icons/${s.icon}.png" alt=""></div>`; });
+    for(let i=got.length;i<6;i++) html+='<div class="oj-cell off">?</div>';
+    grid.innerHTML=html;
+  }
+  const COLL_TOTAL = DATA.collection_total || 86;
+  if(el('#o-collt')) el('#o-collt').textContent = COLL_TOTAL;
+  if(el('#o-colln')) el('#o-colln').textContent = got.length;
 
   if(EXPORT){                          // 릴스 녹화: 녹화기가 트리거할 때까지 대기 → 훅 → 재생
     document.body.classList.add('export');
@@ -388,8 +392,15 @@ async function play(){
   placeTraveler([first.lat,first.lon], 'start');
   trail.setLatLngs([[first.lat,first.lon]]);
   const firstWp=first.waypoint;     // 비행 출발지 등 미디어 없는 경유지면 오프닝 짧게(죽은 시간 제거)
-  map.flyTo([first.lat,first.lon], MODE.start.zoom+ZB, {duration:firstWp?0.8:1.2});
-  await sleep(firstWp?(EXPORT?450:600):1300); if(tok!==cancelToken) return;
+  const firstFly=DATA.legs[0] && DATA.legs[0].mode==='flight';
+  if(firstWp && firstFly){          // 비행 출발: 줌아웃 애니메이션(가장자리 타일 깨짐) 대신 항로 전체로 컷
+    map.fitBounds(L.latLngBounds(DATA.legs[0].geom), {paddingTopLeft:[90,150], paddingBottomRight:[90,230], animate:false});
+  } else {
+    map.flyTo([first.lat,first.lon], MODE.start.zoom+ZB, {duration:firstWp?0.8:1.2});
+  }
+  await sleep(firstWp?(EXPORT?450:600):1300);
+  if(EXPORT) await waitTiles(1800);   // 출발 뷰 타일 로드 완료 후 진행(헤드리스 깨짐 방지)
+  if(tok!==cancelToken) return;
   setChip(first,'start'); markTrack(first.num-1); dropStopDot(first);
   if(first.icon && /[a-z]/.test(first.icon)) await sleep(EXPORT?800:650);
   await showStop(first, tok); if(tok!==cancelToken) return;
@@ -399,9 +410,12 @@ async function play(){
     const lg=legs[i], B=stops[i+1];
     const z=(MODE[lg.mode]||MODE.walk).zoom+ZB;
     const isFly=lg.mode==='flight';
-    if(isFly) map.flyToBounds(L.latLngBounds(lg.geom), {paddingTopLeft:[90,150], paddingBottomRight:[90,230], duration:1.5});  // 한국↔호주 arc 전체를 한 화면에
+    const framed=(i===0 && firstWp && firstFly);   // 출발지 establish가 이미 항로 전체를 잡음
+    if(isFly){ if(!framed) map.fitBounds(L.latLngBounds(lg.geom), {paddingTopLeft:[90,150], paddingBottomRight:[90,230], animate:false}); }
     else map.flyTo(lg.geom[0], z, {duration:.6});
-    await sleep(EXPORT?(isFly?1500:300):(isFly?1600:450)); if(tok!==cancelToken) return;
+    await sleep(EXPORT?(isFly?(framed?250:700):300):(isFly?800:450));
+    if(isFly && EXPORT && !framed) await waitTiles(1500);
+    if(tok!==cancelToken) return;
     if(lg.mode==='train') dropRailStations(lg);
     const dur = lg.mode==='flight' ? (EXPORT?3200:3800)
               : (lg.mode==='train'||lg.mode==='tram') ? (EXPORT?2200:3200)
@@ -410,7 +424,9 @@ async function play(){
     await travelLeg(lg.geom, lg.mode, dur, tok);
     if(tok!==cancelToken) return;
     if(isFly && !B.waypoint){                              // 비행 후엔 arc 줌 → 도착 도시로 '컷'(애니메이션 줌은 트레일이 번져서 과함 → 스냅)
-      map.setView([B.lat,B.lon], 12+ZB, {animate:false}); await sleep(EXPORT?500:500); if(tok!==cancelToken) return; }
+      map.setView([B.lat,B.lon], 12+ZB, {animate:false});
+      if(EXPORT) await waitTiles(1800);                    // 도착 도시 타일 로드 완료까지(깨짐 방지)
+      await sleep(EXPORT?250:500); if(tok!==cancelToken) return; }
     if(!B.waypoint) placeTraveler([B.lat,B.lon],'walk');   // 도착하면 내려서 사람으로
     setChip(B, lg.mode); dropStopDot(B);
     if(B.waypoint){ await sleep(EXPORT?550:900); }          // 환승역 등은 잠깐 지나감
@@ -423,8 +439,8 @@ async function play(){
   if(tok!==cancelToken) return;
   running=false; await sleep(400);
   el('#chip').classList.remove('show'); el('#bar').classList.remove('show');
-  el('#outro').classList.remove('hide');
-  const sk=el('#o-stickers'); if(sk){ sk.classList.remove('go'); void sk.offsetWidth; sk.classList.add('go'); }  // 아웃트로 뜰 때 스탬프 쾅쾅 재생
+  const oc=el('#outro'); oc.classList.remove('hide');
+  oc.classList.remove('go'); void oc.offsetWidth; oc.classList.add('go');   // 아웃트로 뜰 때 스탬프·컬렉션 쾅쾅 재생
   if(EXPORT){ await sleep(3200); window.__exportDone = true; }   // 녹화 종료 신호
 }
 

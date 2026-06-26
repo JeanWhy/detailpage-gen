@@ -283,3 +283,127 @@ body.export .stopdot{width:52px;height:52px;font-size:26px;border-width:4px}
 body.export .waydot{width:48px;height:48px;font-size:26px;border-width:4px}
 body.export .railtick{width:22px;height:22px;border-width:5px}
 .hint{font-size:13px;color:#cdbfae;margin-top:8px}
+
+/* =================== 아웃트로 — Journey Card (Concept 3) =================== */
+.outro-jc{--navy:#234c74;--navy2:#1c3c5e;--coralx:#e8745c;--sage:#5f9e8b;--gold:#e7b04a;--muted:#8a7f6e;
+  background:radial-gradient(120% 70% at 50% -8%,#fbf5e6,#f4ecda 55%,#efe5cf);
+  color:#3a3330;backdrop-filter:none;justify-content:flex-start;text-align:center;padding:46px 30px}
+.outro-jc::after{content:'';position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:repeating-linear-gradient(0deg,rgba(120,90,40,.015) 0 2px,transparent 2px 4px)}
+.outro-jc>*{position:relative;z-index:1}
+.outro-jc #replay{display:none}
+.oj-stamp{position:absolute;top:138px;right:24px;width:92px;height:92px;border-radius:50%;
+  border:3px solid var(--navy);color:var(--navy);opacity:.3;display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:13px;letter-spacing:.5px;transform:rotate(-12deg);line-height:1.2;z-index:2}
+.oj-brand{font-weight:800;font-size:14px;letter-spacing:3px;color:var(--navy);opacity:.85;margin-top:6px}
+.oj-hello{font-family:'Caveat',cursive;font-weight:700;font-size:52px;color:var(--navy);line-height:.7;margin-top:14px}
+.outro-jc h1.oj-syd{font-family:'Playfair Display',serif;font-weight:900;font-size:74px;color:var(--navy2);
+  line-height:1;letter-spacing:-1px;margin:6px 0 0;text-shadow:none}
+.oj-uline{height:8px;width:240px;border-radius:6px;margin:8px auto 0;background:linear-gradient(90deg,var(--gold),#f3d28a);opacity:.85}
+.oj-jc{margin-top:18px;font-weight:900;font-size:14px;letter-spacing:3px;color:var(--sage);
+  border:2px dashed var(--sage);padding:9px 20px;border-radius:9px}
+.oj-stats{display:flex;justify-content:center;gap:18px;margin:24px 0 8px;background:rgba(255,255,255,.5);
+  border:1.5px solid rgba(150,120,70,.18);border-radius:18px;padding:18px 14px;width:100%;max-width:430px}
+.oj-st{flex:1;text-align:center}
+.oj-st i{font-style:normal;font-size:26px}
+.oj-st b{display:block;font-family:'Playfair Display',serif;font-weight:800;font-size:34px;color:var(--navy2);line-height:1.05}
+.oj-st b small{font-size:15px;color:var(--muted);font-weight:700;margin-left:1px}
+.oj-st span{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--muted)}
+.oj-sec{font-weight:900;font-size:14px;letter-spacing:2.5px;color:var(--coralx);margin:22px 0 14px}
+.oj-stamps{display:flex;gap:22px;justify-content:center;min-height:10px}
+.oj-stmp{position:relative;background:#fff;padding:9px 9px 7px;border-radius:7px;width:166px;
+  transform:rotate(var(--rot,0deg));box-shadow:0 7px 18px rgba(0,0,0,.2)}
+.oj-stmp img{width:100%;height:104px;object-fit:contain;display:block}
+.oj-stmp figcaption{font-family:'Caveat',cursive;font-weight:700;font-size:23px;color:var(--navy);margin-top:1px}
+.oj-new{position:absolute;top:-11px;right:-11px;background:var(--coralx);color:#fff;font-weight:900;font-size:12px;
+  padding:4px 11px;border-radius:22px;transform:rotate(9deg);box-shadow:0 3px 8px rgba(232,116,92,.5);z-index:3}
+.oj-coll{width:100%;max-width:430px;margin-top:22px;border-top:1.5px dashed rgba(150,120,70,.3);padding-top:16px}
+.oj-coll-h{display:flex;justify-content:space-between;align-items:center;font-weight:900;font-size:14px;letter-spacing:1.5px;color:#3a3330}
+.oj-cnt b{color:var(--coralx)}
+.oj-grid{display:flex;gap:11px;justify-content:center;margin-top:14px}
+.oj-cell{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;position:relative;flex:0 0 auto}
+.oj-cell.on{background:#fff;box-shadow:0 3px 9px rgba(0,0,0,.16);border:2px solid var(--sage)}
+.oj-cell.on img{width:44px;height:44px;object-fit:contain}
+.oj-cell.on::after{content:'✓';position:absolute;bottom:-3px;right:-3px;background:var(--sage);color:#fff;
+  width:20px;height:20px;border-radius:50%;font-size:12px;font-weight:900;display:flex;align-items:center;justify-content:center;border:2px solid #f6efe0}
+.oj-cell.off{border:2px dashed rgba(120,90,40,.35);color:rgba(120,90,40,.45);font-weight:900;font-size:22px}
+.oj-tag{font-family:'Caveat',cursive;font-weight:700;font-size:26px;color:var(--coralx);margin-top:20px}
+.oj-cta{margin-top:12px;font-size:14px;color:var(--muted);font-weight:700}
+.oj-cta b{color:#fff;background:var(--coralx);padding:8px 18px;border-radius:20px;display:inline-block;margin-top:7px;box-shadow:0 6px 18px rgba(232,116,92,.4)}
+/* 스탬프 쾅! (아웃트로 진입 #outro.go 시 재생) */
+#outro.go .oj-stmp{animation:stamp .52s cubic-bezier(.34,1.2,.4,1) both;animation-delay:var(--d,0s)}
+#outro.go .oj-stmp::after{content:'';position:absolute;left:50%;top:42px;width:108px;height:108px;border-radius:50%;
+  border:3px solid var(--coralx);opacity:0;transform:translate(-50%,-50%) scale(.3);
+  animation:stampring .52s ease-out both;animation-delay:var(--d,0s);pointer-events:none}
+#outro.go .oj-cell.on{animation:stamp .42s cubic-bezier(.34,1.2,.4,1) both;animation-delay:var(--d,0s)}
+
+/* export(1080×1920) 2× */
+body.export .oj-stamp{top:300px;right:44px;width:176px;height:176px;border-width:5px;font-size:23px}
+body.export .oj-brand{font-size:27px;letter-spacing:5px}
+body.export .oj-hello{font-size:100px}
+body.export .outro-jc h1.oj-syd{font-size:140px}
+body.export .oj-uline{height:15px;width:460px}
+body.export .oj-jc{font-size:27px;padding:16px 36px;border-width:3px;margin-top:32px}
+body.export .oj-stats{gap:30px;padding:34px 24px;max-width:860px;margin:44px 0 14px;border-radius:30px}
+body.export .oj-st i{font-size:50px}
+body.export .oj-st b{font-size:66px}
+body.export .oj-st b small{font-size:28px}
+body.export .oj-st span{font-size:23px}
+body.export .oj-sec{font-size:27px;letter-spacing:4px;margin:40px 0 26px}
+body.export .oj-stamps{gap:42px}
+body.export .oj-stmp{width:320px;padding:16px 16px 12px;border-radius:12px}
+body.export .oj-stmp img{height:200px}
+body.export .oj-stmp figcaption{font-size:44px}
+body.export .oj-new{font-size:23px;padding:7px 20px;top:-20px;right:-20px}
+body.export .oj-coll{max-width:860px;margin-top:42px;padding-top:30px}
+body.export .oj-coll-h{font-size:27px}
+body.export .oj-grid{gap:20px;margin-top:26px}
+body.export .oj-cell{width:112px;height:112px}
+body.export .oj-cell.on img{width:84px;height:84px}
+body.export .oj-cell.on::after{width:38px;height:38px;font-size:22px;border-width:4px}
+body.export .oj-cell.off{font-size:44px;border-width:3px}
+body.export #outro.go .oj-stmp::after{top:84px;width:210px;height:210px;border-width:6px}
+body.export .oj-tag{font-size:50px;margin-top:38px}
+body.export .oj-cta{font-size:27px;margin-top:24px}
+body.export .oj-cta b{padding:15px 34px}
+
+/* 아웃트로 상단 스카이라인 띠 (Sydney skyline band) */
+.oj-sky{position:relative;margin:-46px -30px 12px;height:120px;overflow:hidden;
+  background:linear-gradient(180deg,#bfe2f2 0%,#dceef4 68%,#e9f4f6 100%);
+  display:flex;align-items:flex-end;justify-content:center}
+.oj-sky img{height:84px;object-fit:contain;margin:0 -6px;filter:drop-shadow(0 2px 3px rgba(0,0,0,.1))}
+.oj-sky .s2{height:96px}
+.oj-sun{position:absolute;left:30px;top:16px;width:26px;height:26px;border-radius:50%;
+  background:#f6c845;box-shadow:0 0 0 6px rgba(246,200,69,.22)}
+.oj-wave{position:absolute;bottom:0;left:0;right:0;height:13px;
+  background:repeating-linear-gradient(90deg,#a7d8e0 0 12px,#c2e6ec 12px 24px);opacity:.65}
+/* 띠가 생겨서 상단 여백 압축 */
+.outro-jc .oj-brand{margin-top:2px}
+.outro-jc .oj-hello{font-size:46px;margin-top:10px}
+.outro-jc h1.oj-syd{font-size:62px}
+.outro-jc .oj-stats{margin:16px 0 6px}
+.outro-jc .oj-sec{margin:14px 0 12px}
+.outro-jc .oj-coll{margin-top:14px;padding-top:12px}
+.outro-jc .oj-tag{margin-top:14px}
+
+body.export .oj-sky{margin:-46px -30px 18px;height:248px}
+body.export .oj-sky img{height:172px;margin:0 -12px}
+body.export .oj-sky .s2{height:196px}
+body.export .oj-sun{left:64px;top:30px;width:54px;height:54px;box-shadow:0 0 0 13px rgba(246,200,69,.22)}
+body.export .oj-wave{height:26px;background:repeating-linear-gradient(90deg,#a7d8e0 0 24px,#c2e6ec 24px 48px)}
+body.export .outro-jc .oj-hello{font-size:90px}
+body.export .outro-jc h1.oj-syd{font-size:120px}
+body.export .outro-jc .oj-stats{margin:22px 0 8px}
+body.export .outro-jc .oj-sec{margin:26px 0 22px}
+body.export .outro-jc .oj-coll{margin-top:26px;padding-top:22px}
+body.export .outro-jc .oj-tag{margin-top:24px}
+
+/* 스카이라인 풀-width로 펼치기 + 거리 단위 간격 */
+.oj-sky{justify-content:space-evenly;padding:0 6px}
+.oj-sky img{height:96px;margin:0}
+.oj-sky .s2{height:108px}
+.oj-st b small{margin-left:4px}
+body.export .oj-sky{height:262px;padding:0 16px}
+body.export .oj-sky img{height:200px;margin:0}
+body.export .oj-sky .s2{height:228px}
+body.export .oj-st b small{margin-left:8px}
